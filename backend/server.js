@@ -2,11 +2,10 @@ const express = require("express");
 require("dotenv").config();
 
 const app = express();
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Food Delivery MVP API running");
+  res.send("API running");
 });
 
 const PORT = process.env.PORT || 3000;
