@@ -19,35 +19,6 @@ Hosting: **Netlify** 🚀
 * **React Hooks** to take advantage from React's great potential
 * **Tested with Postman** to grant a solid development also in future stages
 
----
-
-## ▶️ Getting Started
-
-### Development mode
-
-```bash
-npm start
-```
-
-### Tests
-
-```bash
-npm test
-```
-
-Launches the interactive test runner.
-
-### Production build
-
-```bash
-npm run build
-```
-
-Creates an optimized production build inside the `build/` folder.
-
----
-
-
 ## 📦 Deployment
 
 The production build is automatically deployed via **Netlify**.
@@ -62,4 +33,4 @@ Live site:
 =======
 # Progetto-finale
 Logistic platform to deliver goods with reusable packaging.
->>>>>>> 7f51d42dcd2bc73908c862ca7549c69791ae42ae
+
