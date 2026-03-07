@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PROGETTO FINALE
 
 A clean, lightweight app with a smooth friendly UI.
@@ -58,5 +59,7 @@ Live site:
 ## 🖼️ App Screenshots
 
  
-
----
+=======
+# Progetto-finale
+Logistic platform to deliver goods with reusable packaging.
+>>>>>>> 7f51d42dcd2bc73908c862ca7549c69791ae42ae
