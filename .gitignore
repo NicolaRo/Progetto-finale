@@ -1,0 +1,5 @@
+node_modules/
+.env
+MONGO_URI=<>
+JWT_SECRET=<>
+NODE_ENV=development
