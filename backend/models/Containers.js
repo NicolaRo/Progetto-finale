@@ -4,17 +4,16 @@ const mongoose = require ("mongoose");
 const ContainerSchema = new mongoose.Schema({
     type: {
         type: String,
-        enum: ["Sealed", "Non-Sealed", "Freezer"],
+        enum: ["Ermetico", "Non-Ermetico", "Contenitore da freezer"],
         required: [true, "È obbligatorio indicare il tipo di contenitore"]
     },
     availability: {
         type: Boolean,
-        enum: {default: "true"},
         required: [true, "È obbligatorio indicare la disponibilità dei contenitori"]
     },
     state: {
         type: String,
-        enum: ["Ready to use", "In Use", "Collectable"],
+        enum: ["Contenitore pronto all'uso", "Contenitore in uso", "Contenitore ritirabile"],
         required: [true, "È obbligatorio aggiornare lo stato dei contenitori"]
     }
 }, {timestamps: true});

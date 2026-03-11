@@ -7,13 +7,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Campo obbligatorio'],
         trim: true,
-        minlenght: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
+        minlength: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
     },
     surname: {
         type: String,
         required: [true, 'Campo obbligatorio'],
         trim: true,
-        minlenght: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
+        minlength: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
     },
     email: {
         type: String,
@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["user", "producer"],
+        enum: ["User", "Producer"],
         default: "User"
     },
 }, {timestamps: true});
