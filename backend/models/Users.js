@@ -5,11 +5,15 @@ const mongoose = require ("mongoose");
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Campo obbligatorio']
+        required: [true, 'Campo obbligatorio'],
+        trim: true,
+        minlenght: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
     },
     surname: {
         type: String,
-        required: [true, 'Campo obbligatorio']
+        required: [true, 'Campo obbligatorio'],
+        trim: true,
+        minlenght: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
     },
     email: {
         type: String,
