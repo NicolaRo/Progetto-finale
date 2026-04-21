@@ -15,7 +15,7 @@ const OrderSchema = new mongoose.Schema({
     state: {
         type: String,
         enum: ["Order created", "Order received", "Preparing Order", "Order shipped"],
-        default: "Ordine creato"
+        default: "Order created"
     }
 }, {timestamps: true});
 
