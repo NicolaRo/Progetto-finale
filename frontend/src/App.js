@@ -1,1 +1,0 @@
-//Commit test 16 - insight: an agent on make.com is reading commits, gathering insights and passing them to another scenario where an LLM creates a post for Linkedin

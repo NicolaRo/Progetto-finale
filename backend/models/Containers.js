@@ -1,20 +1,20 @@
-//Importo mongoose per la gestione dei dati sul DB
+//Import mongoose to handle DB
 const mongoose = require ("mongoose");
 
 const ContainerSchema = new mongoose.Schema({
     type: {
         type: String,
-        enum: ["Ermetico", "Non-Ermetico", "Contenitore da freezer"],
-        required: [true, "È obbligatorio indicare il tipo di contenitore"]
+        enum: ["Sealed", "Non-Sealed", "Freezer-Container"],
+        required: [true, "Choose the type of the Container"]
     },
     availability: {
         type: Boolean,
-        required: [true, "È obbligatorio indicare la disponibilità dei contenitori"]
+        required: [true, "Confirm Container availability"]
     },
     state: {
         type: String,
-        enum: ["Contenitore pronto all'uso", "Contenitore in uso", "Contenitore ritirabile"],
-        required: [true, "È obbligatorio aggiornare lo stato dei contenitori"]
+        enum: ["Container ready to use", "Container busy", "Container ready for collection"],
+        required: [true, "Please chose a Container state"]
     }
 }, {timestamps: true});
 

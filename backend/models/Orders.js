@@ -1,4 +1,4 @@
-//Importo mongoose per la gestione dei dati sul DB
+//Import mongoose to handle DB
 const mongoose = require ("mongoose");
 
 const OrderSchema = new mongoose.Schema({
@@ -14,7 +14,7 @@ const OrderSchema = new mongoose.Schema({
     containers: [{type: mongoose.Schema.Types.ObjectId, ref: "Container"}],
     state: {
         type: String,
-        enum: ["Ordine creato", "Ordine ricevuto", "Ordine in preparazione", "Ordine spedito"],
+        enum: ["Order created", "Order received", "Preparing Order", "Order shipped"],
         default: "Ordine creato"
     }
 }, {timestamps: true});

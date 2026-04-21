@@ -1,33 +1,33 @@
-//Importo mongoose per la gestione dei dati sul DB
+//Import mongoose to handle DB
 const mongoose = require ("mongoose");
 
-//Creo lo schema di dati chiamato ProductSchema per la registrazione delle info di prodotto
+// Creating a data schema called ProductSchema to store product information in the DB
 const ProductSchema = new mongoose.Schema({
     name:{
         type: String,
-        required: [true, "Campo obbligatorio."],
+        required: [true, "Required field"],
         trim: true,
-        minlength: [2, "Il nome prodotto deve contenere almeno 2 caratteri."]
+        minlength: [2, "Product name must be at least 2 characters long"]
     },
     description: {
         type: String,
-        required: [true, "Inserire una descrizione prodotto."],
-        maxlength: [200, "Limite massimo di caratteri raggiunto."]
+        required: [true, "Provide a short product description"],
+        maxlength: [200, "Characters limit reached"]
     },
     price:{
         type: Number,
-        required: [true, "Indicare un prezzo maggiore di 0."],
-        min: [0, "Il prezzo minimo non può essere negativo."]
+        required: [true, "Price value must be higher than 0"],
+        min: [0, "Price can not be lower than 0"]
     },
     type:{
         type: String,
-        enum: ["Verdura","Frutta","Secco","Surgelato","Liquido."],
-        required: [true, "Definire il tipo di prodotto."]
+        enum: ["Vedgetables","Fruits","Dry","Frozen","Liquid"],
+        required: [true, "Define a product cathegory"]
     },
     quantity:{
         type: Number,
         required: true,
-        min: [0, "La quantità minima non può essere negativa."]
+        min: [0, "Quantity must be higher than 0"]
     },
     producerId: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
 

@@ -1,30 +1,31 @@
-//Importo mongoose per la gestione dei dati sul DB
+//Import mongoose to handle DB
 const mongoose = require ("mongoose");
 
-//Creo lo schema di dati chiamato UserSchema per la registrazione delle info dell'utente
+/// Define the UserSchema to structure how user data is stored in the database
+// Creating a data schema called UserSchema to store user information in the DB
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Campo obbligatorio'],
+        required: [true, 'Required field'],
         trim: true,
-        minlength: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
+        minlength: [2, 'Name must be at least 2 characters long']
     },
     surname: {
         type: String,
-        required: [true, 'Campo obbligatorio'],
+        required: [true, 'Required field'],
         trim: true,
-        minlength: [2, 'Il nome prodotto deve contenere almeno 2 caratteri']
+        minlength: [2, 'Surname must be at least 2 characters long']
     },
     email: {
         type: String,
-        required: [true, 'Campo obbligatorio'], 
+        required: [true, 'Required field'], 
         unique: true,
-        match: [/^\S+@\S+\.\S+$/, 'Email non valida'], //Regex, controlla i parametri della mail:
-                                                    // ^	inizio della stringa
-                                                    // \S+	uno o più caratteri non spazi
-                                                    // @	il simbolo @
-                                                    // \.	il punto .
-                                                    // $	fine della stringa
+        match: [/^\S+@\S+\.\S+$/, 'Invalid email'], //Regex, validate email format:
+                                                    // ^	start of the string
+                                                    // \S+	one or more carachters no spaces
+                                                    // @	key @
+                                                    // \.	the "." dot
+                                                    // $	end of the string
         lowercase: true,
         trim: true
     },

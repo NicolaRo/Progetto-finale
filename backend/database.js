@@ -1,9 +1,9 @@
-//Importo mongoose per collegare il database di MongoDB
+//Import mongoose to handle DB
 const mongoose = require ('mongoose');
 
 const connectDB = async () => {
     try {
-        //Tenta la connessione
+        //Attempt to connect
         const conn = await mongoose.connect(process.env.MONGO_URI);
 
         console.log(`📦 MongoDB connesso: ${conn.connection.host}`);
@@ -11,13 +11,13 @@ const connectDB = async () => {
     } catch (error) {
         console.error('Errore connessione MongoDB:', error.message);
 
-        //In caso di errore, termina il processo
-        //Meglio crashare subito che continuare senza DB
+        //In caso of an errore, it stop the process
+        //This way server and the DB are always aligned.
         process.exit(1);
     }
 };
 
-//Gestione chiusura connessione quando l'app termina
+//Closing the connection when the App is closed
 process.on('SIGINT', async () => {
     await mongoose.connection.close();
 
