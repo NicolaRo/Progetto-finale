@@ -1,1 +1,1 @@
-//Commit test 15 - insight: improving make.com automization isn't that easy
+//Commit test 16 - insight: an agent on make.com is reading commits, gathering insights and passing them to another scenario where an LLM creates a post for Linkedin
