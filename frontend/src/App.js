@@ -1,1 +1,1 @@
-//Commit test 11 - insight: insight are ripped from the commit message
+//Commit test 12 - insight: improving make.com automization
