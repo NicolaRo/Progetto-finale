@@ -29,6 +29,11 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         min: [0, "Quantity must be higher than 0"]
     },
+    unit: {
+        type: String,
+        enum: ["Kg", "Cl", "Unit"],
+        required: true,
+    },
     producerId: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
 
 }, {timestamps: true});
