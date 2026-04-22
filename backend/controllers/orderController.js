@@ -6,6 +6,9 @@ const Product = require ('../models/Products');
 const User = require ('../models/Users');
 const Container = require ('../models/Containers');
 
+//Import the StockHelper function
+const {updateProductStock} = require ('../utils/stockHelper');
+
 //1. Create an order
 const createOrder = async (req, res) => {
     try {
