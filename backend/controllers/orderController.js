@@ -131,6 +131,16 @@ const updateOrder = async (req, res) => {
                 err.status = 422 //Unprocessable Entity
                 throw err;
             }
+            
+            //To know which is the current state
+            const currentIndex = allowedStatuses.indexOf(order.status);
+
+            //To set a new state to migrate to
+            const newIndex = allowedStatuses.indexOf(status);
+
+            if(newIndex !== currentIndex + 1) {
+                return res.status(400).json({message: "Invalid status transition: orders must advance one step at a time"})
+            }
             order.status = status;
         }
 
