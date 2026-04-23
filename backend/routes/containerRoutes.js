@@ -4,28 +4,32 @@ const router = express.Router();
 
 //Import controller
 const containerController = require ('../controllers/containerController');
+const { authMiddleware } = require("../middleware/authMiddleware");
+const { roleMiddleware } = require("../middleware/roleMiddleware");
 
 //GET
 
 //1. Read a specific container
-router.get("/:id", containerController.getContainerById);
+router.get("/:id", authMiddleware, containerController.getContainerById);
 
 //2. Read containers
-router.get("/", containerController.getContainers);
+router.get("/", authMiddleware, containerController.getContainers);
 
 //POST
 
 //3. Create a container
-router.post("/", containerController.createContainer);
+//ONLY the "Producer" can create a container 
+router.post("/", authMiddleware, roleMiddleware("Producer"), containerController.createContainer);
 
 //PUT
 
 //4. Update an existing container
-router.put("/:id", containerController.updateContainer);
+router.put("/:id", authMiddleware, containerController.updateContainer);
 
 //DELETE
 
 //5. Delete an existing container
-router.delete("/:id", containerController.deleteContainer);
+//ONLY the "Producer" can create a container 
+router.delete("/:id", authMiddleware, roleMiddleware("Producer"), containerController.deleteContainer);
 
 module.exports = router;

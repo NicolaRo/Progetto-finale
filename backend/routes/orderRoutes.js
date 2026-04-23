@@ -5,27 +5,34 @@ const router = express.Router();
 //Import controller
 const orderController = require('../controllers/orderController');
 
+//Import Middleware
+const authMiddleware = require('../middleware/authMiddleware');
+const roleMiddleware = require('../middleware/roleMiddleware');
+
 //GET
 
 //1. Read a specific orrder
-router.get("/:id", orderController.getOrderById);
+router.get("/:id", authMiddleware, orderController.getOrderById);
 
 //2. Read orders
-router.get("/", orderController.getOrders);
+router.get("/", authMiddleware, orderController.getOrders);
 
 //POST
 
 //3. Create a new order
-router.post("/", orderController.createOrder);
+//ONLY the "User" can create a new order 
+router.post("/", authMiddleware, roleMiddleware("User"), orderController.createOrder);
 
 //PUT
 
 //4. Update an existing order
-router.put("/:id", orderController.updateOrder);
+//ONLY the "Producer" can update an existing order
+router.put("/:id", authMiddleware, roleMiddleware("Producer"), orderController.updateOrder);
 
 //DELETE
 
 //5. Delete an existing order
-router.delete("/:id", orderController.deleteOrder);
+//ONLY the "User" can delete an existing order
+router.delete("/:id", authMiddleware, roleMiddleware("User"), orderController.deleteOrder);
 
 module.exports = router;
