@@ -4,10 +4,10 @@
 const User = require("../models/Users");
 
 //Import bcryptjs to encript the password
-const bcrypt = require("bcryptsjs");
+const bcrypt = require("bcryptjs");
 
 //Import JWT for authentication
-const jsonwebtoken = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 //1. Create an User from client input
 const createUser = async (req, res) => {

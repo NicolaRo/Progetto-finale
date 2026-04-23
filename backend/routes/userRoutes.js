@@ -16,7 +16,10 @@ router.get("/", userController.getUsers);
 //POST
 
 //3. Create a new user
-router.post("/", userController.createUser);
+router.post("/register", userController.createUser);
+
+//3.1 Log in an existing user
+router.post("/login", userController.loginUser);
 
 //PUT
 
