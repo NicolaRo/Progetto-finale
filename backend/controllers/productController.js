@@ -6,9 +6,10 @@ const Product = require ('../models/Products');
 //1. Create Product from user query
 const createProduct = async (req, res) => {
     try {
-        const {name, description, price, type, quantity, unit, producerId} = req.body;
 
-        if(!name || !description || !price || !type || !quantity || !unit || !producerId) {
+        const {name, description, price, type, quantity, unit,} = req.body;
+
+        if(!name || !description || !price || !type || !quantity || !unit) {
             return res.status(400).json ({message: "Product details are missing"});
         } 
         const product = await Product.create({
@@ -18,7 +19,7 @@ const createProduct = async (req, res) => {
             type,
             quantity,
             unit,
-            producerId
+            producerId: req.user.id
         });
         return res.status(201).json(product);
     } catch (error) {
