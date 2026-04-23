@@ -36,10 +36,44 @@ const createUser = async (req, res) => {
     const jwtToken =  jwt.sign({id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: "7d"});
 
     return res.status(201).json({user: user, token: jwtToken});
+
   } catch (error) {
     console.error("User create Error:", error);
     return res.status(500).json({ message: error.message });
   }
+};
+
+//1.1. Log in function to include JWT Token authentication
+const loginUser = async (req, res) => {
+
+    try {
+        const {email, password} = req.body;
+       
+        //Check if credential are submitted
+        if(!email || !password)
+            return res.status(404).json({message: "Credentials not found"});
+
+        //Look for already existing user with findOne()
+        const existingUser = await User.findOne({ email });
+
+        //Check if the user is already existent
+        if(!existingUser)
+            return res.status(401).json({message: "Credential non valid"});
+        
+            //Compare the 2 password, the one from user's input and the hashed password stored in the DB
+            const isMatch = await bcryptjs.compare(password, existingUser.password);
+
+            if(!isMatch)
+                return res.status(401).json({message:"Credential non valid"});
+
+            //If data matches, then execute the jwt.sign with existing user's credentials 
+            const jwtToken = jwt.sign({id: existingUser._id, role: existingUser.role}, process.env.JWT_SECRET, {expiresIn: "7d"});
+
+            return res.status(200).json({token: jwtToken, message: "Successfully logged-in"});
+
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
 };
 
 //2.1. Read Users information
@@ -106,4 +140,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
+  loginUser
 };
