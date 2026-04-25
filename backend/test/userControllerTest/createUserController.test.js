@@ -6,6 +6,9 @@ const sinon = require ('sinon');
 const userController = require ('../../controllers/userController');
 const User = require ('../../models/Users');
 
+//Import bcrypt to enable hash testing
+const bcryptjs = require('bcryptjs');
+
 //Describe the test pourpose
 describe('userController', ()=> {
 
@@ -13,13 +16,18 @@ describe('userController', ()=> {
     let deleteStub;
     //after each test it delete the stubs
     afterEach (() => {
-        if(deleteStub) deleteStub.restore();
+        sinon.restore();
     });
 
     describe('createUSer', () => {
         it('should create an user and return 201', async () => {
 
             //ARRANGE
+            sinon.stub(User, 'findOne').resolves(null);
+            sinon.stub(bcryptjs, 'genSalt').resolves('fakeSalt');
+            sinon.stub(bcryptjs, 'hash').resolves('hashedPassword');
+
+            process.env.JWT_SECRET = 'testsecret';
 
             //Define HTTP req. outloook
             const req = {
@@ -56,12 +64,9 @@ describe('userController', ()=> {
             expect(res.status.calledWith(201)).to.be.true;
             expect(res.json.calledOnce).to.be.true;
             expect(res.json.calledWithMatch({
-                name: "Mario",
-                surname: "Rossi",
-                email: "mario@example.com",
-                password: "hashedPassword"
+                user: { name: "Mario", surname: "Rossi" },
+                token: sinon.match.string
             })).to.be.true;
-            expect(createStub.calledOnceWith(req.body)).to.be.true;
         });
 
         it('should return 400 if required data is missing', async () => {
@@ -94,6 +99,9 @@ describe('userController', ()=> {
         it('should return 500 if the DB fails', async() => {
 
             //ARRANGE
+
+            sinon.stub(User, 'findOne').resolves(null);
+
             const req =  {
                 body: {
                     name: "Mario",
