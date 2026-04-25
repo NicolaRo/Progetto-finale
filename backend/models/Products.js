@@ -21,7 +21,7 @@ const ProductSchema = new mongoose.Schema({
     },
     type:{
         type: String,
-        enum: ["Vedgetables","Fruits","Dry","Frozen","Liquid"],
+        enum: ["Vegetables","Fruits","Dry","Frozen","Liquid"],
         required: [true, "Define a product cathegory"]
     },
     quantity:{
