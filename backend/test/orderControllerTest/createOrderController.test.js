@@ -12,20 +12,6 @@ const {createOrder} = require('../../controllers/orderController');
 
 describe('Order Controller', () => {
     describe('createOrder', () => {
-        /* let fakeSession;
-        beforeEach(() => {
-            //Create a fake session to emulate real DB behaviour
-            fakeSession ={
-                withTransaction: sinon.stub().callsFake(async (callback) => {
-                    //Execute callback = the code inside withTransaction
-                    return await callback();
-                }),
-                endSession: sinon.stub()
-            };
-            //To avoid timeout stub mongoose.startSession() for each test
-            sinon.stub(mongoose, 'startSession').resolves(fakeSession);
-        }); */
-
         afterEach(() => {
             sinon.restore();
         });
