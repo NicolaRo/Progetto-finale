@@ -7,7 +7,7 @@ const User = require ('../models/Users');
 const Container = require ('../models/Containers');
 
 //Import the StockHelper function
-const {updateProductStock} = require ('../utils/stockHelper');
+const {updateProductStock, restoreProductStock} = require ('../utils/stockHelper');
 
 //1. Create an order
 const createOrder = async (req, res) => {
@@ -106,6 +106,9 @@ const updateOrder = async (req, res) => {
         const orderId = req.params.id;
         const {products: newProducts, status, userId} = req.body;
 
+        console.log('userId value:', userId);
+        console.log('orderId:', orderId, 'userId:', userId, 'status:', status);
+
         //Validate order exists
         const order = await Order.findById(orderId);
         
@@ -113,10 +116,13 @@ const updateOrder = async (req, res) => {
             return res.status(404).json({message: "Order not found"});
 
         // 3.1. Validete Users
-        const user = await User.findById(userId);
+        if(userId){
+            const user = await User.findById(userId);
         if (!user) 
             return res.status(404).json({message: "User not found"});
         order.user = user._id;
+        }
+        
 
         if (newProducts && newProducts.length > 0) {
             await updateProductStock(newProducts);
@@ -144,6 +150,7 @@ const updateOrder = async (req, res) => {
             order.status = status;
         }
 
+
         await order.save();
         return res.status(200).json(order);
     } catch (error) {
@@ -154,15 +161,17 @@ const updateOrder = async (req, res) => {
 //4. Deleta an order
 const deleteOrder = async (req, res) => {
     try {
-        const order = await Order.findByIdAndDelete (
-            req.params.id
-        ); 
+        const order = await Order.findById(req.params.id);
         if(!order)
             return res.status(404).json({message: "Order not found"});
-        return res.status(200).json({message: "Order successfully deleted"});
+        await restoreProductStock(order.products);
+        await Order.findByIdAndDelete(req.params.id);
+        return res.status(204).json({message: "Order successfully deleted"});
+
     } catch (error) {
         return res.status(500).json ({message: error.message});
     }
+    
 };
 
 module.exports = {

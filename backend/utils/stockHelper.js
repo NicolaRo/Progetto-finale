@@ -3,6 +3,8 @@
 //Import the model
 const Product = require ('../models/Products');
 
+
+//Update stock availabibilty when a new order is created
 const updateProductStock = async (products = []) => {
     for (let p of products) {
         const product = await Product.findById(p.product);
@@ -34,4 +36,18 @@ const updateProductStock = async (products = []) => {
     }
 };
 
-module.exports = {updateProductStock};
+
+//Restore stock availability when an existing order is canceled before shipping
+const restoreProductStock = async (products = []) => {
+    for (let p of products) {
+        const product = await Product.findById(p.product); 
+
+        await Product.findByIdAndUpdate(
+            p.product,
+            {$inc: {quantity: +p.orderedQuantity} }
+        )
+    };
+    console.log('products ricevuti:', products);
+}
+
+module.exports = {updateProductStock, restoreProductStock};
