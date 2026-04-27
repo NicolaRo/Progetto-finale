@@ -106,9 +106,6 @@ const updateOrder = async (req, res) => {
         const orderId = req.params.id;
         const {products: newProducts, status, userId} = req.body;
 
-        console.log('userId value:', userId);
-        console.log('orderId:', orderId, 'userId:', userId, 'status:', status);
-
         //Validate order exists
         const order = await Order.findById(orderId);
         

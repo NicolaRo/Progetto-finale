@@ -117,8 +117,6 @@ describe('productController', () => {
             //ACT
             await productController.createProduct(req, res);
 
-            console.log(res.json.firstCall.args[0]);
-
             //ASSERT
             expect(res.status.calledWith(500)).to.be.true;
             expect(res.json.calledWithMatch({message: "DB failure"})).to.be.true;

@@ -56,9 +56,6 @@ describe('Update order controller', () => {
             //ACT
             await updateOrder(req, res);
 
-            console.log('status calls:', res.status.args);
-            console.log('json calls:', res.json.args);
-
             //ASSSERT
             expect(Order.findById.calledWith(fakeOrderId.toString())).to.be.true;
             expect(fakeOrder.status).to.equal('Order received');

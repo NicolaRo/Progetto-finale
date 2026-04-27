@@ -173,8 +173,6 @@ describe('Order Controller', () => {
             //ACT
             await createOrder(req, res);
 
-            console.log('status calls:', res.status.args);
-            console.log('json calls:', res.json.args);
             //ASSERT
             expect(res.status.calledWith(404)).to.be.true;
             expect(res.json.calledWith({message: 'User not found'})).to.be.true;

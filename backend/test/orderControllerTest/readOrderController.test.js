@@ -32,11 +32,6 @@ describe ('Order controller', () => {
 
             //ACT
             await orderController.getOrders(req, res);
-
-
-            console.log('status calls:', res.status.args);
-            
-            console.log('json calls:', res.json.args);
             
             //ASSERT
             expect(findStub.calledOnce).to.be.true;
