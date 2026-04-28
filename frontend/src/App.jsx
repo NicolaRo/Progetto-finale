@@ -1,5 +1,5 @@
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
-import SplashPage from '../src/pages/SplashPage';
+import SplashPage from './pages/SplashPage';
 
 function App() {
 
@@ -7,7 +7,9 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={SplashPage} />
+        {/* the splashpage will navigate to the components and here represent the entry point of the App */}
+        <Route path="/" element={<SplashPage/>}>
+        </Route>
       </Routes>
       </BrowserRouter>
     </>
