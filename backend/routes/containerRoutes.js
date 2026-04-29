@@ -4,8 +4,8 @@ const router = express.Router();
 
 //Import controller
 const containerController = require ('../controllers/containerController');
-const { authMiddleware } = require("../middleware/authMiddleware");
-const { roleMiddleware } = require("../middleware/roleMiddleware");
+const  authMiddleware  = require("../middleware/authMiddleware");
+const  roleMiddleware  = require("../middleware/roleMiddleware");
 
 //GET
 

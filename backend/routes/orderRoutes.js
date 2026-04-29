@@ -5,6 +5,8 @@ const router = express.Router();
 //Import controller
 const orderController = require('../controllers/orderController');
 
+console.log(orderController);
+
 //Import Middleware
 const authMiddleware = require('../middleware/authMiddleware');
 const roleMiddleware = require('../middleware/roleMiddleware');
@@ -22,7 +24,6 @@ router.get("/", authMiddleware, orderController.getOrders);
 //3. Create a new order
 //ONLY the "User" can create a new order 
 router.post("/", authMiddleware, roleMiddleware("User"), orderController.createOrder);
-
 //PUT
 
 //4. Update an existing order

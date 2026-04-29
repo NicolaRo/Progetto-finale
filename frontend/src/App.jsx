@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import SplashPage from './pages/SplashPage';
-import LoginPage from './pages/Login';
+import LoginPage from './pages/LoginPage';
 
 function App() {
 

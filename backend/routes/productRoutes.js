@@ -6,8 +6,8 @@ const router = express.Router();
 const productController = require ('../controllers/productController');
 
 //Import Middleware
-const { authMiddleware } = require("../middleware/authMiddleware");
-const { roleMiddleware } = require("../middleware/roleMiddleware");
+const  authMiddleware  = require("../middleware/authMiddleware");
+const  roleMiddleware  = require("../middleware/roleMiddleware");
 
 //GET
 
