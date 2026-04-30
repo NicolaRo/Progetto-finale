@@ -1,6 +1,10 @@
 //Import Express
 const express = require("express");
 
+//Import cors
+const cors = require ('cors');
+
+
 //Import mongoSanitize to defend from No-SQL-Injection attacks
 const mongoSanitize = require('express-mongo-sanitize');
 
@@ -16,16 +20,24 @@ connectDB();
 //Create Express app
 const app = express();
 
+//Configure Cors
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
+
 //--- MIDDLEWARE ---
 //1. Parse JSON applied to the queries body
 app.use(express.json());
 
-//2. NoSQL Injection protection
+/* //2. NoSQL Injection protection
 app.use(mongoSanitize({
+  //sanitizeQuery disable sanitization for req.query which is auto-generated
+  //while sanitizing req.body: the input from the user
+  sanitizeQuery: false,
   onSanitize: ({req, key}) => {
     console.warn(`⚠️ Attempted NoSQL Injection attack to : ${key}`);
   },
-}));
+})); */
 
 //3. Logging to debug
 app.use((req, res, next) => {
@@ -37,8 +49,6 @@ app.use((req, res, next) => {
 const authMiddleware = require('./middleware/authMiddleware');
 const roleMiddleware = require('./middleware/roleMiddleware');
 
-//Import cors
-const cors = require ('cors');
 
 //Import the routes
 const userRoutes = require('./routes/userRoutes');
@@ -46,15 +56,10 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require ('./routes/orderRoutes');
 const containerRoutes = require('./routes/containerRoutes');
 
-//Configure Cors
-app.use(cors({
-  origin: 'http://localhost:5173/'
-}));
-
-/* app.use('/api/users', authMiddleware, roleMiddleware, userRoutes); */
+app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/containers', containerRoutes);
-/* app.use('/api/orders', authMiddleware, roleMiddleware, orderRoutes); */
+app.use('/api/orders', orderRoutes);
 
 //Server port
 const PORT = process.env.PORT || 3000;

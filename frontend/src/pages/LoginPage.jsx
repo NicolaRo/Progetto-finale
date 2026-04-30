@@ -1,35 +1,64 @@
 import {auth} from '../services/firebaseConfig';
 import {useState} from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-
-
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
     const [showLogin, setShowLogin] = useState(true);
-    const [showUser, setShowUser] = useState(true);
+    const [showRole, setShowRole] = useState(true);
 
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
-    const [user, setUser] = useState("");
+    const [role, setRole] = useState("");
     const [password, setPassword] = useState("");
 
-    const data = {name, surname, email, user, password};
+    const data = {name, surname, email, role, password};
 
     const provider = new GoogleAuthProvider();
 
+
+    const navigate = useNavigate();
+
     //Function to enable google login popup
-    const handleLogIn = async () => {
+    const googleLogIn = async () => {
         const result = await signInWithPopup(auth, provider);
         console.log(result.user);
+    }
+    //Function to log in with own credentials
+    const handleLogIn =  async (e) => {
+        e.preventDefault();
+
+        // Validations
+      
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert("Please provide a valid e-mail address.");
+        return;
+      }
+      if (password.length < 8) {
+        alert("The password must be of minimum 8 digits.");
+        return;
+      }
+
+      //Fetch data to the backend
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok) {
+        navigate('./UserHome');
+    } else {
+        const error = await response.json();
+        alert(error.message);
+    }
+
     }
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      
-      const name = e.target.name.value.trim();
-      const email = e.target.email.value.trim();
-      const password = e.target.password.value.trim();
   
       // Validations
       if (name.length < 2) {
@@ -52,6 +81,14 @@ function LoginPage() {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       })
+
+      if (response.ok) {
+        navigate('/login');
+    } else {
+        const error = await response.json();
+        alert(error.message);
+    }
+
     }
     
     return (
@@ -85,9 +122,14 @@ function LoginPage() {
                     placeholder="Choose a password"
                 />
                 
+                <button type="submit"
+                    onClick={handleLogIn}>
+                    Log In
+                </button>
+
                 <button
                     className="btn-google-auth"
-                    onClick={handleLogIn}> Log In
+                    onClick={googleLogIn}> Log In with Google
                 </button>
 
             </div>
@@ -120,7 +162,7 @@ function LoginPage() {
                     className="input-text"
                     type="password"
                     value={password}
-                    minlength="8"
+                    minLength="8"
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Choose a password"
                 />
@@ -132,15 +174,20 @@ function LoginPage() {
                     placeholder="I.e.: john.doe@example.com"
                 />
                 {/*toggle button to choose which profile to register with */}
-                <button onClick={ () => setShowUser(!showUser)}>
-                    {showUser ? "I am an User" : "I am a Producer"}
+                
+                <button 
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    onClick={() => {
+                        setShowRole(!showRole);
+                        setRole(showRole ? "Producer" : "User");
+                    }}>
                 </button>
-                {showUser ? <p>An User can buy products allowing packaging reuse</p> : <p>A Producer can sell products</p>}
+
+                {showRole ? <p>An User can buy products allowing packaging reuse</p> : <p>A Producer can sell products</p>}
                 
                 <button type="submit"
-                    onClick={() => {
-                        handleSubmit(fetch);
-                    }}>
+                    onClick={handleSubmit}>
                     Register
                 </button>
             </div>

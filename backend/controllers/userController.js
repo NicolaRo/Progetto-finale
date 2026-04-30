@@ -45,6 +45,7 @@ const createUser = async (req, res) => {
 
 //1.1. Log in function to include JWT Token authentication
 const loginUser = async (req, res) => {
+  console.log(req.body);
 
     try {
         const {email, password} = req.body;
@@ -61,7 +62,7 @@ const loginUser = async (req, res) => {
             return res.status(401).json({message: "Credential non valid"});
         
             //Compare the 2 password, the one from user's input and the hashed password stored in the DB
-            const isMatch = await bcryptjs.compare(password, existingUser.password);
+            const isMatch = await bcrypt.compare(password, existingUser.password);
 
             if(!isMatch)
                 return res.status(401).json({message:"Credential non valid"});
