@@ -5,7 +5,6 @@ const router = express.Router();
 //Import controller
 const orderController = require('../controllers/orderController');
 
-console.log(orderController);
 
 //Import Middleware
 const authMiddleware = require('../middleware/authMiddleware');

@@ -37,7 +37,8 @@ app.use((req, res, next) => {
 const authMiddleware = require('./middleware/authMiddleware');
 const roleMiddleware = require('./middleware/roleMiddleware');
 
-
+//Import cors
+const cors = require ('cors');
 
 //Import the routes
 const userRoutes = require('./routes/userRoutes');
@@ -45,11 +46,15 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require ('./routes/orderRoutes');
 const containerRoutes = require('./routes/containerRoutes');
 
+//Configure Cors
+app.use(cors({
+  origin: 'http://localhost:5173/'
+}));
 
-app.use('/api/users', authMiddleware, roleMiddleware, userRoutes);
+/* app.use('/api/users', authMiddleware, roleMiddleware, userRoutes); */
 app.use('/api/products', productRoutes);
 app.use('/api/containers', containerRoutes);
-app.use('/api/orders', authMiddleware, roleMiddleware, orderRoutes);
+/* app.use('/api/orders', authMiddleware, roleMiddleware, orderRoutes); */
 
 //Server port
 const PORT = process.env.PORT || 3000;
