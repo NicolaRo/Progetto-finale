@@ -21,6 +21,9 @@ router.post("/register", userController.createUser);
 //3.1 Log in an existing user
 router.post("/login", userController.loginUser);
 
+//3.1.1 Log in an existing user with Google Auth
+router.post("/google-login", userController.googleLogin);
+
 //PUT
 
 //4. Update an existing user

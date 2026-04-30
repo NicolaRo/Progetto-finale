@@ -70,12 +70,34 @@ const loginUser = async (req, res) => {
             //If data matches, then execute the jwt.sign with existing user's credentials 
             const jwtToken = jwt.sign({id: existingUser._id, role: existingUser.role}, process.env.JWT_SECRET, {expiresIn: "7d"});
 
-            return res.status(200).json({token: jwtToken, message: "Successfully logged-in"});
+            return res.status(200).json({token: jwtToken, role: existingUser.role, message: "Successfully logged-in"});
 
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
 };
+
+//1.2. Google login only passes email to validate
+const googleLogin = async (req, res) => {
+  
+  try {
+    const {email} = req.body;
+
+    const existingUser = await User.findOne({email});
+
+    
+    if (!existingUser){
+      return res.status(404).json({ message: "User's email not found" });
+    } else {
+      const jwtToken = jwt.sign({id: existingUser._id, role: existingUser.role}, process.env.JWT_SECRET, {expiresIn: "7d"});
+      return res.status(200).json({token: jwtToken, role: existingUser.role, message: "Successfully logged-in"});
+    }
+
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+};
+
 
 //2.1. Read Users information
 const getUsers = async (req, res) => {
@@ -141,5 +163,6 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
-  loginUser
+  loginUser,
+  googleLogin
 };

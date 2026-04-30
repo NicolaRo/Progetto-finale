@@ -1,7 +1,8 @@
 import {auth} from '../services/firebaseConfig';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 function LoginPage() {
     const [showLogin, setShowLogin] = useState(true);
@@ -17,13 +18,34 @@ function LoginPage() {
 
     const provider = new GoogleAuthProvider();
 
+    const {login} = useContext(AuthContext);
 
     const navigate = useNavigate();
 
     //Function to enable google login popup
     const googleLogIn = async () => {
         const result = await signInWithPopup(auth, provider);
-        console.log(result.user);
+
+        //Fetch data to the backend
+      const googleAuth = await fetch(`${import.meta.env.VITE_API_URL}/api/users/google-login`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email: result.user.email })
+      })
+      console.log(googleAuth.status);
+
+      //Read the data
+      const logInData = await googleAuth.json();
+      login(logInData.token, {role: logInData.role});
+
+      //Navigate to specific page depending on the role
+      if (logInData.role === "Producer") {
+        navigate('/ProducerHome');
+    } else {
+        if(logInData.role === "User") {
+            navigate('/UserHome');
+        }
+    }
     }
     //Function to log in with own credentials
     const handleLogIn =  async (e) => {
@@ -48,11 +70,17 @@ function LoginPage() {
         body: JSON.stringify(data)
       })
 
-      if (response.ok) {
-        navigate('./UserHome');
+      //Read the data
+      const logInData = await response.json();
+      login(logInData.token, {role: logInData.role});
+
+      //Navigate to specific page depending on the role
+      if (logInData.role === "Producer") {
+        navigate('/ProducerHome');
     } else {
-        const error = await response.json();
-        alert(error.message);
+        if(logInData.role === "User") {
+            navigate('/UserHome');
+        }
     }
 
     }
@@ -181,7 +209,7 @@ function LoginPage() {
                     onClick={() => {
                         setShowRole(!showRole);
                         setRole(showRole ? "Producer" : "User");
-                    }}>
+                    }}> {showRole ? "I am a User" : "I am a Producer"}
                 </button>
 
                 {showRole ? <p>An User can buy products allowing packaging reuse</p> : <p>A Producer can sell products</p>}
