@@ -36,7 +36,9 @@ function LoginPage() {
 
       //Read the data
       const logInData = await googleAuth.json();
-      login(logInData.token, {role: logInData.role});
+      login(logInData.token, {role: logInData.role, name: logInData.name});
+
+      console.log(logInData)
 
       //Navigate to specific page depending on the role
       if (logInData.role === "Producer") {
@@ -72,7 +74,10 @@ function LoginPage() {
 
       //Read the data
       const logInData = await response.json();
-      login(logInData.token, {role: logInData.role});
+      login(logInData.token, {role: logInData.role, name: logInData.name});
+
+      console.log(logInData)
+
 
       //Navigate to specific page depending on the role
       if (logInData.role === "Producer") {
@@ -116,7 +121,6 @@ function LoginPage() {
         const error = await response.json();
         alert(error.message);
     }
-
     }
     
     return (
@@ -221,7 +225,6 @@ function LoginPage() {
             </div>
             
         )}
-        
         
         </>
     );

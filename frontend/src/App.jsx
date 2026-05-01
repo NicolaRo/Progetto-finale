@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import SplashPage from './pages/SplashPage';
 import LoginPage from './pages/LoginPage';
 import UserHome from './pages/user/UserHome';
-import ProducerHome from './pages/user/ProducerHome';
+import ProducerHome from './pages/producer/ProducerHome';
 
 function App() {
 
