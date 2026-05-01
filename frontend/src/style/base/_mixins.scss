@@ -1,0 +1,35 @@
+/* _-_-_ MEDIA QUERIES AND FUNCTIONS_-_-_ */
+@use './variables' as *;
+
+@mixin respond ($breakpoint) {
+   
+    /*if "breakpoint" equals "xs"*/
+    @if $breakpoint == xs {
+        /*set MIN width equals to 320px*/
+        @media (min-width: $xs) {@content;}
+    }
+
+    @else if $breakpoint == sm {
+        @media (min-width: $sm) {@content;}
+    }
+
+    @else if $breakpoint == md {
+        @media (min-width: $md) {@content;}
+    }
+    
+    @else if $breakpoint == lg {
+        @media (min-width: $lg) {@content;}
+    }
+
+    @else if $breakpoint == xl {
+        @media (min-width: $xl) {@content;}
+    }
+
+};
+
+
+@mixin flex-center {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}

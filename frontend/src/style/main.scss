@@ -1,0 +1,32 @@
+/*-=-=-= IMPORT BASE MODULES =-=-=- */
+@use './base/_variables' as *;
+@use './base/reset';
+@use './base/mixins' as *;
+
+
+/*-=-=-= APP BASE STYLE =-=-=- */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    display: flex;
+    flex-direction: : column;
+    align-items: center;
+    width: 100vw;
+    overflow-x: hidden;
+    @include respond (xs) {} //min width (≥ 350px)
+    @include respond (sm) {} //min width (≥ 480px)
+    @include respond (md) {} //min width (≥ 780px)
+    @include respond (lg) {} //min width (≥ 1024px)
+    @include respond (xl) {} //min width (≥ 1440px)
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin : 0 auto;
+}
