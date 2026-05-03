@@ -1,108 +1,172 @@
-import {useContext} from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import {useState} from 'react';
-import Navbar from '../../components/Navbar';
+import { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import Navbar from "../../components/Navbar";
 
+function ProducerHome() {
+  const { token } = useContext(AuthContext);
 
-function ProducerHome () {
-    
-    const {token} = useContext(AuthContext);
+  const [productName, setProductName] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productType, setProductType] = useState(null);
+  const [productQuantity, setProductQuantity] = useState("");
+  const [productUnit, setProductUnit] = useState("");
+  const [ingredientResults, setIngredientResults] = useState([]);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedIngredientId, setSelectedIngredientId] = useState("");
 
-    const [productName, setProductName] = useState("");
-    const [productDescription, setProductDescription] = useState("");
-    const [productPrice, setProductPrice] = useState("");
-    const [productType, setProductType] = useState(null);
-    const [productQuantity, setProductQuantity] = useState ("");
-    const [productUnit, setProductUnit] = useState("");
+  const handleCreateProduct = async (e) => {
+    e.preventDefault();
 
-    
-
-    const handleCreateProduct = async (e) => {
-        e.preventDefault();
-
-        if (!productName || !productDescription || !productType || !productPrice || !productQuantity || !productUnit)
-            {alert("Please provide all the product's details.")
-            return;
+    if (
+      !productName ||
+      !productDescription ||
+      !productType ||
+      !productPrice ||
+      !productQuantity ||
+      !productUnit
+    ) {
+      alert("Please provide all the product's details.");
+      return;
     } else {
-        //Fetch data to the backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/products/`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
-        body: JSON.stringify({name: productName, type: productType, quantity: productQuantity, unit: productUnit, price: productPrice, description: productDescription})
-      })
-      if(response.ok) {
+      //Fetch data to the backend
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/products/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: productName,
+            type: productType,
+            quantity: productQuantity,
+            unit: productUnit,
+            price: productPrice,
+            description: productDescription,
+            image: selectedImage,
+            ingredientId: selectedIngredientId
+          })
+        });
+              
+      if (response.ok) {
         alert("Product created");
       }
-    } }
-    return (
-        <>
-        <h3 className="page-title"> Producer Home</h3>
-        <Navbar />
-        <div className="create-product-container">
-            <h3 className="component-title">Add a new product</h3>
-            
-            <input className="input"
-            type="text"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            placeholder="Product's name"
-            ></input>
+    }
+  };
+//Call spoonacular API from the backend to get the ingredients pictures
+  useEffect(() => {
+    if (!productName) return;
 
-            <select 
-                className="dropdown"
-                value={productType}
-                onChange={(e) => setProductType(e.target.value)}>
-                <option value="">Select type...</option>
-                <option value="Vegetables">Vegetables</option>
-                <option value="Fruits">Fruits</option>
-                <option value="Dry">Dry</option>
-                <option value="Frozen">Frozen</option>
-                <option value="Liquid">Liquid</option>
-            </select>
+   
+    const timer = setTimeout(async () => {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/ingredients?query=${productName}`
+      );
+      const data = await response.json();
+      setIngredientResults(data);
+       //wait 1 second to call the API
+    }, 1000);
 
-            <input className="input"
-            type="text"
-            value={productDescription}
-            placeholder="Product short description"
-            minLength="10"
-            onChange={(e) => setProductDescription(e.target.value)}
-            />
-            <input className="input"
-            type="number"
-            value={productPrice}
-            placeholder="1,00€"
-            minLength="10"
-            onChange={(e) => setProductPrice(e.target.value)}
-            />
-            
-            <input className="input"
-            type="quantity"
-            value={productQuantity}
-            placeholder="10"
-            onChange={(e)=> setProductQuantity(e.target.value)} 
-            />
-            
-            <input className="input"
-            type="unit"
-            value={productUnit}
-            placeholder="Unit"
-            onChange={(e)=> setProductUnit(e.target.value)}
-            />
+    return () => clearTimeout(timer);
+  }, [productName]);
 
-            <button type="submit"
-                onClick={handleCreateProduct}>
-                Add a new product
-            </button>
+
+  return (
+    <>
+      <h3 className="page-title"> Producer Home</h3>
+      <Navbar />
+      <div className="create-product-container">
+        <h3 className="component-title">Add a new product</h3>
+
+        <input
+          className="input"
+          type="text"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+          placeholder="Product's name"
+        ></input>
+
+        <select
+          className="dropdown"
+          value={productType}
+          onChange={(e) => setProductType(e.target.value)}
+        >
+          <option value="">Select type...</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Dry">Dry</option>
+          <option value="Frozen">Frozen</option>
+          <option value="Liquid">Liquid</option>
+        </select>
+
+        <input
+          className="input"
+          type="text"
+          value={productDescription}
+          placeholder="Product short description"
+          minLength="10"
+          onChange={(e) => setProductDescription(e.target.value)}
+        />
+        <input
+          className="input"
+          type="number"
+          value={productPrice}
+          placeholder="1,00€"
+          minLength="10"
+          onChange={(e) => setProductPrice(e.target.value)}
+        />
+
+        <input
+          className="input"
+          type="quantity"
+          value={productQuantity}
+          placeholder="10"
+          onChange={(e) => setProductQuantity(e.target.value)}
+        />
+
+        <input
+          className="input"
+          type="unit"
+          value={productUnit}
+          placeholder="Unit"
+          onChange={(e) => setProductUnit(e.target.value)}
+        />
+
+        <div className="ingredients-grid">
+          {ingredientResults.map((ingredient) => (
+            <div
+              key={ingredient.id}
+              onClick={() => {
+                setProductName(ingredient.name);
+                setSelectedImage(ingredient.image);
+                setSelectedIngredientId(ingredient.id);
+              }}
+            >
+              <img
+                src={`https://img.spoonacular.com/ingredients_250x250/${ingredient.image}`}
+                alt={ingredient.name}
+              />
+              <p>{ingredient.name}</p>
+            </div>
+          ))}
         </div>
-        <div className="product-upd-preview">
-          <h4 className='sub-session-title'>New from me</h4>
-          <p>{productName || "New product to upload"}</p>
-          <p>{productDescription || "Product short description"}</p>
-          <p>{productPrice || "0.00"}€/{productUnit || "Unit"}</p>
-        </div>
-        </>
-    );
+
+        <button type="submit" onClick={handleCreateProduct}>
+          Add a new product
+        </button>
+      </div>
+      <div className="product-upd-preview">
+        <h4 className="sub-session-title">New from me</h4>
+        <p>{productName || "New product to upload"}</p>
+        <p>{productDescription || "Product short description"}</p>
+        <p>
+          {productPrice || "0.00"}€/{productUnit || "Unit"}
+        </p>
+      </div>
+    </>
+  );
 }
-
 
 export default ProducerHome;

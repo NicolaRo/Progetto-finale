@@ -34,6 +34,12 @@ const ProductSchema = new mongoose.Schema({
         enum: ["Kg", "Cl", "Unit"],
         required: true,
     },
+    image: {
+        type: String,
+    },
+    ingredientId:{
+        type: String
+    },
     producerId: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
 
 }, {timestamps: true});
