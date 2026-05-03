@@ -48,12 +48,17 @@ function ProducerHome () {
             placeholder="Product's name"
             ></input>
 
-            <input className="input"
-            type="text"
-            value={productType}
-            onChange={(e) => setProductType(e.target.value)}
-            placeholder="Product type"
-            ></input>
+            <select 
+                className="dropdown"
+                value={productType}
+                onChange={(e) => setProductType(e.target.value)}>
+                <option value="">Select type...</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Dry">Dry</option>
+                <option value="Frozen">Frozen</option>
+                <option value="Liquid">Liquid</option>
+            </select>
 
             <input className="input"
             type="text"
@@ -88,6 +93,12 @@ function ProducerHome () {
                 onClick={handleCreateProduct}>
                 Add a new product
             </button>
+        </div>
+        <div className="product-upd-preview">
+          <h4 className='sub-session-title'>New from me</h4>
+          <p>{productName || "New product to upload"}</p>
+          <p>{productDescription || "Product short description"}</p>
+          <p>{productPrice || "0.00"}€/{productUnit || "Unit"}</p>
         </div>
         </>
     );
