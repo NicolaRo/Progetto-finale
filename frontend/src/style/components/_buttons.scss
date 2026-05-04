@@ -1,1 +1,26 @@
 @use '../base/variables' as *;
+
+
+.login-btn{
+    width: fit-content;
+    padding: 0.25rem 1rem;
+    justify-content: space-evenly;
+    display: flex;
+    border-radius: 0.5rem;
+    margin: 1rem;
+}
+
+.btn-google-auth{
+    width: fit-content;
+    padding: 0.25rem 1rem;
+    justify-content: space-evenly;
+    display: flex;
+    border-radius: 0.5rem;
+    margin: 1rem;
+}
+
+.login-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

@@ -1,0 +1,23 @@
+@use '../base/variables' as *; 
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10rem 3rem 0 3rem;
+}
+.input-text {
+    width: 75vw;
+    min-height: 2.5rem;
+    margin: 1rem 0 1rem 0;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    background-color: $background;
+}
+.container-title{
+    margin: 1rem 0 1rem 0;
+}
+
+.container-subtitle{
+    margin: 1rem 0 1rem 0;
+}

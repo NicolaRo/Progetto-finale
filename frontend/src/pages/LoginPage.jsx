@@ -4,6 +4,8 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
+import googleLogin from '../assets/googleLogin.png';
+
 function LoginPage() {
     const [showLogin, setShowLogin] = useState(true);
     const [showRole, setShowRole] = useState(true);
@@ -126,43 +128,48 @@ function LoginPage() {
     return (
         <>
         
-        {/*Toggle to activate sign in form (default is the login screen) */}
-        <button 
-            className="toogle-login"
-            onClick={() => {
-                setShowLogin(!showLogin);
-            }}> 
-            Sign In
-        </button>
+        
         {showLogin ? (
             
             <div className="login-container">
-                <h3 className="container-title">Log In</h3>
+                <h3 className="container-title">Welcome in PackBack</h3>
+                <h6 className="container-subtitle">Reuseable packagin for a greener world</h6>
+                
                 <input 
                     className="input-text"
                     type="email"
+                    aria-label="email"
                     value={email}
                     onChange={(e)=> setEmail(e.target.value)}
-                    placeholder="I.e.: john.doe@example.com"
+                    placeholder="your@email.com"
                 />
                 <input 
                     className="input-text"
                     type="password"
                     value={password}
-                    minlength="8"
+                    minLength="8"
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Choose a password"
                 />
-                
-                <button type="submit"
+                <div className="login-buttons-container">
+                <button 
+                    className="login-btn"
+                    type="submit-btn"
                     onClick={handleLogIn}>
                     Log In
                 </button>
 
                 <button
                     className="btn-google-auth"
-                    onClick={googleLogIn}> Log In with Google
+                    placeholder="login with Google"
+                    onClick={googleLogIn}>
+                    <img
+                    className="btn-icon"
+                    src={googleLogin.png}
+                    alt="login with google"></img>
                 </button>
+                </div>
+                
 
             </div>
         ) : (
@@ -225,6 +232,15 @@ function LoginPage() {
             </div>
             
         )}
+
+        {/*Toggle to activate sign in form (default is the login screen) */}
+        <button 
+            className="toogle-login"
+            onClick={() => {
+                setShowLogin(!showLogin);
+            }}> 
+            Sign In
+        </button>
         
         </>
     );
