@@ -11,7 +11,10 @@ const  roleMiddleware  = require("../middleware/roleMiddleware");
 
 //GET
 
-//1. Read a specific product
+//1.Get Producer's products list
+router.get("/my-products", authMiddleware, productController.getProducersProducts);
+
+//1.1.  Read a specific product
 router.get("/:id", authMiddleware, productController.getProductById);
 
 //2. Read products

@@ -41,6 +41,16 @@ const getProducts = async (req, res) => {
         return res.status(500).json ({message: error.message});
     }
 };
+//2.2. Get Producer's Product list
+const getProducersProducts = async (req, res) => {
+    try {
+        //Get all the Products available
+        const products = await Product.find({producerId: req.user.id});
+        return res.status(200).json(products);
+    } catch (error) {
+        return res.status(500).json ({message: error.message});
+    }
+};
 
 //2.2. Read one specific product
 const getProductById = async (req, res) => {
@@ -88,6 +98,7 @@ module.exports = {
     createProduct,
     getProducts,
     getProductById,
+    getProducersProducts,
     updateProduct,
     deleteProduct
 };

@@ -1,6 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
+import ProductList from '../../components/ProductList';
+
 
 function ProducerHome() {
   const { token } = useContext(AuthContext);
@@ -14,6 +16,7 @@ function ProducerHome() {
   const [ingredientResults, setIngredientResults] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedIngredientId, setSelectedIngredientId] = useState("");
+  const [myProducts, setMyProducts] = useState ([]);
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
@@ -49,7 +52,7 @@ function ProducerHome() {
             ingredientId: selectedIngredientId
           })
         });
-              
+
       if (response.ok) {
         alert("Product created");
       }
@@ -59,7 +62,6 @@ function ProducerHome() {
   useEffect(() => {
     if (!productName) return;
 
-   
     const timer = setTimeout(async () => {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/ingredients?query=${productName}`
@@ -72,6 +74,21 @@ function ProducerHome() {
     return () => clearTimeout(timer);
   }, [productName]);
 
+  useEffect (() => {
+    const fetchProducts = async () => {
+      const response = await fetch (
+        `${import.meta.env.VITE_API_URL}/api/products/my-products`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setMyProducts (data);
+    };
+    fetchProducts();
+  }, [token] );
 
   return (
     <>
@@ -158,13 +175,14 @@ function ProducerHome() {
         </button>
       </div>
       <div className="product-upd-preview">
-        <h4 className="sub-session-title">New from me</h4>
+        <h4 className="sub-session-title">My Products</h4>
         <p>{productName || "New product to upload"}</p>
         <p>{productDescription || "Product short description"}</p>
         <p>
           {productPrice || "0.00"}€/{productUnit || "Unit"}
         </p>
       </div>
+      <ProductList products={myProducts} />
     </>
   );
 }
