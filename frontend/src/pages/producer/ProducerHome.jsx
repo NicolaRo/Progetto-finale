@@ -3,7 +3,6 @@ import { AuthContext } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
 import ProductList from '../../components/ProductList';
 
-
 function ProducerHome() {
   const { token } = useContext(AuthContext);
 
@@ -74,6 +73,7 @@ function ProducerHome() {
     return () => clearTimeout(timer);
   }, [productName]);
 
+  //API call to the DB to get the list of products
   useEffect (() => {
     const fetchProducts = async () => {
       const response = await fetch (

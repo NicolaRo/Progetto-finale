@@ -4,6 +4,7 @@ function ProductList({products}) {
     
         return(
             <div key= {product.name}>
+                <p>{product.producerId.name}</p>
                 <p>{product.name}</p>
                 <p>{product.description}</p>
                 <p>{product.price}</p>
@@ -13,9 +14,14 @@ function ProductList({products}) {
                 src={`https://img.spoonacular.com/ingredients_100x100/${product.image}`}
                 alt={product.name}
               />
+              <p>{product.producerId ? product.producerId.name : "Unknown producer"}</p>
             </div>
+            
+            
         )
+        
     })
+
 
     return (
         <>
@@ -28,5 +34,6 @@ function ProductList({products}) {
         </>
     )
 }
+
 
 export default ProductList;

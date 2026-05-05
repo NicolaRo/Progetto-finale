@@ -33,9 +33,10 @@ const createProduct = async (req, res) => {
 
 //2.1. Read Products information
 const getProducts = async (req, res) => {
+    
     try {
-        //Get all the Products available
-        const products = await Product.find();
+        //Get all the Products available (including producer's name)
+        const products = await Product.find().populate("producerId", "name");
         return res.status(200).json(products);
     } catch (error) {
         return res.status(500).json ({message: error.message});

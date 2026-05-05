@@ -16,8 +16,6 @@ function LoginPage() {
     const [role, setRole] = useState("");
     const [password, setPassword] = useState("");
 
-    const data = {name, surname, email, role, password};
-
     const provider = new GoogleAuthProvider();
 
     const {login} = useContext(AuthContext);
@@ -55,8 +53,13 @@ function LoginPage() {
     const handleLogIn =  async (e) => {
         e.preventDefault();
 
+        //Object with credentials to pass to the backend when loggin in an existing user
+        const data = {
+            email: email,
+            password: password
+          }
+
         // Validations
-      
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(email)) {
         alert("Please provide a valid e-mail address.");
@@ -94,7 +97,7 @@ function LoginPage() {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
+
       // Validations
       if (name.length < 2) {
         alert("Name lenght must be at least 2 digits.");
@@ -108,6 +111,15 @@ function LoginPage() {
       if (password.length < 8) {
         alert("The password must be of minimum 8 digits.");
         return;
+      }
+
+      //Object with Account details to pass to the backend when registering a new user
+      const data = {
+        email: email,
+        password: password,
+        name: name,
+        surname: surname,
+        role: role
       }
 
       //Fetch data to the backend

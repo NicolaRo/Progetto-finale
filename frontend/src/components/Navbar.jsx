@@ -2,6 +2,7 @@ import {useContext} from 'react';
 import { AuthContext } from '../context/AuthContext';
 import {useNavigate} from 'react-router-dom';
 
+import placeholderImg from '../assets/placeholderImg.png';
 
 function Navbar () {
 
@@ -11,14 +12,15 @@ function Navbar () {
     return (
         <>
         <div className="navbar">
+        <h4 className="account-name"> {user ? `Benvenut@: ${user.name}`: "Caricamento..."}</h4>
             <div className="PP-container">
-                <img 
-                    className="profile-picture"
-                    src= "placeholder-img"
-                    alt="profile picture icon"
-                />
+            <img
+                className="PP-image"
+                src={placeholderImg}
+                alt="packback sustainable shop"
+            />
             </div>
-            <h4 className="account-name"> {user ? `Benvenut@: ${user.name}`: "Caricamento..."}</h4>
+            
             <button className="btn-logout"
             onClick={() => {
                 navigate('/login')
