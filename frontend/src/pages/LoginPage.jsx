@@ -169,7 +169,7 @@ function LoginPage() {
                 <div className="login-buttons-container">
                 <button 
                     className="login-btn"
-                    type="submit-btn"
+                    type="submit"
                     onClick={handleLogIn}>
                     Log In
                 </button>

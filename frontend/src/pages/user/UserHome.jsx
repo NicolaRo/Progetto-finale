@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import ProductList from '../../components/ProductList';
+import ProductCard from '../../components/ProductCard';
 import Navbar from "../../components/Navbar";
 
 

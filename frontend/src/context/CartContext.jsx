@@ -1,6 +1,7 @@
-//To store the JWT and use it to browse different pages during the session
+//Import createContext to set component's state between non relative files
 import { createContext, useState} from "react";
 
+//Save the cart state 
 const CartContext = createContext();
 
 //the function CartProvider 
