@@ -105,6 +105,15 @@ function ProducerHome() {
           placeholder="Product's name"
         ></input>
 
+        <input
+          className="input"
+          type="text"
+          value={productDescription}
+          placeholder="Product short description"
+          minLength="10"
+          onChange={(e) => setProductDescription(e.target.value)}
+        />
+
         <select
           className="dropdown"
           value={productType}
@@ -118,19 +127,12 @@ function ProducerHome() {
           <option value="Liquid">Liquid</option>
         </select>
 
-        <input
-          className="input"
-          type="text"
-          value={productDescription}
-          placeholder="Product short description"
-          minLength="10"
-          onChange={(e) => setProductDescription(e.target.value)}
-        />
+        
         <input
           className="input"
           type="number"
           value={productPrice}
-          placeholder="1,00€"
+          placeholder="1,00€/Kg"
           minLength="10"
           onChange={(e) => setProductPrice(e.target.value)}
         />
@@ -139,17 +141,24 @@ function ProducerHome() {
           className="input"
           type="quantity"
           value={productQuantity}
-          placeholder="10"
+          placeholder="10Kg"
           onChange={(e) => setProductQuantity(e.target.value)}
         />
 
-        <input
-          className="input"
-          type="unit"
+        <select
+          className="dropdown"
           value={productUnit}
-          placeholder="Unit"
           onChange={(e) => setProductUnit(e.target.value)}
-        />
+        >
+          <option value="">Choose unit...</option>
+          <option value="Kg">Kg</option>
+          <option value="Lt">Lt</option>
+          <option value="Gr">Gr</option>
+          <option value="Cl">Cl</option>
+          <option value="Piece">Piece</option>
+        </select>
+
+       
 
         <div className="ingredients-grid">
           {ingredientResults.map((ingredient) => (
@@ -170,7 +179,7 @@ function ProducerHome() {
           ))}
         </div>
 
-        <button type="submit" onClick={handleCreateProduct}>
+        <button className="create-product-btn" type="submit" onClick={handleCreateProduct}>
           Add a new product
         </button>
       </div>

@@ -6,10 +6,16 @@
 @use './components/navbar';
 @use './components/buttons'as*;
 @use './pages/login';
+@use './pages/userHome';
+@use './pages/producerHome';
 
 
 
 /*-=-=-= APP BASE STYLE =-=-=- */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -31,6 +37,8 @@
 }
 
 body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

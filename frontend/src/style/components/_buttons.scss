@@ -24,3 +24,23 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
+
+/* -_-_-_ UserHome _-_-_- */
+
+.dropdown {
+    border: solid 1px blueviolet;
+    border-radius: 6px;
+    padding: 0.25rem;
+    background-color: #ffffff45;
+    color:rgb(110, 110, 110);
+}
+
+.create-product-btn{
+    border: solid 1px blueviolet;
+    border-radius: 6px;
+    padding: 0.25rem;
+    background-color: #ffffff45;
+    color:rgb(110, 110, 110);
+    margin: 1rem;
+    justify-content: end;
+}

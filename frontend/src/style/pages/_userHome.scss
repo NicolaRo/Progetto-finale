@@ -1,0 +1,14 @@
+.product-card{
+display: flex;
+flex-direction: row;
+border: 1px solid black;
+border-radius: 0.5rem;
+margin: 1rem;
+padding: 0.5rem;
+width: fit-content;
+background-color: rgba(255, 255, 255, 0.726);
+}
+.product-listed-preview{
+    width: 50px;
+    height: auto;
+}

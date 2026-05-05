@@ -1,0 +1,22 @@
+.create-product-container {
+    margin: 1rem;
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+.input{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    border: none;
+    padding: 0.25rem;
+}
+.product-upd-preview {
+    margin: 1rem;
+    border-radius: 8px;
+    background-color: beige;
+    padding: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
