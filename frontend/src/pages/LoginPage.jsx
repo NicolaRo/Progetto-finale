@@ -114,15 +114,18 @@ function LoginPage() {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/users/register`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify()
+        body: JSON.stringify(data)
       })
 
       if (response.ok) {
         navigate('/login');
+        alert('Account created successfully, log in to access')
+        
     } else {
         const error = await response.json();
         alert(error.message);
     }
+    
     }
     
     return (
@@ -147,7 +150,7 @@ function LoginPage() {
                     className="input-text"
                     type="password"
                     value={password}
-                    minLength="8"
+                    minlength="8"
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Choose a password"
                 />
