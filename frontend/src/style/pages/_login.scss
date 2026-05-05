@@ -5,12 +5,15 @@
     flex-direction: column;
     text-align: center;
     margin: 10rem 3rem 0 3rem;
+    border: 2px solid black;
+    border-radius: 2rem;
 }
 .input-text {
     width: 75vw;
     min-height: 2.5rem;
-    margin: 1rem 0 1rem 0;
+    margin: 1rem;
     border-radius: 1rem;
+    border: 2px solid black;
     padding: 0.5rem;
     background-color: $background;
 }
