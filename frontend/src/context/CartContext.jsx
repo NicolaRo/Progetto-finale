@@ -1,0 +1,33 @@
+//To store the JWT and use it to browse different pages during the session
+import { createContext, useState} from "react";
+
+const CartContext = createContext();
+
+//the function CartProvider 
+function CartProvider({children}) {
+    const [cart, setCart] = useState([]);
+
+    //addToCart store the selected products and userData 
+    const addToCart = (product) => {
+    
+        setCart([...cart, product]);
+    };
+
+    //removeFromCart will remove selected products from the cart
+    const removeFromCart = (productId) => {
+        setCart(cart.filter(item => item._id !== productId));
+    };
+
+    //logout will clear the information when the session is over
+    const clearCart = () => {
+        setCart([]);
+    };
+
+    return (
+        <CartContext.Provider value={{cart, addToCart, removeFromCart, clearCart}}>
+        {children}
+        </CartContext.Provider>
+    );
+}
+
+export {CartContext, CartProvider}; 
