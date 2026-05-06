@@ -15,6 +15,7 @@ function LoginPage() {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const provider = new GoogleAuthProvider();
 
@@ -179,8 +180,8 @@ function LoginPage() {
                     placeholder="login with Google"
                     onClick={googleLogIn}>
                     <img
-                    className="btn-icon"
-                    src={googleLogin.png}
+                    className="icon-google-login"
+                    src={googleLogin}
                     alt="login with google"></img>
                 </button>
                 </div>

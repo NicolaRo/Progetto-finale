@@ -16,7 +16,8 @@ function CartProvider({children}) {
 
     //removeFromCart will remove selected products from the cart
     const removeFromCart = (productId) => {
-        setCart(cart.filter(item => item._id !== productId));
+        console.log("removeFromCart chiamato con:", productId);
+        setCart(cart.filter(item => item.product !== productId));
     };
 
     //clearCart remove the selected products from the cart
