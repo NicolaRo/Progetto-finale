@@ -162,7 +162,7 @@ function LoginPage() {
                     className="input-text"
                     type="password"
                     value={password}
-                    minlength="8"
+                    minLength="8"
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Choose a password"
                 />

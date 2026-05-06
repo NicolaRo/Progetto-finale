@@ -19,7 +19,7 @@ function SplashPage () {
     return (
         <>
         <div className="splash-page">
-        <div class="loader"></div>
+        <div className="loader"></div>
                 <img
                 className="splash-image"
                 src={splashImage}

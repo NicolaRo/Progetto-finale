@@ -11,13 +11,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Required field'],
         trim: true,
-        minlength: [2, 'Name must be at least 2 characters long']
+        minLength: [2, 'Name must be at least 2 characters long']
     },
     surname: {
         type: String,
         required: [true, 'Required field'],
         trim: true,
-        minlength: [2, 'Surname must be at least 2 characters long']
+        minLength: [2, 'Surname must be at least 2 characters long']
     },
     email: {
         type: String,

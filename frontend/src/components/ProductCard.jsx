@@ -4,14 +4,17 @@ import {CartContext} from '../context/CartContext';
 function ProductCard({product}) {
 
 
-    const [quantity, setQuantity] = useState(null);
+    const [quantity, setQuantity] = useState("");
     const {addToCart} = useContext(CartContext);
 
+    
+
     const handleAddToCart = () => {
-        if(quantity === '0')
-            return;
-        alert('Chose a quantity higher than 0')
-        
+        if(!quantity || quantity === '0' ){
+            alert('Chose a quantity higher than 0')
+            return; 
+        }
+
         addToCart({
             product: product._id,
             orderedQuantity: quantity,
@@ -19,7 +22,7 @@ function ProductCard({product}) {
             producerId: product.producerId._id
         });
     };
-
+    
 
     return (
         <>
@@ -35,6 +38,7 @@ function ProductCard({product}) {
                 <p className="p-details">{product.description}</p>
                 <p className="p-details">{product.quantity}</p> <p>{product.unit}</p>
                 <p className="p-details">{product.price}€</p>
+                <p className="p-details">{product.producerId.name}€</p>
                 
             </div>
             <div className="card-btn-container">
