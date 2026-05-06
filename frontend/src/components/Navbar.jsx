@@ -1,16 +1,24 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import { AuthContext } from '../context/AuthContext';
 import {useNavigate} from 'react-router-dom';
 
+import Cart from './Cart';
+
 import placeholderImg from '../assets/placeholderImg.png';
+import ShoppingCart from '../assets/shopping-cart.png';
+import FullShoppingCart from '../assets/full-shopping-cart.png';
 
 function Navbar () {
+
+    const [showCart, setShowCart] = useState(false);
 
     const {user} = useContext(AuthContext);
     const navigate = useNavigate ();
 
+
     return (
-        <>
+        <> 
+        
         <div className="navbar">
         <h4 className="account-name"> {user ? `Benvenut@: ${user.name}`: "Caricamento..."}</h4>
             <div className="PP-container">
@@ -26,7 +34,24 @@ function Navbar () {
                 navigate('/login')
             }}>Log out
             </button>
-        </div>
+
+            {showCart && <Cart/>}
+            <button className="cart-btn"
+                onClick={() => {
+                    setShowCart(!showCart);
+                }}> {showCart ? 
+                    <img className="cart-icon"
+                    src={FullShoppingCart}
+                    alt="Cart is full"/> 
+                    :
+                    <img className="cart-icon"
+                    src={ShoppingCart}
+                    alt="Empty cart"/>
+                }
+            </button>
+        
+            
+            </div>
         </>
     );
 }

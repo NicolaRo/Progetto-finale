@@ -20,6 +20,9 @@ function ProductCard({product}) {
             product: product._id,
             orderedQuantity: quantity,
             price: product.price,
+            name: product.name,
+            image: product.image,
+            producerName: product.producerId.name,
             producerId: product.producerId._id
         });
     };
