@@ -10,6 +10,7 @@ function ProductCard({product}) {
     
 
     const handleAddToCart = () => {
+        console.log("handleAddToCart chiamato", quantity);
         if(!quantity || quantity === '0' ){
             alert('Chose a quantity higher than 0')
             return; 

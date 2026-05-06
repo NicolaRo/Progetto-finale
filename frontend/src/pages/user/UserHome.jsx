@@ -1,15 +1,16 @@
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import ProductList from '../../components/ProductList';
-import ProductCard from '../../components/ProductCard';
 import Navbar from "../../components/Navbar";
-
+import { CartContext } from "../../context/CartContext";
 
 function UserHome () {
 
     const [shopProducts, setShopProducts] = useState ([]);
 
     const { token } = useContext(AuthContext);
+    const {cart} = useContext(CartContext);
+    console.log("cart:", cart);
     
     //API call to the DB to get the list of products
       useEffect (() => {
@@ -23,11 +24,14 @@ function UserHome () {
             }
           );
           const data = await response.json();
-          console.log(shopProducts)
+         
           setShopProducts (data);
+          
         };
         fetchProducts();
+        
       }, [token] );
+
     return (
         <>
         <Navbar />
