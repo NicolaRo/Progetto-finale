@@ -8,6 +8,13 @@
     border: 2px solid black;
     border-radius: 2rem;
 }
+
+.google-login-container{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .input-text {
     min-height: 2.5rem;
     margin: 1rem;
@@ -27,4 +34,16 @@
 .icon-google-login{
     width: auto;
     height: 2rem;
+}
+
+.icon-show-pwd{
+    width: 2rem;
+    height: 2rem;
+}
+
+.signUp-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
 }

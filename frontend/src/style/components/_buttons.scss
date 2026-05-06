@@ -1,14 +1,39 @@
 @use '../base/variables' as *;
 
 
-.login-btn{
+.show-pwd-btn, .login-btn {
     width: fit-content;
-    padding: 0.25rem 1rem;
-    justify-content: space-evenly;
+    height: fit-content;
+    align-items: center;
+    margin-right: 1rem;
     display: flex;
-    border-radius: 0.5rem;
-    margin: 1rem;
+    align-self: flex-end;
+    border-radius: 1rem;
+    border: 0.1rem solid black;
+    padding: 0.25rem;
+    background: transparent;
 }
+
+.login-btn{
+    font-size: larger;
+    font-weight: bold;
+}
+.show-pwd-btn{
+    font-size: xx-small;
+}
+
+.toogle-login{
+    margin: 1rem; 
+    border-radius: 1rem;
+    border: 0.1rem solid black;
+    padding: 0.25rem;
+    background: transparent;
+    font-size: larger;
+    font-weight: 400;
+    align-items: center;
+
+}
+
 
 .btn-google-auth{
     width: fit-content;
@@ -25,6 +50,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    padding: 1rem;
 }
 
 /* -_-_-_ UserHome _-_-_- */
