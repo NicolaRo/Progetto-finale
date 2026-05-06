@@ -19,7 +19,7 @@ function CartProvider({children}) {
         setCart(cart.filter(item => item._id !== productId));
     };
 
-    //logout will clear the information when the session is over
+    //clearCart remove the selected products from the cart
     const clearCart = () => {
         setCart([]);
     };

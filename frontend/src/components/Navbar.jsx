@@ -1,6 +1,7 @@
 import {useContext, useState} from 'react';
 import { AuthContext } from '../context/AuthContext';
 import {useNavigate} from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
 
 import Cart from './Cart';
 
@@ -12,6 +13,7 @@ function Navbar () {
 
     const [showCart, setShowCart] = useState(false);
 
+    const {cart} = useContext(CartContext);
     const {user} = useContext(AuthContext);
     const navigate = useNavigate ();
 
@@ -36,21 +38,14 @@ function Navbar () {
             </button>
 
             {showCart && <Cart/>}
-            <button className="cart-btn"
-                onClick={() => {
-                    setShowCart(!showCart);
-                }}> {showCart ? 
-                    <img className="cart-icon"
-                    src={FullShoppingCart}
-                    alt="Cart is full"/> 
-                    :
-                    <img className="cart-icon"
-                    src={ShoppingCart}
-                    alt="Empty cart"/>
-                }
+
+            <button className="cart-btn" onClick={() => setShowCart(!showCart)}>
+                <img 
+                    className="cart-icon"
+                    src={cart.length > 0 ? FullShoppingCart : ShoppingCart}
+                    alt="Cart"
+                />
             </button>
-        
-            
             </div>
         </>
     );

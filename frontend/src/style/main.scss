@@ -4,6 +4,7 @@
 @use './base/mixins' as *;
 @use './components/loader';
 @use './components/navbar';
+@use './components/cart';
 @use './components/buttons'as*;
 @use './pages/login';
 @use './pages/userHome';

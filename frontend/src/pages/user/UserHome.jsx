@@ -3,22 +3,22 @@ import { AuthContext } from "../../context/AuthContext";
 
 import ProductList from "../../components/ProductList";
 import Navbar from "../../components/Navbar";
-import Cart from "../../components/Cart";
+/* import Cart from "../../components/Cart"; */
 
 import { CartContext } from "../../context/CartContext";
 
 
-import ShoppingCart from '../../assets/shopping-cart.png';
-import FullShoppingCart from '../../assets/full-shopping-cart.png';
+/* import ShoppingCart from '../../assets/shopping-cart.png';
+import FullShoppingCart from '../../assets/full-shopping-cart.png'; */
 
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
-
-  const [showCart, setShowCart] = useState(false);
+/* 
+  const [showCart, setShowCart] = useState(false); */
 
   const { token } = useContext(AuthContext);
   const { cart } = useContext(CartContext);
-  console.log("cart:", cart);
+  /* console.log("cart:", cart); */
 
   //API call to the DB to get the list of products
   useEffect(() => {
@@ -47,18 +47,18 @@ function UserHome() {
       </div>
       <ProductList products={shopProducts} />
      
-      {showCart && <Cart/>}
+      {/* {showCart && <Cart/>}
       <button 
           onClick={() => {
               setShowCart(!showCart);
           }}> {showCart ? "false" : "true"}
       </button>
 
-      {showCart ? <img
+      {showCart ? <img className="full-cart-icon"
       src={FullShoppingCart}
-      alt="Cart is full"/> : <img
+      alt="Cart is full"/> : <img className="empty-cart-icon"
       src={ShoppingCart}
-      alt="Empty cart"/>}
+      alt="Empty cart"/>} */}
     </>
   );
 }
