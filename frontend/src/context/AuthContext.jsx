@@ -5,6 +5,8 @@ const AuthContext = createContext();
 
 //the function AuthProvider 
 function AuthProvider({children}) {
+
+    //Setting states for token and User
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
 

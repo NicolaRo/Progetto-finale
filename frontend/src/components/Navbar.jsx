@@ -8,6 +8,7 @@ import Cart from './Cart';
 import placeholderImg from '../assets/placeholderImg.png';
 import ShoppingCart from '../assets/shopping-cart.png';
 import FullShoppingCart from '../assets/full-shopping-cart.png';
+import LogoutIcon from '../assets/logout-icon.png';
 
 function Navbar () {
 
@@ -31,10 +32,14 @@ function Navbar () {
             />
             </div>
             
-            <button className="btn-logout"
-            onClick={() => {
+            <button 
+                className="btn-logout"
+                onClick={() => {
                 navigate('/login')
-            }}>Log out
+            }}><img 
+                className="account-logout-icon"
+                src={LogoutIcon}
+                alt="log out"/>log out
             </button>
 
             {showCart && <Cart/>}

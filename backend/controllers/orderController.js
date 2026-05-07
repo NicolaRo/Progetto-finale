@@ -12,10 +12,15 @@ const {updateProductStock, restoreProductStock} = require ('../utils/stockHelper
 //1. Create an order
 const createOrder = async (req, res) => {
     try {
-        const {userId, products, containers, state} = req.body;
+        //console.log for debug
+        console.log(req.body);
+        const {products} = req.body;
+
+        //console.log for debug
+        console.log("products:", products);
 
         //1.1. Validate conditions under which we can accept a new order creation
-        if(!userId || !Array.isArray(products) || products.length === 0 || !containers || !state){
+        if(!Array.isArray(products) || products.length === 0 || !state){
             return res.status(400).json({message:"Order details missing or not valid"});
         }
 
@@ -26,7 +31,7 @@ const createOrder = async (req, res) => {
         }
 
         // 1.2. Validete Users
-        const user = await User.findById(userId);
+        const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({message: "User not found"});
 
         //1.3. Update product stock availability
@@ -45,7 +50,9 @@ const createOrder = async (req, res) => {
         ); return res.status(201).json(order);
 
     } catch (error) {
+        console.error(error);
         return res.status(500).json({message: error.message});
+        
     }
 };
 

@@ -14,8 +14,8 @@ const OrderSchema = new mongoose.Schema({
     containers: [{type: mongoose.Schema.Types.ObjectId, ref: "Container"}],
     state: {
         type: String,
-        enum: ["Order created", "Order received", "Preparing Order", "Order shipped"],
-        default: "Order created"
+        enum: ["Order Created", "Order Received", "Preparing Order", "Order Shipped"],
+        default: "Order Created"
     }
 }, {timestamps: true});
 

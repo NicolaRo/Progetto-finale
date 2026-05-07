@@ -1,7 +1,7 @@
 @use '../base/variables' as *;
 
 
-.show-pwd-btn, .login-btn, .register-btn {
+.show-pwd-btn, .login-btn, .register-btn, .btn-logout {
     width: fit-content;
     height: fit-content;
     align-items: center;
@@ -207,17 +207,9 @@
 
 /* -_-_-_ Cart _-_-_- */
 
-.cart-btn{
-    background: transparent;
-    border: none;
-}
-
-
-.remove-from-cart-btn{
-    background: transparent;
-    border: none;
-
-}
+.cart-btn, 
+.confirm-order-btn, 
+.remove-from-cart-btn,
 .clear-cart-btn {
     background: transparent;
     border: none;

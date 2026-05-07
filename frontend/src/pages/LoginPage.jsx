@@ -88,7 +88,7 @@ function LoginPage() {
 
     //Read the data
     const logInData = await response.json();
-    login(logInData.token, { role: logInData.role, name: logInData.name });
+    login(logInData.token, { role: logInData.role, name: logInData.name, id: logInData.id });
 
     console.log(logInData);
 
