@@ -36,9 +36,24 @@
     height: 2rem;
 }
 
+.input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.input-container-btn{
+    display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.label{
+justify-content: flex-start;
+display: flex;
+margin-left: 1rem;
+}
 .icon-show-pwd{
-    width: 2rem;
-    height: 2rem;
+    width: 1rem;
+    height: 1rem;
 }
 
 .signUp-container{
@@ -46,4 +61,19 @@
     flex-direction: column;
     align-items: center;
     margin: 1rem;
+}
+//-_-_-_ REGISTER _-_-_-
+
+.account-icon{
+    width: 5rem;
+}
+
+.role-selection-container{
+    margin: 1rem;
+  background-color: rgb(249, 227, 250);
+  padding: 0.25rem;
+  border-radius: 8px;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
 }

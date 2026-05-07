@@ -6,6 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 
 import googleLogin from "../assets/googleLogin.png";
 import ShowPassword from "../assets/show-password.png";
+import Account from '../assets/account-icon.png';
 
 function LoginPage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -151,12 +152,15 @@ function LoginPage() {
     <>
       {showLogin ? (
         <div className="login-container">
+          
           <h3 className="container-title">Welcome in PackBack</h3>
+          
           <h6 className="container-subtitle">
             Reuseable packagin for a greener world
           </h6>
-<div className="google-login-container">
-<button
+
+        <div className="google-login-container">
+            <button
               className="btn-google-auth"
               placeholder="login with Google"
               onClick={googleLogIn}
@@ -166,40 +170,51 @@ function LoginPage() {
                 src={googleLogin}
                 alt="login with google"/>
             </button>
-
-</div>
+        </div>
           
             <p >
             ------ Or log in with your credentials ------
           </p>
-
+          <div className="input-container">
+            <label className="label"
+                htmlFor="email">Email</label>
           <input
             className="input-text"
+            id="email"
             type="email"
             aria-label="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
           />
-          <input
-            className="input-text"
-            type={showPassword ? "text" : "password"}
-            value={password}
-            minLength="8"
-            placeholder="Choose a password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            className="show-pwd-btn"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? "Hide" : "Show password"}
-            <img
-              className="icon-show-pwd"
-              src={ShowPassword}
-              alt="show/hide password"
+            </div>
+          
+        <div className="input-container--btn">
+            <label className="label"
+                htmlFor="password">Password</label>
+            <input
+                className="input-text"
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                minLength="8"
+                placeholder="Choose a password"
+                onChange={(e) => setPassword(e.target.value)}
             />
-          </button>
+            <button
+                className="show-pwd-btn"
+                onClick={() => setShowPassword(!showPassword)}
+            >
+                {showPassword ? "Hide" : "Show password"}
+                <img
+                className="icon-show-pwd"
+                src={ShowPassword}
+                alt="show/hide password"
+                />
+            </button>
+        </div>
+          
+          
 
           <div className="login-buttons-container">
             <button className="login-btn" type="submit" onClick={handleLogIn}>
@@ -213,35 +228,55 @@ function LoginPage() {
 
           <div className="img-container">
             <img
-              className="imgage"
-              src="placeholder-img.png"
-              alt="illustration"
+              className="account-icon"
+              src={Account}
+              alt="Account icon"
             />
           </div>
+
+          <div className="input-container">
+            <label className="label"
+                htmlFor="name">Name</label>
           <input
             className="input-text"
+            id="name"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="I.e.: John"
           />
+          </div>
+
+          <div className="input-container">
+            <label className="label" 
+                htmlFor="surname">Surname</label>
           <input
             className="input-text"
+            id="surname"
             type="text"
             value={surname}
             onChange={(e) => setSurname(e.target.value)}
             placeholder="I.e.: Doe"
           />
+            </div>
 
-            <input
-            className="input-text"
-            type={showPassword ? "text" : "password"}
-            value={password}
-            minLength="8"
-            placeholder="Choose a password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
+            <div className="input-container-btn">
+                <div className="input-container">
+                <label className="label"
+                htmlFor="password">Password
+                </label>
+                <input
+                    className="input-text"
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    minLength="8"
+                    placeholder="Choose a password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
+            
+           <button
             className="show-pwd-btn"
             onClick={() => setShowPassword(!showPassword)}
           >
@@ -252,17 +287,39 @@ function LoginPage() {
               alt="show/hide password"
             />
           </button>
+            </div>
+            
+         
 
+          <div className="input-container">
+            <label className="label"
+                htmlFor="email">Email</label>
           <input
             className="input-text"
+            id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="I.e.: john.doe@example.com"
           />
+          </div>
+          
           {/*toggle button to choose which profile to register with */}
-
-          <button
+     {/*     <div class="checkbox-wrapper-35">
+  <input value="private" name="switch" id="switch" type="checkbox" class="switch">
+  <label for="switch">
+    <span class="switch-x-text">This is </span>
+    <span class="switch-x-toggletext">
+      <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked: </span>Off</span>
+      <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span>On</span>
+    </span>
+  </label>
+</div> */}
+    
+    <div className="role-selection-container">
+        
+        <button
+            className="toogle-role-btn"
             value={role}
             onChange={(e) => setRole(e.target.value)}
             onClick={() => {
@@ -272,7 +329,7 @@ function LoginPage() {
           >
             {" "}
             {showRole ? "I am a User" : "I am a Producer"}
-          </button>
+        </button>
 
           {showRole ? (
             <p>An User can buy products allowing packaging reuse</p>
@@ -280,7 +337,12 @@ function LoginPage() {
             <p>A Producer can sell products</p>
           )}
 
-          <button type="submit" onClick={handleSubmit}>
+    </div>
+          
+          <button 
+            className="register-btn"
+            type="submit" 
+            onClick={handleSubmit}>
             Register
           </button>
         </div>
@@ -289,6 +351,18 @@ function LoginPage() {
       {/*Toggle to activate sign in form (default is the login screen) */}
       <div className="signUp-container">
         <h6>Become part of the changing world</h6>
+
+
+
+
+
+   
+
+
+
+
+
+
       <button
         className="toogle-login"
         onClick={() => {
