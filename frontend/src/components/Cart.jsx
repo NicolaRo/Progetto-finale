@@ -1,11 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../context/AuthContext";
 
 import RemoveFromCartIcon from "../assets/remove-from-cart.png";
 import ClearCartIcon from "../assets/clear-cart.png";
 import ConfirmOrder from '../assets/confirm-order.png';
-function Cart() {
+
+
+function Cart({ setShowCart }) {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
   const { user, token } = useContext(AuthContext);
 
@@ -37,6 +39,10 @@ function Cart() {
   }
     return (
       <>
+      <button 
+        onClick={() => setShowCart(false)}>
+        Close
+        </button>
         <div>
           {cart.map((product) => (
             <div key={product.product}>
@@ -65,7 +71,7 @@ function Cart() {
           />
         </button>
         <div className="cart-total">
-          <h4>Total:{totalPrice}</h4>
+          <h4>Total: {totalPrice}€</h4>
         </div>
         <button 
             className="confirm-order-btn" 
