@@ -4,8 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 import RemoveFromCartIcon from "../assets/remove-from-cart.png";
 import ClearCartIcon from "../assets/clear-cart.png";
-import ConfirmOrder from '../assets/confirm-order.png';
-
+import ConfirmOrder from "../assets/confirm-order.png";
 
 function Cart({ setShowCart }) {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
@@ -18,71 +17,95 @@ function Cart({ setShowCart }) {
 
   //Fetch the cart to the backend
   const handleConfirmOrder = async () => {
-    
     //console.log for debug
     console.log("user:", user);
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
       method: "POST",
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
-        Authorization:`Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ user: user._id, products: cart}),
+      body: JSON.stringify({ user: user._id, products: cart }),
     });
     await response.json();
     console.log(response);
-    if(!response.ok)
-        return alert('Your order can not be processed, try later')
-    alert('Order confirmed');
+    if (!response.ok)
+      return alert("Your order can not be processed, try later");
+    alert("Order confirmed");
     clearCart();
-  }
-    return (
-      <>
-      <button 
-        onClick={() => setShowCart(false)}>
-        Close
-        </button>
-        <div>
-          {cart.map((product) => (
-            <div key={product.product}>
-              <p className="cart-p-details">{product.image}</p>
-              <p className="cart-p-details">{product.name}</p>
-              <p className="cart-p-details">{product.orderedQuantity}</p>
-              <p className="cart-p-details">{product.producerName}</p>
-              <button
-                className="remove-from-cart-btn"
-                onClick={() => removeFromCart(product.product)}
-              >
-                <img
-                  className="remove-from-cart-icon"
-                  src={RemoveFromCartIcon}
-                  alt="Remove product from cart"
-                />
-              </button>
-            </div>
-          ))}
-        </div>
-        <button className="clear-cart-btn" onClick={clearCart}>
-          <img
-            className="clear-cart-icon"
-            src={ClearCartIcon}
-            alt="Cleat Cart"
-          />
-        </button>
-        <div className="cart-total">
-          <h4>Total: {totalPrice}€</h4>
-        </div>
-        <button 
-            className="confirm-order-btn" 
-            onClick={handleConfirmOrder}>
-                <img className="confirm-order-icon"
-                src={ConfirmOrder}
-                alt="Confirm Order"/>
-          Confirm order
-        </button>
-      </>
-    );
   };
+  return (
+    <>
+      <div className="cart-overlay" onClick={() => setShowCart(false)}>
+        <div className="cart-drawer" onClick={(e) => e.stopPropagation()}>
+          
+          <button className="btn-close-cart" onClick={() => setShowCart(false)}>Close</button>
+
+          <div>
+            {cart.map((product) => (
+              <div className="cart-items" key={product.product}>
+
+                <div className="cart-item-details">
+                    <div className="cart-item-prod-img">
+                        <p className="cart-p-details">{product.image}</p>
+                    </div>
+
+                    <div className="cart-item-qty">
+                        <p className="cart-p-details"><strong>Quantity: </strong>{product.orderedQuantity}</p>
+                    </div>
+
+                    <div className="cart-item-name">
+                        <p className="cart-p-details"><strong>Product: </strong>{product.name}</p>
+                    </div>
+                    
+                    <div className="cart-item-producerName">
+                        <p className="cart-p-details"><strong>Producer: </strong>{product.producerName}</p>
+                    </div>
+                </div>
+                
+
+                <button
+                  className="remove-from-cart-btn"
+                  onClick={() => removeFromCart(product.product)}
+                >
+                  <img
+                    className="remove-from-cart-icon"
+                    src={RemoveFromCartIcon}
+                    alt="Remove product from cart"
+                  />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="cart-order-btn-container">
+          <button className="clear-cart-btn" onClick={clearCart}>
+            <img
+              className="clear-cart-icon"
+              src={ClearCartIcon}
+              alt="Cleat Cart"
+            />
+            Clear cart
+          </button>
+
+          <button className="confirm-order-btn" onClick={handleConfirmOrder}>
+            <img
+              className="confirm-order-icon"
+              src={ConfirmOrder}
+              alt="Confirm Order"
+            />
+            Confirm order
+          </button>
+          <div className="cart-total">
+            <h4>Total: {totalPrice}€</h4>
+          </div>
+          </div>
+          
+        </div>
+      </div>
+    </>
+  );
+}
 
 export default Cart;

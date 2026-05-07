@@ -1,17 +1,27 @@
 @use '../base/variables' as *;
 
 
-.show-pwd-btn, .login-btn, .register-btn, .btn-logout {
-    width: fit-content;
-    height: fit-content;
-    align-items: center;
-    margin-right: 1rem;
-    display: flex;
-    align-self: flex-end;
-    border-radius: 1rem;
-    border: 0.1rem solid black;
-    padding: 0.25rem;
-    background: transparent;
+.show-pwd-btn, 
+.login-btn, 
+.register-btn, 
+.btn-logout, 
+.btn-close-cart,
+.confirm-order-btn,
+.clear-cart-btn {
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  margin-right: 1rem;
+  display: flex;
+  align-self: flex-end;
+  border-radius: 1rem;
+  border: 0.1rem solid black;
+  padding: 0.25rem;
+  background: transparent;
+}
+
+.btn-close-cart{
+  background-color: rgba(248, 156, 156, 0.573);
 }
 
 .login-btn{
@@ -207,10 +217,26 @@
 
 /* -_-_-_ Cart _-_-_- */
 
-.cart-btn, 
-.confirm-order-btn, 
-.remove-from-cart-btn,
+.remove-from-cart-btn{
+  border: none;
+  height: fit-content;
+  padding: 0.5rem;
+  align-self: center;
+  box-shadow: 0 6px 6px 0 rgba(240, 2, 2, 0.37);
+  border-radius: 50%;
+  background-color: #d97b80;
+
+}
+
+.clear-cart-btn, .confirm-order-btn {
+ display: flex;
+ flex-direction: column;
+}
+
+.confirm-order-btn{
+  background-color: #5cf8909f;
+}
+
 .clear-cart-btn {
-    background: transparent;
-    border: none;
+  background-color: rgba(248, 156, 156, 0.573);
 }
