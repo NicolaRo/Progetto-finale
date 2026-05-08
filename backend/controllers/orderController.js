@@ -110,8 +110,12 @@ const getOrderById = async (req, res) => {
 //3. Update an order
 const updateOrder = async (req, res) => {
     try {
+        
+        //console.log for debug
+        console.log(req.body);
+
         const orderId = req.params.id;
-        const {products: newProducts, status, userId} = req.body;
+        const {products: newProducts, status, userId, containers} = req.body;
 
         //Validate order exists
         const order = await Order.findById(orderId);
@@ -154,10 +158,15 @@ const updateOrder = async (req, res) => {
             order.status = status;
         }
 
+        if(containers && containers.length > 0) {
+            order.containers = containers;
+        }
+
 
         await order.save();
         return res.status(200).json(order);
     } catch (error) {
+        console.error(error);
         return res.status(error.status || 500).json({message: error.message});
     }
 };

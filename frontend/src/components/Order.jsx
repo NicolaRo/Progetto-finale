@@ -1,14 +1,40 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 
 function Order ({orders}) {
     const [containerSelections, setContainerSelections] = useState({});
+
+    const {token}= useContext(AuthContext);
 
 const handleContainerChange = (productId, field, value) => {
   setContainerSelections(prev => ({
     ...prev,
     [productId]: { ...prev[productId], [field]: value }
   }));
+};
+
+const handleShipOrder = async (orderId) => {
+
+    const containers = Object.entries(containerSelections).map(([productId, selection])=> ({
+        productId,
+        type: selection.type,
+        quantity: selection.quantity
+    }));
+
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type":"application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({containers}),
+    });
+    await response.json();
+    if(!response.ok)
+        return alert ('Could not assign container, try later');
+    alert("Containers assigned to your products")
+
 };
 
     return (
@@ -75,9 +101,13 @@ const handleContainerChange = (productId, field, value) => {
                                         <option value="10">10</option>   
                             </select>
                         </div>
+                        
                     ))}
+                    <button className="ship-order-btn"
+                    onClick={() => handleShipOrder(order._id)} >Ship order</button>
                 </div>
             ))}
+            
         </div>
         </>
     );
