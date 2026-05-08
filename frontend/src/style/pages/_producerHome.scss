@@ -5,8 +5,7 @@
     padding: 0.5rem;
 }
 .input{
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin:0.5rem;
     border-radius: 6px;
     border: none;
     padding: 0.25rem;
@@ -19,4 +18,9 @@
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+}
+.ingredients-grid{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
 }

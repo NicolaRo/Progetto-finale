@@ -20,7 +20,7 @@ const createOrder = async (req, res) => {
         console.log("products:", products);
 
         //1.1. Validate conditions under which we can accept a new order creation
-        if(!Array.isArray(products) || products.length === 0 || !state){
+        if(!Array.isArray(products) || products.length === 0){
             return res.status(400).json({message:"Order details missing or not valid"});
         }
 
@@ -43,8 +43,8 @@ const createOrder = async (req, res) => {
                 {
                     user: user._id,
                     products,
-                    containers,
-                    status: "Order Created"
+                    status: "Order created",
+                    containers: []
                 }
             ]
         ); return res.status(201).json(order);
