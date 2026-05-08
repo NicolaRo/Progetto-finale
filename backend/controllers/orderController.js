@@ -159,8 +159,32 @@ const updateOrder = async (req, res) => {
         }
 
         if(containers && containers.length > 0) {
-            order.containers = containers;
+            //Console.log for debug
+            console.log("containers ricevuti:", containers);
+
+            const assignedContanierIds = [];
+
+            for (const selection of containers) {
+                //get the available containers per each requested type
+                const available = await Container.find({
+                
+                    type: selection.type,
+                    state: "Container ready to use"
+                }).limit(Number(selection.quantity));
+
+                 //Console.log for debug
+                 console.log("container trovati:", available);
+
+                //Update container's state to "Container Busy"
+                for(const container of available) {
+                    container.state = "Container Busy";
+                    await container.save();
+                    assignedContanierIds.push(container._id);
+                }
+            }
+            order.containers = assignedContanierIds;
         }
+
 
 
         await order.save();

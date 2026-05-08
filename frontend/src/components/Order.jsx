@@ -46,13 +46,9 @@ const handleShipOrder = async (orderId) => {
                     <div className="order-user-details-container">
                         <label htmlFor='order-user-detail'><strong>Order Id: </strong></label>
                         <p>{order._id}</p>
-                    </div>
-                    
-                    <div className="order-user-details-container">
                         <label htmlFor='order-user-detail'><strong>Customer: </strong></label>
                         <p>{order.user.name}, Id: {order.user._id}</p>
                     </div>
-                    
                     
                     {order.products.map((products)=> (
                         <div className="ordered-products" key={products.product._id}>
@@ -71,7 +67,11 @@ const handleShipOrder = async (orderId) => {
                             </div>
                             <div className="order-product-quantity-container">
                                 <label htmlFor='order-product-quantity'><strong>Quantity: </strong></label>
-                                <p>{products.orderedQuantity} <p>{products.product.unit}</p> </p>
+                                <p>{products.orderedQuantity}</p>
+                            </div>
+                            <div className="order-product-quantity-container">
+                                <label htmlFor='order-product-quantity'><strong>Unit: </strong></label>
+                                <p>{products.product.unit}</p>
                             </div>
                             
                             <select 

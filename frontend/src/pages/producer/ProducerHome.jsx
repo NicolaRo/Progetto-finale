@@ -6,6 +6,7 @@ import Order from '../../components/Order';
 
 function ProducerHome() {
   const { token } = useContext(AuthContext);
+  console.log(token);
 
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
