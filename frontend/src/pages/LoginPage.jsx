@@ -88,6 +88,10 @@ function LoginPage() {
 
     //Read the data
     const logInData = await response.json();
+
+    if (!response.ok)
+      return alert("Invalid credentials, please try again");
+    
     login(logInData.token, { role: logInData.role, name: logInData.name, id: logInData.id });
 
     console.log(logInData);
@@ -200,6 +204,7 @@ function LoginPage() {
                 minLength="8"
                 placeholder="Choose a password"
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e)=> {if(e.key==="Enter")handleLogIn(e)}}
             />
             <button
                 className="show-pwd-btn"
@@ -369,7 +374,7 @@ function LoginPage() {
           setShowLogin(!showLogin);
         }}
       >
-        Sign In
+        {showLogin ? "Sign Up" : "Back to login"}
       </button>
       </div>
       
