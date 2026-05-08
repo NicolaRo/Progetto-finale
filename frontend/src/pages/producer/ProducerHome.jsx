@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
 import ProductList from '../../components/ProductList';
+import Order from '../../components/Order';
 
 function ProducerHome() {
   const { token } = useContext(AuthContext);
@@ -16,6 +17,8 @@ function ProducerHome() {
   const [selectedImage, setSelectedImage] = useState("");
   const [selectedIngredientId, setSelectedIngredientId] = useState("");
   const [myProducts, setMyProducts] = useState ([]);
+
+  const [orders, setOrders] = useState([]);
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
@@ -89,6 +92,24 @@ function ProducerHome() {
     };
     fetchProducts();
   }, [token] );
+
+  //useEffect handle the DB call to fetch the Order to the DB
+  useEffect(() => {
+      const fetchOrders = async () => {
+          const response = await fetch (
+              `${import.meta.env.VITE_API_URL}/api/orders`,
+              {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              }
+          );
+          const orders = await response.json();
+          
+          setOrders(orders);
+      };
+      fetchOrders();
+  }, [token]);
 
   return (
     <>
@@ -192,6 +213,7 @@ function ProducerHome() {
         </p>
       </div>
       <ProductList products={myProducts} />
+      <Order orders = {orders} />
     </>
   );
 }

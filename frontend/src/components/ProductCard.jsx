@@ -10,7 +10,7 @@ function ProductCard({product}) {
     
 
     const handleAddToCart = () => {
-        console.log("handleAddToCart chiamato", quantity);
+        console.log("handleAddToCart called", quantity);
         if(!quantity || quantity === '0' ){
             alert('Chose a quantity higher than 0')
             return; 
@@ -25,6 +25,7 @@ function ProductCard({product}) {
             producerName: product.producerId.name,
             producerId: product.producerId._id
         });
+        setQuantity("");
     };
     
 
