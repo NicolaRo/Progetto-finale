@@ -1,12 +1,13 @@
 import { useContext, useState} from "react";
 import {CartContext} from '../context/CartContext';
+import { AuthContext } from "../context/AuthContext";
 
 function ProductCard({product}) {
 
 
     const [quantity, setQuantity] = useState("");
     const {addToCart} = useContext(CartContext);
-
+    const {user} = useContext(AuthContext);
     
 
     const handleAddToCart = () => {
@@ -68,7 +69,7 @@ function ProductCard({product}) {
                 className="create-order-btn" 
                 type="submit"
                 onClick={handleAddToCart}>
-                    Add product to cart
+                    {user.role === "User" ? "Add to cart" : "Load product"}
                 </button> 
             </div>
         </div> 

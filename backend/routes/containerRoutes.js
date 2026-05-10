@@ -20,6 +20,7 @@ router.get("/", authMiddleware, containerController.getContainers);
 //3. Create a container
 //ONLY the "Producer" can create a container 
 router.post("/", authMiddleware, roleMiddleware("Producer"), containerController.createContainer);
+
 //PUT
 
 //4. Update an existing container

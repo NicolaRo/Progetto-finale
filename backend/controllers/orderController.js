@@ -177,7 +177,7 @@ const updateOrder = async (req, res) => {
 
                 //Update container's state to "Container Busy"
                 for(const container of available) {
-                    container.state = "Container Busy";
+                    container.state = "Container busy";
                     await container.save();
                     assignedContanierIds.push(container._id);
                 }

@@ -33,7 +33,7 @@ const handleShipOrder = async (orderId) => {
     await response.json();
     if(!response.ok)
         return alert ('Could not assign container, try later');
-    alert("Containers assigned to your products")
+    alert("Containers assigned to your products, order ready to ship.")
 
 };
 

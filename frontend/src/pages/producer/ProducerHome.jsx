@@ -5,6 +5,8 @@ import ProductList from '../../components/ProductList';
 import Order from '../../components/Order';
 
 function ProducerHome() {
+
+  //***IMPORTANT REMOVE THIS LOG BEFORE DEPLOY*** */
   const { token } = useContext(AuthContext);
   console.log(token);
 
