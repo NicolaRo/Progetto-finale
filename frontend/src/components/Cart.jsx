@@ -28,13 +28,28 @@ function Cart({ setShowCart }) {
       },
       body: JSON.stringify({ user: user._id, products: cart }),
     });
-    await response.json();
+
     console.log(response);
     if (!response.ok)
       return alert("Your order can not be processed, try later");
+    const orderData = await response.json();
+
+    //API Call to Stripe
+    const stripeResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/stripe/create-checkout-session`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({orderId: orderData._id}),
+    });
+
+    const {url} = await stripeResponse.json();
     alert("Order confirmed");
     clearCart();
+    window.location.href = url;
   };
+
   return (
     <>
       <div className="cart-overlay" onClick={() => setShowCart(false)}>

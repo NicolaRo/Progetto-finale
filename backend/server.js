@@ -56,12 +56,14 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require ('./routes/orderRoutes');
 const containerRoutes = require('./routes/containerRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
+const stripeRoutes = require('./routes/stripeRoutes');
 
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/containers', containerRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/ingredients', ingredientRoutes);
+app.use('/api/stripe', stripeRoutes);
 
 //Server port
 const PORT = process.env.PORT || 3000;
