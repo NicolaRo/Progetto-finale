@@ -159,9 +159,9 @@ function LoginPage() {
           
           <h3 className="container-title">Welcome in PackBack</h3>
           
-          <h6 className="container-subtitle">
+          <h4 className="container-subtitle">
             Reuseable packagin for a greener world
-          </h6>
+          </h4>
 
         <div className="google-login-container">
             <button
@@ -182,18 +182,15 @@ function LoginPage() {
           <div className="input-container">
             <label className="label"
                 htmlFor="email">Email</label>
-          <input
-            className="input-text"
-            id="email"
-            type="email"
-            aria-label="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-          />
-            </div>
-          
-        <div className="input-container--btn">
+            <input
+              className="input-text"
+              id="email"
+              type="email"
+              aria-label="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+            />
             <label className="label"
                 htmlFor="password">Password</label>
             <input
@@ -217,10 +214,7 @@ function LoginPage() {
                 alt="show/hide password"
                 />
             </button>
-        </div>
-          
-          
-
+            </div>
           <div className="login-buttons-container">
             <button className="login-btn" type="submit" onClick={handleLogIn}>
               Log In

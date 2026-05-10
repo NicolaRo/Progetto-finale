@@ -12,7 +12,7 @@ function SplashPage () {
     useEffect(() =>{
         setTimeout(()=> {
             navigate('/login');
-        }, 2100);
+        }, 6100);
     }, [navigate]); 
     
 //The SplashPage only contains the image
