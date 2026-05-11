@@ -26,7 +26,7 @@
   padding: 0.5rem;
 }
 
-.btn-close-cart{
+.btn-close-cart, .back-btn{
   background-color: rgba(248, 156, 156, 0.573);
 }
 
@@ -244,4 +244,12 @@
 
 .clear-cart-btn {
   background-color: rgba(248, 156, 156, 0.573);
+}
+
+.back-btn{
+  background-color: rgba(248, 156, 156, 0.573);
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 8px;
+  display: flex;
 }
