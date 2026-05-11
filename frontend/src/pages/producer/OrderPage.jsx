@@ -2,10 +2,13 @@ import {useEffect, useContext, useState} from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import Order from '../../components/Order';
 import Navbar from '../../components/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 function OrderPage(){
     const [orders, setOrders] = useState([]);
     const {token} = useContext(AuthContext);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -21,8 +24,16 @@ function OrderPage(){
 
     return (
         <>
+        <button 
+            className="back-btn"
+            onClick={()=> navigate ("/ProducerHome")}>Back to myHome
+        </button>
         <Navbar />
-        <Order orders={orders} />
+        <Order orders={orders}/>
+        <div className="btn-container">
+        
+        </div>
+        
         </>
     );
 }

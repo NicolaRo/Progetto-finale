@@ -17,11 +17,13 @@
 
 .input-text {
     min-height: 2.5rem;
-    margin: 1rem;
-    border-radius: 1rem;
-    border: 2px solid black;
-    padding: 0.5rem;
-    background-color: $background;
+  margin: 0.5rem 1rem 1rem 1rem;
+  border-radius: 1rem;
+  border: 2px solid #e1bdf7;
+  padding: 0.5rem;
+  background-color: rgb(225, 189, 247);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.24);
+  width: -webkit-fill-available;
 }
 
 .input-container--btn{
@@ -38,7 +40,9 @@
 
 .icon-google-login{
     width: auto;
-    height: 2rem;
+    height: 3rem;
+    box-shadow: 1px 1px 20px 1px #0000007a;
+    border-radius: 27px;
 }
 
 .input-container {
@@ -64,9 +68,22 @@ margin-left: 1rem;
 
 .signUp-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    margin: 2rem;
+    background-color: #00c1c1;
+    padding: 1rem;
+    border-radius: 24px;  
+}
+
+.signup-img-container{
     margin: 1rem;
+}
+
+.signup-text{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 //-_-_-_ REGISTER _-_-_-
 

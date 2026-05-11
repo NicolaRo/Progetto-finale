@@ -4,11 +4,14 @@ import { AuthContext } from "../../context/AuthContext";
 import ProductList from "../../components/ProductList";
 import Navbar from "../../components/Navbar";
 import Cart from "../../components/Cart";
+import Order from "../../components/Order";
 
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
 
   const [showCart, setShowCart] = useState(false);
+  const [showOrders, setShowOrders] = useState (false);
+
 
   const { token } = useContext(AuthContext);
 
@@ -32,8 +35,10 @@ function UserHome() {
 
   return (
     <>
-      <Navbar setShowCart={setShowCart} />
+      <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} />
       {showCart && <Cart setShowCart={setShowCart} />}
+      {showOrders && <Order setShowOrders={setShowOrders}/>}
+
       <h3 className="page-title">User Home</h3>
       <div className="product-list">
         <h4 className="sub-session-title">Available products</h4>

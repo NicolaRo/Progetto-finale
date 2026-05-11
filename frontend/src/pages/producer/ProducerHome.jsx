@@ -21,7 +21,7 @@ function ProducerHome() {
   const [selectedIngredientId, setSelectedIngredientId] = useState("");
   const [myProducts, setMyProducts] = useState ([]);
 
-  const [orders, setOrders] = useState([]);
+  /* const [orders, setOrders] = useState([]); */
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
@@ -216,7 +216,7 @@ function ProducerHome() {
         </p>
       </div>
       <ProductList products={myProducts} />
-      <Order orders = {orders} />
+      {/* <Order orders = {orders} /> */}
     </>
   );
 }

@@ -20,6 +20,18 @@
   background: transparent;
 }
 
+.register-btn{
+  padding: 0.75rem;
+  border-radius: 25px;
+  background-color: #74e6e6;
+  box-shadow: 1px 1px 25px 2px #b4f5f5;
+  border: 1px solid #ffffff;
+  width: -webkit-fill-available;
+  justify-content: center;
+  font-weight: bolder;
+  font-size: larger;
+  margin:1rem;
+}
 .cart-btn{
   background: transparent;
   border: none;
@@ -31,11 +43,23 @@
 }
 
 .login-btn{
-    font-size: larger;
-    font-weight: bold;
+  font-size: larger;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 25px;
+  background-color: #74e6e6;
+  box-shadow: 1px 1px 25px 2px #b4f5f5;
+  border: 1px solid #ffffff;
+  width: -webkit-fill-available;
+  justify-content: center;
 }
+
 .show-pwd-btn{
     font-size: xx-small;
+    font-size: xx-small;
+  border: none;
+  gap: 0.25rem;
+  color: white;
 }
 
 
@@ -171,14 +195,12 @@
 
 
 .toogle-login{
-    margin: 1rem; 
-    border-radius: 1rem;
-    border: 0.1rem solid black;
-    padding: 0.25rem;
-    background: transparent;
-    font-weight: 400;
-    align-items: center;
-
+  padding: 0.75rem;
+  border-radius: 25px;
+  background-color: #74e6e6;
+  box-shadow: 1px 1px 25px 2px #b4f5f5;
+  border: 1px solid #ffffff;
+  width: -webkit-fill-available;
 }
 
 
@@ -252,4 +274,13 @@
   padding: 0.5rem;
   border-radius: 8px;
   display: flex;
+}
+
+/*-_-_-_ORDER PAGE BTN _-_-_-*/
+
+.orders-btn{
+background: transparent;
+border: solid black 1px;
+border-radius: 6px;
+padding: 0.5rem;
 }
