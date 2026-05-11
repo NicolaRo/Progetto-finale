@@ -6,6 +6,7 @@ import { CartContext } from '../context/CartContext';
 import ShoppingCart from '../assets/shopping-cart.png';
 import FullShoppingCart from '../assets/full-shopping-cart.png';
 import LogoutIcon from '../assets/logout-icon.png';
+import OrderIcon from '../assets/order-icon.png'
 
 function Navbar ({ setShowCart }) {
 
@@ -30,14 +31,36 @@ function Navbar ({ setShowCart }) {
                         alt="log out"/>log out
                 </button>
             </div>
+            {user.role === 'User' && (
+                <button 
+                    className="cart-btn"
+                    onClick={() => setShowCart(true)}>
+                        <img
+                            src={cart.length > 0 ? FullShoppingCart : ShoppingCart}
+                            alt="Cart"
+                        />
+                    </button>
+            )}
 
-            <button className="cart-btn" onClick={() => setShowCart(true)}>
+            {user.role === 'Producer' && (
+                <button
+                    className='orders-btn'
+                    onClick={() => navigate('/orders')}>
+                        <img
+                            className='orders-btn'
+                            src={OrderIcon}
+                            alt='Orders'
+                        />
+                    </button>
+            )}
+
+            {/* <button className="cart-btn" onClick={() => setShowCart(true)}>
                 <img 
                     className="cart-icon"
                     src={cart.length > 0 ? FullShoppingCart : ShoppingCart}
                     alt="Cart"
                 />
-            </button>
+            </button> */}
             </div>
         </>
     );

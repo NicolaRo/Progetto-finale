@@ -5,6 +5,7 @@ import UserHome from './pages/user/UserHome';
 import ProducerHome from './pages/producer/ProducerHome';
 import SuccessPage from './pages/user/SuccessPage';
 import CancelPage from './pages/user/CancelPage';
+import OrderPage from './pages/producer/OrderPAge';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/ProducerHome" element={<ProducerHome/>}/>
         <Route path="/success" element={<SuccessPage/>}/>
         <Route path="/cancel" element={<CancelPage/>}/>
+        <Route path="/orders" element={<OrderPage/>}/>
       </Routes>
       </BrowserRouter>
     </>
