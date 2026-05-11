@@ -4,8 +4,8 @@
 .show-pwd-btn, 
 .login-btn, 
 .register-btn, 
-.btn-logout, 
 .btn-close-cart,
+.btn-logout,
 .confirm-order-btn,
 .clear-cart-btn {
   width: fit-content;
@@ -19,7 +19,13 @@
   padding: 0.25rem;
   background: transparent;
 }
-
+.btn-logout,{
+  border: none;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  background: transparent;
+  gap: 0.25rem;
+  box-shadow: 1px 1px 1px 1px teal;
+}
 .register-btn{
   padding: 0.75rem;
   border-radius: 25px;
@@ -244,6 +250,15 @@
 
 /* -_-_-_ Cart _-_-_- */
 
+.create-order-btn{
+  padding: 0.4rem 0.25rem 0.4rem 0.25rem;
+  border-radius: 25px;
+  background-color: #74e6e6;
+  box-shadow: 1px 1px 10px 1px #00d1d1b8;
+  border: 1px solid #fff;
+  margin: 1rem;
+}
+
 .remove-from-cart-btn{
   border: none;
   height: fit-content;
@@ -279,8 +294,7 @@
 /*-_-_-_ORDER PAGE BTN _-_-_-*/
 
 .orders-btn{
-background: transparent;
-border: solid black 1px;
-border-radius: 6px;
-padding: 0.5rem;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
 }

@@ -38,8 +38,9 @@ function Navbar({setShowCart, setShowOrders}) {
         {user.role === "User" && (
           <button className="cart-btn" onClick={() => setShowCart(true)}>
             <img
-              src={cart.length > 0 ? FullShoppingCart : ShoppingCart}
-              alt="Cart"
+                className="cart-icon"
+                src={cart.length > 0 ? FullShoppingCart : ShoppingCart}
+                alt="Cart"
             />
           </button>
         )}

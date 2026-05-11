@@ -245,7 +245,7 @@ function LoginPage() {
             }}
           >
             {" "}
-            {showRole ? "I am a User" : "I am a Producer"}
+            {showRole ? "Register as an 'User'" : "Register as a 'Producer'"}
         </button>
 
           {showRole ? (
@@ -255,7 +255,7 @@ function LoginPage() {
           )}
 
     </div>
-    
+
           <div className="input-containers">
           <div className="input-name-container">
               <label className="label"

@@ -39,8 +39,9 @@ function UserHome() {
       {showCart && <Cart setShowCart={setShowCart} />}
       {showOrders && <Order setShowOrders={setShowOrders}/>}
 
-      <h3 className="page-title">User Home</h3>
+      
       <div className="product-list">
+        <h3 className="page-title">User Home</h3>
         <h4 className="sub-session-title">Available products</h4>
       </div>
       <ProductList products={shopProducts} />
