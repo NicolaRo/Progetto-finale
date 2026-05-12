@@ -169,7 +169,7 @@ const updateOrder = async (req, res) => {
                 const available = await Container.find({
                 
                     type: selection.type,
-                    state: "Container ready to use"
+                    status: "Container ready to use"
                 }).limit(Number(selection.quantity));
 
                  //Console.log for debug
@@ -177,7 +177,7 @@ const updateOrder = async (req, res) => {
 
                 //Update container's state to "Container Busy"
                 for(const container of available) {
-                    container.state = "Container busy";
+                    container.status = "Container busy";
                     await container.save();
                     assignedContanierIds.push(container._id);
                 }
@@ -197,7 +197,10 @@ const updateOrder = async (req, res) => {
 
 //4. Deleta an order
 const deleteOrder = async (req, res) => {
+    
     try {
+        //Console.log for debug
+        console.log(req.user)
         const order = await Order.findById(req.params.id);
         if(!order)
             return res.status(404).json({message: "Order not found"});

@@ -10,10 +10,13 @@ function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
 
   const [showCart, setShowCart] = useState(false);
-  const [showOrders, setShowOrders] = useState (false);
+  const [orders, setOrders] = useState([]);
+  const [showOrders, setShowOrders] = useState(false);
 
 
   const { token } = useContext(AuthContext);
+  //Console log for debug
+  console.log(token);
 
   //API call to the DB to get the list of products
   useEffect(() => {
@@ -33,11 +36,27 @@ function UserHome() {
     fetchProducts();
   }, [token]);
 
+  useEffect (() => {
+    const fetchOrders = async () => {
+      const response = await fetch (
+        `${import.meta.env.VITE_API_URL}/api/orders`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      );
+      const data = await response.json();
+      setOrders(data);
+    };
+    fetchOrders();
+  }, [token]);
+
   return (
     <>
       <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} />
       {showCart && <Cart setShowCart={setShowCart} />}
-      {showOrders && <Order setShowOrders={setShowOrders}/>}
+      {showOrders && <Order orders={orders} setShowOrders={setShowOrders}/>}
 
       
       <div className="product-list">

@@ -2,12 +2,13 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
 import ProductList from '../../components/ProductList';
-import Order from '../../components/Order';
 
 function ProducerHome() {
 
   //***IMPORTANT REMOVE THIS LOG BEFORE DEPLOY*** */
   const { token } = useContext(AuthContext);
+  
+  //console.log for debug
   console.log(token);
 
   const [productName, setProductName] = useState("");
@@ -97,7 +98,7 @@ function ProducerHome() {
   }, [token] );
 
   //useEffect handle the DB call to fetch the Order to the DB
-  useEffect(() => {
+  /* useEffect(() => {
       const fetchOrders = async () => {
           const response = await fetch (
               `${import.meta.env.VITE_API_URL}/api/orders`,
@@ -112,7 +113,7 @@ function ProducerHome() {
           setOrders(orders);
       };
       fetchOrders();
-  }, [token]);
+  }, [token]); */
 
   return (
     <>
