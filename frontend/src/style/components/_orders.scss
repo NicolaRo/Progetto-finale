@@ -11,4 +11,27 @@
   padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 1px 1px 10px #a6fafa;
+  display: flex;
+  align-items: center;
+}
+
+.single-order-container{
+background-color: aliceblue;
+padding: 0.5rem;
+border: 1px solid;
+border-radius: 10px;
+margin: 1rem 0 1rem 0;}
+
+.order-product-details-container{
+  margin-left: 0.5rem;
+}
+
+.order-product-quantity-container{
+  display: flex;
+  margin: 0 0.5rem 0 0.5rem;
+}
+
+.shipped-order-details{
+  display: flex;
+  flex-direction: column;
 }

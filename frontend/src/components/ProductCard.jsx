@@ -74,7 +74,7 @@ function ProductCard({product}) {
                 className="create-order-btn" 
                 type="submit"
                 onClick={handleAddToCart}>
-                    {user.role === "User" ? "Add to cart" : "Load product"}
+                    {user?.role === "User" ? "Add to cart" : "Load product"}
                 </button> 
             </div>
         </div> 

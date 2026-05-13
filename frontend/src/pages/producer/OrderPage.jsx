@@ -8,6 +8,7 @@ function OrderPage(){
     const [orders, setOrders] = useState([]);
     const {token} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [refresh, setRefresh] = useState(0);
 
 
     useEffect(() => {
@@ -20,7 +21,7 @@ function OrderPage(){
         setOrders(data);
         };
         fetchOrders();
-    }, [token]);
+    }, [token, refresh]);
 
     return (
         <>
@@ -29,7 +30,7 @@ function OrderPage(){
             onClick={()=> navigate ("/ProducerHome")}>Back to myHome
         </button>
         <Navbar />
-        <Order orders={orders}/>
+        <Order orders={orders} setRefresh={setRefresh}/>
         <div className="btn-container">
         
         </div>

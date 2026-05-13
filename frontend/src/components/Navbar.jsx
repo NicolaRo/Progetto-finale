@@ -10,7 +10,7 @@ import OrderIcon from "../assets/order-icon.png";
 
 function Navbar({setShowCart, setShowOrders}) {
   const { cart } = useContext(CartContext);
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   return (
@@ -24,6 +24,7 @@ function Navbar({setShowCart, setShowOrders}) {
           <button
             className="btn-logout"
             onClick={() => {
+              logout();
               navigate("/login");
             }}
           >
@@ -35,7 +36,7 @@ function Navbar({setShowCart, setShowOrders}) {
             log out
           </button>
         </div>
-        {user.role === "User" && (
+        {user?.role === "User" && (
           <button className="cart-btn" onClick={() => setShowCart(true)}>
             <img
                 className="cart-icon"
@@ -45,7 +46,7 @@ function Navbar({setShowCart, setShowOrders}) {
           </button>
         )}
 
-        {user.role === "User" && (
+        {user?.role === "User" && (
             <button
                 className="orders-btn "
                 onClick={()=> setShowOrders(true)}>
@@ -56,7 +57,7 @@ function Navbar({setShowCart, setShowOrders}) {
                 </button>
         )}
 
-        {user.role === "Producer" && (
+        {user?.role === "Producer" && (
           <button className="orders-btn" onClick={() => navigate("/orders")}>
             <img className="orders-icon" src={OrderIcon} alt="Orders" />
           </button>

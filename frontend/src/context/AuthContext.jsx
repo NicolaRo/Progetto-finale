@@ -7,18 +7,23 @@ const AuthContext = createContext();
 function AuthProvider({children}) {
 
     //Setting states for token and User
-    const [token, setToken] = useState(null);
-    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(sessionStorage.getItem('token'));
+    const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('user')));
 
 
     //login will store token and userData 
     const login = (token, userData) => {
-        setToken (token);
-        setUser(userData);
+        
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('user', JSON.stringify(userData));
+        setToken(token);
+        setUser (user); 
     };
 
     //logout will clear the information when the session is over
     const logout = () => {
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
         setToken(null);
         setUser(null);
     };
