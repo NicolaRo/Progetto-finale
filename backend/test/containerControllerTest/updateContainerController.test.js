@@ -16,7 +16,7 @@ describe('update container controller', () => {
         const fakeContainer = {
             _id: '123fakeId',
             type: "Sealed",
-            state: "Container ready to use",
+            status: "Container ready to use",
             save: sinon.stub().resolves()
         };
 
@@ -24,7 +24,7 @@ describe('update container controller', () => {
 
         const req = {
             params: {id: '123fakeId'},
-            body: {state: "Container busy"},
+            body: {status: "Container busy"},
             user: {role: "Producer"}
         };
 
@@ -37,7 +37,7 @@ describe('update container controller', () => {
         const fakeUpdatedContainer =  {
             _id: '123fakeId',
             type:"Sealed",
-            state: "Container busy"
+            status: "Container busy"
         };
 
         //ACT
@@ -45,7 +45,7 @@ describe('update container controller', () => {
 
         //ASSERT
         expect(updateStub.calledOnceWith('123fakeId')).to.be.true;
-        expect(fakeContainer.state).to.equal('Container busy');
+        expect(fakeContainer.status).to.equal('Container busy');
         expect(fakeContainer.save.calledOnce).to.be.true;
         expect(res.status.calledWith(200)).to.be.true;
 
@@ -58,7 +58,7 @@ describe('update container controller', () => {
             params: {id: 'nonexistent-id'},
             body: {
                 type: "Sealed",
-                state: "Container ready to use"
+                status: "Container ready to use"
             }
         };
 
@@ -87,7 +87,7 @@ describe('update container controller', () => {
             params: {id: '123fakeId'},
             body: {
                 type: "Sealed",
-                state: "Container ready to use" 
+                status: "Container ready to use" 
             }
         };
 

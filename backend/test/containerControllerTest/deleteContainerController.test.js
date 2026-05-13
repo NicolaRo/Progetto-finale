@@ -20,7 +20,7 @@ describe('Container controller', () => {
             params: {
                 id: 'fakeContainerId123',
                 type: "Sealed",
-                state: "Container ready to use"
+                status: "Container ready to use"
             }
         };
 

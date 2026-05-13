@@ -6,15 +6,15 @@ const Container = require("../models/Containers");
 //1. Create Container
 const createContainer = async (req, res) => {
   try {
-    const { type, availability, state } = req.body;
+    const { type, availability, status } = req.body;
 
-    if (!type || !availability || !state) {
+    if (!type || !availability || !status) {
       return res.status(400).json({ message: "Container details are missing" });
     }
     const container = await Container.create({
       type,
       availability,
-      state,
+      status,
     });
     return res.status(201).json(container);
   } catch (error) {
@@ -55,48 +55,48 @@ const updateContainer = async (req, res) => {
     if (!container)
       return res.status(404).json({ message: "Container not found" });
 
-    const { state } = req.body;
+    const { status } = req.body;
     const allowedStatuses = [
       "Container ready to use",
       "Container busy",
       "Container ready for collection",
     ];
-    if (state) {
-      if (!allowedStatuses.includes(state)) {
-        const err = new Error("Invalid Container state");
-        err.state = 422; //Unprocessable Entity
+    if (status) {
+      if (!allowedStatuses.includes(status)) {
+        const err = new Error("Invalid Container status");
+        err.status = 422; //Unprocessable Entity
         throw err;
       }
-      //To know which is the current state
-      const currentIndex = allowedStatuses.indexOf(container.state);
+      //To know which is the current status
+      const currentIndex = allowedStatuses.indexOf(container.status);
 
-      //To set a new state to migrate to
-      const newIndex = allowedStatuses.indexOf(state);
+      //To set a new status to migrate to
+      const newIndex = allowedStatuses.indexOf(status);
 
       //If the role is User:
       if (req.user.role === "User") {
-        //Only allow for 1 state change to "Container ready for collection"
+        //Only allow for 1 status change to "Container ready for collection"
         if (
-          container.state !== "Container busy" ||
-          state !== "Container ready for collection"
+          container.status !== "Container busy" ||
+          status !== "Container ready for collection"
         )
           return res.status(403).json({ message: "..." });
       }
       //If the role is "Producer"
       else if (req.user.role === "Producer") {
-        //Prevent state change to "Container ready for collection"
+        //Prevent status change to "Container ready for collection"
         const validProducerTransition =
-          (container.state === "Container ready to use" &&
-            state === "Container busy") ||
-          (container.state === "Container ready for collection" &&
-            state === "Container ready to use");
+          (container.status === "Container ready to use" &&
+            status === "Container busy") ||
+          (container.status === "Container ready for collection" &&
+            status === "Container ready to use");
 
         if (!validProducerTransition)
           return res
             .status(403)
             .json({ message: "Invalid transition for Producer" });
       }
-      container.state = state;
+      container.status = status;
 
       await container.save();
       return res.status(200).json(container);

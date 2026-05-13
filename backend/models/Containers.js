@@ -11,7 +11,7 @@ const ContainerSchema = new mongoose.Schema({
         type: Boolean,
         required: [true, "Confirm Container availability"]
     },
-    state: {
+    status: {
         type: String,
         enum: ["Container ready to use", "Container busy", "Container ready for collection"],
         required: [true, "Please chose a Container state"]

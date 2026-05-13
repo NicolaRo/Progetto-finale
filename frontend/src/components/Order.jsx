@@ -9,12 +9,17 @@ function Order ({orders}) {
 
     const [packedProducts, setPackedProducts] = useState({});
 
-const handleContainerChange = (productId, field, value) => {
+const handleContainerChange = (productId, orderId, field, value) => {
   setContainerSelections(prev => ({
     ...prev,
-    [productId]: { ...prev[productId], [field]: value }
-  }));
-};
+    [orderId]: {
+        ...prev[orderId], [productId]: {
+            ...prev[orderId]?.[productId],
+            [field]: value
+        }
+    }
+  }
+))};
 
 const handleShipOrder = async (orderId) => {
 
@@ -22,11 +27,17 @@ const handleShipOrder = async (orderId) => {
     console.log("orderId:", orderId);
     
 
-    const containers = Object.entries(containerSelections).map(([productId, selection])=> ({
+    const containers = Object.entries(containerSelections[orderId]).map(([productId, selection])=> ({
+        
         productId,
         type: selection.type,
         quantity: selection.quantity
     }));
+
+    if (!containerSelections[orderId]) {
+        alert("Please select containers for all products first");
+        return;
+      }
 
     //console.log for debug
     console.log("containers:", containers);
@@ -37,7 +48,7 @@ const handleShipOrder = async (orderId) => {
             "Content-Type":"application/json",
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({containers}),
+        body: JSON.stringify({containers, status: "Order shipped"}),
     });
     await response.json();
     if(!response.ok)
@@ -50,23 +61,47 @@ if (!orders || !Array.isArray(orders)) return null;
 
 //function to temporary store the product assigned with its container into a card before
 //Producer can confirm shipping
-const handlePackedProduct = (productId, productData) => {
+const handlePackedProduct = async (productId, productData, orderId) => {
     //validate type and quantity must be selected
-    if(!containerSelections[productId]?.type || !containerSelections[productId]?.quantity){
+    if(!containerSelections[orderId]?.[productId]?.type || !containerSelections[orderId]?.[productId]?.quantity){
         alert("Please select container type and quantity");
         return;
     }
-setPackedProducts (prev => ({
-    ...prev,
-    [productId]: {
-        ...productData,
-        containerType: containerSelections[productId].type,
-        containerQuantity: containerSelections[productId].quantity
-    }
-}));
-console.log(packedProducts);
 
-};
+//Fetch Order status to update "Order created" -> "Preparing order"
+const response = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
+    {method: "PUT",
+        headers: {
+            "Content-Type":"application/json",
+            Authorization: `Bearer ${token}`,
+        }, 
+        body: JSON.stringify({
+            status: "Preparing order",
+            containers: [{
+                productId,
+                type: containerSelections[orderId][productId].type,
+                quantity: containerSelections[orderId][productId].quantity
+            }]
+        })
+    })
+
+    if(!response.ok)
+        return alert('Could not update order state, please try later.');
+
+    await response.json();
+
+    alert ('Updated order state: Preparing Order.');
+
+    setPackedProducts (prev => ({
+        ...prev,
+        [productId]: {
+            ...productData,
+            containerType: containerSelections[orderId][productId].type,
+            containerQuantity: containerSelections[orderId][productId].quantity
+        }
+    }));
+    console.log(packedProducts);
+}
 
     return (
         <>
@@ -112,19 +147,19 @@ console.log(packedProducts);
                             </div>
                             {user.role === "Producer" && (
                                 <>
-                                <select 
-                                value={containerSelections[products.product._id]?.type || ""}
-                                onChange={(e) => handleContainerChange(products.product._id, "type", e.target.value)}
+                                <select className="container-type-sel-btn"
+                                value={containerSelections[order._id]?.[products.product._id]?.type || ""}
+                                onChange={(e) => handleContainerChange(products.product._id, order._id, "type", e.target.value)}
                                 >
                                     <option value="">Container type...</option>
                                     <option value="Sealed">Sealed</option>
                                     <option value="Non-Sealed">Non-Sealed</option>
                                     <option value="Freezer-Container">Freezer-Container</option>   
-                            </select>
+                                </select>
 
-                            <select 
-                                value={containerSelections[products.product._id]?.quantity || ""}
-                                onChange={(e) => handleContainerChange(products.product._id, "quantity", e.target.value)}
+                            <select className="container-qty-sel-btn"
+                                value={containerSelections[order._id]?.[products.product._id]?.quantity || ""}
+                                onChange={(e) => handleContainerChange(products.product._id, order._id, "quantity", e.target.value)}
                                 >
                                     <option value="">Container quantity...</option>
                                     <option value="1">1</option>
@@ -142,7 +177,7 @@ console.log(packedProducts);
                             )}
                             {user.role==='Producer' && (
                                 <button className="handle-packed-product-btn"
-                                    onClick={() => handlePackedProduct(products.product._id, products)}>Pack</button>
+                                    onClick={() => handlePackedProduct(products.product._id, products, order._id)}>Pack</button>
                             )}
                         </div>
                        );
@@ -164,5 +199,4 @@ console.log(packedProducts);
         </>
     );
 }
-
 export default Order; 

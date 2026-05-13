@@ -11,6 +11,7 @@ function ProductList({products}) {
         <>
         <div className="product-list-container">
             <div className="singleItem">
+                <h3 className="container-title">Recently added products:</h3>
                 {productItems}
             </div>
         </div>

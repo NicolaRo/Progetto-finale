@@ -12,10 +12,10 @@ const OrderSchema = new mongoose.Schema({
         }
     ],
     containers: [{type: mongoose.Schema.Types.ObjectId, ref: "Container"}],
-    state: {
+    status: {
         type: String,
-        enum: ["Order Created", "Order Received", "Preparing Order", "Order Shipped"],
-        default: "Order Created"
+        enum: ["Order created", "Preparing order", "Order shipped"],
+        default: "Order created"
     }
 }, {timestamps: true});
 

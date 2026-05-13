@@ -85,7 +85,7 @@ describe('Order Controller', () => {
                         }
                     ],
                     containers: [],
-                    state: "Order created"
+                    status: "Order created"
                 }
             };
 
@@ -161,7 +161,7 @@ describe('Order Controller', () => {
                         }
                     ],
                     containers: [],
-                    state: "Order created"
+                    status: "Order created"
                 }
             };
 
@@ -192,7 +192,7 @@ describe('Order Controller', () => {
                         }
                     ],
                     containers: [],
-                    state: "Order created"
+                    status: "Order created"
                 }
             };
 

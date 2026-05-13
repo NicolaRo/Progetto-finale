@@ -17,7 +17,7 @@ describe('createContainer', () => {
                 body:{
                     type: "Sealed",
                     availability: {},
-                    state: "Container ready to use"
+                    status: "Container ready to use"
                 }
             };
 
@@ -25,7 +25,7 @@ describe('createContainer', () => {
                 _id: "123fakeContainerId",
                 type: "Sealed",
                 availability: {},
-                state: "Container ready to use"
+                status: "Container ready to use"
             };
 
             const res = {
@@ -44,7 +44,7 @@ describe('createContainer', () => {
             expect(res.json.calledWithMatch({
                 type: "Sealed",
                 availability: {},
-                state: "Container ready to use"
+                status: "Container ready to use"
             })).to.be.true;
             expect(createStub.calledOnceWith(req.body)).to.be.true;
 
@@ -56,7 +56,7 @@ describe('createContainer', () => {
                 body: {
                     //type is missing
                     availability: {},
-                    state: "Container ready to use"
+                    status: "Container ready to use"
                 }
             };
 
@@ -83,7 +83,7 @@ describe('createContainer', () => {
                 body: {
                     type: "Sealed",
                     availability: {},
-                    state: "Container ready to use"
+                    status: "Container ready to use"
                 }
             };
 

@@ -119,6 +119,9 @@ const updateOrder = async (req, res) => {
 
         //Validate order exists
         const order = await Order.findById(orderId);
+
+        //console.log for debug
+        console.log("order.status dal DB:", JSON.stringify(order.status));
         
         if(!order)
             return res.status(404).json({message: "Order not found"});
@@ -139,18 +142,26 @@ const updateOrder = async (req, res) => {
         }
 
         if(status) {
-            const allowedStatuses = ["Order created", "Order received", "Preparing Order", "Order shipped"];
+            const allowedStatuses = ["Order created", "Preparing order", "Order shipped"];
+            
             if(!allowedStatuses.includes(status)) {
                 const err = new Error("Invalid Order status");
                 err.status = 422 //Unprocessable Entity
                 throw err;
             }
             
-            //To know which is the current state
+            //To know which is the current status
             const currentIndex = allowedStatuses.indexOf(order.status);
 
-            //To set a new state to migrate to
+            //To set a new status to migrate to
             const newIndex = allowedStatuses.indexOf(status);
+
+            //validate order status if already updated don't touch it
+            if(newIndex === currentIndex) 
+                return res.status(200).json(order);
+
+            //console.log for debug
+            console.log("currentIndex:", currentIndex, "newIndex:", newIndex);
 
             if(newIndex !== currentIndex + 1) {
                 return res.status(400).json({message: "Invalid status transition: orders must advance one step at a time"})
@@ -161,10 +172,14 @@ const updateOrder = async (req, res) => {
         if(containers && containers.length > 0) {
             //Console.log for debug
             console.log("containers ricevuti:", containers);
-
+            
             const assignedContanierIds = [];
 
             for (const selection of containers) {
+                //console.log for debug
+                console.log("Cerco:", selection.type, "Container ready to use");
+    
+                
                 //get the available containers per each requested type
                 const available = await Container.find({
                 
@@ -175,7 +190,7 @@ const updateOrder = async (req, res) => {
                  //Console.log for debug
                  console.log("container trovati:", available);
 
-                //Update container's state to "Container Busy"
+                //Update container's status to "Container Busy"
                 for(const container of available) {
                     container.status = "Container busy";
                     await container.save();

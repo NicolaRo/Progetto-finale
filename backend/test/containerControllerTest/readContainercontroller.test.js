@@ -16,7 +16,7 @@ describe('containerController', () => {
             const fakeContainer = [{
                 id: 1,
                 type:"Sealed",
-                state: "Container busy"
+                status: "Container busy"
             }];
 
             const findStub = sinon.stub(Container, 'find').resolves(fakeContainer);
