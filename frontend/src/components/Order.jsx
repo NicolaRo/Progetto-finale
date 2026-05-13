@@ -23,6 +23,11 @@ const handleContainerChange = (productId, orderId, field, value) => {
 
 const handleShipOrder = async (orderId) => {
 
+    if (!containerSelections[orderId]) {
+        alert("Please select containers for all products first");
+        return;
+      }
+
     //console.log for debug
     console.log("orderId:", orderId);
     
@@ -34,10 +39,7 @@ const handleShipOrder = async (orderId) => {
         quantity: selection.quantity
     }));
 
-    if (!containerSelections[orderId]) {
-        alert("Please select containers for all products first");
-        return;
-      }
+   
 
     //console.log for debug
     console.log("containers:", containers);
@@ -50,10 +52,13 @@ const handleShipOrder = async (orderId) => {
         },
         body: JSON.stringify({containers, status: "Order shipped"}),
     });
-    await response.json();
     if(!response.ok)
         return alert ('Could not assign container, try later');
+    await response.json();
+
     alert("Containers assigned to your products, order ready to ship.")
+
+    setRefresh(prev => prev + 1)
 };
 
 if (!orders || !Array.isArray(orders)) return null;
@@ -112,11 +117,11 @@ const handlePackedProduct = async (productId, productData, orderId) => {
             {orders.map((order) => (
                 <div className="single-order-container" key={order._id}>
                     <div className="order-user-details-container">
-                    <label htmlFor='order-user-detail'><strong>Customer: </strong></label>
-                    <p><strong>{order.user.name}</strong>, Id: {order.user._id}</p>
+                        <label htmlFor='order-user-detail'><strong>Customer: </strong></label>
+                        <p><strong>{order.user.name}</strong>, Id: {order.user._id}</p>
                         <label htmlFor='order-user-detail'><strong>Order Id: </strong></label>
-                        <p>{order._id}</p>
-                        
+                        <p> {order._id}</p>
+                        <label htmlFor='order-status-detail'><strong>Order Status:</strong> {order.status}</label>
                     </div>
                     
                     {order.status === "Preparing order" && 
@@ -145,7 +150,7 @@ const handlePackedProduct = async (productId, productData, orderId) => {
                                 <p>{products.product.price}€</p>
                             </div>
                             <div className="order-product-quantity-container">
-                                <label htmlFor='order-product-quantity'>Quantity:</label>
+                                <label htmlFor='order-product-quantity'></label>
                                 <p>{products.orderedQuantity}</p>
                             </div>
                             <div className="order-product-quantity-container">
@@ -185,7 +190,7 @@ const handlePackedProduct = async (productId, productData, orderId) => {
                                     </select>
 
                                     <button className="handle-packed-product-btn"
-                                        onClick={() => 
+                                        onClick={() =>
                                         handlePackedProduct(products.product._id, products, order._id)}
                                         >Pack
                                     </button>
@@ -195,16 +200,9 @@ const handlePackedProduct = async (productId, productData, orderId) => {
                                 )}
 
                             {order.status === "Order shipped" && (
-                                <>
                                 <div className="shipped-order-details">
-                                <p><strong>Status:</strong></p>
-                                <p>Shipped</p>
+                                    <p><strong>Container Status:</strong>{containerSelections.status}</p>
                                 </div>
-                                <div className="shipped-order-details">
-                                    <p>Container Status:</p>
-                                </div>
-                                
-                                </>  
                             )}
                         </div>
                        );

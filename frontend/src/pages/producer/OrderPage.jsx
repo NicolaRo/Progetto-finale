@@ -12,6 +12,8 @@ function OrderPage(){
 
 
     useEffect(() => {
+        //console.log for debug
+        console.log("refetch triggered, refres", refresh);
         const fetchOrders = async () => {
             const response = await fetch(
                 `${import.meta.env.VITE_API_URL}/api/orders`,
