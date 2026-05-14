@@ -14,12 +14,19 @@ function OrderPage() {
     //console.log for debug
     console.log("refetch triggered, refres", refresh);
     const fetchOrders = async () => {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/orders`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      const data = await response.json();
-      setOrders(data);
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/orders`,
+                { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" }
+              );
+              const data = await response.json();
+        
+              //Console log for debug
+              console.log("orders ricevuti:", data);
+              setOrders(data);
+        } catch (error) {
+            console.log("Errore fetch ordini:", error);
+        }
     };
     fetchOrders();
   }, [token, refresh]);

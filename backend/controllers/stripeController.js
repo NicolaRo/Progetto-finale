@@ -4,8 +4,6 @@ const Order = require ('../models/Orders');
 
 const createCheckoutSession = async (req, res) => {
     try{
-
-        
         
         const {orderId} = req.body;
         const order = await Order.findById(orderId).populate("products.product");

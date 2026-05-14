@@ -123,6 +123,10 @@ function Order({ orders, setRefresh }) {
         <h3 className="component-title">Orders list</h3>
         {orders.map((order) => (
           <div className="single-order-container" key={order._id}>
+            
+            {/*Console.log for debug*/}
+            {order.products.map(p => console.log("producerId:", p.producerId, "user._id:", user._id, "match:", p.producerId === user._id))}
+            
             <div className="order-user-details-container">
               <label htmlFor="order-user-detail">
                 <strong>Customer: </strong>
@@ -147,8 +151,11 @@ function Order({ orders, setRefresh }) {
                 Ship order
               </button>
             )}
+            {/*console log for debug */}
+            {order.products.map(p => console.log("producerId:", p.producerId, "user._id:", user._id))}
 
-            {order.products.map((products) => {
+
+            {order.products.filter(p => user?. role === "Producer" ? p.producerId === user._id : true).map((products) => {
               if (packedProducts[order._id]?.[products.product._id])
                 return null;
               return (
@@ -266,6 +273,7 @@ function Order({ orders, setRefresh }) {
                 </div>
               );
             })}
+
             {Object.values(packedProducts[order._id] || {}).length > 0 && (
               <div className="packed-summary">
                 <h4>Order status: {order.status}</h4>

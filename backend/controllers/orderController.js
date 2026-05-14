@@ -59,6 +59,11 @@ const createOrder = async (req, res) => {
 //2.1 Read orders
 const getOrders = async (req, res) => {
     try {
+
+        //Console log for debug
+        console.log("getOrders chiamato, user:", req.user);
+
+
         //2.1.1. Dynamic filter
         const filter = {};
 
@@ -77,9 +82,9 @@ const getOrders = async (req, res) => {
             filter.user = req.query.userId; 
         }
 
-        //2.1.4. Filter products from an order
-        if (req.query.product) {
-            filter["products.product"] = req.query.product;
+        //2.1.4. Filter products per Producer - show only orders with their products
+        if (req.user.role === "Producer") {
+            filter["products.producerId"] = req.user._id;
         }
 
         //2.1.5. Final query
