@@ -25,17 +25,24 @@ const createOrder = async (req, res) => {
         }
 
         for (let p of products) {
+
+            //Console log for debug
+            console.log("validating:", p.product, p.orderedQuantity);
+
             if(!p.product || !p.orderedQuantity || p.orderedQuantity <= 0) {
                 return res.status(400).json({message: "Every product must have a valid ID and positive quantity"});
             }
         }
 
         // 1.2. Validete Users
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user._id);
         if (!user) return res.status(404).json({message: "User not found"});
 
         //1.3. Update product stock availability
         await updateProductStock(products);
+
+        //Console.log for debug
+        console.log("Sto per creare l'ordine...");
 
         //1.4. Create order
         const [order] = await Order.create (
@@ -90,7 +97,8 @@ const getOrders = async (req, res) => {
         //2.1.5. Final query
         const orders = await Order.find(filter)
         .populate("user")
-        .populate("products.product");
+        .populate("products.product")
+        .populate("products.producerId");
 
         return res.status(200).json(orders);
     } catch (error) {

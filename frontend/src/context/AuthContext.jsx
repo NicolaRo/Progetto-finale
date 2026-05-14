@@ -17,7 +17,7 @@ function AuthProvider({children}) {
         sessionStorage.setItem('token', token);
         sessionStorage.setItem('user', JSON.stringify(userData));
         setToken(token);
-        setUser (user); 
+        setUser (userData); 
     };
 
     //logout will clear the information when the session is over

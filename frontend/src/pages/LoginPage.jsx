@@ -42,7 +42,7 @@ function LoginPage() {
 
     //Read the data
     const logInData = await googleAuth.json();
-    login(logInData.token, { role: logInData.role, name: logInData.name, _id: logInData._id });
+    login(logInData.token, { role: logInData.role, name: logInData.name, _id: logInData.id });
 
     console.log(logInData);
 
@@ -92,8 +92,9 @@ function LoginPage() {
     if (!response.ok)
       return alert("Invalid credentials, please try again");
     
-    login(logInData.token, { role: logInData.role, name: logInData.name, _id: logInData._id });
+    login(logInData.token, { role: logInData.role, name: logInData.name, _id: logInData.id });
 
+    //console log for debug
     console.log(logInData);
 
     //Navigate to specific page depending on the role

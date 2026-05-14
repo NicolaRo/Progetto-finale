@@ -171,6 +171,12 @@ function Order({ orders, setRefresh }) {
                       alt={products.product.name}
                     />
                   </div>
+                  <div className="order-producer-details-container">
+                    <label htmlFor="order-producter-detail">
+                      <strong>Producer: </strong>
+                    </label>
+                    <p>{products.producerId.name}</p>
+                  </div>
                   <div className="order-product-details-container">
                     <label htmlFor="order-product-detail">
                       <strong>Price: </strong>
