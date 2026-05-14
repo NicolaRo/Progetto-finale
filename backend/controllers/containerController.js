@@ -6,14 +6,13 @@ const Container = require("../models/Containers");
 //1. Create Container
 const createContainer = async (req, res) => {
   try {
-    const { type, availability, status } = req.body;
+    const { type,  status } = req.body;
 
-    if (!type || !availability || !status) {
+    if (!type || !status) {
       return res.status(400).json({ message: "Container details are missing" });
     }
     const container = await Container.create({
       type,
-      availability,
       status,
     });
     return res.status(201).json(container);

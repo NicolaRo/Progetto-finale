@@ -7,10 +7,6 @@ const ContainerSchema = new mongoose.Schema({
         enum: ["Sealed", "Non-Sealed", "Freezer-Container"],
         required: [true, "Choose the type of the Container"]
     },
-    availability: {
-        type: Boolean,
-        required: [true, "Confirm Container availability"]
-    },
     status: {
         type: String,
         enum: ["Container ready to use", "Container busy", "Container ready for collection"],
