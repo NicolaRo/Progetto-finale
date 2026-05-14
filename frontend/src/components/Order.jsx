@@ -276,19 +276,29 @@ function Order({ orders, setRefresh }) {
 
             {Object.values(packedProducts[order._id] || {}).length > 0 && (
               <div className="packed-summary">
-                <h4>Order status: {order.status}</h4>
+              {/*   <h4>Order status: {order.status}</h4> */}
                 {Object.values(packedProducts[order._id] || {}).map(
-                  (packed) => (
-                    <div key={packed.product._id}>
-                      <p>
-                        {packed.product.name} - Qty: {packed.orderedQuantity}{" "}
-                        {packed.product.unit}
-                      </p>
-                      <p>
-                        Container: {packed.containerType} - Qty:{" "}
-                        {packed.containerQuantity}
-                      </p>
+                  (packed) => ( 
+                    <>
+                    
+                    <div className="packing-list">
+                        <h4>Packing list:</h4>
+                        <div className="packed-products"key={packed.product._id}> 
+                            <h4>Ordered products:</h4>
+                                <p>
+                                    {packed.product.name} - {packed.orderedQuantity}{" "}
+                                    {packed.product.unit}
+                                </p>
+                        </div>
+                        <div className="assigned-containers">
+                            <h4>Assigned containers:</h4>
+                                <p>
+                                    Container: {packed.containerType} - N.:{" "}
+                                    {packed.containerQuantity}
+                                </p>
+                        </div>
                     </div>
+                    </>
                   )
                 )}
               </div>
