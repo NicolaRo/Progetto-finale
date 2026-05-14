@@ -55,6 +55,10 @@ const updateContainer = async (req, res) => {
       return res.status(404).json({ message: "Container not found" });
 
     const { status } = req.body;
+
+    //console.log for debug
+    console.log("status bytes:", JSON.stringify(status));
+    console.log("container.status:", container.status, "status richiesto: ", status, "user.role:", req.user.role);
     const allowedStatuses = [
       "Container ready to use",
       "Container busy",

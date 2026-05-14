@@ -49,7 +49,7 @@ function Order({ orders, setRefresh }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ containers, status: "Order shipped" }),
+        body: JSON.stringify({status: "Order shipped" }),
       }
     );
     if (!response.ok) return alert("Could not assign container, try later");
@@ -117,16 +117,49 @@ function Order({ orders, setRefresh }) {
     console.log(packedProducts);
     setRefresh((prev) => prev + 1);
   };
+
+  const handleReturnContainer = async (containerId, orderId) => {
+    const body = {status:"Container ready for collection"};
+
+    //colnsole log for debug
+    console.log("body:", JSON.stringify(body));
+
+    const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/containers/${containerId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            status:"Container ready for collection"
+          }),
+        }
+      );
+
+      //console.log for debugw
+      console.log("response status:", response.status, response.ok)
+      if(!response.ok)
+        return alert ("Could not update container status");
+    await response.json();
+    setRefresh(prev => prev +1);
+  };
+
   return (
     <>
       <div className="orders-container">
         <h3 className="component-title">Orders list</h3>
         {orders.map((order) => (
+            
           <div className="single-order-container" key={order._id}>
             
+
             {/*Console.log for debug*/}
-            {order.products.map(p => console.log("producerId:", p.producerId, "user._id:", user._id, "match:", p.producerId === user._id))}
+            {order.products.map(p => 
+                console.log("containers:", order.containers, "producerId:", p.producerId, "user._id:", user._id, "match:", p.producerId === user._id))}
             
+
             <div className="order-user-details-container">
               <label htmlFor="order-user-detail">
                 <strong>Customer: </strong>
@@ -155,7 +188,7 @@ function Order({ orders, setRefresh }) {
             {order.products.map(p => console.log("producerId:", p.producerId, "user._id:", user._id))}
 
 
-            {order.products.filter(p => user?. role === "Producer" ? p.producerId === user._id : true).map((products) => {
+            {order.products.filter(p => user?. role === "Producer" ? p.producerId._id === user._id : true).map((products) => {
               if (packedProducts[order._id]?.[products.product._id])
                 return null;
               return (
@@ -268,12 +301,16 @@ function Order({ orders, setRefresh }) {
                       </>
                     )}
 
-                  {order.status === "Order shipped" && (
-                    <div className="shipped-order-details">
-                      <p>
-                        <strong>Container Status:</strong>
-                        {containerSelections.status}
-                      </p>
+                  {order.status === "Order shipped" && user?.role === "User" && (
+                    <div className="containers-return">
+                        <h4>Your containers:</h4>
+                        {order.containers.map((container) => (
+                            <div key = {container._id}>
+                                <p>Type: {container.type} - Status: {container.status}</p> 
+                                <button onClick={() => handleReturnContainer(container._id, order._id)}>Containers ready for collection
+                                </button>
+                            </div>
+                        ))}
                     </div>
                   )}
                 </div>

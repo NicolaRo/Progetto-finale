@@ -98,7 +98,8 @@ const getOrders = async (req, res) => {
         const orders = await Order.find(filter)
         .populate("user")
         .populate("products.product")
-        .populate("products.producerId");
+        .populate("products.producerId")
+        .populate("containers");
 
         return res.status(200).json(orders);
     } catch (error) {
@@ -124,11 +125,11 @@ const getOrderById = async (req, res) => {
 const updateOrder = async (req, res) => {
     try {
         
-        //console.log for debug
-        console.log(req.body);
-
         const orderId = req.params.id;
         const {products: newProducts, status, userId, containers} = req.body;
+
+        //console.log for debug
+        console.log(req.body);
 
         //Validate order exists
         const order = await Order.findById(orderId);
@@ -147,11 +148,44 @@ const updateOrder = async (req, res) => {
         order.user = user._id;
         }
         
-
         if (newProducts && newProducts.length > 0) {
             await updateProductStock(newProducts);
     
             order.products.push(...newProducts);
+        }
+        if(containers && containers.length > 0) {
+            //Console.log for debug
+            console.log("containers ricevuti:", containers);
+            
+            const assignedContanierIds = [];
+
+            for (const selection of containers) {
+                //console.log for debug
+                console.log("Cerco:", selection.type, "Container ready to use");
+    
+                
+                //get the available containers per each requested type
+                const available = await Container.find({
+                    type: selection.type,
+                    status: "Container ready to use"
+                }).limit(Number(selection.quantity));
+
+                if(available.length === 0){
+                    return res.status(400).json({message: `No containers available of type${selection.type}`})
+                }
+
+                //Update container's status to "Container Busy"
+                for(const container of available) {
+                    
+                    container.status = "Container busy";
+                    await container.save();
+                    assignedContanierIds.push(container._id);
+                }
+            }
+            order.containers.push(...assignedContanierIds);
+
+            //console log for debug
+            console.log("containers dopo push:", order.containers);
         }
 
         if(status) {
@@ -170,8 +204,11 @@ const updateOrder = async (req, res) => {
             const newIndex = allowedStatuses.indexOf(status);
 
             //validate order status if already updated don't touch it
-            if(newIndex === currentIndex) 
+            if(newIndex === currentIndex) {
+                await order.save();
                 return res.status(200).json(order);
+            }
+                
 
             //console.log for debug
             console.log("currentIndex:", currentIndex, "newIndex:", newIndex);
@@ -181,39 +218,6 @@ const updateOrder = async (req, res) => {
             }
             order.status = status;
         }
-
-        if(containers && containers.length > 0) {
-            //Console.log for debug
-            console.log("containers ricevuti:", containers);
-            
-            const assignedContanierIds = [];
-
-            for (const selection of containers) {
-                //console.log for debug
-                console.log("Cerco:", selection.type, "Container ready to use");
-    
-                
-                //get the available containers per each requested type
-                const available = await Container.find({
-                
-                    type: selection.type,
-                    status: "Container ready to use"
-                }).limit(Number(selection.quantity));
-
-                 //Console.log for debug
-                 console.log("container trovati:", available);
-
-                //Update container's status to "Container Busy"
-                for(const container of available) {
-                    container.status = "Container busy";
-                    await container.save();
-                    assignedContanierIds.push(container._id);
-                }
-            }
-            order.containers = assignedContanierIds;
-        }
-
-
 
         await order.save();
         return res.status(200).json(order);

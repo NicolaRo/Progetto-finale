@@ -70,7 +70,7 @@ const loginUser = async (req, res) => {
             //If data matches, then execute the jwt.sign with existing user's credentials 
             const jwtToken = jwt.sign({_id: existingUser._id, role: existingUser.role, name: existingUser.name}, process.env.JWT_SECRET, {expiresIn: "7d"});
 
-            return res.status(200).json({token: jwtToken, role: existingUser.role, name: existingUser.name, id: existingUser._id, message: "Successfully logged-in"});
+            return res.status(200).json({token: jwtToken, role: existingUser.role, name: existingUser.name, _id: existingUser._id, message: "Successfully logged-in"});
 
     } catch (error) {
         return res.status(500).json({message: error.message});

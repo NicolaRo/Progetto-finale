@@ -13,6 +13,8 @@ function UserHome() {
   const [orders, setOrders] = useState([]);
   const [showOrders, setShowOrders] = useState(false);
 
+  const [refresh, setRefresh] = useState(0);
+
 
   const { token } = useContext(AuthContext);
   //Console log for debug
@@ -50,13 +52,13 @@ function UserHome() {
       setOrders(data);
     };
     fetchOrders();
-  }, [token]);
+  }, [token, refresh]);
 
   return (
     <>
       <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} />
       {showCart && <Cart setShowCart={setShowCart} />}
-      {showOrders && <Order orders={orders} setShowOrders={setShowOrders}/>}
+      {showOrders && <Order orders={orders} setRefresh={setRefresh} setShowOrders={setShowOrders}/>}
 
       
       <div className="product-list">
