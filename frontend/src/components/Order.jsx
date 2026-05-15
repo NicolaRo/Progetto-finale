@@ -49,7 +49,7 @@ function Order({ orders, setRefresh }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({status: "Order shipped" }),
+        body: JSON.stringify({ status: "Order shipped" }),
       }
     );
     if (!response.ok) return alert("Could not assign container, try later");
@@ -120,43 +120,65 @@ function Order({ orders, setRefresh }) {
 
   const handleReturnContainers = async (containers) => {
     for (const container of containers) {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/containers/${container._id}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/containers/${container._id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({status: "Container ready for collection"}),
+          body: JSON.stringify({ status: "Container ready for collection" }),
         }
       );
       if (!response.ok)
         return alert("Could not update container status, try later");
-      }
-      setRefresh(prev => prev +1);
-    }; 
+    }
+    alert("Containers returned successfully");
+    setRefresh((prev) => prev + 1);
+  };
 
-  
-    const body = {status:"Container ready for collection"};
 
-    //colnsole log for debug
-    console.log("body:", JSON.stringify(body));
-
+  const handleContainerCheckin = async (containerId) => {
     
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/containers/${containerId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ status: "Container ready to use" }),
+        }
+      );
+      if (!response.ok)
+        return alert("Could not update container status, try later");
+    setRefresh((prev) => prev + 1);
+    alert("Containers successfully checked in");
+  };
+
+const body = { status: "Container ready to use" };
 
   return (
     <>
       <div className="orders-container">
         <h3 className="component-title">Orders list</h3>
         {orders.map((order) => (
-            
           <div className="single-order-container" key={order._id}>
-            
-
             {/*Console.log for debug*/}
-            {order.products.map(p => 
-                console.log("containers:", order.containers, "producerId:", p.producerId, "user._id:", user._id, "match:", p.producerId === user._id))}
-            
+            {order.products.map((p) =>
+              console.log(
+                "containers:",
+                order.containers,
+                "producerId:",
+                p.producerId,
+                "user._id:",
+                user._id,
+                "match:",
+                p.producerId === user._id
+              )
+            )}
 
             <div className="order-user-details-container">
               <label htmlFor="order-user-detail">
@@ -183,163 +205,201 @@ function Order({ orders, setRefresh }) {
               </button>
             )}
             {/*console log for debug */}
-            {order.products.map(p => console.log("producerId:", p.producerId, "user._id:", user._id))}
+            {order.products.map((p) =>
+              console.log("producerId:", p.producerId, "user._id:", user._id)
+            )}
 
+            {order.products
+              .filter((p) =>
+                user?.role === "Producer" ? p.producerId._id === user._id : true
+              )
+              .map((products) => {
+                if (packedProducts[order._id]?.[products.product._id])
+                  return null;
+                return (
+                  <div className="ordered-products" key={products.product._id}>
+                    <div className="order-product-details-container">
+                      <label htmlFor="order-product-detail">
+                        <strong>Product: </strong>
+                      </label>
+                      <p>{products.product.name}</p>
+                      <img
+                        className="prod-order-preview"
+                        src={`http://img.spoonacular.com/ingredients_100x100/${products.product.image}`}
+                        alt={products.product.name}
+                      />
+                    </div>
+                    <div className="order-producer-details-container">
+                      <label htmlFor="order-producter-detail">
+                        <strong>Producer: </strong>
+                      </label>
+                      <p>{products.producerId.name}</p>
+                    </div>
+                    <div className="order-product-details-container">
+                      <label htmlFor="order-product-detail">
+                        <strong>Price: </strong>
+                      </label>
+                      <p>{products.product.price}€</p>
+                    </div>
+                    <div className="order-product-quantity-container">
+                      <label htmlFor="order-product-quantity"></label>
+                      <p>{products.orderedQuantity}</p>
+                    </div>
+                    <div className="order-product-quantity-container">
+                      <label htmlFor="order-product-quantity"></label>
+                      <p>
+                        <strong>{products.product.unit}</strong>
+                      </p>
+                    </div>
 
-            {order.products.filter(p => user?. role === "Producer" ? p.producerId._id === user._id : true).map((products) => {
-              if (packedProducts[order._id]?.[products.product._id])
-                return null;
-              return (
-                <div className="ordered-products" key={products.product._id}>
-                  <div className="order-product-details-container">
-                    <label htmlFor="order-product-detail">
-                      <strong>Product: </strong>
-                    </label>
-                    <p>{products.product.name}</p>
-                    <img
-                      className="prod-order-preview"
-                      src={`http://img.spoonacular.com/ingredients_100x100/${products.product.image}`}
-                      alt={products.product.name}
-                    />
-                  </div>
-                  <div className="order-producer-details-container">
-                    <label htmlFor="order-producter-detail">
-                      <strong>Producer: </strong>
-                    </label>
-                    <p>{products.producerId.name}</p>
-                  </div>
-                  <div className="order-product-details-container">
-                    <label htmlFor="order-product-detail">
-                      <strong>Price: </strong>
-                    </label>
-                    <p>{products.product.price}€</p>
-                  </div>
-                  <div className="order-product-quantity-container">
-                    <label htmlFor="order-product-quantity"></label>
-                    <p>{products.orderedQuantity}</p>
-                  </div>
-                  <div className="order-product-quantity-container">
-                    <label htmlFor="order-product-quantity"></label>
-                    <p>
-                      <strong>{products.product.unit}</strong>
-                    </p>
-                  </div>
+                    {(order.status === "Order created" ||
+                      order.status === "Preparing order") &&
+                      user?.role === "Producer" && (
+                        <>
+                          <div className="order-btn-container">
+                            <select
+                              className="container-type-sel-btn"
+                              value={
+                                containerSelections[order._id]?.[
+                                  products.product._id
+                                ]?.type || ""
+                              }
+                              onChange={(e) =>
+                                handleContainerChange(
+                                  products.product._id,
+                                  order._id,
+                                  "type",
+                                  e.target.value
+                                )
+                              }
+                            >
+                              <option value="">Container type...</option>
+                              <option value="Sealed">Sealed</option>
+                              <option value="Non-Sealed">Non-Sealed</option>
+                              <option value="Freezer-Container">
+                                Freezer-Container
+                              </option>
+                            </select>
 
-                  {(order.status === "Order created" ||
-                    order.status === "Preparing order") &&
-                    user?.role === "Producer" && (
-                      <>
-                        <div className="order-btn-container">
-                          <select
-                            className="container-type-sel-btn"
-                            value={
-                              containerSelections[order._id]?.[
-                                products.product._id
-                              ]?.type || ""
-                            }
-                            onChange={(e) =>
-                              handleContainerChange(
-                                products.product._id,
-                                order._id,
-                                "type",
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="">Container type...</option>
-                            <option value="Sealed">Sealed</option>
-                            <option value="Non-Sealed">Non-Sealed</option>
-                            <option value="Freezer-Container">
-                              Freezer-Container
-                            </option>
-                          </select>
+                            <select
+                              className="container-qty-sel-btn"
+                              value={
+                                containerSelections[order._id]?.[
+                                  products.product._id
+                                ]?.quantity || ""
+                              }
+                              onChange={(e) =>
+                                handleContainerChange(
+                                  products.product._id,
+                                  order._id,
+                                  "quantity",
+                                  e.target.value
+                                )
+                              }
+                            >
+                              <option value="">Container quantity...</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              <option value="6">6</option>
+                              <option value="7">7</option>
+                              <option value="8">8</option>
+                              <option value="9">9</option>
+                              <option value="10">10</option>
+                            </select>
 
-                          <select
-                            className="container-qty-sel-btn"
-                            value={
-                              containerSelections[order._id]?.[
-                                products.product._id
-                              ]?.quantity || ""
-                            }
-                            onChange={(e) =>
-                              handleContainerChange(
-                                products.product._id,
-                                order._id,
-                                "quantity",
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="">Container quantity...</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                            <button
+                              className="handle-packed-product-btn"
+                              onClick={() =>
+                                handlePackedProduct(
+                                  products.product._id,
+                                  products,
+                                  order._id
+                                )
+                              }
+                            >
+                              Pack
+                            </button>
+                          </div>
+                        </>
+                      )}
 
-                          <button
-                            className="handle-packed-product-btn"
-                            onClick={() =>
-                              handlePackedProduct(
-                                products.product._id,
-                                products,
-                                order._id
-                              )
-                            }
-                          >
-                            Pack
-                          </button>
+                    {order.status === "Order shipped" &&
+                      user?.role === "User" && (
+                        <div className="containers-return">
+                          <h4>Order received?</h4>
+                          {order.containers.some(
+                            (c) => c.status === "Container busy"
+                          ) ? (
+                            <button
+                              onClick={() =>
+                                handleReturnContainers(order.containers)
+                              }
+                            >
+                              Confirm receipt & return containers
+                            </button>
+                          ) : (
+                            <p>
+                              All containers are returned! See you on the next
+                              order.
+                            </p>
+                          )}
                         </div>
-                      </>
-                    )}
-
-{order.status === "Order shipped" && user?.role === "User" && (
-  <div className="containers-return">
-    <h4>Order received?</h4>
-    <button onClick={() => handleReturnContainers(order.containers)}>
-      Confirm receipt & return containers
-    </button>
-  </div>
-)}
-                </div>
-              );
-            })}
+                      )}
+                  </div>
+                );
+              })}
 
             {Object.values(packedProducts[order._id] || {}).length > 0 && (
               <div className="packed-summary">
-              {/*   <h4>Order status: {order.status}</h4> */}
+                {/*   <h4>Order status: {order.status}</h4> */}
                 {Object.values(packedProducts[order._id] || {}).map(
-                  (packed) => ( 
+                  (packed) => (
                     <>
-                    
-                    <div className="packing-list">
+                      <div className="packing-list">
                         <h4>Packing list:</h4>
-                        <div className="packed-products"key={packed.product._id}> 
-                            <h4>Ordered products:</h4>
-                                <p>
-                                    {packed.product.name} - {packed.orderedQuantity}{" "}
-                                    {packed.product.unit}
-                                </p>
+                        <div
+                          className="packed-products"
+                          key={packed.product._id}
+                        >
+                          <h4>Ordered products:</h4>
+                          <p>
+                            {packed.product.name} - {packed.orderedQuantity}{" "}
+                            {packed.product.unit}
+                          </p>
                         </div>
                         <div className="assigned-containers">
-                            <h4>Assigned containers:</h4>
-                                <p>
-                                    Container: {packed.containerType} - N.:{" "}
-                                    {packed.containerQuantity}
-                                </p>
+                          <h4>Assigned containers:</h4>
+                          <p>
+                            Container: {packed.containerType} - N.:{" "}
+                            {packed.containerQuantity}
+                          </p>
                         </div>
-                    </div>
+                      </div>
                     </>
                   )
                 )}
+                
               </div>
+
             )}
+            {order.status === "Order shipped" && user?.role === "Producer" && (
+                  <div className="containers-checkin">
+                    <h4>Returned containers:</h4>
+                    {order.containers
+                      .filter(c => c.status === "Container ready for collection")
+                      .map(container => (
+                        <div key={container._id}>
+                          <p>Type: {container.type} — Status: {container.status}</p>
+                          <button onClick={() => handleContainerCheckin(container._id)}>
+                            Set ready to use
+                          </button>
+                        </div>
+                      ))}
+                  </div>
+                )}
           </div>
         ))}
       </div>
