@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import Order from "../../components/Order";
+import UserOrder from "../../components/UserOrder";
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ function OrderPage() {
         Back to myHome
       </button>
       <Navbar />
-      <Order orders={orders} setRefresh={setRefresh} />
+      <UserOrder orders={orders} setRefresh={setRefresh} />
       <div className="btn-container"></div>
     </>
   );
