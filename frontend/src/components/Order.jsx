@@ -118,33 +118,31 @@ function Order({ orders, setRefresh }) {
     setRefresh((prev) => prev + 1);
   };
 
-  const handleReturnContainer = async (containerId, orderId) => {
-    const body = {status:"Container ready for collection"};
-
-    //colnsole log for debug
-    console.log("body:", JSON.stringify(body));
-
-    const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/containers/${containerId}`,
+  const handleReturnContainers = async (containers) => {
+    for (const container of containers) {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/containers/${container._id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({
-            status:"Container ready for collection"
-          }),
+          body: JSON.stringify({status: "Container ready for collection"}),
         }
       );
+      if (!response.ok)
+        return alert("Could not update container status, try later");
+      }
+      setRefresh(prev => prev +1);
+    }; 
 
-      //console.log for debugw
-      console.log("response status:", response.status, response.ok)
-      if(!response.ok)
-        return alert ("Could not update container status");
-    await response.json();
-    setRefresh(prev => prev +1);
-  };
+  
+    const body = {status:"Container ready for collection"};
+
+    //colnsole log for debug
+    console.log("body:", JSON.stringify(body));
+
+    
 
   return (
     <>
@@ -301,18 +299,14 @@ function Order({ orders, setRefresh }) {
                       </>
                     )}
 
-                  {order.status === "Order shipped" && user?.role === "User" && (
-                    <div className="containers-return">
-                        <h4>Your containers:</h4>
-                        {order.containers.map((container) => (
-                            <div key = {container._id}>
-                                <p>Type: {container.type} - Status: {container.status}</p> 
-                                <button onClick={() => handleReturnContainer(container._id, order._id)}>Containers ready for collection
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                  )}
+{order.status === "Order shipped" && user?.role === "User" && (
+  <div className="containers-return">
+    <h4>Order received?</h4>
+    <button onClick={() => handleReturnContainers(order.containers)}>
+      Confirm receipt & return containers
+    </button>
+  </div>
+)}
                 </div>
               );
             })}

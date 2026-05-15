@@ -49,6 +49,10 @@ function UserHome() {
       }
       );
       const data = await response.json();
+
+      //console.log for debug
+      console.log("orders dopo refetch:", data);
+      
       setOrders(data);
     };
     fetchOrders();

@@ -49,6 +49,10 @@ const getContainerById = async (req, res) => {
 
 const updateContainer = async (req, res) => {
   try {
+    //console.log for debug
+    console.log("raw body:", JSON.stringify(req.body));
+
+    
     const container = await Container.findById(req.params.id);
 
     if (!container)
