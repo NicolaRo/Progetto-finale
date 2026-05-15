@@ -1,28 +1,28 @@
 import { useContext} from "react";
 import { AuthContext } from "../context/AuthContext";
 
+import { updateContainerStatus } from "../services/containerService";
+
 function UserOrder({ orders, setRefresh }) {
 
   const { token} = useContext(AuthContext);
 
   const handleReturnContainers = async (containers) => {
-    for (const container of containers) {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/containers/${container._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ status: "Container ready for collection" }),
-        }
-      );
-      if (!response.ok)
-        return alert("Could not update container status, try later");
+    try {
+      for (const container of containers) {
+        await updateContainerStatus (
+          container._id,
+          "Container ready for collection",
+          token
+        );
+      }
+      alert("Containers returned successfully");
+
+      setRefresh((prev) => prev + 1);
+
+    } catch {
+      alert ("Could not update container status, try later");
     }
-    alert("Containers returned successfully");
-    setRefresh((prev) => prev + 1);
   };
 
   return (

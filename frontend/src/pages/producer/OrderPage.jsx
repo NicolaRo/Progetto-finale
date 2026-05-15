@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+
 import UserOrder from "../../components/UserOrder";
 import Navbar from "../../components/Navbar";
-import { useNavigate } from "react-router-dom";
+
+import { getOrders } from "../../services/orderService";
+
 
 function OrderPage() {
   const [orders, setOrders] = useState([]);
@@ -11,7 +15,18 @@ function OrderPage() {
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
-    //console.log for debug
+    const fetchOrders = async () => {
+      try {
+        const data = await getOrders(token);
+        setOrders(data);
+      } catch (error) {
+                console.log("Errore fetch ordini:", error);
+            }
+        };
+        fetchOrders();
+      }, [token, refresh]);
+    }
+    /* //console.log for debug
     console.log("refetch triggered, refres", refresh);
     const fetchOrders = async () => {
         try {
@@ -29,7 +44,7 @@ function OrderPage() {
         }
     };
     fetchOrders();
-  }, [token, refresh]);
+  }, [token, refresh]); */
 
   return (
     <>

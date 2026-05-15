@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { updateContainerStatus } from "../services/containerService";
 
 function Order({ orders, setRefresh }) {
   const [containerSelections, setContainerSelections] = useState({});
@@ -118,47 +119,21 @@ function Order({ orders, setRefresh }) {
     setRefresh((prev) => prev + 1);
   };
 
-  const handleReturnContainers = async (containers) => {
-    for (const container of containers) {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/containers/${container._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ status: "Container ready for collection" }),
-        }
-      );
-      if (!response.ok)
-        return alert("Could not update container status, try later");
-    }
-    alert("Containers returned successfully");
-    setRefresh((prev) => prev + 1);
-  };
-
-
-  const handleContainerCheckin = async (containerId) => {
+const handleContainerCheckin = async (containerId) => {
     
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/containers/${containerId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ status: "Container ready to use" }),
-        }
-      );
-      if (!response.ok)
-        return alert("Could not update container status, try later");
-    setRefresh((prev) => prev + 1);
-    alert("Containers successfully checked in");
-  };
+      try{
+      await updateContainerStatus (
+      containerId,
+      "Container ready to use",
+      token);
 
-const body = { status: "Container ready to use" };
+      setRefresh((prev) => prev + 1);
+
+      alert("Containers successfully checked in");
+      } catch {
+       alert("Could not update container status, try later");
+      }
+  };
 
   return (
     <>
@@ -324,29 +299,6 @@ const body = { status: "Container ready to use" };
                             </button>
                           </div>
                         </>
-                      )}
-
-                    {order.status === "Order shipped" &&
-                      user?.role === "User" && (
-                        <div className="containers-return">
-                          <h4>Order received?</h4>
-                          {order.containers.some(
-                            (c) => c.status === "Container busy"
-                          ) ? (
-                            <button
-                              onClick={() =>
-                                handleReturnContainers(order.containers)
-                              }
-                            >
-                              Confirm receipt & return containers
-                            </button>
-                          ) : (
-                            <p>
-                              All containers are returned! See you on the next
-                              order.
-                            </p>
-                          )}
-                        </div>
                       )}
                   </div>
                 );
