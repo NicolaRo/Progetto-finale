@@ -9,6 +9,7 @@ import { getOrders } from "../../services/orderService";
 
 
 function OrderPage() {
+  
   const [orders, setOrders] = useState([]);
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -25,26 +26,6 @@ function OrderPage() {
         };
         fetchOrders();
       }, [token, refresh]);
-    }
-    /* //console.log for debug
-    console.log("refetch triggered, refres", refresh);
-    const fetchOrders = async () => {
-        try {
-            const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/orders`,
-                { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" }
-              );
-              const data = await response.json();
-        
-              //Console log for debug
-              console.log("orders ricevuti:", data);
-              setOrders(data);
-        } catch (error) {
-            console.log("Errore fetch ordini:", error);
-        }
-    };
-    fetchOrders();
-  }, [token, refresh]); */
 
   return (
     <>
