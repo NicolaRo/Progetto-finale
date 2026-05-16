@@ -20,7 +20,7 @@ const createProduct = async (req, res) => {
             type,
             quantity,
             unit,
-            producerId: req.user.id,
+            producerId: req.user._id,
             image,
             ingredientId
         });

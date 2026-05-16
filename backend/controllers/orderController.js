@@ -101,6 +101,19 @@ const getOrders = async (req, res) => {
         .populate("products.producerId")
         .populate("containers");
 
+        if(req.user.role === "Producer") {
+            const filteredOrders = orders.map(order =>  {
+                const obj = order.toObject();
+
+                obj.products = obj.products.filter(p =>
+                    p.producerId && 
+                    p.producerId._id.toString() === req.user._id.toString()
+                 );
+
+                 return obj;
+            });
+            return res.status(200).json(filteredOrders);
+        }
         return res.status(200).json(orders);
     } catch (error) {
         return res.status(500).json({message: error.message});
