@@ -2,11 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
-import UserOrder from "../../components/UserOrder";
 import Navbar from "../../components/Navbar";
 
 import { getOrders } from "../../services/orderService";
 
+import ProducerOrder from "../../components/ProducerOrder";
 
 function OrderPage() {
   
@@ -33,7 +33,7 @@ function OrderPage() {
         Back to myHome
       </button>
       <Navbar />
-      <UserOrder orders={orders} setRefresh={setRefresh} />
+      <ProducerOrder orders={orders} setRefresh={setRefresh} />
       <div className="btn-container"></div>
     </>
   );
