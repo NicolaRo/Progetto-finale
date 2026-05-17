@@ -57,7 +57,7 @@ function Cart({ setShowCart }) {
           
           <button className="btn-close-cart" onClick={() => setShowCart(false)}>Close</button>
 
-          <div>
+          <div className="cart-list">
             {cart.map((product) => (
               <div className="cart-items" key={product.product}>
 
@@ -112,11 +112,11 @@ function Cart({ setShowCart }) {
             />
             Confirm order
           </button>
+          
+          </div>
           <div className="cart-total">
             <h4>Total: {totalPrice}€</h4>
           </div>
-          </div>
-          
         </div>
       </div>
     </>

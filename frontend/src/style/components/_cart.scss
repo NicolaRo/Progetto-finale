@@ -1,3 +1,5 @@
+@use '../base/variables' as *;
+
 .cart-icon,
 .orders-icon,
 .clear-cart-icon,
@@ -27,10 +29,20 @@
   }
 
   .cart-drawer{
-    background-color: #ffffffcc;
-    padding: 1rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);;
-  }
+    background-color: $container-color;
+  padding: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+  width: 80vw;
+  height: 100vh;
+  border-radius: 24px 0px 0px 24px;
+ }
+.cart-list{
+  overflow-y: scroll;
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
 
   .cart-items{
     display: flex;
@@ -49,10 +61,11 @@
   }
 
   .cart-total{
-    font-size: larger;
+  font-size: larger;
   text-align: end;
-  background-color: #1ff3e9;
+  background-color: $background;
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 1px 1px 1px 1px aliceblue;
+  box-shadow: $box-shadow;
+  margin-top: 1rem;
   }
