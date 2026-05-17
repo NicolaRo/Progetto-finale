@@ -249,11 +249,11 @@ const updateOrder = async (req, res) => {
         // =========================
         // ORDER COMPLETION (Producer checkin)
         // =========================
-        if (req.body.status === "Order completed") {
+        if (req.body.status === "Order closed") {
             for (const containerId of order.containers) {
             await Container.findByIdAndUpdate(containerId, { status: "Container ready to use" });
             }
-            order.status = "Order completed";
+            order.status = "Order closed";
         }
 
         await order.save();
