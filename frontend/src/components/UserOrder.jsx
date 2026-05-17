@@ -22,7 +22,7 @@ function UserOrder({ orders, setRefresh }) {
     }
   };
 
-  const isCompleted = (order) => order.status === "Order shipped";
+  const isCompleted = (order) => order.status === "Order closed";
 
   const activeOrders = orders.filter((o) => !isCompleted(o));
   const completedOrders = orders.filter(isCompleted);

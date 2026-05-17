@@ -137,106 +137,135 @@ const getOrderById = async (req, res) => {
 //3. Update an order
 const updateOrder = async (req, res) => {
     try {
-        
         const orderId = req.params.id;
-        const {products: newProducts, status, userId, containers} = req.body;
 
-        //console.log for debug
+        const {
+            products: newProducts,
+            userId,
+            containers
+        } = req.body;
+
         console.log(req.body);
 
-        //Validate order exists
         const order = await Order.findById(orderId);
 
-        //console.log for debug
-        console.log("order.status dal DB:", JSON.stringify(order.status));
-        
-        if(!order)
-            return res.status(404).json({message: "Order not found"});
-
-        // 3.1. Validete Users
-        if(userId){
-            const user = await User.findById(userId);
-        if (!user) 
-            return res.status(404).json({message: "User not found"});
-        order.user = user._id;
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
         }
-        
+
+        // =========================
+        // USER UPDATE (optional)
+        // =========================
+        if (userId) {
+            const user = await User.findById(userId);
+
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            order.user = user._id;
+        }
+
+        // =========================
+        // PRODUCTS ADD (optional)
+        // =========================
         if (newProducts && newProducts.length > 0) {
             await updateProductStock(newProducts);
-    
             order.products.push(...newProducts);
         }
-        if(containers && containers.length > 0) {
-            //Console.log for debug
+
+        // =========================
+        // CONTAINERS ASSIGNMENT
+        // =========================
+        if (containers && containers.length > 0) {
+
             console.log("containers ricevuti:", containers);
-            
-            const assignedContanierIds = [];
+
+            const assignedContainerIds = [];
 
             for (const selection of containers) {
-                //console.log for debug
+
                 console.log("Cerco:", selection.type, "Container ready to use");
-    
-                
-                //get the available containers per each requested type
+
                 const available = await Container.find({
                     type: selection.type,
                     status: "Container ready to use"
                 }).limit(Number(selection.quantity));
 
-                if(available.length === 0){
-                    return res.status(400).json({message: `No containers available of type${selection.type}`})
+                if (available.length === 0) {
+                    return res.status(400).json({
+                        message: `No containers available of type ${selection.type}`
+                    });
                 }
 
-                //Update container's status to "Container Busy"
-                for(const container of available) {
-                    
+                const targetProduct = order.products.find(
+                    p => p.product.toString() === selection.productId
+                );
+
+                if (!targetProduct) {
+                    return res.status(404).json({
+                        message: "Product not found in order"
+                    });
+                }
+
+                // attach container info to product
+                targetProduct.containerType = selection.type;
+                targetProduct.containerQuantity = Number(selection.quantity);
+
+                // mark containers as busy
+                for (const container of available) {
                     container.status = "Container busy";
                     await container.save();
-                    assignedContanierIds.push(container._id);
+                    assignedContainerIds.push(container._id);
                 }
             }
-            order.containers.push(...assignedContanierIds);
 
-            //console log for debug
+            order.markModified("products");
+
+            // attach containers to order
+            order.containers.push(...assignedContainerIds);
+
+            // =========================
+            // ORDER STATUS CALCULATION
+            // =========================
+            const packedCount = order.products.filter(
+                p => p.containerType && p.containerQuantity > 0
+            ).length;
+
+            console.log(`packedProducts: ${packedCount} / ${order.products.length}`);
+
+            if (packedCount === order.products.length && order.products.length > 0) {
+                order.status = "Order shipped";
+            } else if (packedCount > 0) {
+                order.status = "Preparing order";
+            } else {
+                order.status = "Order created";
+            }
+
+            console.log("NEW ORDER STATUS:", order.status);
             console.log("containers dopo push:", order.containers);
         }
 
-        if(status) {
-            const allowedStatuses = ["Order created", "Preparing order", "Order shipped"];
-            
-            if(!allowedStatuses.includes(status)) {
-                const err = new Error("Invalid Order status");
-                err.status = 422 //Unprocessable Entity
-                throw err;
+        // =========================
+        // ORDER COMPLETION (Producer checkin)
+        // =========================
+        if (req.body.status === "Order completed") {
+            for (const containerId of order.containers) {
+            await Container.findByIdAndUpdate(containerId, { status: "Container ready to use" });
             }
-            
-            //To know which is the current status
-            const currentIndex = allowedStatuses.indexOf(order.status);
-
-            //To set a new status to migrate to
-            const newIndex = allowedStatuses.indexOf(status);
-
-            //validate order status if already updated don't touch it
-            if(newIndex === currentIndex) {
-                await order.save();
-                return res.status(200).json(order);
-            }
-                
-
-            //console.log for debug
-            console.log("currentIndex:", currentIndex, "newIndex:", newIndex);
-
-            if(newIndex !== currentIndex + 1) {
-                return res.status(400).json({message: "Invalid status transition: orders must advance one step at a time"})
-            }
-            order.status = status;
+            order.status = "Order completed";
         }
 
         await order.save();
+
         return res.status(200).json(order);
-    } catch (error) {
+
+    } catch (error) {
         console.error(error);
-        return res.status(error.status || 500).json({message: error.message});
+
+        return res.status(500).json({
+            message: error.message
+        });
     }
 };
 
