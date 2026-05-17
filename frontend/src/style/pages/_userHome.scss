@@ -35,26 +35,10 @@
   gap: 1rem;
 }
 .product-listed-preview{
-    width: 3.5rem;
-  align-self: center;
   margin: 0.5rem;
-  box-shadow: 1px 1px 10px 1px #265c5c45;
+  box-shadow: 1px 1px 10px 1px rgba(38, 92, 92, 0.2705882353);
   border-radius: 3rem;
   padding: 0.5rem;
-}
-
-.product-details{
-    display: flex;
-    flex-direction: column;
-}
-
-.p-details{
-    margin: 0.25rem;
-}
-
-.p-unit-details{
-    display: flex;
-    align-items: center;
 }
 
 .card-btn-container{

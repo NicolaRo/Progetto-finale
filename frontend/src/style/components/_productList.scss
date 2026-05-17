@@ -1,0 +1,31 @@
+@use '../base/variables' as *;
+.product-list-container {
+    width: 100%;
+    padding: $padding;
+  }
+  
+  .singleItem {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-md;
+    padding: $space-sm;
+  }
+  
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    padding: $space-sm;
+    border-radius: $radius;
+    border: $border;
+    box-shadow: 2px 2px 8px 2px white;
+    overflow: hidden;
+  }
+
+.p-name-details{
+    font-size: larger;
+    margin-left: 0.5rem;
+}
+
+.p-details{
+    font-size: small;
+}

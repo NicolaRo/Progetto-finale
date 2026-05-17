@@ -10,8 +10,9 @@ function ProductList({products}) {
     return (
         <>
         <div className="product-list-container">
+        <h3 className="container-title">Recently added products:</h3>
             <div className="singleItem">
-                <h3 className="container-title">Recently added products:</h3>
+                
                 {productItems}
             </div>
         </div>

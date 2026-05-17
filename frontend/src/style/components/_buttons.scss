@@ -253,6 +253,13 @@
   border:$border;
   border-radius: $radius;
 }
+
+.producer-select, .dropdown{
+  background-color: $container-color;
+  padding: 0.25rem;
+  border-radius: $radius;
+  border: $border;
+}
 .dropdown {
     border: solid 1px blueviolet;
     border-radius: 6px;
@@ -279,12 +286,14 @@
 }
 
 .create-order-btn{
-  padding: 0.4rem 0.25rem 0.4rem 0.25rem;
-  border-radius: 25px;
-  background-color: #74e6e6;
-  box-shadow: 1px 1px 10px 1px #00d1d1b8;
-  border: 1px solid #fff;
+  padding: 0.25rem;
+  border-radius: $radius;
+  background-color: #ebb922;
+  box-shadow: 1px 1px 10px 1px white;
+  border:$border;
   margin: 1rem;
+  font-size: small;
+  font-weight: bold;
 }
 
 .remove-from-cart-btn{

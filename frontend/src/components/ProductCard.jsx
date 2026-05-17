@@ -34,7 +34,7 @@ function ProductCard({product}) {
         <>
         <div className="product-card">
             <div className="p-name-pic-details">
-                <p className="p-details">{product.name}</p>
+                <p className="p-name-details"><strong>{product.name}</strong></p>
                 <img 
                 className="product-listed-preview"
                 src={`http://img.spoonacular.com/ingredients_100x100/${product.image}`}
@@ -44,12 +44,12 @@ function ProductCard({product}) {
         
         
             <div className="product-details">
-                <p className="p-details">{product.description}</p>
                 <div className="p-unit-details">
-                <p className="p-details">{product.quantity}</p><p>{product.unit}</p>
+                <p className="p-details"><strong>Availability: </strong>{product.quantity}</p>
+                <p>{product.unit}</p>
                 </div>
-                <p className="p-details">{product.price}€</p>
-                <p className="p-details">{product.producerId.name}</p>
+                <p className="p-details"><strong>Unit price: </strong>{product.price}€</p>
+                <p className="p-details"><strong>Producer: </strong>{product.producerId.name}</p>
                 
             </div>
             <div className="card-btn-container">
