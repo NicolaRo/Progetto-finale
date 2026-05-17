@@ -33,16 +33,32 @@ const createProduct = async (req, res) => {
 
 //2.1. Read Products information
 const getProducts = async (req, res) => {
-    
     try {
-        const {name} = req.query;
-        const query = name ? {name: {$regex: name, $options: "i"}}:{};
-        const products = await Product.find(query).populate("producerId", "name");
-        return res.status(200).json(products);
+      const name = req.query.name;
+      const type = req.query.type;
+      const producerId = req.query.producerId;
+
+      //console.log for debug
+      console.log("name:", name, "type:", type, "producerId:", producerId);
+      
+      const query = {};
+      if (name) query.name = { $regex: name, $options: "i" };
+      if (type) query.type = { $in: [].concat(type) };
+      if (producerId) query.producerId = producerId;
+
+      //console.log for debug
+      console.log("query mongoose:", JSON.stringify(query));
+      
+      const products = await Product.find(query).populate("producerId", "name");
+      res.set('Cache-control', 'no-store');
+      return res.status(200).json(products);
     } catch (error) {
-        return res.status(500).json ({message: error.message});
+        
+        //console.log for debug
+      console.error("ERRORE:", error.message);
+      return res.status(500).json({ message: error.message });
     }
-};
+  };
 //2.2. Get Producer's Product list
 const getProducersProducts = async (req, res) => {
     try {

@@ -231,7 +231,7 @@
 
 /* -_-_-_ UserHome _-_-_- */
 
-.search-button{
+.search-button, .search-btn{
   padding: 0.5rem;
   border-radius: 20px;
   background-color: #000;
@@ -245,6 +245,14 @@
   position: relative;
 }
 
+.filter-btn{
+  width: fit-content;
+  background-color: #ebb922;
+  border: none;
+  padding: 0.5rem;
+  border:$border;
+  border-radius: $radius;
+}
 .dropdown {
     border: solid 1px blueviolet;
     border-radius: 6px;

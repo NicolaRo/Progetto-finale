@@ -1,6 +1,5 @@
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-
 import ProductList from "../../components/ProductList";
 import Navbar from "../../components/Navbar";
 import Cart from "../../components/Cart";
@@ -8,98 +7,119 @@ import UserOrder from "../../components/UserOrder";
 
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
-
   const [showCart, setShowCart] = useState(false);
   const [orders, setOrders] = useState([]);
   const [showOrders, setShowOrders] = useState(false);
-
   const [refresh, setRefresh] = useState(0);
-
+  const [query, setQuery] = useState("");
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [selectedProducer, setSelectedProducer] = useState("");
 
   const { token } = useContext(AuthContext);
-  //Console log for debug
-  console.log(token);
 
-  //API call to the DB to get the list of products
+  // Caricamento iniziale prodotti
   useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/products`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-
-      setShopProducts(data);
-    };
-    fetchProducts();
+    fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(r => r.json())
+      .then(data => setShopProducts(data));
   }, [token]);
 
-  useEffect (() => {
-    const fetchOrders = async () => {
-      const response = await fetch (
-        `${import.meta.env.VITE_API_URL}/api/orders`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-      );
-      const data = await response.json();
-
-      //console.log for debug
-      console.log("orders dopo refetch:", data);
-      
-      setOrders(data);
-    };
-    fetchOrders();
+  // Fetch ordini
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(r => r.json())
+      .then(data => setOrders(Array.isArray(data) ? data : []));
   }, [token, refresh]);
 
-  //Search products
-  const [query, setQuery] = useState("");
+  // Ricerca + filtri — chiamata manuale
+  const fetchProducts = async (nameQuery, filters, producer) => {
+    const params = new URLSearchParams();
+    if (nameQuery) params.append("name", nameQuery);
+    if (filters) filters.forEach(f => params.append("type", f));
+    if (producer) params.append("producerId", producer);
 
-  const searchProducts = async () => {
-    const url = query
-    ? `${import.meta.env.VITE_API_URL}/api/products?name=${query}`
-    : `${import.meta.env.VITE_API_URL}/api/products`;
-
-    const response = await fetch(url, {
-      headers: {Authorization: `Bearer ${token}`},
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/products?${params.toString()}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
     const data = await response.json();
-    setShopProducts(data);
-  }
+    setShopProducts(Array.isArray(data)? data : []);
+  };
+
+  const producers = [...new Map(
+    shopProducts
+      .filter(p => p.producerId)
+      .map(p => [p.producerId._id, p.producerId])
+  ).values()];
+
+  const toggleFilter = (type) => {
+    const updated = activeFilters.includes(type)
+      ? activeFilters.filter(f => f !== type)
+      : [...activeFilters, type];
+    setActiveFilters(updated);
+    fetchProducts(query, updated, selectedProducer);
+  };
+
+  const handleProducerChange = (e) => {
+    setSelectedProducer(e.target.value);
+    fetchProducts(query, activeFilters, e.target.value);
+  };
 
   return (
     <>
       <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} />
       {showCart && <Cart setShowCart={setShowCart} />}
-      {showOrders && <UserOrder orders={orders} setRefresh={setRefresh} setShowOrders={setShowOrders}/>}
+      {showOrders && <UserOrder orders={orders} setRefresh={setRefresh} setShowOrders={setShowOrders} />}
 
-      
-      <div className="product-list">
+      <div className="research-container">
         <h3 className="page-title">What do you need today?</h3>
-      </div>
-      <div className="searchbar"> 
-      <input
-        className="search-input"
-        type="text"
-        placeholder="Search products..."
-        value= {query}
-        onChange={(e)=> setQuery(e.target.value)}
-        onKeyDown={(e) => {if(e.key === "Enter")searchProducts}}
-      /> 
-      <button
-        className="search-button"
-        onClick={searchProducts}>
-        Search
-      </button>
 
+        <div className="searchbar">
+          <input
+            className="search-input"
+            type="text"
+            placeholder="Search products..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") fetchProducts(query, activeFilters, selectedProducer); }}
+          />
+          <button className="search-button" onClick={() => fetchProducts(query, activeFilters, selectedProducer)}>
+            Search
+          </button>
+        </div>
+
+        <div className="filters-container">
+          <div className="filter-tag-container">
+            {["Vegetables", "Fruits", "Dry", "Frozen", "Liquid"].map(type => (
+              <button
+                key={type}
+                className={`filter-btn ${activeFilters.includes(type) ? "active" : ""}`}
+                onClick={() => toggleFilter(type)}
+              >
+                {type}
+              </button>
+            ))}
+          </div>
+
+          <div className="filter-select">
+            <select
+              className="producer-select"
+              value={selectedProducer}
+              onChange={handleProducerChange}
+            >
+              <option value="">Choose Producer...</option>
+              {producers.map(p => (
+                <option key={p._id} value={p._id}>{p.name}</option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
-        
+
       <ProductList products={shopProducts} />
     </>
   );

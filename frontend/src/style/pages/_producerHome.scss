@@ -12,6 +12,12 @@
     border: none;
     padding: 0.25rem;
 }
+
+.filters-container{
+    display: grid;
+  gap: 1rem;
+  padding: 0 1em;
+}
 .product-upd-preview {
     margin: 1rem;
     border-radius: 8px;
