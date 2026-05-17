@@ -13,13 +13,18 @@ $button-text: #ffff;
 
 /*-=-=-= ACCESSORIES =-=-=- */
 $glass-background: rgba(255,255,255,0.14);
-$border: 2px solid #ff72ff;
-$glass-shadow: 0 6px 24px rgba(8, 30, 10, 0.12);
-$box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
-$background:  rgb(225, 189, 247);
+$border: 1px solid #d3d2d1;
+$radius: 2rem;
+$glow: 1px 1px 25px 2px #000000a8;
+$box-shadow:  1px 1px 10px 1px rgb(209, 203, 127), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+$background:  rgb(254, 253, 240);
+$container-color: rgb(245, 243, 207);
 /*-=-=-= SPACING =-=-=- */
 $space-xs: 0.25rem;
 $space-sm: 0.5rem;
 $space-md: 1rem;
 $space-lg: 2rem;
 $space-xl: 4rem;
+
+$margin: 1rem;
+$padding: 1rem;

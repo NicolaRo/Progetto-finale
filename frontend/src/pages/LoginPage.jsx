@@ -234,28 +234,40 @@ function LoginPage() {
             />
           </div>
 
-          <div className="role-selection-container">
-        
-        <button
-            className="toogle-role-btn"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            onClick={() => {
-              setShowRole(!showRole);
-              setRole(showRole ? "Producer" : "User");
-            }}
-          >
-            {" "}
-            {showRole ? "Register as an 'User'" : "Register as a 'Producer'"}
-        </button>
+<div className="role-selection-container">
+  <h3>Choose your account type:</h3>
+  <div className="checkbox-wrapper-35">
+    <input
+      id="switch"
+      name="switch"
+      type="checkbox"
+      className="switch"
+      checked={role === "Producer"}
+      onChange={() => {
+        setShowRole(!showRole);
+        setRole(showRole ? "Producer" : "User");
+      }}
+    />
+    <label htmlFor="switch">
+      <span className="switch-x-text">Register as: </span>
+      <span className="switch-x-toggletext">
+        <span className="switch-x-unchecked">
+          <span className="switch-x-hiddenlabel">Unchecked: </span>User
+        </span>
+        <span className="switch-x-checked">
+          <span className="switch-x-hiddenlabel">Checked: </span>Producer
+        </span>
+      </span>
+    </label>
+  </div>
 
-          {showRole ? (
-            <p>An User can buy products allowing packaging reuse</p>
-          ) : (
-            <p>A Producer can sell products</p>
-          )}
-
-    </div>
+  {role === "Producer" ? (
+    <p>A Producer can sell products</p>
+  ) : (
+    <p>A User can buy products allowing packaging reuse</p>
+  )}
+</div>
+          
 
           <div className="input-containers">
           <div className="input-name-container">

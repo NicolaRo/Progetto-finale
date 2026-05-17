@@ -4,9 +4,9 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin: 10rem 3rem 0 3rem;
-    border: 2px solid black;
-    border-radius: 2rem;
+    margin: 8rem 3rem 0 3rem;
+    border: $border;
+    border-radius: $radius;
 }
 
 .google-login-container{
@@ -19,10 +19,10 @@
     min-height: 2.5rem;
   margin: 0.5rem 1rem 1rem 1rem;
   border-radius: 1rem;
-  border: 2px solid #e1bdf7;
+  border: $border;
   padding: 0.5rem;
-  background-color: rgb(225, 189, 247);
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.24);
+  background-color: rgb(234, 234, 223);
+  box-shadow: $box-shadow;
   width: -webkit-fill-available;
 }
 
@@ -41,7 +41,6 @@
 .icon-google-login{
     width: auto;
     height: 3rem;
-    box-shadow: 1px 1px 20px 1px #0000007a;
     border-radius: 27px;
 }
 
@@ -49,6 +48,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin: 2rem 0 2rem 0;
 }
 .input-container-btn{
     display: flex;
@@ -67,12 +67,12 @@ margin-left: 1rem;
 
 .signUp-container{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 2rem;
-    background-color: #00c1c1;
-    padding: 1rem;
-    border-radius: 24px;  
+  flex-direction: row;
+  align-items: center;
+  margin: 3rem;
+  background-color: $container-color;
+  padding: 1rem;
+  border-radius: $radius;
 }
 
 .signup-img-container{
@@ -86,13 +86,19 @@ margin-left: 1rem;
 }
 //-_-_-_ REGISTER _-_-_-
 
+.signin-container{
+    border: $border;
+    border-radius: $radius;
+    padding: 1rem;
+    margin: 3rem;
+}
 .account-icon{
     width: 5rem;
 }
 
 .role-selection-container{
     margin: 1rem;
-  background-color: rgb(249, 227, 250);
+  background-color:$container-color;
   padding: 1rem;
   border-radius: 8px;
   justify-content: space-evenly;

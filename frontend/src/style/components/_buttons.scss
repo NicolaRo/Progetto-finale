@@ -11,7 +11,6 @@
   width: fit-content;
   height: fit-content;
   align-items: center;
-  margin-right: 1rem;
   display: flex;
   align-self: flex-end;
   border-radius: 1rem;
@@ -32,15 +31,16 @@
 }
 .register-btn{
   padding: 0.75rem;
-  border-radius: 25px;
-  background-color: #74e6e6;
-  box-shadow: 1px 1px 25px 2px #b4f5f5;
-  border: 1px solid #ffffff;
+  border-radius: $radius;
+  background-color: #000000;
+  box-shadow: $glow;
+  border: $border;
   width: -webkit-fill-available;
   justify-content: center;
   font-weight: bolder;
-  font-size: larger;
+  font-size: x-large;
   margin:1rem;
+  color: white;
 }
 .cart-btn{
   background: transparent;
@@ -55,21 +55,24 @@
 .login-btn{
   font-size: larger;
   font-weight: bold;
-  padding: 1rem;
+  padding: 1rem 5rem 1rem 5rem;
   border-radius: 25px;
-  background-color: #74e6e6;
-  box-shadow: 1px 1px 25px 2px #b4f5f5;
-  border: 1px solid #ffffff;
+  background-color: #000000d9;
+  box-shadow: $glow;
+  border: $border;
   width: -webkit-fill-available;
   justify-content: center;
+  color: #fff;
+  margin: 0 1rem 0 1rem; 
 }
 
 .show-pwd-btn{
-    font-size: xx-small;
-    font-size: xx-small;
+  font-size: x-small;
   border: none;
-  gap: 0.25rem;
+  gap: 0.5rem;
+  background-color: #e8af05e0;
   color: white;
+  margin-right: 1rem;
 }
 
 
@@ -92,7 +95,7 @@
     display: -ms-flexbox;
     display: flex;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 12px;
+    font-size: 1rem;
     line-height: 15px;
     position: relative;
     -webkit-user-select: none;
@@ -143,7 +146,7 @@
     height: 15px;
     overflow: hidden;
     position: relative;
-    width: 25px;
+    width: 5rem;
   }
   
   .checkbox-wrapper-35 .switch + label .switch-x-unchecked,
@@ -205,12 +208,14 @@
 
 
 .toogle-login{
-  padding: 0.75rem;
-  border-radius: 25px;
-  background-color: #74e6e6;
-  box-shadow: 1px 1px 25px 2px #b4f5f5;
-  border: 1px solid #ffffff;
+  padding: 0.75rem 2rem;
+  margin: 2rem 0.5rem; 
+  border-radius: $radius;
+  background-color: #e8af05e0;
+  box-shadow: $box-shadow;
+  border: $border;
   width: -webkit-fill-available;
+  font-weight: 700;
 }
 
 
