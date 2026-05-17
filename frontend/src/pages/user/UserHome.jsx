@@ -58,6 +58,21 @@ function UserHome() {
     fetchOrders();
   }, [token, refresh]);
 
+  //Search products
+  const [query, setQuery] = useState("");
+
+  const searchProducts = async () => {
+    const url = query
+    ? `${import.meta.env.VITE_API_URL}/api/products?name=${query}`
+    : `${import.meta.env.VITE_API_URL}/api/products`;
+
+    const response = await fetch(url, {
+      headers: {Authorization: `Bearer ${token}`},
+    });
+    const data = await response.json();
+    setShopProducts(data);
+  }
+
   return (
     <>
       <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} />
@@ -66,9 +81,25 @@ function UserHome() {
 
       
       <div className="product-list">
-        <h3 className="page-title">User Home</h3>
-        <h4 className="sub-session-title">Available products</h4>
+        <h3 className="page-title">What do you need today?</h3>
       </div>
+      <div className="searchbar"> 
+      <input
+        className="search-input"
+        type="text"
+        placeholder="Search products..."
+        value= {query}
+        onChange={(e)=> setQuery(e.target.value)}
+        onKeyDown={(e) => {if(e.key === "Enter")searchProducts}}
+      /> 
+      <button
+        className="search-button"
+        onClick={searchProducts}>
+        Search
+      </button>
+
+      </div>
+        
       <ProductList products={shopProducts} />
     </>
   );

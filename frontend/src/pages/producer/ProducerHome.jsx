@@ -217,7 +217,6 @@ function ProducerHome() {
         </p>
       </div>
       <ProductList products={myProducts} />
-      {/* <Order orders = {orders} /> */}
     </>
   );
 }

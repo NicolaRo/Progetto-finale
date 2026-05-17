@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.input-text {
+.input-text, .search-input {
     min-height: 2.5rem;
   margin: 0.5rem 1rem 1rem 1rem;
   border-radius: 1rem;
@@ -24,6 +24,9 @@
   background-color: rgb(234, 234, 223);
   box-shadow: $box-shadow;
   width: -webkit-fill-available;
+}
+.search-input{
+    margin: 0 !important;
 }
 
 .input-container--btn{

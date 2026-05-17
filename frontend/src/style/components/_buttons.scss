@@ -199,14 +199,6 @@
   }
   
 
-
-
-
-
-
-
-
-
 .toogle-login{
   padding: 0.75rem 2rem;
   margin: 2rem 0.5rem; 
@@ -238,6 +230,20 @@
 }
 
 /* -_-_-_ UserHome _-_-_- */
+
+.search-button{
+  padding: 0.5rem;
+  border-radius: 20px;
+  background-color: #000;
+  box-shadow: $box-shadow;
+  border: solid 1px gray;
+  width: -webkit-fill-available;
+  font-weight: bolder;
+  margin: 0.5rem;
+  color: white;
+  width: fit-content;
+  position: relative;
+}
 
 .dropdown {
     border: solid 1px blueviolet;

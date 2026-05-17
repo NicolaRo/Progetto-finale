@@ -1,14 +1,18 @@
+@use '../base/variables' as *;
+
+.searchbar{
+  display: flex;
+  align-items: center;
+}
+
 .product-card{
     display: flex;
-    flex-direction: row;
-    border: none;
-      border-bottom-width: medium;
-      border-bottom-style: none;
-      border-bottom-color: currentcolor;
+    flex-direction: column;
+    border: $border;
     border-radius: 1rem;
     margin: 1rem;
     padding: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.45);
+    background-color:rgba(154, 157, 49, 0.45);
     box-shadow: 1px 1px 6px 1px white;
     border-bottom: 1px solid white;
 }
