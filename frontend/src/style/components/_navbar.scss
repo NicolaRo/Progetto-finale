@@ -2,20 +2,39 @@
 
 .navbar{
 display: flex;
+flex-direction: column;
 margin: 0.5rem;
-border: 2px solid black;
-padding: 0.5rem;
-border-radius: 8px;
+border: $border;
+padding: 1rem;
+border-radius: $radius;
 justify-content: space-between;
 }
+.account-container{
+    justify-content: center;
+  display: flex;
+  flex-direction: column;
 
+}
+.account-name{
+    margin: 1.5rem;
+  font-size: x-large;
+}
 .PP-image{
     width: 2rem;
     height: auto;
-
 }
 
 .account-logout-icon{
-    width: 2rem;
+    width: 1.5rem;
     height: auto;
+}
+
+.Navbar-btn-container{
+    margin-top: 2rem;
+    justify-content: space-between;
+    background-color: $container-color;
+    gap: 1rem;
+    display: flex;
+    padding: 1.5rem;
+    border-radius: $radius;
 }

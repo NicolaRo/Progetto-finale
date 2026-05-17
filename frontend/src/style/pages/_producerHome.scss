@@ -1,3 +1,5 @@
+@use '../base/variables' as *;
+
 .create-product-container {
     margin: 1rem;
     border: 1px solid black;
@@ -27,7 +29,8 @@
 
 .singleItem{
     padding: 0.5rem;
-    border-radius: 10px;
+    border-radius: $radius;
     margin: 1rem;
     box-shadow: 2px 2px 8px 2px white;
+    border: $border;
 }

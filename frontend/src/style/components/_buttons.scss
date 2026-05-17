@@ -23,11 +23,10 @@
   padding: 0.5rem;
 }
 .btn-logout{
-  border: none;
+  box-shadow: $box-shadow;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   background: transparent;
   gap: 0.25rem;
-  box-shadow: 1px 1px 1px 1px teal;
 }
 .register-btn{
   padding: 0.75rem;
@@ -43,9 +42,10 @@
   color: white;
 }
 .cart-btn{
-  background: transparent;
+  background-color:#ebb922;
   border: none;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-radius: $button-radius;
 }
 
 .btn-close-cart, .back-btn{
@@ -259,6 +259,11 @@
 
 /* -_-_-_ Cart _-_-_- */
 
+.orders-btn{
+  border-radius: $button-radius;
+  padding-left:1rem;
+}
+
 .create-order-btn{
   padding: 0.4rem 0.25rem 0.4rem 0.25rem;
   border-radius: 25px;
@@ -302,7 +307,7 @@
 /*-_-_-_ORDER PAGE BTN _-_-_-*/
 
 .orders-btn{
-  background: transparent;
+  background-color: #ebb922;
   border: none;
   padding: 0.5rem;
 }

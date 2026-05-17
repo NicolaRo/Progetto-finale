@@ -16,11 +16,12 @@ function Navbar({setShowCart, setShowOrders}) {
   return (
     <>
       <div className="navbar">
-        <h4 className="account-name">
-          {" "}
-          {user ? `Benvenut@: ${user.name}` : "Caricamento..."}
-        </h4>
-        <div className="PP-container">
+        <div className="account-container">
+          <h4 className="account-name">
+            {" "}
+            {user ? `Benvenut@: ${user.name}` : "Caricamento..."}
+          </h4>
+          <div className="PP-container">
           <button
             className="btn-logout"
             onClick={() => {
@@ -35,7 +36,9 @@ function Navbar({setShowCart, setShowOrders}) {
             />
             log out
           </button>
+      </div>
         </div>
+        <div className="Navbar-btn-container">
         {user?.role === "User" && (
           <button className="cart-btn" onClick={() => setShowCart(true)}>
             <img
@@ -62,6 +65,7 @@ function Navbar({setShowCart, setShowOrders}) {
             <img className="orders-icon" src={OrderIcon} alt="Orders" />
           </button>
         )}
+        </div>
 
       </div>
     </>
