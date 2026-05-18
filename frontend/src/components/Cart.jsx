@@ -45,7 +45,7 @@ function Cart({ setShowCart }) {
     });
 
     const {url} = await stripeResponse.json();
-    alert("Order confirmed");
+    alert("Order confirmed, please chek out your purchase");
     clearCart();
     window.location.href = url;
   };
@@ -58,13 +58,18 @@ function Cart({ setShowCart }) {
           <button className="btn-close-cart" onClick={() => setShowCart(false)}>Close</button>
 
           <div className="cart-list">
+            <h3>Cart list:</h3>
             {cart.map((product) => (
               <div className="cart-items" key={product.product}>
-
+                
                 <div className="cart-item-details">
-                    <div className="cart-item-prod-img">
-                        <p className="cart-p-details">{product.image}</p>
-                    </div>
+                  <img
+                    className="cart-item-img"
+                    src={`http://img.spoonacular.com/ingredients_100x100/${product.image}`}
+                    alt={product.name}
+                  />
+                  <p className="cart-p-details"></p>
+                  </div>
 
                     <div className="cart-item-qty">
                         <p className="cart-p-details"><strong>Quantity: </strong>{product.orderedQuantity}</p>
@@ -77,7 +82,7 @@ function Cart({ setShowCart }) {
                     <div className="cart-item-producerName">
                         <p className="cart-p-details"><strong>Producer: </strong>{product.producerName}</p>
                     </div>
-                </div>
+
                 
 
                 <button

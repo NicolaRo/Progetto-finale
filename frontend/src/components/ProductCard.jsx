@@ -45,8 +45,7 @@ function ProductCard({product}) {
         
             <div className="product-details">
                 <div className="p-unit-details">
-                <p className="p-details"><strong>Availability: </strong>{product.quantity}</p>
-                <p>{product.unit}</p>
+                <p className="p-details"><strong>Availability: </strong>{product.quantity}{product.unit}</p>
                 </div>
                 <p className="p-details"><strong>Unit price: </strong>{product.price}€</p>
                 <p className="p-details"><strong>Producer: </strong>{product.producerId.name}</p>

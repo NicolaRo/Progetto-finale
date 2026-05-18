@@ -326,8 +326,11 @@
   background-color: rgba(248, 156, 156, 0.573);
   width: fit-content;
   padding: 0.5rem;
-  border-radius: 8px;
+  border-radius: $radius;
+  border: $border;
+  box-shadow: $box-shadow;
   display: flex;
+  margin-bottom: 2rem;
 }
 
 /*-_-_-_ORDER PAGE BTN _-_-_-*/

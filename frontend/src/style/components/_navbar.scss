@@ -1,13 +1,19 @@
 @use '../base/variables' as *;
 
 .navbar{
-display: flex;
-flex-direction: column;
-margin: 0.5rem;
-border: $border;
-padding: 1rem;
-border-radius: $radius;
-justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  border: 1px solid #d3d2d1;
+  padding: 1rem;
+  border-radius: 2rem;
+  justify-content: space-between;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  background-color: #fefdf0f2;
+  backdrop-filter: blur (2px);
 }
 .account-container{
     justify-content: center;

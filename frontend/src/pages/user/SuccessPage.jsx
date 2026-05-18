@@ -1,6 +1,6 @@
 import {useNavigate} from  "react-router-dom";
 
-import PlaceholderImg from '../../assets/PlaceholderImg.png';
+import SuccessPayment from '../../assets/payment-successful.gif';
 
 function SuccessPage() {
     const navigate = useNavigate();
@@ -11,11 +11,11 @@ function SuccessPage() {
             <h1 className="payment-success-title">🎉 Payment successful!</h1>
             <img
                 className="payment-success-icon"
-                src={PlaceholderImg}
+                src={SuccessPayment}
                 alt="Payment successful"
                 />
             <p>Your order has been confirmed.</p>
-            <p>You will receive an email when the order is shipped.</p>
+            <p>Track your order state in the order page.</p>
       <button 
         className="back-btn"
         onClick={() => navigate("/UserHome")}>Back to shop</button>

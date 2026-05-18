@@ -9,6 +9,13 @@
     grid-template-columns: repeat(2, 1fr);
     gap: $space-md;
     padding: $space-sm;
+    padding: 0.5rem;
+    border-radius: $radius;
+    margin: 1rem;
+    box-shadow: 2px 2px 8px 2px white;
+    border: $border;
+    overflow-y: auto;
+    height:30rem;
   }
   
   .product-card {
@@ -18,7 +25,6 @@
     border-radius: $radius;
     border: $border;
     box-shadow: 2px 2px 8px 2px white;
-    overflow: hidden;
   }
 
 .p-name-details{
@@ -26,6 +32,9 @@
     margin-left: 0.5rem;
 }
 
-.p-details{
+.product-details{
     font-size: small;
+    display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
