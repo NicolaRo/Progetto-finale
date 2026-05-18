@@ -28,10 +28,20 @@ function UserOrder({ orders, setRefresh }) {
   const completedOrders = orders.filter(isCompleted);
 
   return (
-    <div className="orders-container">
-
+    <div className="user-orders-container">
+      <div className="user-openOrders-container">
       <h3>Open orders</h3>
-
+        {activeOrders.map((order) => (
+          <OrderCard
+            key={order._id}
+            order={order}
+            variant="active"
+            onReturnContainers={handleReturnContainers}
+          />
+        ))}
+      </div>
+      <div className="user-preparingOrders-container">
+      <h3>Preparing orders</h3>
       {activeOrders.map((order) => (
         <OrderCard
           key={order._id}
@@ -40,16 +50,20 @@ function UserOrder({ orders, setRefresh }) {
           onReturnContainers={handleReturnContainers}
         />
       ))}
+      </div>
+    
+      <div className="user-completedOrders-container">
+        <h3>Completed orders</h3>
 
-      <h3>Completed orders</h3>
-
-      {completedOrders.map((order) => (
-        <OrderCard
-          key={order._id}
-          order={order}
-          variant="completed"
-        />
-      ))}
+        {completedOrders.map((order) => (
+          <OrderCard
+            key={order._id}
+            order={order}
+            variant="completed"
+          />
+        ))}
+      </div>
+      
 
     </div>
   );

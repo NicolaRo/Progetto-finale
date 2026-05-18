@@ -10,8 +10,8 @@ function OrderCard({ order, variant, onReturnContainers}) {
             <label><strong>Order Id: </strong></label> <p>{order._id}</p>
 
             <label><strong>Order Status:</strong> {order.status}</label>
-        </div>
-        {order.products.map((products)=> (
+            
+            {order.products.map((products)=> (
             <div className="ordered-products" key={products.product._id}>
 
                 <div className="order-product-details-container">
@@ -44,6 +44,8 @@ function OrderCard({ order, variant, onReturnContainers}) {
 
                 </div>
             ))}
+        </div>
+        
 
             {!isCompleted && order.status === "Order shipped" && (
                 <div className="containers-return">
