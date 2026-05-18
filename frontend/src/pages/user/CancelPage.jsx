@@ -1,14 +1,21 @@
 import {useNavigate} from  "react-router-dom";
 
+import RejectedPayment from '../../assets/payment-rejected.gif';
+
 function CancelPage() {
     const navigate = useNavigate();
 
     return (
         <>
         <div className="cancel-payment">
-            <h1 className="cancel-payment-title">⛔️Cancel Pay</h1>
+            <h1 className="cancel-payment-title">Payment failed</h1>
+            <img
+                src={RejectedPayment}
+                alt="rejected payment"
+            />
             <p>Your payment has been canceled.</p>
-      <button onClick={() => navigate("/UserHome")}>Back to shop</button>
+            <p>Please check it and try later.</p>
+      <button onClick={() => navigate("/UserHome")}>Back to my home</button>
         </div>
         </>
     );
