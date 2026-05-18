@@ -199,7 +199,7 @@
   }
   
 
-.toogle-login{
+.toogle-login, .toggle-btn-completed-orders{
   padding: 0.75rem 2rem;
   margin: 2rem 0.5rem; 
   border-radius: $radius;
@@ -339,4 +339,22 @@
   background-color: #ebb922;
   border: none;
   padding: 0.5rem;
+}
+
+/* .toggle-btn-completed-orders{
+  padding: 0.5rem;
+  margin: 1rem;
+  border-radius: 20px;
+  background-color: #fefdf1;
+  box-shadow: 1px 1px 10px white;
+} */
+
+.return-containers-btn{
+  padding: 0.5rem;
+  border-radius: 10px;
+  background-color: black;
+  box-shadow: $box-shadow;
+  margin-top: 1rem;
+  color: white;
+  font-weight:700;
 }

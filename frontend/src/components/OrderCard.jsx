@@ -17,11 +17,12 @@ function OrderCard({ order, variant, onReturnContainers}) {
                 <div className="order-product-details-container">
                     <label><strong>Product: </strong></label>
                     <p>{products.product.name}</p>
-                    <img
+                    {!isCompleted && (<img
                     className="prod-order-preview"
                     src={`http://img.spoonacular.com/ingredients_100x100/${products.product.image}`}
                     alt={products.product.name}
                     />
+                    )}
                 </div>
 
                 <div className="order-producer-details-container">
@@ -44,20 +45,21 @@ function OrderCard({ order, variant, onReturnContainers}) {
 
                 </div>
             ))}
-        </div>
-        
-
             {!isCompleted && order.status === "Order shipped" && (
                 <div className="containers-return">
                     <h4>Order received?</h4>
                     {order.containers.some(c => c.status === "Container busy") ? (
-                        <button 
+                        <button className="return-containers-btn"
                             onClick={() => onReturnContainers(order.containers)}>
                             Confirm receipt & return containers
                         </button> ) : ( <p>All containers are returned! See you on the next order.</p>                    
                     )}
                 </div>
             )}
+        </div>
+        
+
+            
         </>
     );
 }
