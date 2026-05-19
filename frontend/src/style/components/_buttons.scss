@@ -231,7 +231,7 @@
 
 /* -_-_-_ UserHome _-_-_- */
 
-.search-button, .search-btn{
+.search-button, .search-btn, .ppc-btn-save{
   padding: 0.5rem;
   border-radius: 20px;
   background-color: #000;
@@ -243,6 +243,10 @@
   color: white;
   width: fit-content;
   position: relative;
+}
+
+.ppc-btn-save{
+  background-color:#ebb922 !important;
 }
 
 .filter-btn{
@@ -325,7 +329,7 @@
   padding: 1rem;
 }
 
-.back-btn{
+.back-btn, .ppc-btn-edit{
   background-color: rgba(248, 156, 156, 0.573);
   width: fit-content;
   padding: 0.5rem;
@@ -336,12 +340,17 @@
   margin-bottom: 2rem;
 }
 
+.ppc-btn-edit{
+  background-color: white !important;
+}
+
 /*-_-_-_ORDER PAGE BTN _-_-_-*/
 
-.orders-btn{
+.orders-btn, .ppc-btn-add{
   background-color: #ebb922;
   border: none;
   padding: 0.5rem;
+  border-radius: $radius;
 }
 
 /* .toggle-btn-completed-orders{
@@ -352,7 +361,7 @@
   box-shadow: 1px 1px 10px white;
 } */
 
-.return-containers-btn{
+.return-containers-btn, .ppc-btn-remove{
   padding: 0.5rem;
   border-radius: 10px;
   background-color: black;
@@ -362,7 +371,7 @@
   font-weight:700;
 }
 
-.select-container-type, .select-container-qty{
+.select-container-type, .select-container-qty, .ppc-qty-select{
   padding: 0.25rem;
   background-color: #f5f3cf;
   border-radius: 20px;
@@ -384,3 +393,12 @@
   background-color: #ebb922 !important; 
   color:black !important;
 }
+
+
+//-_-_-_ PRODUCER PRODUCT CARD _-_-_-
+/* .ppc-qty-select{
+
+}
+ppc-btn-add
+ppc-btn-remove
+ppc-btn-edit */
