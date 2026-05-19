@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { updateContainerStatus } from "../services/containerService";
 import OrderCard from "./OrderCard";
 
+
 function UserOrder({ orders, setRefresh }) {
   const { token } = useContext(AuthContext);
 
@@ -51,9 +52,12 @@ function UserOrder({ orders, setRefresh }) {
 
       <div className="user-shippedOrders-container">
         <h3>Shipped orders</h3>
+        
         {shippedOrders.map((order) => (
-          <OrderCard key={order._id} order={order} variant="active" onReturnContainers={handleReturnContainers} />
+          <OrderCard key={order._id} order={order} variant="active" onReturnContainers={handleReturnContainers}
+           />
         ))}
+        
       </div>
 
       <div className="user-completedOrders-container">

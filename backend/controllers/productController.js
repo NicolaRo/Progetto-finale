@@ -45,6 +45,7 @@ const getProducts = async (req, res) => {
       if (name) query.name = { $regex: name, $options: "i" };
       if (type) query.type = { $in: [].concat(type) };
       if (producerId) query.producerId = producerId;
+      if (req.user.role === "User") query.quantity = { $gt: 0 }; //Hide qty: 0 to Users
 
       //console.log for debug
       console.log("query mongoose:", JSON.stringify(query));

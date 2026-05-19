@@ -1,10 +1,25 @@
+/* import ShippingOrder from '../assets/shipping-order.gif'; */
+
 function OrderCard({ order, variant, onReturnContainers}) {
+    
+
+    
     const isCompleted = variant === "completed";
     return (
-        <><div className={`single-order-container ${isCompleted ? "completed" : ""}`}>
+        <>
+        <div className={`single-order-container ${isCompleted ? "completed" : ""}`}>
+            {/* {order.status === "Order shipped" && (
+                        <img
+                            className="order-shipping-gif"
+                            src={ShippingOrder}
+                            alt="order shipped"
+                        />
+                    )} */}
+
             <div className="order-user-details-container">
                 <label><strong>Customer</strong></label>
             </div>
+            
             <p><strong>{order.user.name}</strong>, Id: {order.user._id}</p>
 
             <label><strong>Order Id: </strong></label> <p>{order._id}</p>
@@ -16,6 +31,7 @@ function OrderCard({ order, variant, onReturnContainers}) {
 
                 <div className="order-product-details-container">
                     <label><strong>Product: </strong></label>
+                    
                     <p>{products.product.name}</p>
                     {!isCompleted && (<img
                     className="prod-order-preview"
