@@ -60,8 +60,10 @@ function ProducerOrderCard({
       ))}
 
       {/* CHECKIN — solo quando lo user ha confermato la ricezione */}
-      {order.status === "Order shipped" && (
-        <button className="checkin-containers-btn" onClick={() => handleContainerCheckin(order._id)}>
+      {order.status === "Order shipped" && 
+        order.containers.length > 0 &&
+        order.containers.every(c => c.status === "Container ready for collection") && (
+        <button className="btn-checkin-containers" onClick={() => handleContainerCheckin(order._id)}>
           Check in containers and close the order
         </button>
       )}

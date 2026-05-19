@@ -369,7 +369,7 @@
   border: $border;
 }
 
-.btn-pack-product, .checkin-containers-btn{
+.btn-pack-product, .btn-checkin-containers{
   background-color: black;
   color: white;
   font-weight: 700;
@@ -380,7 +380,7 @@
   box-shadow: $box-shadow;
 }
 
-.checkin-containers-btn{
+.btn-checkin-containers{
   background-color: #ebb922 !important; 
   color:black !important;
 }
