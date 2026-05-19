@@ -89,7 +89,6 @@ function ProducerHome() {
 
   return (
     <>
-      <h3 className="page-title">Producer Home</h3>
       <Navbar />
       <div className="create-product-container">
         <h3 className="component-title">Add a new product</h3>
@@ -123,9 +122,9 @@ function ProducerHome() {
         </div>
         <button className="create-product-btn" type="submit" onClick={handleCreateProduct}>Add a new product</button>
       </div>
-
+<h3 className="sub-session-title">My Products</h3>
       <div className="my-products-container">
-        <h4 className="sub-session-title">My Products</h4>
+        
         {myProducts.map(product => (
           <ProducerProductCard
             key={product._id}
@@ -139,4 +138,4 @@ function ProducerHome() {
   );
 }
 
-export default ProducerHome;
+export default ProducerHome;  

@@ -1,10 +1,11 @@
 @use '../base/variables' as *;
 
 .create-product-container {
-    margin: 1rem;
-    border: 1px solid black;
-    border-radius: 8px;
-    padding: 0.5rem;
+    margin: 2rem 1rem;
+    border: $border;
+    border-radius: $radius;
+    padding: 1rem;
+    box-shadow: $box-shadow;
 }
 .input{
     margin:0.5rem;
