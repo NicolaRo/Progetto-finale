@@ -5,6 +5,8 @@ import Navbar from "../../components/Navbar";
 import Cart from "../../components/Cart";
 import UserOrder from "../../components/UserOrder";
 
+import RecycleBuddy from "../../components/RecycleBuddy";
+
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -14,6 +16,8 @@ function UserHome() {
   const [query, setQuery] = useState("");
   const [activeFilters, setActiveFilters] = useState([]);
   const [selectedProducer, setSelectedProducer] = useState("");
+  const [heroTip, setHeroTip] = useState("");
+  const [showChat, setShowChat] = useState(false);
 
   const { token } = useContext(AuthContext);
 
@@ -34,6 +38,17 @@ function UserHome() {
       .then(r => r.json())
       .then(data => setOrders(Array.isArray(data) ? data : []));
   }, [token, refresh]);
+
+  //Fetch green tips from OpenAI
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/ai/hero-tip`,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    })
+    .then(r => r.json())
+    .then(data => setHeroTip(data.tip));
+  }, [token]);
 
   // Ricerca + filtri — chiamata manuale
   const fetchProducts = async (nameQuery, filters, producer) => {
@@ -75,6 +90,14 @@ function UserHome() {
       {showCart && <Cart setShowCart={setShowCart} />}
       {showOrders && <UserOrder orders={orders} setRefresh={setRefresh} setShowOrders={setShowOrders} />}
 
+      <div className="hero-banner">
+        <h3 className="hero-title">Green tip of the day</h3>
+        <p className="hero-tip">{heroTip || "Loading..."}</p>
+        <button className="hero-chat-btn" 
+        onClick={() => setShowChat(true)}>Chat with RecycleBuddy</button>
+      </div>
+      {showChat && <RecycleBuddy onClose={() => setShowChat(false)}/>}
+        
       <div className="research-container">
         <h3 className="page-title">What do you need today?</h3>
 

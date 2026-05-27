@@ -1,5 +1,12 @@
 @use '../base/variables' as *;
 
+.hero-banner{
+  margin: 1rem;
+  box-shadow: $box-shadow;
+  padding: 0.5rem;
+  border-radius: $radius;
+}
+
 .searchbar{
   display: flex;
   align-items: center;
@@ -48,3 +55,4 @@
   align-items: end;
   margin: 0.5rem;
 }
+

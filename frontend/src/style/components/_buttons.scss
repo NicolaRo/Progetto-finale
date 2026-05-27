@@ -265,14 +265,14 @@
   border: $border;
 }
 .dropdown {
-    border: solid 1px blueviolet;
-    border-radius: 6px;
-    padding: 0.25rem;
+    border: $border;
+    border-radius: $border;
+    padding: 0.5rem;
     background-color: #ffffff45;
     color:rgb(110, 110, 110);
 }
 
-.create-product-btn{
+.create-product-btn, .hero-chat-btn{
   border: 1px solid #d3d2d1;
   border-radius: 2rem;
   padding: 1rem;
@@ -282,6 +282,12 @@
   justify-content: end;
   font-weight: bolder;
   font-size: large;
+}
+
+.hero-chat-btn{
+  margin-top: 1.5rem !important;
+  padding: 0.5rem !important;
+
 }
 
 /* -_-_-_ Cart _-_-_- */
