@@ -7,3 +7,28 @@ background-color: $container-color;
   box-shadow: $box-shadow;
   border-radius: $radius;
 }
+
+.chat-header{
+    display: grid;
+}
+
+.chat-message-assistant, .chat-message-user{
+    background-color: white;
+  margin-top: 0.5rem;
+  width: 70%;
+  padding: 1rem;
+  border-radius: $radius;
+  line-height: 1.25rem;
+}
+
+.chat-message-user{
+    background-color: $container-color !important;
+}
+
+.chat-input{
+    width: 90%;
+    margin-top: 1rem;
+    border-radius: $radius;
+    background-color: white;
+    box-shadow: $box-shadow;
+}

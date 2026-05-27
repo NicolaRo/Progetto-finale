@@ -56,7 +56,7 @@ function RecycleBuddy({onClose}) {
                     </div>
                     <div className="chat-messages">
                         {messages.map((msg, i) => (
-                            <div key={i} className={`chat message ${msg.role === "user" ? "user" : "assistant"}`}>
+                            <div key={i} className={`chat-message-${msg.role === "user" ? "user" : "assistant"}`}>
                                 <p>{msg.content}</p>
                             </div>
                         ))}

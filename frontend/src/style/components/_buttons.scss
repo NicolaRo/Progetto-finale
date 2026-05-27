@@ -264,7 +264,7 @@
   border-radius: $radius;
   border: $border;
 }
-.dropdown {
+.dropdown, .chat-input {
     border: $border;
     border-radius: $border;
     padding: 0.5rem;
@@ -413,3 +413,18 @@
 ppc-btn-add
 ppc-btn-remove
 ppc-btn-edit */
+
+//-_-_- CHAT -_-_-
+.chat-send-btn{
+  margin-left: 1.25rem;
+  background-color: #ebb922;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  min-width: 2rem;
+  max-width: 4rem;
+}
+
+.chat-input-container{
+  display: ruby-base;
+}
