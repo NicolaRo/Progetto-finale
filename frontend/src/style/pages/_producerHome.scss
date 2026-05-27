@@ -6,12 +6,15 @@
     border-radius: $radius;
     padding: 1rem;
     box-shadow: $box-shadow;
+    width: 100vw;
+    overflow-x: auto;
 }
 .input{
     margin:0.5rem;
-    border-radius: 6px;
+    border-radius: $radius;
     border: none;
-    padding: 0.25rem;
+    padding: 0.5rem;
+    box-shadow: $box-shadow;
 }
 
 .filters-container{

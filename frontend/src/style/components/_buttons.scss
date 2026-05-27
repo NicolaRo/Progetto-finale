@@ -273,13 +273,15 @@
 }
 
 .create-product-btn{
-    border: solid 1px blueviolet;
-    border-radius: 6px;
-    padding: 0.25rem;
-    background-color: #ffffff45;
-    color:rgb(110, 110, 110);
-    margin: 1rem;
-    justify-content: end;
+  border: 1px solid #d3d2d1;
+  border-radius: 2rem;
+  padding: 1rem;
+  background-color: rgb(235, 185, 34);
+  color: rgb(8, 8, 8);
+  margin: 1rem;
+  justify-content: end;
+  font-weight: bolder;
+  font-size: large;
 }
 
 /* -_-_-_ Cart _-_-_- */
@@ -369,6 +371,9 @@
   margin-top: 1rem;
   color: white;
   font-weight:700;
+}
+.ppc-btn-remove{
+  margin: 0 !important;
 }
 
 .select-container-type, .select-container-qty, .ppc-qty-select{
