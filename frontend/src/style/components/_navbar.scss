@@ -3,15 +3,12 @@
 .navbar{
   display: flex;
   flex-direction: column;
-  margin: 0.5rem;
-  border: 1px solid #d3d2d1;
   padding: 1rem;
   border-radius: 2rem;
   justify-content: space-between;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-  padding: 10px;
   background-color: #fefdf0f2;
   backdrop-filter: blur (2px);
 }
@@ -36,11 +33,20 @@
 }
 
 .Navbar-btn-container{
-    margin-top: 2rem;
-    justify-content: space-between;
-    background-color: $container-color;
-    gap: 1rem;
-    display: flex;
-    padding: 1.5rem;
-    border-radius: $radius;
+  margin-top: 2rem;
+  justify-content: space-between;
+  background-color: $container-color;
+  gap: 1rem;
+  display: flex;
+  padding: 1.5rem;
+  border-radius: $radius;
+}
+
+.green-assistant-icon{
+  width: 4rem;
+  height: auto;
+  border-radius: 50%;
+  background-color: #ebb922;
+  padding: 0.5rem;
+  border: none;
 }

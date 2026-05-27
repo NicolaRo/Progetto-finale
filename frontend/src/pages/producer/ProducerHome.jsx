@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
 import ProducerProductCard from "../../components/ProducerProductCard";
+import RecycleBuddy from "../../components/RecycleBuddy";
 
 function ProducerHome() {
   const { token } = useContext(AuthContext);
@@ -17,7 +18,7 @@ function ProducerHome() {
   const [selectedIngredientId, setSelectedIngredientId] = useState("");
   const [myProducts, setMyProducts] = useState([]);
   const [refresh, setRefresh] = useState(0);
-
+  const [setShowGreenAssistant, setShowGreenAssistant] = useState(false);
   const handleCreateProduct = async (e) => {
     e.preventDefault();
     if (!productName || !productDescription || !productType || !productPrice || !productQuantity || !productUnit) {
@@ -89,7 +90,8 @@ function ProducerHome() {
 
   return (
     <>
-      <Navbar />
+      <Navbar setShowGreenAssistant={setShowGreenAssistant} />
+      {showGreenAssistant && <RecycleBuddy onClose={() => setShowGreenAssistant(false)}/> }
       <div className="create-product-container">
         <h3 className="component-title">Add a new product</h3>
         <input className="input" type="text" value={productName} onChange={(e) => setProductName(e.target.value)} placeholder="Product's name" />

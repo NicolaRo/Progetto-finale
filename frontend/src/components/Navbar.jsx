@@ -2,13 +2,14 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import GreenAssistantIcon from "../assets/assistant-icon.png";
 
 import ShoppingCart from "../assets/shopping-cart.png";
 import FullShoppingCart from "../assets/full-shopping-cart.png";
 import LogoutIcon from "../assets/logout-icon.png";
 import OrderIcon from "../assets/order-icon.png";
 
-function Navbar({setShowCart, setShowOrders}) {
+function Navbar({setShowCart, setShowOrders, setShowGreenAssistant = () => {}}) {
   const { cart } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -61,9 +62,14 @@ function Navbar({setShowCart, setShowOrders}) {
         )}
 
         {user?.role === "Producer" && (
+          <>
           <button className="orders-btn" onClick={() => navigate("/orders")}>
             <img className="orders-icon" src={OrderIcon} alt="Orders" />
           </button>
+          <button className="green-assistant-btn" onClick={() => setShowGreenAssistant(true)}>
+            <img className="green-assistant-icon" src={GreenAssistantIcon} alt="Green Assistant" /></button>
+          </>
+          
         )}
         </div>
 

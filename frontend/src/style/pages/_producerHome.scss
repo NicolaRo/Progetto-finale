@@ -2,12 +2,8 @@
 
 .create-product-container {
     margin: 2rem 1rem;
-    border: $border;
-    border-radius: $radius;
     padding: 1rem;
-    box-shadow: $box-shadow;
     width: 100vw;
-    overflow-x: auto;
 }
 .input{
     margin:0.5rem;
@@ -30,6 +26,10 @@
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+}
+
+.sub-session-title{
+    margin-left: 1rem;
 }
 .ingredients-grid{
     display: flex;

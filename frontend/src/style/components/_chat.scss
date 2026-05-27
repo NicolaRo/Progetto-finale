@@ -19,10 +19,17 @@ background-color: $container-color;
   padding: 1rem;
   border-radius: $radius;
   line-height: 1.25rem;
+  align-self: start;
 }
-
+.chat-messages{
+    display: flex;
+    flex-direction: column;
+}
 .chat-message-user{
     background-color: $container-color !important;
+    align-self: end !important;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .chat-input{

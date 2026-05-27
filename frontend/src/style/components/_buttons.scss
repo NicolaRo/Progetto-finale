@@ -298,13 +298,13 @@
 }
 
 .create-order-btn{
-  padding: 0.25rem;
-  border-radius: $radius;
+  padding: 0.5rem;
+  border-radius: 2rem;
   background-color: #ebb922;
   box-shadow: 1px 1px 10px 1px white;
-  border:$border;
+  border: 1px solid #d3d2d1;
   margin: 1rem;
-  font-size: small;
+  font-size: medium;
   font-weight: bold;
 }
 
@@ -427,4 +427,9 @@ ppc-btn-edit */
 
 .chat-input-container{
   display: ruby-base;
+}
+
+.green-assistant-btn{
+  background-color: transparent;
+  border: none;
 }
