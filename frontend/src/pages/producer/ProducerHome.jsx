@@ -18,7 +18,7 @@ function ProducerHome() {
   const [selectedIngredientId, setSelectedIngredientId] = useState("");
   const [myProducts, setMyProducts] = useState([]);
   const [refresh, setRefresh] = useState(0);
-  const [setShowGreenAssistant, setShowGreenAssistant] = useState(false);
+  const [showGreenAssistant, setShowGreenAssistant] = useState(false);
   const handleCreateProduct = async (e) => {
     e.preventDefault();
     if (!productName || !productDescription || !productType || !productPrice || !productQuantity || !productUnit) {
