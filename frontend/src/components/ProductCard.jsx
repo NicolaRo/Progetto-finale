@@ -17,6 +17,11 @@ function ProductCard({product}) {
             return; 
         }
 
+        if(Number(quantity) > product.quantity) {
+            alert(`Not enough stock. ${product.name} Availability: ${product.quantity} ${product.unit}`);
+            return;
+        }
+
         addToCart({
             product: product._id,
             orderedQuantity: quantity,

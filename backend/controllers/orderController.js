@@ -32,6 +32,17 @@ const createOrder = async (req, res) => {
             if(!p.product || !p.orderedQuantity || p.orderedQuantity <= 0) {
                 return res.status(400).json({message: "Every product must have a valid ID and positive quantity"});
             }
+
+            //Validating orderable quantity (it must be smaller or equal to availability)
+            const productInDb = await Product.findById(p.product);
+            if(!productInDb) {
+                return res.status(404).json({message: `Product ${p.product} not found`});
+            }
+            if (Number(p.orderedQuantity)> productInDb.quantity) {
+                return res.status(400).json({
+                    message: `Not enough stock for ${productInDb.name}.Availabile:  ${productInDb.quantity}`
+                });
+            }
         }
 
         // 1.2. Validete Users
