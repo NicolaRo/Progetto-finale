@@ -120,11 +120,13 @@ function Cart({ setShowCart }) {
           
           </div>
           <div className="cart-total">
+            {cart.length > 0 && (
+              <h6 className="deposit-info">🌱 Refundable container deposit: 5,00€</h6>
+            )}
           <h5>Order total: {totalPrice.toFixed(2)}€</h5>
-
-            <h6 className="deposit-info">🌱 Refundable container deposit: 5,00€</h6>
-            
+          {cart.length > 0 && (
             <h3>Total due today: {(totalPrice + 5).toFixed(2)}€</h3>
+          )}  
           </div>
         </div>
       </div>
