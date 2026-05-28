@@ -46,7 +46,6 @@ const getContainerById = async (req, res) => {
 };
 
 //3. Update a container
-
 const updateContainer = async (req, res) => {
   try {
     //console.log for debug

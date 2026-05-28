@@ -148,6 +148,12 @@ const getOrderById = async (req, res) => {
 //3. Update an order
 const updateOrder = async (req, res) => {
     try {
+
+        //console log for debug
+        console.log("updateOrder chiamato");
+        console.log("req.body.status:", req.body.status);
+        console.log("req.body:", req.body);
+        
         const orderId = req.params.id;
 
         const {
@@ -261,8 +267,45 @@ const updateOrder = async (req, res) => {
         // ORDER COMPLETION (Producer checkin)
         // =========================
         if (req.body.status === "Order closed") {
+
+            //Console log for debug
+            console.log("Order closed triggered");
+            console.log("stripePaymentIntentId:", order.stripePaymentIntentId);
+            console.log("depositStatus:", order.depositStatus);
+            console.log("depositAmount:", order.depositAmount);
+
+            //Update all the containers from the order as "Container ready to use"
             for (const containerId of order.containers) {
             await Container.findByIdAndUpdate(containerId, { status: "Container ready to use" });
+            }
+
+            //if a deposit to refund exist, then do the refund
+            if(order.stripePaymentIntentId && order.depositStatus === "held") {
+                try{
+                    const stripe = require ('stripe')(process.env.STRIPE_SECRET_KEY);
+
+                    // get the session to read the actual payment_intent
+                    const session = await stripe.checkout.sessions.retrieve(order.stripePaymentIntentId);
+
+                    //console.log for debug
+                    console.log("payment_intent from the session:", session.stripePaymentIntent);
+                    console.log("session completa:", JSON.stringify(session, null, 2));
+
+                    await stripe.refunds.create({
+                        payment_intent: session.payment_intent,
+                        amount: order.depositAmount *100,
+                    });
+
+                    //Update the refund status
+                    order.depositStatus = "refunded";
+
+                    //Console.log for debug
+                    console.log(`${order.depositAmount} Deposit for the order:${order._id} has been refunded`);
+                
+                } catch (stripeError) {
+                    //log the error without preventing the order closure
+                    console.error("Stripe refund error:", stripeError.message);
+                }
             }
             order.status = "Order closed";
         }

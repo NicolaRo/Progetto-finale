@@ -48,7 +48,7 @@ const createCheckoutSession = async (req, res) => {
         //Get the payment intent from the session and save it into the order
         //Will use it later to do the deposit refund
         await Order.findByIdAndUpdate(orderId, {
-            stripePaymentIntentId: session.payment_intent,
+            stripePaymentIntentId: session.id,
             depositAmount: 5,
             depositStatus: 'held',
         });
