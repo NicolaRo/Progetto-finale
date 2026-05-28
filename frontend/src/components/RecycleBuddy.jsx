@@ -52,7 +52,7 @@ function RecycleBuddy({onClose}) {
                     <div className="chat-header">
                         <h3>Recycle Buddy</h3>
                         <button className="bt-close-chat"
-                        onClick={onClose}>Close</button>
+                        onClick={onClose}>Close chat </button>
                     </div>
                     <div className="chat-messages">
                         {messages.map((msg, i) => (

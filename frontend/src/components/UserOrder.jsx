@@ -3,6 +3,8 @@ import { AuthContext } from "../context/AuthContext";
 import { updateContainerStatus } from "../services/containerService";
 import OrderCard from "./OrderCard";
 
+import ShippingIcon from '../assets/shipping-order.gif';
+
 
 function UserOrder({ orders, setRefresh }) {
   const { token } = useContext(AuthContext);
@@ -52,6 +54,10 @@ function UserOrder({ orders, setRefresh }) {
 
       <div className="user-shippedOrders-container">
         <h3>Shipped orders</h3>
+        <img className="delivering-icon"
+        src={ShippingIcon}
+        alt="shipping products"
+        />
         
         {shippedOrders.map((order) => (
           <OrderCard key={order._id} order={order} variant="active" onReturnContainers={handleReturnContainers}

@@ -40,14 +40,11 @@
  }
 .cart-list{
   padding: 1rem;
-  border: solid 1px black;
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
-  width: 90%;
   align-content: flex-start;
   overflow-y: auto;
-  border: $border;
   border-radius: $radius;
 }
 
@@ -58,9 +55,9 @@
   margin: 0.5rem;
   padding: 1rem;
   border-radius: $radius;
-  box-shadow: 1px 1px 5px 1px rgb(4, 125, 119);
+  box-shadow: $box-shadow;
   background-color: rgb(255, 255, 255);
-  width: 90%;
+  gap: 0.5rem;
   }
 
 .cart-item-details {

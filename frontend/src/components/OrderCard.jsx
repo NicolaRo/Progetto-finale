@@ -17,7 +17,7 @@ function OrderCard({ order, variant, onReturnContainers}) {
                     )} */}
 
             <div className="order-user-details-container">
-                <label><strong>Customer</strong></label>
+                <label><strong>Customer:</strong></label>
             </div>
             
             <p><strong>{order.user.name}</strong>, Id: {order.user._id}</p>

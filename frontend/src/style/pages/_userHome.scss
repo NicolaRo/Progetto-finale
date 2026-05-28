@@ -1,25 +1,31 @@
 @use '../base/variables' as *;
 
 .hero-banner{
-  margin: 1rem;
+  margin: 2rem 1rem;
   box-shadow: $box-shadow;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: $radius;
+  background-color: white;
+}
+
+.hero-tip{
+  margin: 1rem 0;
 }
 
 .searchbar{
   display: flex;
   align-items: center;
 }
-
-.filter-container{
+.filter-tag-container {
   display: flex;
   gap: 1rem;
+}
+.filters-container{
+  display: flex;
+  gap: 2rem;
   padding: 0 1em;
   flex-direction: column;
   padding: 1rem;
-  border-radius: 10px;
-  background-color: $container-color;
 }
 
 .product-card{
