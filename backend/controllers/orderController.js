@@ -100,9 +100,13 @@ const getOrders = async (req, res) => {
             filter.user = req.query.userId; 
         }
 
-        //2.1.4. Filter products per Producer - show only orders with their products
+        //2.1.4a. Filter products per Producer - show only orders with their products
         if (req.user.role === "Producer") {
             filter["products.producerId"] = req.user._id;
+        }
+        //2.1.4b. Filter order per User - show only orders with their products
+        if (req.user.role === "User") {
+            filter.user = req.user._id;
         }
 
         //2.1.5. Final query

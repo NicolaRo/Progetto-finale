@@ -72,10 +72,7 @@ function OrderCard({ order, variant, onReturnContainers}) {
                     )}
                 </div>
             )}
-        </div>
-        
-
-            
+        </div>   
         </>
     );
 }
