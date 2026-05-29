@@ -93,7 +93,8 @@ function ProducerHome() {
       <Navbar setShowGreenAssistant={setShowGreenAssistant} />
       {showGreenAssistant && <RecycleBuddy onClose={() => setShowGreenAssistant(false)}/> }
       <div className="create-product-container">
-        <h3 className="component-title">Add a new product</h3>
+      <h3 className="component-title">Add a new product</h3>
+        <div className="add-new-product">
         <input className="input" type="text" value={productName} onChange={(e) => setProductName(e.target.value)} placeholder="Product's name" />
         <input className="input" type="text" value={productDescription} placeholder="Product short description" onChange={(e) => setProductDescription(e.target.value)} />
         <select className="dropdown" value={productType} onChange={(e) => setProductType(e.target.value)}>
@@ -114,6 +115,7 @@ function ProducerHome() {
           <option value="Cl">Cl</option>
           <option value="Piece">Piece</option>
         </select>
+        </div>
         <div className="ingredients-grid">
           {ingredientResults.map((ingredient) => (
             <div key={ingredient.id} onClick={() => { setProductName(ingredient.name); setSelectedImage(ingredient.image); setSelectedIngredientId(ingredient.id); }}>
