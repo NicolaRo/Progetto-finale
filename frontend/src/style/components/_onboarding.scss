@@ -1,0 +1,44 @@
+@use '../base/variables' as *;
+.onboarding-emoji{
+    display: flex;
+  justify-content: center;
+  font-size: xxx-large;
+}
+
+.onboarding-title {
+    margin: 1rem 0;
+}
+
+.onboarding-content {
+    margin-top: 1rem;
+}
+
+.onboarding-step {
+    margin: 0.5rem 1rem;
+}
+.onboarding-note{
+    margin-top: 1rem;
+}
+.onboarding-dot :active {
+    background-color: black;
+}
+.onboarding-dot{
+    background-color: gray;
+}
+.onboarding-nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+}
+.onboarding-nav{
+    display: flex;
+    justify-content: space-evenly;
+    
+    gap: 6rem;
+    margin: 5rem 1rem 1rem 1rem;
+}
+.onboarding-skip{
+    margin-left: 1rem;
+    gap: 0.5rem;
+    display: flex; 
+}

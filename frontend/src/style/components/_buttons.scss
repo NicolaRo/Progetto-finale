@@ -1,5 +1,16 @@
 @use '../base/variables' as *;
 
+//-_-_- ONBOARDING -_-_-
+.onboarding-btn-start{
+font-size: medium !important;
+padding: 1rem !important;
+width: fit-content !important;
+margin: 0 !important;
+}
+
+.onboarding-btn-next{
+  width: fit-content !important;
+}
 
 .show-pwd-btn, 
 .login-btn, 
@@ -7,7 +18,7 @@
 .btn-close-cart,
 .btn-logout,
 .confirm-order-btn,
-.clear-cart-btn {
+.clear-cart-btn, .onboarding-btn-next{
   width: fit-content;
   height: fit-content;
   align-items: center;
@@ -27,7 +38,7 @@
   background: transparent;
   gap: 0.25rem;
 }
-.register-btn{
+.register-btn, .onboarding-btn-start{
   padding: 0.75rem;
   border-radius: $radius;
   background-color: #000000;
