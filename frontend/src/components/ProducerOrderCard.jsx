@@ -10,6 +10,12 @@ function ProducerOrderCard({
 }) {
   if (!order) return null;
 
+  const CONTAINER_ICONS = {
+    "Sealed": "🔒",
+    "Non-Sealed": "📦",
+    "Freezer-Container": "🧊"
+  };
+
   return (
     <div className="single-order-container">
       {/* ORDER HEADER */}
@@ -35,6 +41,10 @@ function ProducerOrderCard({
                 </div>
               ) : (
                 <>
+                <div calssName="container-select-row">
+                  <span className="container-icon">
+                    {CONTAINER_ICONS[containerSelections?.[order._id]?.[p.product._id]?.type] || "🧺"}
+                  </span>
                   <select
                     className="select-container-type"
                     value={containerSelections?.[order._id]?.[p.product._id]?.type || ""}
@@ -45,6 +55,8 @@ function ProducerOrderCard({
                     <option value="Non-Sealed">Non-Sealed</option>
                     <option value="Freezer-Container">Freezer</option>
                   </select>
+                </div>
+                  
 
                   <select
                     className="select-container-qty"
