@@ -6,12 +6,10 @@
   
   .singleItem {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 2fr);
     gap: $space-md;
     padding: $space-sm;
-    padding: 0.5rem;
     border-radius: $radius;
-    margin: 1rem;
     box-shadow: 2px 2px 8px 2px white;
     border: $border;
     overflow-y: auto;
@@ -33,8 +31,7 @@
 }
 
 .product-details{
-    font-size: small;
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }

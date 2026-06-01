@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin: 8rem 3rem 0 3rem;
+    margin: 1rem;
     border: $border;
     border-radius: $radius;
 }
@@ -35,7 +35,7 @@
   flex-direction: column;
 }
 .container-title{
-    margin: 1rem 0 1rem 0;
+    margin: 1rem;
 }
 
 .container-subtitle{
@@ -73,7 +73,7 @@ margin-left: 1rem;
     display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 3rem;
+  margin: 1rem;
   background-color: $container-color;
   padding: 1rem;
   border-radius: $radius;
@@ -94,7 +94,7 @@ margin-left: 1rem;
     border: $border;
     border-radius: $radius;
     padding: 1rem;
-    margin: 3rem;
+    margin: 1rem;
 }
 .account-icon{
     width: 5rem;

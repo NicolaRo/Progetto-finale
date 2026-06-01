@@ -227,7 +227,7 @@ margin: 0 !important;
     justify-content: space-evenly;
     display: flex;
     border-radius: 0.5rem;
-    margin: 3rem 0 3rem 0;
+    margin: 2rem 0;
     background: transparent;
     border: none;
 }
@@ -272,7 +272,7 @@ margin: 0 !important;
   padding: 0.25rem;
   border-radius: $radius;
   border: $border;
-  margin: 1rem;
+  margin: 0.5rem;
 }
 .dropdown, .chat-input {
     border: $border;
@@ -313,9 +313,10 @@ margin: 0 !important;
   background-color: #ebb922;
   box-shadow: 1px 1px 10px 1px white;
   border: 1px solid #d3d2d1;
-  margin: 1rem;
+  margin: 0.5rem;
   font-size: medium;
   font-weight: bold;
+  align-self: center;
 }
 
 .remove-from-cart-btn{
@@ -369,6 +370,8 @@ margin: 0 !important;
   border: none;
   padding: 0.5rem;
   border-radius: $radius;
+  font-weight: bold;
+  font-size: 0.75rem;
 }
 
 /* .toggle-btn-completed-orders{
@@ -390,6 +393,7 @@ margin: 0 !important;
 }
 .ppc-btn-remove{
   margin: 0 !important;
+  font-size: 0.75rem !important;
 }
 
 .select-container-type, .select-container-qty, .ppc-qty-select{
@@ -408,6 +412,10 @@ margin: 0 !important;
   border-radius: 20px;
   border: $border;
   box-shadow: $box-shadow;
+}
+
+.btn-pack-product{
+  margin: 0 !important;
 }
 
 .btn-checkin-containers{
@@ -436,7 +444,7 @@ ppc-btn-edit */
 }
 
 .chat-send-btn{
-  margin-left: 1.25rem;
+  margin-left: 0.5rem;
   background-color: #ebb922;
   border: none;
   padding: 0.5rem;

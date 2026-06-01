@@ -1,27 +1,27 @@
 @use '../base/variables' as*;
 
 .my-products-container{
-    margin: 1rem;
-  padding: 1rem;
+  padding: 0.25rem;
   background-color: #f5f3cf;
   border-radius: 20px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   height: 45rem;
-  overflow-y: auto;
+  overflow-y: scroll;
+  width: 100vw;
 }
 .producer-product-card{
 display: flex;
   flex-direction: column;
-  padding: 0.5rem;
+  padding: 0.25rem;
   background-color: #fefdf1;
-  border-radius: 20px;
-  margin: 1rem;
+  border-radius: $radius;
+  margin: 0.25rem;
   box-shadow: $box-shadow;
 }
 
 .prod-qty-buttons{
-    padding: 0.5rem;
+    padding: 0.25rem;
   display: flex;
   gap: 0.5rem;
 }

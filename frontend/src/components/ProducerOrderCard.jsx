@@ -1,5 +1,21 @@
 import ProPackedIcon from '../assets/pro-packed-icon.gif';
 
+import SealedContainer from '../assets/sealed-container-img.png';
+import NonSealedContainer from '../assets/non-sealed-container-img.png';
+import FreezerContainer from '../assets/freezer-container.png';
+
+const CONTAINER_IMAGES = {
+  "Sealed": SealedContainer,
+  "Non-Sealed": NonSealedContainer,
+  "Freezer-Container": FreezerContainer
+};
+
+const CONTAINER_ICONS = {
+  "Sealed": "🔒",
+  "Non-Sealed": "📦",
+  "Freezer-Container": "🧊"
+};
+
 function ProducerOrderCard({
   order,
   user,
@@ -9,12 +25,6 @@ function ProducerOrderCard({
   handleContainerCheckin
 }) {
   if (!order) return null;
-
-  const CONTAINER_ICONS = {
-    "Sealed": "🔒",
-    "Non-Sealed": "📦",
-    "Freezer-Container": "🧊"
-  };
 
   return (
     <div className="single-order-container">
@@ -34,13 +44,25 @@ function ProducerOrderCard({
           {(order.status === "Order created" || order.status === "Preparing order") &&
             user?.role === "Producer" && (
             <>
+            {CONTAINER_IMAGES[p.containerType] && (
+                    <div className="container-assigned-preview">
+                      <img
+                        className="container-type-img"
+                        src={CONTAINER_IMAGES[p.containerType]}
+                        alt={p.containerType}
+                        />
+                        <p>{p.containerType} x {p.containerQuantity}</p>
+                    </div>
+                  )}
               {p.containerType ? (
                 <div className="containers-assigned">
-                  <p>This product is packed and ready for shipping.</p>
                   <img className="packed-product-icon" src={ProPackedIcon} alt="packed" />
+                  <p>This product is packed and ready for shipping.</p>
+                  
                 </div>
               ) : (
                 <>
+                <div className="container-assign-btn">
                 <div calssName="container-select-row">
                   <span className="container-icon">
                     {CONTAINER_ICONS[containerSelections?.[order._id]?.[p.product._id]?.type] || "🧺"}
@@ -75,6 +97,7 @@ function ProducerOrderCard({
                   >
                     Pack product
                   </button>
+                </div>
                 </>
               )}
             </>

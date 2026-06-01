@@ -29,10 +29,11 @@ function OrderPage() {
 
   return (
     <>
+      
+      <Navbar />
       <button className="back-btn" onClick={() => navigate("/ProducerHome")}>
         Back to myHome
       </button>
-      <Navbar />
       <ProducerOrder orders={orders} setRefresh={setRefresh} />
       <div className="btn-container"></div>
     </>

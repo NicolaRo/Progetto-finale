@@ -17,16 +17,20 @@
 }
 
 .orders-container{
-    margin: 1rem;
-    padding: 0.5rem;
-    border-radius: 8px;
-    width: 80vw;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: $radius;
 }
 
 .single-order-container{
   padding: 0.5rem;
 }
 
+.container-assign-btn{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
 .ordered-products{
   background-color: rgb(254, 253, 239);
@@ -40,6 +44,8 @@
 
 .order-product-details-container{
   margin-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .order-product-quantity-container{
@@ -85,8 +91,13 @@ padding: 1rem;
 .containers-assigned{
   display: flex;
   padding: 0.5rem;
+  flex-direction: column;
 }
 
 .delivering-icon{
   max-width: 90%;
+}
+
+.container-type-img{
+  width: 4rem;
 }

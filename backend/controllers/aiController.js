@@ -2,7 +2,7 @@ const { OpenAI } = require("openai");
 
 //console.log for debug
 console.log("OpenAI:", OpenAI);
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY});
 
 //console.log for debug
 console.log("openai instance:", openai);

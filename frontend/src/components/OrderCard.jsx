@@ -1,25 +1,37 @@
 /* import ShippingOrder from '../assets/shipping-order.gif'; */
 
-function OrderCard({ order, variant, onReturnContainers}) {
-    
+import SealedContainer from '../assets/sealed-container-img.png';
+import NonSealedContainer from '../assets/non-sealed-container-img.png';
+import FreezerContainer from '../assets/freezer-container.png';
 
+const CONTAINER_IMAGES = {
+  "Sealed": SealedContainer,
+  "Non-Sealed": NonSealedContainer,
+  "Freezer-Container": FreezerContainer
+};
+
+
+
+function OrderCard({ order, variant, onReturnContainers}) {
     
     const isCompleted = variant === "completed";
     return (
         <>
         <div className={`single-order-container ${isCompleted ? "completed" : ""}`}>
-            {/* {order.status === "Order shipped" && (
-                        <img
-                            className="order-shipping-gif"
-                            src={ShippingOrder}
-                            alt="order shipped"
-                        />
-                    )} */}
 
             <div className="order-user-details-container">
                 <label><strong>Customer:</strong></label>
             </div>
-            
+            {CONTAINER_IMAGES[p.containerType] && (
+                    <div className="container-assigned-preview">
+                      <img
+                        className="container-type-img"
+                        src={CONTAINER_IMAGES[p.containerType]}
+                        alt={p.containerType}
+                        />
+                        <p>{p.containerType} x {p.containerQuantity}</p>
+                    </div>
+                  )}
             <p><strong>{order.user.name}</strong>, Id: {order.user._id}</p>
 
             <label><strong>Order Id: </strong></label> <p>{order._id}</p>
@@ -28,6 +40,17 @@ function OrderCard({ order, variant, onReturnContainers}) {
             
             {order.products.map((products)=> (
             <div className="ordered-products" key={products.product._id}>
+
+            {CONTAINER_IMAGES[products.containerType] && (
+                    <div className="container-assigned-preview">
+                      <img
+                        className="container-type-img"
+                        src={CONTAINER_IMAGES[products.containerType]}
+                        alt={products.containerType}
+                        />
+                        <p>{products.containerType} x {products.containerQuantity}</p>
+                    </div>
+                  )}
 
                 <div className="order-product-details-container">
                     <label><strong>Product: </strong></label>
@@ -40,7 +63,7 @@ function OrderCard({ order, variant, onReturnContainers}) {
                     />
                     )}
                 </div>
-
+                <div className="order-details-contianer">
                 <div className="order-producer-details-container">
                     <label><strong>Producer: </strong></label>
                     <p>{products.producerId.name}</p>
@@ -53,12 +76,11 @@ function OrderCard({ order, variant, onReturnContainers}) {
 
                 <div className="order-product-quantity-container">
                     <p>{products.orderedQuantity}</p>
-                </div>
-
-                <div className="order-product-quantity-container">
                     <p><strong>{products.product.unit}</strong></p>
                 </div>
 
+                </div>
+                
                 </div>
             ))}
             {!isCompleted && order.status === "Order shipped" && (
