@@ -22,14 +22,14 @@ function OrderCard({ order, variant, onReturnContainers}) {
             <div className="order-user-details-container">
                 <label><strong>Customer:</strong></label>
             </div>
-            {CONTAINER_IMAGES[p.containerType] && (
+            {CONTAINER_IMAGES[order.containerType] && (
                     <div className="container-assigned-preview">
                       <img
                         className="container-type-img"
-                        src={CONTAINER_IMAGES[p.containerType]}
-                        alt={p.containerType}
+                        src={CONTAINER_IMAGES[order.containerType]}
+                        alt={order.containerType}
                         />
-                        <p>{p.containerType} x {p.containerQuantity}</p>
+                        <p>{order.containerQuantity} X {order.containerType}</p>
                     </div>
                   )}
             <p><strong>{order.user.name}</strong>, Id: {order.user._id}</p>
