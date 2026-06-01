@@ -70,8 +70,8 @@ function Cart({ setShowCart }) {
                   />
                   <p className="cart-p-details"></p>
                   </div>
-
-                    <div className="cart-item-qty">
+                  <div className="cart-cards">
+                  <div className="cart-item-qty">
                         <p className="cart-p-details"><strong>Quantity: </strong>{product.orderedQuantity}</p>
                     </div>
 
@@ -82,9 +82,8 @@ function Cart({ setShowCart }) {
                     <div className="cart-item-producerName">
                         <p className="cart-p-details"><strong>Producer: </strong>{product.producerName}</p>
                     </div>
-
-                
-
+                  </div>
+                  
                 <button
                   className="remove-from-cart-btn"
                   onClick={() => removeFromCart(product.product)}

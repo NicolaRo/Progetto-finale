@@ -35,6 +35,18 @@ function ProducerOrderCard({
         <p><strong>Customer:</strong> {order.user?.name}</p>
       </div>
 
+      {CONTAINER_IMAGES[order.containerType] && (
+                    <div className="container-assigned-preview">
+                      <img
+                        className="container-type-img"
+                        src={CONTAINER_IMAGES[order.containerType]}
+                        alt={order.containerType}
+                        />
+                        <p>{order.containerType} x {order.containerQuantity}</p>
+                    </div>
+                  )}
+
+
       {/* PRODUCTS + PACK */}
       {order.products?.map((p) => (
         <div key={p.product._id} className="ordered-products">
@@ -44,21 +56,22 @@ function ProducerOrderCard({
           {(order.status === "Order created" || order.status === "Preparing order") &&
             user?.role === "Producer" && (
             <>
-            {CONTAINER_IMAGES[p.containerType] && (
-                    <div className="container-assigned-preview">
-                      <img
-                        className="container-type-img"
-                        src={CONTAINER_IMAGES[p.containerType]}
-                        alt={p.containerType}
-                        />
-                        <p>{p.containerType} x {p.containerQuantity}</p>
-                    </div>
-                  )}
+            
               {p.containerType ? (
                 <div className="containers-assigned">
                   <img className="packed-product-icon" src={ProPackedIcon} alt="packed" />
                   <p>This product is packed and ready for shipping.</p>
-                  
+                 
+                  {CONTAINER_IMAGES[order.containerType] && (
+                    <div className="container-assigned-preview">
+                      <img
+                        className="container-type-img"
+                        src={CONTAINER_IMAGES[order.containerType]}
+                        alt={order.containerType}
+                        />
+                        <p>{order.containerType} x {order.containerQuantity}</p>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <>
