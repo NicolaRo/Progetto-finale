@@ -6,6 +6,8 @@ import ProducerHome from './pages/producer/ProducerHome';
 import SuccessPage from './pages/user/SuccessPage';
 import CancelPage from './pages/user/CancelPage';
 import OrderPage from './pages/producer/OrderPage';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
 
@@ -21,6 +23,8 @@ function App() {
         <Route path="/success" element={<SuccessPage/>}/>
         <Route path="/cancel" element={<CancelPage/>}/>
         <Route path="/orders" element={<OrderPage/>}/>
+        <Route path="/ForgotPassword" element={<ForgotPassword/>}/>
+        <Route path="/reset-password/:token" element={<ResetPassword/>}/>
       </Routes>
       </BrowserRouter>
     </>

@@ -41,6 +41,14 @@ const UserSchema = new mongoose.Schema({
         enum: ["User", "Producer"],
         default: "User"
     },
+    //Temporary token to reset PWD
+    resetPasswordToken: {
+        type: String,
+    },
+    //Expiration token after 1 hour
+    resetPasswordExpires:{
+        type: Date,
+    },
 }, {timestamps: true});
 
 

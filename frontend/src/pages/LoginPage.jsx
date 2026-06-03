@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import googleLogin from "../assets/googleLogin.png";
 import ShowPassword from "../assets/show-password.png";
 import Account from '../assets/account-icon.png';
+import ForgotPassword from "./ForgotPassword";
 
 function LoginPage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -18,6 +19,8 @@ function LoginPage() {
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const [showForgotPassword, setShowForgotPassword] = useState (false);
 
   const provider = new GoogleAuthProvider();
 
@@ -215,6 +218,12 @@ function LoginPage() {
                 alt="show/hide password"
                 />
             </button>
+            <button
+              className="forgot-pwd-btn"
+              onClick={() => setShowForgotPassword(!showForgotPassword)}
+              > Forgot password?
+            </button>
+            {showForgotPassword && <ForgotPassword />}
             </div>
           <div className="login-buttons-container">
             <button className="login-btn" type="submit" onClick={handleLogIn}>

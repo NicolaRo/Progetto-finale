@@ -58,6 +58,8 @@ const containerRoutes = require('./routes/containerRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
 const stripeRoutes = require('./routes/stripeRoutes');
 const aiRoutes = require('./routes/aiRoutes');
+const resetPasswordRoutes = require("./routes/resetPasswordRoutes");
+
 
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
@@ -66,6 +68,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/ingredients', ingredientRoutes);
 app.use('/api/stripe', stripeRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/password", resetPasswordRoutes);
 
 //Server port
 const PORT = process.env.PORT || 3000;
