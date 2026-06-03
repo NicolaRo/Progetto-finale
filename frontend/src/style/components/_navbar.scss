@@ -1,52 +1,80 @@
 @use '../base/variables' as *;
+@use '../base/mixins' as *;
 
-.navbar{
+.navbar {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  border-radius: 2rem;
+  border-radius: 0 0 2rem 2rem;
   justify-content: space-between;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
+  z-index: 100;
   background-color: #fefdf0f2;
-  backdrop-filter: blur (2px);
+  backdrop-filter: blur(2px);
+  background-color: rgba(245, 243, 207, 0.91);
+  box-shadow: 3px 3px 20px #0000005e;
+
+  @include respond(md) {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: 0 0 2rem 2rem;
+  }
 }
-.account-container{
-    justify-content: center;
+
+.account-container {
   display: flex;
-  flex-direction: column;
-
-}
-.account-name{
-    margin: 1.5rem;
-  font-size: x-large;
-}
-.PP-image{
-    width: 2rem;
-    height: auto;
-}
-
-.account-logout-icon{
-    width: 1.5rem;
-    height: auto;
-}
-
-.Navbar-btn-container{
-  margin-top: 2rem;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  background-color: $container-color;
-  gap: 1rem;
-  display: flex;
-  padding: 1.5rem;
-  border-radius: $radius;
+
+  @include respond(md) {
+    flex-direction: row;
+    gap: 1rem;
+  }
 }
 
-.green-assistant-icon{
-  width: 4rem;
+.account-name {
+  margin: 0.5rem;
+  font-size: large;
+
+  @include respond(md) {
+    font-size: x-large;
+    margin: 1rem;
+  }
+}
+
+.Navbar-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: $radius;
+  margin-top: 0.5rem;
+
+  @include respond(md) {
+    margin-top: 0;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+.account-logout-icon {
+  width: 1.5rem;
+  height: auto;
+}
+
+.green-assistant-icon {
+  width: 3rem;
   height: auto;
   border-radius: 50%;
   background-color: #ebb922;
   padding: 0.5rem;
-  border: none;
+
+  @include respond(md) {
+    width: 4rem;
+  }
 }

@@ -239,6 +239,13 @@ margin: 0 !important;
     padding: 1rem;
 }
 
+.forgot-pwd-btn{
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  color: blue;
+}
+
 /* -_-_-_ UserHome _-_-_- */
 
 .search-button, .search-btn, .ppc-btn-save{
@@ -460,4 +467,42 @@ ppc-btn-edit */
 .green-assistant-btn{
   background-color: transparent;
   border: none;
+}
+
+// -_-_-_ FEEDBACK VISIVI GLOBALI _-_-_-
+// Applica a tutti i bottoni dell'app
+
+button {
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: scale(0.96);
+    opacity: 1;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #08edde;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Filtri attivi — feedback visivo quando selezionati
+.filter-btn.active {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+  transform: scale(1.03);
 }

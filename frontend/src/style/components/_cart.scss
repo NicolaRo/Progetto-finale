@@ -76,17 +76,16 @@
   }
 
   .cart-total{
-    position: -webkit-sticky; /* Supporto Safari */
-    position: sticky;
-    top: 0; /* Incolla a 0px dalla cima del viewport */
-    background-color: white;
-    padding: 10px;
-    border-radius: $radius;
-    box-shadow: $box-shadow;
-    font-size: x-large;
-    width: 90%;
-    text-align: end;
-    margin-top:1rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 10px;
+  border-radius: 2rem;
+  box-shadow: $box-shadow;
+  font-size: x-large;
+  text-align: end;
+  margin-top: 1rem;
   }
 
   .deposit-info{

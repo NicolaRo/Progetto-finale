@@ -1,5 +1,9 @@
 import {useState} from "react";
 
+import Splash1 from '../assets/splash-1.png';
+import Splash2 from '../assets/splash-2.png';
+import Splash3 from '../assets/splash-3.png';
+
 const SLIDES = [
     {
         emoji: "🌱",
@@ -24,6 +28,12 @@ const SLIDES = [
         note:"Your 5€ deposit is automatically refunded as soon as the producer confirms the containers are back. No hassle, no paperwork."
     }
 ];
+
+const ONBOARDING_IMAGES = {
+    "Splash1": Splash1,
+    "Splash2": Splash2,
+    "Splash3": Splash3
+  };
 
 function Onboarding({onComplete}) {
     const [current, setCurrent] = useState(0);
@@ -70,6 +80,18 @@ return(
                 <div className="onboarding-slide">
                     <span className="onboarding-emoji">{slide.emoji}</span>
                     <h2 className="onboarding-title">{slide.title}</h2>
+
+                    {ONBOARDING_IMAGES && (
+                    <div className="splash-img">
+                      <img
+                        className="splash-image"
+                        src={ONBOARDING_IMAGES}
+                        alt="onboarding illustrations"
+                        />
+</div>
+                  )}
+
+
 
                     {slide.content && <p className="onboarding-content">{slide.content}</p>}
                     {slide.note && <p className="onboarding-note">{slide.note}</p>}

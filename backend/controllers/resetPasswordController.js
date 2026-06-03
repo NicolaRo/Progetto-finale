@@ -10,7 +10,7 @@ const requestPasswordReset = async (req, res) => {
     try {
         const {email} = req.body;
 
-        const User = await User.findOne ({email});
+        const user = await User.findOne ({email});
         if(!user) {
             return res.status(200).json({message: "If this email exists, you will receive a reset link."});
         }
@@ -49,7 +49,7 @@ const requestPasswordReset = async (req, res) => {
         return res.status(200).json({message: "If this email exists, you will receive a reset link."});
    
     } catch (error) {
-
+        
         console.error("Reset password error:", error);
         return res.status(500).json({message: error.message});
     }
