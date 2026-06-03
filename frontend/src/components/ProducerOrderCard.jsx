@@ -25,34 +25,43 @@ function ProducerOrderCard({
   handleContainerCheckin
 }) {
   if (!order) return null;
+//console log for debug
+order.product?.forEach(p => {
+  console.log("Product:", p.product?.name, "containerType:", p.containerType );
+});
 
   return (
     <div className="single-order-container">
       {/* ORDER HEADER */}
+
+    {/* CONSOLE LOG FOR DEBUG */}
+    {console.log("order completo:", order)}
+    {console.log("order.products:", order.products)}
+
       <div className="order-user-details-container">
         <p><strong>Order ID:</strong> {order._id}</p>
         <p><strong>Status:</strong> {order.status}</p>
         <p><strong>Customer:</strong> {order.user?.name}</p>
       </div>
 
-      {CONTAINER_IMAGES[order.containerType] && (
-                    <div className="container-assigned-preview">
-                      <img
-                        className="container-type-img"
-                        src={CONTAINER_IMAGES[order.containerType]}
-                        alt={order.containerType}
-                        />
-                        <p>{order.containerType} x {order.containerQuantity}</p>
-                    </div>
-                  )}
-
-
       {/* PRODUCTS + PACK */}
       {order.products?.map((p) => (
+        
         <div key={p.product._id} className="ordered-products">
           <p><strong>{p.product.name}</strong></p>
           <p>Qty: {p.orderedQuantity}</p>
 
+          {p.containerType && CONTAINER_IMAGES[p.containerType] && (
+            <div className="container-assigned-preview">
+              <img
+                className="container-type-img"
+                src={CONTAINER_IMAGES[p.containerType]}
+                alt={p.containerType}
+              />
+              <p>{p.containerType} x {p.containerQuantity}</p>
+            </div>
+          )}
+          
           {(order.status === "Order created" || order.status === "Preparing order") &&
             user?.role === "Producer" && (
             <>
@@ -62,14 +71,14 @@ function ProducerOrderCard({
                   <img className="packed-product-icon" src={ProPackedIcon} alt="packed" />
                   <p>This product is packed and ready for shipping.</p>
                  
-                  {CONTAINER_IMAGES[order.containerType] && (
+                   {CONTAINER_IMAGES[p.containerType] && (
                     <div className="container-assigned-preview">
                       <img
                         className="container-type-img"
-                        src={CONTAINER_IMAGES[order.containerType]}
-                        alt={order.containerType}
+                        src={CONTAINER_IMAGES[p.containerType]}
+                        alt={p.containerType}
                         />
-                        <p>{order.containerType} x {order.containerQuantity}</p>
+                        <p>{p.containerType} x {p.containerQuantity}</p>
                     </div>
                   )}
                 </div>

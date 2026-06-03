@@ -11,16 +11,16 @@ const SLIDES = [
         emoji:"📦",
         title:"How it works",
         steps: [
-            "🛒 Order from local producers",
-            "👨‍🌾  Producer packs your order in reusable containers",
+            "🛒  Browse the app and see the products available",
+            "👨‍🌾  Our listed producers will pack your order in reusable containers",
             "🚚  Receive your groceries",
-            "♻️  Return the containers and get your deposit back"
+            "♻️  Return the containers directly from the app and get your deposit back"
         ]
     },
     {
         emoji:"💶",
         title:"The 5€ deposit",
-        content: "When you receive yor order, tap 'Confirm receipt & return containers'. This tells us you got your order and the containers are on their way back.",
+        content: "When you receive yor order, go to 'orders' and tap 'Confirm receipt & return containers'. This tells us you got your order and the containers are collectable.",
         note:"Your 5€ deposit is automatically refunded as soon as the producer confirms the containers are back. No hassle, no paperwork."
     }
 ];
