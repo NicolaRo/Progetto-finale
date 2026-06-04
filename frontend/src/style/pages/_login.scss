@@ -1,4 +1,5 @@
 @use '../base/variables' as *; 
+@use '../base/mixins' as *;
 
 .login-container{
     display: flex;
@@ -7,6 +8,10 @@
     margin: 1rem;
     border: $border;
     border-radius: $radius;
+    @include respond (md) {
+        max-width: 480px;
+        margin: 2rem auto;
+    }
 }
 
 .google-login-container{
@@ -77,6 +82,10 @@ margin-left: 1rem;
   background-color: $container-color;
   padding: 1rem;
   border-radius: $radius;
+  @include respond (md) {
+    max-width: 480px;
+    margin: 2rem auto;
+  }
 }
 
 .signup-img-container{
@@ -101,6 +110,10 @@ margin-left: 1rem;
     border-radius: $radius;
     padding: 1rem;
     margin: 1rem;
+    @include respond (md) {
+        max-width: 480px;
+        margin: 2rem auto;
+    }
 }
 .account-icon{
     width: 5rem;

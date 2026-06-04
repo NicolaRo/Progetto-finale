@@ -283,7 +283,7 @@ margin: 0 !important;
 }
 .dropdown, .chat-input {
     border: $border;
-    border-radius: $border;
+    border-radius: $radius;
     padding: 0.5rem;
     background-color: #ffffff45;
     color:rgb(110, 110, 110);
@@ -365,7 +365,9 @@ margin: 0 !important;
   display: flex;
   margin-bottom: 2rem;
 }
-
+.back-btn {
+  margin-top: 2rem;
+}
 .ppc-btn-edit{
   background-color: white !important;
 }

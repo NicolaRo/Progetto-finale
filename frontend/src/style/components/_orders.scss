@@ -1,5 +1,6 @@
 // USER ORDER ****
 @use '../base/variables' as *;
+@use '../base/mixins' as *;
 
 .user-openOrders-container{
   background-color: #f5f3cf;
@@ -16,15 +17,11 @@
   margin: 2rem 1rem;
 }
 
-.orders-container{
+/* .orders-container{
   margin: 0.5rem;
   padding: 0.5rem;
   border-radius: $radius;
-}
-
-.single-order-container{
-  padding: 0.5rem;
-}
+} */
 
 .container-assign-btn{
   display: flex;
@@ -76,10 +73,15 @@
   margin: 1rem;
 }
 .single-order-container{
+width: 100%;
 border-radius: $radius;
 border: $border;
 margin-bottom: 1rem;
 padding: 1rem;
+
+@include respond (md) {
+  max-width: 780px  ;
+}
 }
 .packed-product-icon{
   width: 2rem;
@@ -139,4 +141,16 @@ padding: 1rem;
   font-weight: bold;
   font-size: medium;
   margin-top: 0.5rem;
+}
+
+.producer-orders-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  @include respond(md) {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }
