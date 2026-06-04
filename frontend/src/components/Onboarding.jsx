@@ -6,13 +6,13 @@ import Splash3 from '../assets/splash-3.png';
 
 const SLIDES = [
     {
-        emoji: "🌱",
+        image: Splash1,
         title:"Welcome to PackBack",
         content:"Shop local, eat fresh, and help the planet. PackBack connects you with local producers who deliver in reusable containers.",
         note: "A 5€ deposit is held at checkout — return all the containers and get your 5€ refunded. Simple.",
     },
     {
-        emoji:"📦",
+        image: Splash2,
         title:"How it works",
         steps: [
             "🛒  Browse the app and see the products available",
@@ -22,18 +22,13 @@ const SLIDES = [
         ]
     },
     {
-        emoji:"💶",
+        image: Splash3,
         title:"The 5€ deposit",
         content: "When you receive yor order, go to 'orders' and tap 'Confirm receipt & return containers'. This tells us you got your order and the containers are collectable.",
         note:"Your 5€ deposit is automatically refunded as soon as the producer confirms the containers are back. No hassle, no paperwork."
     }
 ];
 
-const ONBOARDING_IMAGES = {
-    "Splash1": Splash1,
-    "Splash2": Splash2,
-    "Splash3": Splash3
-  };
 
 function Onboarding({onComplete}) {
     const [current, setCurrent] = useState(0);
@@ -81,18 +76,15 @@ return(
                     <span className="onboarding-emoji">{slide.emoji}</span>
                     <h2 className="onboarding-title">{slide.title}</h2>
 
-                    {ONBOARDING_IMAGES && (
+                    {slide.image && (
                     <div className="splash-img">
                       <img
-                        className="splash-image"
-                        src={ONBOARDING_IMAGES}
-                        alt="onboarding illustrations"
+                        className="onboarding-illustration"
+                        src={slide.image}
+                        alt={slide.title}
                         />
-</div>
+                    </div>
                   )}
-
-
-
                     {slide.content && <p className="onboarding-content">{slide.content}</p>}
                     {slide.note && <p className="onboarding-note">{slide.note}</p>}
 

@@ -1,5 +1,7 @@
 /* import ShippingOrder from '../assets/shipping-order.gif'; */
 
+import {useState} from "react";
+
 import SealedContainer from '../assets/sealed-container-img.png';
 import NonSealedContainer from '../assets/non-sealed-container-img.png';
 import FreezerContainer from '../assets/freezer-container.png';
@@ -15,6 +17,7 @@ const CONTAINER_IMAGES = {
 function OrderCard({ order, variant, onReturnContainers}) {
     
     const isCompleted = variant === "completed";
+    const [showModal, setShowModal] = useState(false);
     return (
         <>
         <div className={`single-order-container ${isCompleted ? "completed" : ""}`}>
@@ -88,13 +91,32 @@ function OrderCard({ order, variant, onReturnContainers}) {
                     <h4>Order received?</h4>
                     {order.containers.some(c => c.status === "Container busy") ? (
                         <button className="return-containers-btn"
-                            onClick={() => onReturnContainers(order.containers)}>
+                            onClick={async () => {await onReturnContainers(order.containers);
+                                setShowModal(true);
+                            }}>
                             Confirm receipt & return containers
                         </button> ) : ( <p>All containers are returned! See you on the next order.</p>                    
                     )}
                 </div>
             )}
-        </div>   
+        </div>
+        {showModal && (
+            <div 
+                className = "modal-overlay"
+                onClick={() => setShowModal(false)}>
+                 <div
+                    className=" modal-card"
+                    onClick = {(e) => e.stopPropagation()}>
+                        <h3>Containers are on their way back!</h3>
+                        <p>Congratulations - You contributed to reducing single-use plastick packaging. Your 5,00€ deposit will be refunded shortly</p>
+                        <button
+                            className="modal-btn"
+                            onClick ={() => setShowModal(false)}>Continue shopping
+                        </button>
+                    </div>
+                </div>
+
+        )} 
         </>
     );
 }
