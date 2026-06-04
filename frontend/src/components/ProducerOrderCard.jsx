@@ -70,17 +70,6 @@ order.product?.forEach(p => {
                 <div className="containers-assigned">
                   <img className="packed-product-icon" src={ProPackedIcon} alt="packed" />
                   <p>This product is packed and ready for shipping.</p>
-                 
-                   {CONTAINER_IMAGES[p.containerType] && (
-                    <div className="container-assigned-preview">
-                      <img
-                        className="container-type-img"
-                        src={CONTAINER_IMAGES[p.containerType]}
-                        alt={p.containerType}
-                        />
-                        <p>{p.containerType} x {p.containerQuantity}</p>
-                    </div>
-                  )}
                 </div>
               ) : (
                 <>
