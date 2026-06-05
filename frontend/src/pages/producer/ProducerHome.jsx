@@ -119,7 +119,7 @@ function ProducerHome() {
         <div className="ingredients-grid">
           {ingredientResults.map((ingredient) => (
             <div key={ingredient.id} onClick={() => { setProductName(ingredient.name); setSelectedImage(ingredient.image); setSelectedIngredientId(ingredient.id); }}>
-              <img src={`https://img.spoonacular.com/ingredients_250x250/${ingredient.image}`} alt={ingredient.name} />
+              <img className="ingredient-img" src={`https://img.spoonacular.com/ingredients_250x250/${ingredient.image}`} alt={ingredient.name} />
               <p>{ingredient.name}</p>
             </div>
           ))}

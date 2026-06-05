@@ -12,7 +12,7 @@
   z-index: 100;
   background-color: #fefdf0f2;
   backdrop-filter: blur(2px);
-  background-color: rgba(245, 243, 207, 0.91);
+  background-color: $container-color;
   box-shadow: 3px 3px 20px #0000005e;
 
   @include respond(md) {

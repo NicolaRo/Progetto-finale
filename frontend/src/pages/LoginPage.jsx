@@ -16,7 +16,7 @@ function LoginPage() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("User");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 

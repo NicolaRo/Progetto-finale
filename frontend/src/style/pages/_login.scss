@@ -110,11 +110,13 @@ margin-left: 1rem;
 
 .role-selection-container{
     margin: 1rem;
-  background-color:$container-color;
-  padding: 1rem;
-  border-radius: 8px;
-  justify-content: space-evenly;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    background-color: rgba(159, 232, 100, 0.5411764706);
+    padding: 1rem;
+    border-radius: 8px;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: larger;
+    font-weight: 600;
 }

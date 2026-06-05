@@ -42,15 +42,12 @@
   color: white;
 }
 .cart-btn, .orders-btn {
-  background-color:#ebb922;
+  background-color:$accent;
   border: none;
-  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  padding: 1rem;
   border-radius: $button-radius;
 }
 
-.btn-close-cart, .back-btn{
-  background-color: rgba(248, 156, 156, 0.573);
-}
 
 .login-btn, .onboarding-btn-next, .onboarding-btn-back, .onboarding-btn-start {
   font-size: larger;
@@ -67,7 +64,7 @@
 }
 
 .onboarding-btn-next, .onboarding-btn-back, .onboarding-btn-start {
-  padding: 1rem 3rem!important;
+  padding: 1rem !important;
   width: fit-content!important;
   font-size: xx-large !important;
 }
@@ -79,7 +76,7 @@
   font-size: x-small;
   border: none;
   gap: 0.5rem;
-  background-color: #e8af05e0;
+  background-color:$accent;
   color: white;
   margin-right: 1rem;
 }
@@ -122,18 +119,18 @@
   .checkbox-wrapper-35 .switch + label::before {
     background-color: #05012c;
     border-radius: 500px;
-    height: 15px;
-    margin-right: 8px;
+    height: 30px;
+    margin-right: 2rem;
     -webkit-transition: background-color 0.125s ease-out;
     transition: background-color 0.125s ease-out;
-    width: 25px;
+    width: 70px;
   }
   
   .checkbox-wrapper-35 .switch + label::after {
     background-color: #fff;
     border-radius: 13px;
     box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
-    height: 13px;
+    height: 28px;
     left: 1px;
     position: absolute;
     top: 1px;
@@ -141,7 +138,7 @@
     transition: -webkit-transform 0.125s ease-out;
     transition: transform 0.125s ease-out;
     transition: transform 0.125s ease-out, -webkit-transform 0.125s ease-out;
-    width: 13px;
+    width: 35px;
   }
   
   .checkbox-wrapper-35 .switch + label .switch-x-text {
@@ -187,12 +184,12 @@
   }
   
   .checkbox-wrapper-35 .switch:checked + label::before {
-    background-color: #ffb500;
+    background-color: $accent;
   }
   
   .checkbox-wrapper-35 .switch:checked + label::after {
     -webkit-transform: translate3d(10px, 0, 0);
-    transform: translate3d(10px, 0, 0);
+    transform: translate3d(33px, 0, 0);
   }
   
   .checkbox-wrapper-35 .switch:checked + label .switch-x-unchecked {
@@ -212,7 +209,7 @@
   padding: 0.75rem 2rem;
   margin: 2rem 0.5rem; 
   border-radius: $radius;
-  background-color: #e8af05e0;
+  background-color: $accent;
   box-shadow: $box-shadow;
   border: $border;
   width: -webkit-fill-available;
@@ -266,7 +263,7 @@
 
 .filter-btn{
   width: fit-content;
-  background-color: #ebb922;
+  background-color: $accent;
   border: none;
   padding: 0.5rem;
   border:$border;
@@ -292,7 +289,7 @@
   border: 1px solid #d3d2d1;
   border-radius: 2rem;
   padding: 1rem;
-  background-color: rgb(235, 185, 34);
+  background-color: $accent;
   color: rgb(8, 8, 8);
   margin: 1rem;
   justify-content: end;
@@ -337,11 +334,13 @@
 }
 
 .confirm-order-btn{
-  background-color: #ebb922;
+  background-color: #31dc19;
   justify-content: flex-end;
   padding: 1rem;
   font-weight: 600;
+  color: white;
 }
+
 
 .clear-cart-btn {
   background-color: rgba(157, 146, 146, 0.57);
@@ -360,8 +359,18 @@
   display: flex;
   margin-bottom: 2rem;
 }
-.back-btn {
-  margin-top: 2rem;
+.back-btn, .btn-close-cart {
+  background-color: red;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  border: 1px solid #d3d2d1;
+  box-shadow: 1px 1px 10px 1px rgb(209, 203, 127), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+  display: flex;
+  margin: 2rem;
+    margin-top: 2rem;
+  color: white;
+  font-weight: bold;
 }
 .ppc-btn-edit{
   background-color: white !important;
@@ -370,7 +379,7 @@
 /*-_-_-_ORDER PAGE BTN _-_-_-*/
 
 .ppc-btn-add{
-  background-color: #ebb922;
+  background-color: $accent;
   border: none;
   padding: 0.5rem;
   border-radius: $radius;
@@ -438,23 +447,26 @@ ppc-btn-edit */
 
 //-_-_- CHAT -_-_-
 .bt-close-chat{
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 0, 0, 0.618));
+  background: red;
   margin-top: 0.25rem;
   border-radius: $radius;
   border: none;
   height: 3rem;
   color: white;
   font-weight: bold;
+  padding: 0.5rem;
 }
 
 .chat-send-btn{
   margin-left: 0.5rem;
-  background-color: #ebb922;
+  background-color: #31dc19;
   border: none;
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 50%;
   min-width: 2rem;
   max-width: 4rem;
+  color: white;
+  font-size: larger;
 }
 
 .chat-input-container{
@@ -464,6 +476,9 @@ ppc-btn-edit */
 .green-assistant-btn{
   background-color: transparent;
   border: none;
+  border-radius: 1rem;
+  background-color: $accent;
+  padding: 0.5rem;
 }
 
 // -_-_-_ FEEDBACK VISIVI GLOBALI _-_-_-

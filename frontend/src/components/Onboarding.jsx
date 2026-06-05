@@ -24,7 +24,7 @@ const SLIDES = [
     {
         image: Splash3,
         title:"The 5€ deposit",
-        content: "When you receive yor order, go to 'orders' and tap 'Confirm receipt & return containers'. This tells us you got your order and the containers are collectable.",
+        content: "When you receive your order, go to 'orders' and tap 'Confirm receipt & return containers'. This tells us you got your order and the containers are collectable.",
         note:"Your 5€ deposit is automatically refunded as soon as the producer confirms the containers are back. No hassle, no paperwork."
     }
 ];
@@ -45,7 +45,7 @@ function Onboarding({onComplete}) {
 
         const diff = touchStart - e.changedTouches [0].clientX;
         if(diff > 50) goNext();
-        if(diff < 50) goPrev();
+        if(diff < -50) goPrev();
         setTouchStart(null);
     };
 
@@ -73,11 +73,11 @@ return(
             >
                 {/*SLIDE CONTENT*/}
                 <div className="onboarding-slide">
-                    <span className="onboarding-emoji">{slide.emoji}</span>
+                
                     <h2 className="onboarding-title">{slide.title}</h2>
 
                     {slide.image && (
-                    <div className="splash-img">
+                    <div className="onboarding-img">
                       <img
                         className="onboarding-illustration"
                         src={slide.image}
