@@ -1,0 +1,53 @@
+@use '../base/mixins' as*;
+@use '../base/mixins' as*;
+
+.cart-icon,
+.orders-icon,
+.clear-cart-icon,
+.confirm-order-icon{
+    width: 2rem;
+}
+
+.remove-from-cart-icon{
+    width: 1.5rem;
+}
+
+.account-logout-icon {
+    width: 1.5rem;
+    height: auto;
+  }
+  
+  .green-assistant-icon {
+    width: 3rem;
+    height: auto;
+    border-radius: 50%;
+    background-color: #ebb922;
+    padding: 0.5rem;
+  
+    @include respond(md) {
+      width: 4rem;
+    }
+  }
+
+.packed-product-icon{
+    width: 2rem;
+}
+
+.delivering-icon{
+    max-width: 90%;
+}
+
+.icon-google-login{
+    width: auto;
+    height: 3rem;
+    border-radius: 27px;
+}
+
+.icon-show-pwd{
+    width: 1rem;
+    height: 1rem;
+}
+
+.account-icon{
+    width: 5rem;
+}

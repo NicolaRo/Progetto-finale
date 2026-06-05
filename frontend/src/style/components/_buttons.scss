@@ -1,16 +1,6 @@
 @use '../base/variables' as *;
 
 //-_-_- ONBOARDING -_-_-
-.onboarding-btn-start{
-font-size: medium !important;
-padding: 1rem !important;
-width: fit-content !important;
-margin: 0 !important;
-}
-
-.onboarding-btn-next{
-  width: fit-content !important;
-}
 
 .show-pwd-btn, 
 .login-btn, 
@@ -18,7 +8,7 @@ margin: 0 !important;
 .btn-close-cart,
 .btn-logout,
 .confirm-order-btn,
-.clear-cart-btn, .onboarding-btn-next{
+.clear-cart-btn{
   width: fit-content;
   height: fit-content;
   align-items: center;
@@ -38,7 +28,7 @@ margin: 0 !important;
   background: transparent;
   gap: 0.25rem;
 }
-.register-btn, .onboarding-btn-start{
+.register-btn{
   padding: 0.75rem;
   border-radius: $radius;
   background-color: #000000;
@@ -51,7 +41,7 @@ margin: 0 !important;
   margin:1rem;
   color: white;
 }
-.cart-btn{
+.cart-btn, .orders-btn {
   background-color:#ebb922;
   border: none;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
@@ -62,7 +52,7 @@ margin: 0 !important;
   background-color: rgba(248, 156, 156, 0.573);
 }
 
-.login-btn{
+.login-btn, .onboarding-btn-next, .onboarding-btn-back, .onboarding-btn-start {
   font-size: larger;
   font-weight: bold;
   padding: 1rem 5rem 1rem 5rem;
@@ -76,6 +66,15 @@ margin: 0 !important;
   margin: 0 1rem 0 1rem; 
 }
 
+.onboarding-btn-next, .onboarding-btn-back, .onboarding-btn-start {
+  padding: 1rem 3rem!important;
+  width: fit-content!important;
+  font-size: xx-large !important;
+}
+
+.onboarding-btn-back {
+  background-color: #e8af05e0;
+}
 .show-pwd-btn{
   font-size: x-small;
   border: none;
@@ -309,12 +308,8 @@ margin: 0 !important;
 
 /* -_-_-_ Cart _-_-_- */
 
-.orders-btn{
-  border-radius: $button-radius;
-  padding-left:1rem;
-}
 
-.create-order-btn{
+.create-order-btn {
   padding: 0.5rem;
   border-radius: 2rem;
   background-color: #ebb922;
@@ -374,7 +369,7 @@ margin: 0 !important;
 
 /*-_-_-_ORDER PAGE BTN _-_-_-*/
 
-.orders-btn, .ppc-btn-add{
+.ppc-btn-add{
   background-color: #ebb922;
   border: none;
   padding: 0.5rem;

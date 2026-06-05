@@ -9,7 +9,7 @@ import FullShoppingCart from "../assets/full-shopping-cart.png";
 import LogoutIcon from "../assets/logout-icon.png";
 import OrderIcon from "../assets/order-icon.png";
 
-function Navbar({setShowCart, setShowOrders, setShowGreenAssistant = () => {}}) {
+function Navbar({setShowCart, setShowOrders, showOrders, setShowGreenAssistant = () => {}}) {
   const { cart } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ function Navbar({setShowCart, setShowOrders, setShowGreenAssistant = () => {}}) 
         {user?.role === "User" && (
             <button
                 className="orders-btn "
-                onClick={()=> setShowOrders(true)}>
+                onClick={()=> setShowOrders(!showOrders)}>
                     <img
                         className="orders-icon"
                         src={OrderIcon}

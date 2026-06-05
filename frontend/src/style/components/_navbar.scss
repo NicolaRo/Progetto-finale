@@ -62,19 +62,3 @@
   }
 }
 
-.account-logout-icon {
-  width: 1.5rem;
-  height: auto;
-}
-
-.green-assistant-icon {
-  width: 3rem;
-  height: auto;
-  border-radius: 50%;
-  background-color: #ebb922;
-  padding: 0.5rem;
-
-  @include respond(md) {
-    width: 4rem;
-  }
-}

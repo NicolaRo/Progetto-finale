@@ -86,7 +86,7 @@ function UserHome() {
 
   return (
     <>
-      <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} />
+      <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} showOrders={showOrders} />
       {showCart && <Cart setShowCart={setShowCart} />}
       {showOrders && <UserOrder orders={orders} setRefresh={setRefresh} setShowOrders={setShowOrders} />}
 

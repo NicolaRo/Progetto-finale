@@ -41,7 +41,7 @@ function ProductCard({product}) {
             <div className="p-name-pic-details">
                 <p className="p-name-details"><strong>{product.name}</strong></p>
                 <img 
-                className="product-listed-preview"
+                className="product-listed-img"
                 src={`http://img.spoonacular.com/ingredients_100x100/${product.image}`}
                 alt={product.name}
                 />

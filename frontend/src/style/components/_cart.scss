@@ -1,15 +1,5 @@
 @use '../base/variables' as *;
 
-.cart-icon,
-.orders-icon,
-.clear-cart-icon,
-.confirm-order-icon{
-    width: 2rem;
-}
-
-.remove-from-cart-icon{
-    width: 1.5rem;
-}
 
 .cart-details-container{
     display: flex;

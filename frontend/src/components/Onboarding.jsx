@@ -110,15 +110,15 @@ return(
                 {/* NAVIGATION */}
                 <div className="onboarding-nav">
                     {current > 0 && (
-                        <button className="onboarding-btn-next"
-                            onClick={goPrev}>☜ Back</button>
+                        <button className="onboarding-btn-back"
+                            onClick={goPrev}>Back</button>
                     )}
                     {current < SLIDES.length - 1 ? (
                         <button className="onboarding-btn-next"
-                            onClick={goNext}>Next ☞</button>
+                            onClick={goNext}>Next</button>
                     ) : (
                         <button className="onboarding-btn-start"
-                            onClick={handleComplete}> Let's start 🛒</button>
+                            onClick={handleComplete}> Let's start</button>
                     )}
                 </div>
 
