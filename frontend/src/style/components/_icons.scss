@@ -1,5 +1,5 @@
 @use '../base/mixins' as*;
-@use '../base/mixins' as*;
+@use '../base/variables' as*;
 
 .cart-icon,
 .orders-icon,
@@ -48,4 +48,8 @@
 
 .account-icon{
     width: 5rem;
+}
+
+.payment-success-icon{
+    border-radius: $radius;
 }
