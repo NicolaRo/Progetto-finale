@@ -41,11 +41,15 @@
   margin:1rem;
   color: white;
 }
-.cart-btn, .orders-btn {
+.cart-btn, .orders-btn, .green-assistant-btn {
   background-color:$accent;
   border: none;
   padding: 1rem;
   border-radius: $button-radius;
+  height: 4rem;
+  width: auto;
+  justify-content: center;
+  display: flex;
 }
 
 
@@ -375,6 +379,7 @@
 }
 .ppc-btn-edit{
   background-color: white !important;
+  box-shadow: 1px 1px 10px 1px rgb(236, 161, 231), inset 0 1px 0 0 rgba(255, 255, 255, 0.3)!important;
 }
 
 /*-_-_-_ORDER PAGE BTN _-_-_-*/
@@ -425,7 +430,7 @@
   margin: 0.5rem;
   border-radius: 20px;
   border: $border;
-  box-shadow: $box-shadow;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.368627451);
 }
 
 .btn-pack-product{

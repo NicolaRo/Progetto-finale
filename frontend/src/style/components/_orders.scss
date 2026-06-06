@@ -26,7 +26,11 @@
 .container-assign-btn{
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
+
+  @include respond (md) {
+    flex-direction: row;
+  }
 }
 
 .ordered-products{
@@ -34,9 +38,15 @@
   padding: 1rem;
   border-radius: 1rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin: 1rem 0;
+  justify-content: space-between;
   gap: 1rem;
+
+  @include respond (md) {
+    flex-direction: row;
+  }
 }
 
 .order-product-details-container{
@@ -67,6 +77,10 @@
 }
 .user-shippedOrders-container{
   margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
 .user-completedOrders-container{
@@ -78,9 +92,10 @@ border-radius: $radius;
 border: $border;
 margin-bottom: 1rem;
 padding: 1rem;
+display: flex;
+flex-direction: column;
 
 @include respond (md) {
-  max-width: 780px  ;
 }
 }
 
@@ -90,8 +105,13 @@ padding: 1rem;
 
 .containers-assigned{
   display: flex;
-  padding: 0.5rem;
-  flex-direction: column;
+  padding: 1rem;
+  flex-direction: column-reverse;
+  align-items: center;
+  
+  @include respond (md) {
+    flex-direction: row-reverse;
+  }
 }
 
 
@@ -144,9 +164,4 @@ padding: 1rem;
   flex-direction: column;
   align-items: center;
   width: 100%;
-
-  @include respond(md) {
-    max-width: 800px;
-    margin: 0 auto;
-  }
 }

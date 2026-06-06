@@ -1,4 +1,5 @@
 @use '../base/variables' as *;
+@use '../base/mixins' as *;
 
 .hero-banner{
   margin: 2rem 1rem;
@@ -38,6 +39,10 @@
     background-color:rgba(154, 157, 49, 0.45);
     box-shadow: 1px 1px 6px 1px white;
     border-bottom: 1px solid white;
+    @include respond (md){
+      max-width: 15rem;
+      justify-content: space-evenly;
+    }
 }
 
 .research-container{

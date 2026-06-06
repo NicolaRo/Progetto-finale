@@ -1,4 +1,6 @@
 @use '../base/variables' as *;
+@use '../base/mixins' as *;
+
 .product-list-container {
     width: 100%;
     padding: $padding;
@@ -14,6 +16,9 @@
     border: $border;
     overflow-y: auto;
     height:30rem;
+    @include respond (md) {
+      grid-template-columns: repeat(4, 4fr);
+    }
   }
   
   .product-card {
