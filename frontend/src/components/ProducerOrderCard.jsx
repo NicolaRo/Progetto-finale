@@ -45,7 +45,7 @@ order.product?.forEach(p => {
       </div>
 
       {/* PRODUCTS + PACK */}
-      {order.products?.map((p) => (
+      {order.products?.filter(p => p.product).map((p) => (
         
         <div key={p.product._id} className="ordered-products">
           <p><strong>{p.product.name}</strong></p>

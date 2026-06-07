@@ -1,4 +1,5 @@
 @use '../base/variables' as *;
+@use '../base/mixins' as *;
 .onboarding-slide{
   display: flex;
   flex-direction: column;
@@ -47,7 +48,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
     transition: background-color 0.2s ease;
   
@@ -66,19 +67,25 @@
   .onboarding-step {
     margin: 0.75rem 0;
     padding: 0.5rem;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.25);
     border-radius: 0.5rem;
   }
   
   
 .onboarding-card {
-  background-color: rgb(159, 232, 100);
+  background-color: rgb(21, 136, 125);
   border-radius: 2rem;
   padding: 1.5rem;
   justify-content: center;
   display: flex;
   flex-direction: column;
   margin: 1rem;
+  color: white;
+  font-weight: 500;
+  @include respond (md) {
+    font-size: x-large;
+    font-weight: bold;
+  }
 }
   
 .onboarding-overlay {
