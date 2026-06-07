@@ -12,8 +12,7 @@
     gap: $space-md;
     padding: $space-sm;
     border-radius: $radius;
-    box-shadow: 2px 2px 8px 2px white;
-    border: $border;
+    box-shadow: 1px 1px 25px 0 #22948169;
     overflow-y: auto;
     height:30rem;
     @include respond (md) {
@@ -26,8 +25,6 @@
     flex-direction: column;
     padding: $space-sm;
     border-radius: $radius;
-    border: $border;
-    box-shadow: 2px 2px 8px 2px white;
   }
 
 .p-name-details{

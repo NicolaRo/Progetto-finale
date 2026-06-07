@@ -10,7 +10,7 @@ $xl: 1440px; //Extra large: desktop
 /*-=-=-= COLOR PALETTE =-=-=- */
 
 $button-text: #ffff;
-$accent: rgba(239, 149, 238, 0.88);
+$accent: rgba(21, 136, 125, 0.88);
 
 /*-=-=-= ACCESSORIES =-=-=- */
 $glass-background: rgba(255,255,255,0.14);
@@ -18,10 +18,10 @@ $border: 1px solid #d3d2d1;
 $radius: 2rem;
 $button-radius: 1rem;
 $glow: 1px 1px 25px 2px #000000a8;
-$box-shadow:  1px 1px 10px 1px rgb(209, 203, 127), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+$box-shadow:  1px 1px 10px 1px rgba(255, 255, 255, 0.28), inset 0 1px 0 0 rgba(255, 255, 255, 0.21);
 $btn-shadow: 1px 1px 10px darkgray;
-$background:  #a0e8647a;
-$container-color: #9fe8648a;
+$background:  #96eec5;
+$container-color: rgba(-1, 206, 51, 0.48);
 /*-=-=-= SPACING =-=-=- */
 $space-xs: 0.25rem;
 $space-sm: 0.5rem;

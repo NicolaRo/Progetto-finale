@@ -2,8 +2,12 @@
 @use '../base/mixins' as *;
 
 .onboarding-illustration {
-    width: 90%;
-}
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+    margin: 1rem 0;
+  }
 
 .ingredient-img {
     border-radius: $radius;

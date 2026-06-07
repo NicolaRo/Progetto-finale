@@ -1,6 +1,5 @@
 @use '../base/variables' as *;
 .onboarding-slide{
-    width: 70vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,33 +70,26 @@
     border-radius: 0.5rem;
   }
   
-  .onboarding-illustration {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    object-fit: contain;
-    margin: 1rem 0;
-  }
   
-  .onboarding-card {
-    overflow: hidden;
-    width: 90vw;
-    max-height: 90vh;
-    overflow-y: auto;
-    background-color: $container-color;
-    border-radius: $radius;
-    padding: 1.5rem;
-  }
+.onboarding-card {
+  background-color: rgb(159, 232, 100);
+  border-radius: 2rem;
+  padding: 1.5rem;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
   
-  .onboarding-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
+.onboarding-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}

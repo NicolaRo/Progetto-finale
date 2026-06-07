@@ -34,11 +34,9 @@
 .product-card{
     display: flex;
     flex-direction: column;
-    border: $border;
-    border-radius: 1rem;
-    background-color:rgba(154, 157, 49, 0.45);
-    box-shadow: 1px 1px 6px 1px white;
-    border-bottom: 1px solid white;
+    border: none;
+    border-radius: $radius;
+    background-color:white;
     @include respond (md){
       max-width: 15rem;
       justify-content: space-evenly;

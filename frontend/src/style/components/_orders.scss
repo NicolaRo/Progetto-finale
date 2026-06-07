@@ -11,7 +11,7 @@
 }
 
 .user-completedOrders-container{
-  background-color: #f5f3cf;
+  background-color: $container-color;
   padding: 1rem;
   border-radius: 20px;
   margin: 2rem 1rem;
@@ -83,9 +83,6 @@
   gap: 1rem;
 }
 
-.user-completedOrders-container{
-  margin: 1rem;
-}
 .single-order-container{
 width: 100%;
 border-radius: $radius;

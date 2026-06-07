@@ -6,32 +6,36 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1000;
     display: flex;
     align-items: flex-end; // drawer dal basso su mobile
     justify-content: center;
+    backdrop-filter: blur(2px);
   }
-  
+  .chat-header{
+    background-image: linear-gradient(180deg, #96eec5, #ff00);
+  }
   .chat-drawer {
-    background-color: rgb(198, 244, 161);
-    padding: 1rem;
-    margin: 1rem;
-    box-shadow: $box-shadow;
-    border-radius: $radius;
-    width: 100%;
-    max-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+  background-color: $background;
+  padding: 1rem;
+  top: 0rem;
+  box-shadow: 1px 1px 10px 1px rgba(255, 255, 255, 0.28), inset 0 1px 0 0 rgba(255, 255, 255, 0.21);
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  margin: 1rem;
+}
   
   .chat-messages {
     display: flex;
     flex-direction: column;
-    overflow-y: auto; // scrolla solo i messaggi, non tutta la chat
+    overflow-y: scroll;
     flex: 1;
     padding: 0.5rem;
+    max-height: 40vh;
   }
 
   .chat-message-assistant{
@@ -47,8 +51,9 @@
   text-align: end;
   width: 80%;
   align-self: flex-end;
-  background-color: #ebb922;
+  background-color: $accent;
   padding: 0.5rem;
   border-radius: 20px;
   margin: 1rem 0;
+  color: white;
 }

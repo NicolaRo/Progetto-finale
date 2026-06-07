@@ -44,9 +44,8 @@
 .cart-btn, .orders-btn, .green-assistant-btn {
   background-color:$accent;
   border: none;
-  padding: 1rem;
+  padding: 0.74rem;
   border-radius: $button-radius;
-  height: 4rem;
   width: auto;
   justify-content: center;
   display: flex;
@@ -273,6 +272,7 @@
   padding: 0.5rem;
   border:$border;
   border-radius: $radius;
+  color: white;
 }
 
 .producer-select, .dropdown{
@@ -286,8 +286,8 @@
     border: $border;
     border-radius: $radius;
     padding: 0.5rem;
-    background-color: #ffffff45;
-    color:rgb(110, 110, 110);
+    background-color:$container-color;
+    color:rgb(0, 0, 0);
 }
 
 .create-product-btn, .hero-chat-btn{
@@ -295,7 +295,7 @@
   border-radius: 2rem;
   padding: 1rem;
   background-color: $accent;
-  color: rgb(8, 8, 8);
+  color: white;
   margin: 1rem;
   justify-content: end;
   font-weight: bolder;
@@ -305,6 +305,7 @@
 .hero-chat-btn{
   margin-top: 1.5rem !important;
   padding: 0.5rem !important;
+  color: white !important;
 
 }
 
@@ -314,13 +315,14 @@
 .create-order-btn {
   padding: 0.5rem;
   border-radius: 2rem;
-  background-color: #ebb922;
+  background-color: $accent;
   box-shadow: 1px 1px 10px 1px white;
   border: 1px solid #d3d2d1;
   margin: 0.5rem;
   font-size: medium;
   font-weight: bold;
   align-self: center;
+  color: white;
 }
 
 .remove-from-cart-btn{
@@ -329,7 +331,7 @@
   padding: 0.25rem;
   align-self: center;
   border-radius: 50%;
-  background-color: #e7b6ba91;
+  background-color: rgba(255, 0, 20, 0.69);
   width: 2rem;
 }
 
@@ -454,13 +456,14 @@ ppc-btn-edit */
 //-_-_- CHAT -_-_-
 .bt-close-chat{
   background: red;
-  margin-top: 0.25rem;
-  border-radius: $radius;
+  margin: 2rem 0;
+  border-radius: 2rem;
   border: none;
   height: 3rem;
   color: white;
   font-weight: bold;
   padding: 0.5rem;
+  font-size: small;
 }
 
 .chat-send-btn{
