@@ -22,6 +22,8 @@
     "express": "^5.2.1",
     "express-mongo-sanitize": "^2.2.0",
     "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.3",
+    "openai": "^6.42.0",
     "stripe": "^22.1.1"
   },
   "devDependencies": {
