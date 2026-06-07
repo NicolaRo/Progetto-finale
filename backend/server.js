@@ -22,7 +22,9 @@ const app = express();
 
 //Configure Cors
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: ['http://localhost:5173',
+          'https://packback-greengrocery.netlify.app'
+  ]
 }));
 
 //--- MIDDLEWARE ---
