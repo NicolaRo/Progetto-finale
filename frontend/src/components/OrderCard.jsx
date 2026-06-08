@@ -41,7 +41,7 @@ function OrderCard({ order, variant, onReturnContainers}) {
 
             <label><strong>Order Status:</strong> {order.status}</label>
             
-            {order.products.map((products)=> (
+            {order.products.filter(p => p.product).map((products)=> (
             <div className="ordered-products" key={products.product._id}>
 
             {CONTAINER_IMAGES[products.containerType] && (
