@@ -12,11 +12,14 @@
     gap: $space-md;
     padding: $space-sm;
     border-radius: $radius;
-    box-shadow: 1px 1px 25px 0 #22948169;
     overflow-y: auto;
     height:30rem;
+
     @include respond (md) {
       grid-template-columns: repeat(4, 4fr);
+      border: 2px solid #249486;
+      padding: 4rem;
+      box-shadow: 1px 1px 10px 1px rgba(49, 150, 141, 0.1882352941), inset 0 1px 0 0 rgba(255, 255, 255, 0.21);
     }
   }
   

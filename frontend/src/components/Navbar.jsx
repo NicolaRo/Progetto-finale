@@ -26,7 +26,7 @@ function Navbar({setShowCart, setShowOrders, showOrders, orders =  [], setShowGr
         <div className="account-container">
           <h4 className="account-name">
             {" "}
-            {user ? `Benvenut@: ${user.name}` : "Caricamento..."}
+            {user ? `Welcome: ${user.name}` : "Caricamento..."}
           </h4>
           <div className="PP-container">
           <button

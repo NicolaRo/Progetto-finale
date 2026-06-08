@@ -3,7 +3,6 @@
 @use '../base/mixins' as *;
 
 .user-openOrders-container{
-  background-color: #f5f3cf;
   padding: 1rem;
   border: none;
   border-radius: 20px;
@@ -34,7 +33,7 @@
 }
 
 .ordered-products{
-  background-color: rgb(254, 253, 239);
+  background-color: rgb(255, 255, 255);
   padding: 1rem;
   border-radius: 1rem;
   display: flex;
@@ -43,6 +42,7 @@
   margin: 1rem 0;
   justify-content: space-between;
   gap: 1rem;
+  box-shadow: $box-shadow;
 
   @include respond (md) {
     flex-direction: row;
@@ -86,14 +86,10 @@
 .single-order-container{
 width: 100%;
 border-radius: $radius;
-border: $border;
 margin-bottom: 1rem;
 padding: 1rem;
 display: flex;
 flex-direction: column;
-
-@include respond (md) {
-}
 }
 
 .order-shipping-gif{
@@ -154,6 +150,7 @@ flex-direction: column;
   font-weight: bold;
   font-size: medium;
   margin-top: 0.5rem;
+  color: white;
 }
 
 .producer-orders-section {

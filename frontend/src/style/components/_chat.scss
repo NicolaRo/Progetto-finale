@@ -1,4 +1,5 @@
 @use '../base/variables' as *;
+@use '../base/mixins' as *;
 
 .chat-overlay {
     position: fixed;
@@ -13,9 +14,7 @@
     justify-content: center;
     backdrop-filter: blur(2px);
   }
-  .chat-header{
-    background-image: linear-gradient(180deg, #96eec5, #ff00);
-  }
+
   .chat-drawer {
   background-color: $background;
   padding: 1rem;
@@ -27,6 +26,9 @@
   overflow: hidden;
   position: absolute;
   margin: 1rem;
+  @include respond (md) {
+    width: 90%;
+  }
 }
   
   .chat-messages {

@@ -18,8 +18,9 @@ function UserHome() {
   const [selectedProducer, setSelectedProducer] = useState("");
   const [heroTip, setHeroTip] = useState("");
   const [showChat, setShowChat] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
-  const { token } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
 
   // Caricamento iniziale prodotti
   useEffect(() => {
@@ -87,6 +88,15 @@ function UserHome() {
   return (
     <>
       <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} showOrders={showOrders} orders = {orders}/>
+      {showWelcome && (
+        <div className="toast-welcome">
+          <div className="welcome-msg">
+          Welcome back, {user?.name}!
+          </div>
+          <button  className="close-welcome-btn" onClick={() => setShowWelcome(false)}>✕</button>
+        </div>
+      )}
+
       {showCart && <Cart setShowCart={setShowCart} />}
       {showOrders && <UserOrder orders={orders} setRefresh={setRefresh} setShowOrders={setShowOrders} />}
 
