@@ -48,9 +48,6 @@ const getContainerById = async (req, res) => {
 //3. Update a container
 const updateContainer = async (req, res) => {
   try {
-    //console.log for debug
-    console.log("raw body:", JSON.stringify(req.body));
-
     
     const container = await Container.findById(req.params.id);
 
@@ -59,9 +56,6 @@ const updateContainer = async (req, res) => {
 
     const { status } = req.body;
 
-    //console.log for debug
-    console.log("status bytes:", JSON.stringify(status));
-    console.log("container.status:", container.status, "status richiesto: ", status, "user.role:", req.user.role);
     const allowedStatuses = [
       "Container ready to use",
       "Container busy",
@@ -90,6 +84,7 @@ const updateContainer = async (req, res) => {
       }
       //If the role is "Producer"
       else if (req.user.role === "Producer") {
+        
         //Prevent status change to "Container ready for collection"
         const validProducerTransition =
           (container.status === "Container ready to use" &&

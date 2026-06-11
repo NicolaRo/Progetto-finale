@@ -12,7 +12,7 @@ const authMiddleware = async (req, res, next) => {
 
         //Split the authorization and take the token alone
         // *** the authorization format is: "Bearer eyJhbGciOiJIUzI1NiJ9..." ***
-        //This "[1]"  removes second element: "bearer" 
+        // "[1]"  removes second element: "bearer" 
         const token = authHeader.split(" ")[1];
 
         //decoded takes the _id and the role together and it checks if the token is still valid

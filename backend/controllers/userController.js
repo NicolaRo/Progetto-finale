@@ -32,7 +32,7 @@ const createUser = async (req, res) => {
     });
 
     //jwt.sign injects token into the user object
-    //the token is then stored in the client then passed o in each HTTP header request
+    //the token is then stored in the client then passed on in each HTTP header request
     const jwtToken =  jwt.sign({id: user._id, role: user.role}, process.env.JWT_SECRET, {expiresIn: "7d"});
 
     return res.status(201).json({user: user, token: jwtToken});
@@ -45,7 +45,6 @@ const createUser = async (req, res) => {
 
 //1.1. Log in function to include JWT Token authentication
 const loginUser = async (req, res) => {
-  console.log(req.body);
 
     try {
         const {email, password} = req.body;
@@ -84,7 +83,6 @@ const googleLogin = async (req, res) => {
     const {email} = req.body;
 
     const existingUser = await User.findOne({email});
-
     
     if (!existingUser){
       return res.status(404).json({ message: "User's email not found" });
@@ -97,7 +95,6 @@ const googleLogin = async (req, res) => {
     return res.status(500).json({message: error.message});
   }
 };
-
 
 //2.1. Read Users information
 const getUsers = async (req, res) => {

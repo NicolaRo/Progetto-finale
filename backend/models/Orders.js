@@ -19,7 +19,7 @@ const OrderSchema = new mongoose.Schema({
         enum: ["Order created", "Preparing order", "Order shipped", "Order closed"],
         default: "Order created"
     },
-    //Stripe payment intent ID - Is required to refund the cuational deposit (taken to grant containers return)
+    //Stripe payment intent ID - Is required to refund the deposit (taken to grant containers return)
     stripePaymentIntentId: {
         type: String,
     },
@@ -28,7 +28,7 @@ const OrderSchema = new mongoose.Schema({
         type: Number,
         default: 5
     },
-    //redund status with default value set on "held"
+    //refund status with default value set on "held"
     depositStatus: {
         type: String,
         enum: ["held", "refunded"],

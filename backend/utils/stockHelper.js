@@ -3,7 +3,6 @@
 //Import the model
 const Product = require ('../models/Products');
 
-
 //Update stock availabibilty when a new order is created
 const updateProductStock = async (products = []) => {
     for (let p of products) {
@@ -16,7 +15,6 @@ const updateProductStock = async (products = []) => {
             err.type = "business";
             throw err;
         }
-
         //Stock non sufficient
         if(product.quantity <p.orderedQuantity) {
             const err = new Error (
@@ -30,7 +28,7 @@ const updateProductStock = async (products = []) => {
         //Update quantities
         await Product.findByIdAndUpdate(
             p.product,
-            //Inc = increment from MongoDB, it removes the ordered quantity from total quantity for a specific product.
+            //Inc = increment from MongoDB, it removes the ordered quantity from the stock for a specific product.
             {$inc: {quantity: -p.orderedQuantity}}
         );
     }
@@ -47,7 +45,7 @@ const restoreProductStock = async (products = []) => {
             {$inc: {quantity: +p.orderedQuantity} }
         )
     };
-    console.log('products ricevuti:', products);
+    /* console.log('products ricevuti:', products); */  // CONSOLE LOG// 
 }
 
 module.exports = {updateProductStock, restoreProductStock};

@@ -1,12 +1,6 @@
 const { OpenAI } = require("openai");
 
-//console.log for debug
-console.log("OpenAI:", OpenAI);
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY});
-
-//console.log for debug
-console.log("openai instance:", openai);
-console.log("API KEY:", process.env.OPENAI_API_KEY ? "presente" : "MANCANTE");
 
 const SYSTEM_PROMPTS = {
     User:  `Your are Recycle Buddy, a friendly and enthusiastic sustainability assistant for PackBack - an app that promotes reusable packaging for grocery shopping.
@@ -55,10 +49,6 @@ const getHeroTip = async (req, res) => {
 // Chat
 const chat = async (req, res) => {
     try {
-
-        //Console.log for debug
-        console.log("openai.chat:", openai.chat);
-        console.log("openai.chat.completions:", openai.chat?.completions);
 
         const {messages, role} = req.body;
         if(!messages || !Array.isArray(messages)){

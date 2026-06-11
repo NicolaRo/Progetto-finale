@@ -3,7 +3,7 @@ const {getIngredients} = require ('../utils/spoonacularService');
 //Controller to gather the product's images (spoonacular) from the producer's query
 //1. Get 
 const searchIngredients = async (req, res) => {
-    console.log('query ricevuta:', req.query);
+    
     try {
         //get the query
         const producerQuery = await (req.query.query);

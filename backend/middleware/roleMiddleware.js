@@ -2,10 +2,6 @@
 const roleMiddleware = (role) => {
     return (req, res, next) => {
 
-        //Console.log for debug
-        console.log("role richiesto:", role);
-        console.log("role utente:", req.user?.role);
-
         //Check if the role from the request is the same
         //found on the request header
         if( req.user.role !== role)

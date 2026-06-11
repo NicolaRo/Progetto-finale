@@ -5,7 +5,7 @@ const Product = require ('../models/Products');
 
 //1. Create Product from user query
 const createProduct = async (req, res) => {
-    console.log(req.body);
+    /* console.log(req.body); */  // CONSOLE LOG// 
     try {
 
         const {name, description, price, type, quantity, unit, image, ingredientId} = req.body;
@@ -38,25 +38,17 @@ const getProducts = async (req, res) => {
       const type = req.query.type;
       const producerId = req.query.producerId;
 
-      //console.log for debug
-      console.log("name:", name, "type:", type, "producerId:", producerId);
-      
       const query = {};
       if (name) query.name = { $regex: name, $options: "i" };
       if (type) query.type = { $in: [].concat(type) };
       if (producerId) query.producerId = producerId;
       if (req.user.role === "User") query.quantity = { $gt: 0 }; //Hide qty: 0 to Users
 
-      //console.log for debug
-      console.log("query mongoose:", JSON.stringify(query));
-      
       const products = await Product.find(query).populate("producerId", "name");
       res.set('Cache-control', 'no-store');
       return res.status(200).json(products);
     } catch (error) {
-        
-        //console.log for debug
-      console.error("ERRORE:", error.message);
+      
       return res.status(500).json({ message: error.message });
     }
   };

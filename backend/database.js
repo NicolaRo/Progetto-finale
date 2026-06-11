@@ -9,7 +9,7 @@ const connectDB = async () => {
         console.log(`📦 MongoDB connesso: ${conn.connection.host}`);
         console.log(`🗄️ Database: ${conn.connection.name}`);
     } catch (error) {
-        console.error('Errore connessione MongoDB:', error.message);
+        console.error('MongoDB failed to connect:', error.message);
 
         //In caso of an errore, it stop the process
         //This way server and the DB are always aligned.

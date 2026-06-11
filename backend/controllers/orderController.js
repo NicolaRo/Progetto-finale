@@ -12,12 +12,7 @@ const {updateProductStock, restoreProductStock} = require ('../utils/stockHelper
 //1. Create an order
 const createOrder = async (req, res) => {
     try {
-        //console.log for debug
-        console.log(req.body);
         const {products} = req.body;
-
-        //console.log for debug
-        console.log("products:", products);
 
         //1.1. Validate conditions under which we can accept a new order creation
         if(!Array.isArray(products) || products.length === 0){
@@ -25,9 +20,6 @@ const createOrder = async (req, res) => {
         }
 
         for (let p of products) {
-
-            //Console log for debug
-            console.log("validating:", p.product, p.orderedQuantity);
 
             if(!p.product || !p.orderedQuantity || p.orderedQuantity <= 0) {
                 return res.status(400).json({message: "Every product must have a valid ID and positive quantity"});
@@ -52,9 +44,6 @@ const createOrder = async (req, res) => {
         //1.3. Update product stock availability
         await updateProductStock(products);
 
-        //Console.log for debug
-        console.log("Sto per creare l'ordine...");
-
         //1.4. Create order
         const [order] = await Order.create (
             [
@@ -77,10 +66,6 @@ const createOrder = async (req, res) => {
 //2.1 Read orders
 const getOrders = async (req, res) => {
     try {
-
-        //Console log for debug
-        console.log("getOrders chiamato, user:", req.user);
-
 
         //2.1.1. Dynamic filter
         const filter = {};
@@ -200,13 +185,11 @@ const updateOrder = async (req, res) => {
         // =========================
         if (containers && containers.length > 0) {
 
-            console.log("containers ricevuti:", containers);
-
             const assignedContainerIds = [];
 
             for (const selection of containers) {
 
-                console.log("Cerco:", selection.type, "Container ready to use");
+                console.log("Finding:", selection.type, "Container ready to use");
 
                 const available = await Container.find({
                     type: selection.type,
@@ -253,7 +236,7 @@ const updateOrder = async (req, res) => {
                 p => p.containerType && p.containerQuantity > 0
             ).length;
 
-            console.log(`packedProducts: ${packedCount} / ${order.products.length}`);
+            /* console.log(`packedProducts: ${packedCount} / ${order.products.length}`); */ // CONSOLE LOG// 
 
             if (packedCount === order.products.length && order.products.length > 0) {
                 order.status = "Order shipped";
@@ -263,20 +246,14 @@ const updateOrder = async (req, res) => {
                 order.status = "Order created";
             }
 
-            console.log("NEW ORDER STATUS:", order.status);
-            console.log("containers dopo push:", order.containers);
+            /* console.log("NEW ORDER STATUS:", order.status);
+            console.log("containers after push:", order.containers); */  // CONSOLE LOG// 
         }
 
         // =========================
         // ORDER COMPLETION (Producer checkin)
         // =========================
         if (req.body.status === "Order closed") {
-
-            //Console log for debug
-            console.log("Order closed triggered");
-            console.log("stripePaymentIntentId:", order.stripePaymentIntentId);
-            console.log("depositStatus:", order.depositStatus);
-            console.log("depositAmount:", order.depositAmount);
 
             //Update all the containers from the order as "Container ready to use"
             for (const containerId of order.containers) {
@@ -291,10 +268,6 @@ const updateOrder = async (req, res) => {
                     // get the session to read the actual payment_intent
                     const session = await stripe.checkout.sessions.retrieve(order.stripePaymentIntentId);
 
-                    //console.log for debug
-                    console.log("payment_intent from the session:", session.stripePaymentIntent);
-                    console.log("session completa:", JSON.stringify(session, null, 2));
-
                     await stripe.refunds.create({
                         payment_intent: session.payment_intent,
                         amount: order.depositAmount *100,
@@ -302,9 +275,6 @@ const updateOrder = async (req, res) => {
 
                     //Update the refund status
                     order.depositStatus = "refunded";
-
-                    //Console.log for debug
-                    console.log(`${order.depositAmount} Deposit for the order:${order._id} has been refunded`);
                 
                 } catch (stripeError) {
                     //log the error without preventing the order closure
@@ -331,8 +301,6 @@ const updateOrder = async (req, res) => {
 const deleteOrder = async (req, res) => {
     
     try {
-        //Console.log for debug
-        console.log(req.user)
         const order = await Order.findById(req.params.id);
         if(!order)
             return res.status(404).json({message: "Order not found"});
