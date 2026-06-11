@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext";
 
 import googleLogin from "../assets/googleLogin.png";
 import ShowPassword from "../assets/show-password.png";
-import Account from '../assets/account-icon.png';
+import Account from "../assets/account-icon.png";
 import ForgotPassword from "./ForgotPassword";
 
 function LoginPage() {
@@ -20,7 +20,7 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const [showForgotPassword, setShowForgotPassword] = useState (false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const provider = new GoogleAuthProvider();
 
@@ -45,7 +45,11 @@ function LoginPage() {
 
     //Read the data
     const logInData = await googleAuth.json();
-    login(logInData.token, { role: logInData.role, name: logInData.name, _id: logInData._id });
+    login(logInData.token, {
+      role: logInData.role,
+      name: logInData.name,
+      _id: logInData._id,
+    });
 
     console.log(logInData);
 
@@ -92,10 +96,13 @@ function LoginPage() {
     //Read the data
     const logInData = await response.json();
 
-    if (!response.ok)
-      return alert("Invalid credentials, please try again");
-    
-    login(logInData.token, { role: logInData.role, name: logInData.name, _id: logInData._id });
+    if (!response.ok) return alert("Invalid credentials, please try again");
+
+    login(logInData.token, {
+      role: logInData.role,
+      name: logInData.name,
+      _id: logInData._id,
+    });
 
     //console log for debug
     console.log(logInData);
@@ -160,14 +167,13 @@ function LoginPage() {
     <>
       {showLogin ? (
         <div className="login-container">
-          
           <h3 className="container-title">Welcome in PackBack</h3>
-          
+
           <h4 className="container-subtitle">
             Reuseable packagin for a greener world
           </h4>
 
-        <div className="google-login-container">
+          <div className="google-login-container">
             <button
               className="btn-google-auth"
               placeholder="login with Google"
@@ -176,16 +182,16 @@ function LoginPage() {
               <img
                 className="icon-google-login"
                 src={googleLogin}
-                alt="login with google"/>
+                alt="login with google"
+              />
             </button>
-        </div>
-          
-            <p >
-           Or log in with your credentials
-          </p>
+          </div>
+
+          <p>Or log in with your credentials</p>
           <div className="input-container">
-            <label className="label"
-                htmlFor="email">Email</label>
+            <label className="label" htmlFor="email">
+              Email
+            </label>
             <input
               className="input-text"
               id="email"
@@ -195,36 +201,41 @@ function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
             />
-            <label className="label"
-                htmlFor="password">Password</label>
+            <label className="label" htmlFor="password">
+              Password
+            </label>
             <input
-                className="input-text"
-                id="password"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                minLength="8"
-                placeholder="Choose a password"
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyDown={(e)=> {if(e.key==="Enter")handleLogIn(e)}}
+              className="input-text"
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={password}
+              minLength="8"
+              placeholder="Choose a password"
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleLogIn(e);
+              }}
             />
             <button
-                className="show-pwd-btn"
-                onClick={() => setShowPassword(!showPassword)}
+              className="show-pwd-btn"
+              onClick={() => setShowPassword(!showPassword)}
             >
-                {showPassword ? "Hide" : "Show password"}
-                <img
+              {showPassword ? "Hide" : "Show password"}
+              <img
                 className="icon-show-pwd"
                 src={ShowPassword}
                 alt="show/hide password"
-                />
+              />
             </button>
             <button
               className="forgot-pwd-btn"
               onClick={() => setShowForgotPassword(!showForgotPassword)}
-              > Forgot password?
+            >
+              {" "}
+              Forgot password?
             </button>
             {showForgotPassword && <ForgotPassword />}
-            </div>
+          </div>
           <div className="login-buttons-container">
             <button className="login-btn" type="submit" onClick={handleLogIn}>
               Log In
@@ -233,68 +244,65 @@ function LoginPage() {
         </div>
       ) : (
         <div className="signin-container">
-
           <div className="signup-img-container">
             <h3 className="container-title">Sign Up</h3>
-            <img
-              className="account-icon"
-              src={Account}
-              alt="Account icon"
-            />
+            <img className="account-icon" src={Account} alt="Account icon" />
           </div>
 
-<div className="role-selection-container">
-  <h3>Choose your account type:</h3>
-  <div className="checkbox-wrapper-35">
-    <input
-      id="switch"
-      name="switch"
-      type="checkbox"
-      className="switch"
-      checked={role === "Producer"}
-      onChange={() => {
-        setShowRole(!showRole);
-        setRole(showRole ? "Producer" : "User");
-      }}
-    />
-    <label htmlFor="switch">
-      <span className="switch-x-text">Register as: </span>
-      <span className="switch-x-toggletext">
-        <span className="switch-x-unchecked">
-          <span className="switch-x-hiddenlabel">Unchecked: </span>User
-        </span>
-        <span className="switch-x-checked">
-          <span className="switch-x-hiddenlabel">Checked: </span>Producer
-        </span>
-      </span>
-    </label>
-  </div>
+          <div className="role-selection-container">
+            <h3>Choose your account type:</h3>
+            <div className="checkbox-wrapper-35">
+              <input
+                id="switch"
+                name="switch"
+                type="checkbox"
+                className="switch"
+                checked={role === "Producer"}
+                onChange={() => {
+                  setShowRole(!showRole);
+                  setRole(showRole ? "Producer" : "User");
+                }}
+              />
+              <label htmlFor="switch">
+                <span className="switch-x-text">Register as: </span>
+                <span className="switch-x-toggletext">
+                  <span className="switch-x-unchecked">
+                    <span className="switch-x-hiddenlabel">Unchecked: </span>
+                    User
+                  </span>
+                  <span className="switch-x-checked">
+                    <span className="switch-x-hiddenlabel">Checked: </span>
+                    Producer
+                  </span>
+                </span>
+              </label>
+            </div>
 
-  {role === "Producer" ? (
-    <p>A Producer can sell products</p>
-  ) : (
-    <p>A User can buy products allowing packaging reuse</p>
-  )}
-</div>
-          
+            {role === "Producer" ? (
+              <p>A Producer can sell products</p>
+            ) : (
+              <p>A User can buy products allowing packaging reuse</p>
+            )}
+          </div>
 
           <div className="input-containers">
-          <div className="input-name-container">
-              <label className="label"
-                  htmlFor="name">Name</label>
-                <input
-                  className="input-text"
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="I.e.: John"
-                />
+            <div className="input-name-container">
+              <label className="label" htmlFor="name">
+                Name
+              </label>
+              <input
+                className="input-text"
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="I.e.: John"
+              />
             </div>
 
             <div className="input-surname-container">
-              <label className="label" 
-                htmlFor="surname">Surname
+              <label className="label" htmlFor="surname">
+                Surname
               </label>
               <input
                 className="input-text"
@@ -307,66 +315,49 @@ function LoginPage() {
             </div>
 
             <div className="input-pwd-container-btn">
+              <div className="input-email-container">
+                <label className="label" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  className="input-text"
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="I.e.: john.doe@example.com"
+                />
+              </div>
 
-            <div className="input-email-container">
-              <label className="label"
-                  htmlFor="email">Email</label>
-              <input
-                className="input-text"
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="I.e.: john.doe@example.com"
-              />
-            </div>
-
-                <div className="input-container">
-                  <label className="label"
-                  htmlFor="password">Password
-                  </label>
-                  <input
-                      className="input-text"
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      minLength="8"
-                      placeholder="Choose a password"
-                      onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <button
-                    className="show-pwd-btn"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
+              <div className="input-container">
+                <label className="label" htmlFor="password">
+                  Password
+                </label>
+                <input
+                  className="input-text"
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  minLength="8"
+                  placeholder="Choose a password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  className="show-pwd-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? "Hide" : "Show password"}
-                    <img
-                      className="icon-show-pwd"
-                      src={ShowPassword}
-                      alt="show/hide password"
-                    />
-                  </button>
-                </div>
-            
-                  
-          </div>
+                  <img
+                    className="icon-show-pwd"
+                    src={ShowPassword}
+                    alt="show/hide password"
+                  />
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/*toggle button to choose which profile to register with */}
-     {/*     <div class="checkbox-wrapper-35">
-  <input value="private" name="switch" id="switch" type="checkbox" class="switch">
-  <label for="switch">
-    <span class="switch-x-text">This is </span>
-    <span class="switch-x-toggletext">
-      <span class="switch-x-unchecked"><span class="switch-x-hiddenlabel">Unchecked: </span>Off</span>
-      <span class="switch-x-checked"><span class="switch-x-hiddenlabel">Checked: </span>On</span>
-    </span>
-  </label>
-</div> */}
-          
-          <button 
-            className="register-btn"
-            type="submit" 
-            onClick={handleSubmit}>
+          <button className="register-btn" type="submit" onClick={handleSubmit}>
             Register
           </button>
         </div>
@@ -375,30 +366,29 @@ function LoginPage() {
       {/*Toggle to activate sign in form (default is the login screen) */}
       <div className="signUp-container">
         <div className="signup-text">
-          {showLogin ? 
-          <div className="join-us-claim">
-            <h4>Not a member yet?</h4>
-            <br></br>
-            <p>Join our community and become part of the changing world</p>
-          </div>
-           : <div className="join-us-claim">
-           <h4>PackBack</h4>
-           <br></br>
-           <p>Sustainable shopping for a greener world</p>
-         </div>
-          }
-          
+          {showLogin ? (
+            <div className="join-us-claim">
+              <h4>Not a member yet?</h4>
+              <br></br>
+              <p>Join our community and become part of the changing world</p>
+            </div>
+          ) : (
+            <div className="join-us-claim">
+              <h4>PackBack</h4>
+              <br></br>
+              <p>Sustainable shopping for a greener world</p>
+            </div>
+          )}
         </div>
-      <button
-        className="toogle-login"
-        onClick={() => {
-          setShowLogin(!showLogin);
-        }}
-      >
-        {showLogin ? "Sign Up" : "Back to login"}
-      </button>
+        <button
+          className="toogle-login"
+          onClick={() => {
+            setShowLogin(!showLogin);
+          }}
+        >
+          {showLogin ? "Sign Up" : "Back to login"}
+        </button>
       </div>
-      
     </>
   );
 }

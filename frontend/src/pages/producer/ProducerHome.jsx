@@ -2,10 +2,10 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
 import ProducerProductCard from "../../components/ProducerProductCard";
-import RecycleBuddy from "../../components/RecycleBuddy";
+/* import RecycleBuddy from "../../components/RecycleBuddy"; */
 
-function ProducerHome() {
-  const { token } = useContext(AuthContext);
+function ProducerHome({setShowGreenAssistant}) {
+  const { token, producer } = useContext(AuthContext);
 
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -18,7 +18,8 @@ function ProducerHome() {
   const [selectedIngredientId, setSelectedIngredientId] = useState("");
   const [myProducts, setMyProducts] = useState([]);
   const [refresh, setRefresh] = useState(0);
-  const [showGreenAssistant, setShowGreenAssistant] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  
   const handleCreateProduct = async (e) => {
     e.preventDefault();
     if (!productName || !productDescription || !productType || !productPrice || !productQuantity || !productUnit) {
@@ -91,7 +92,14 @@ function ProducerHome() {
   return (
     <>
       <Navbar setShowGreenAssistant={setShowGreenAssistant} />
-      {showGreenAssistant && <RecycleBuddy onClose={() => setShowGreenAssistant(false)}/> }
+      {showWelcome && (
+        <div className="toast-welcome">
+          <div className="welcome-msg">
+          Welcome back, {producer?.name}!
+          </div>
+          <button  className="close-welcome-btn" onClick={() => setShowWelcome(false)}>✕</button>
+        </div>
+      )}
       <div className="create-product-container">
       <h3 className="component-title">Add a new product</h3>
         <div className="add-new-product">

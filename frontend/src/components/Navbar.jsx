@@ -70,7 +70,9 @@ function Navbar({setShowCart, setShowOrders, showOrders, orders =  [], setShowGr
         {user?.role === "Producer" && (
           <>
           <button className="orders-btn" onClick={() => navigate("/orders")}>
-            <img className="orders-icon" src={OrderIcon} alt="Orders" />
+            <img 
+              className="orders-icon"
+              src={orders.some(o => o.status === "Order shipped") ? OrderIcon : OrderIconEmpty} />
           </button>
           <button className="green-assistant-btn" onClick={() => setShowGreenAssistant(true)}>
             <img className="green-assistant-icon" src={GreenAssistantIcon} alt="Green Assistant" /></button>

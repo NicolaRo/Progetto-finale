@@ -8,7 +8,7 @@ import { getOrders } from "../../services/orderService";
 
 import ProducerOrder from "../../components/ProducerOrder";
 
-function OrderPage() {
+function OrderPage({setShowGreenAssistant}) {
   
   const [orders, setOrders] = useState([]);
   const { token } = useContext(AuthContext);
@@ -30,7 +30,7 @@ function OrderPage() {
   return (
     <>
       
-      <Navbar />
+      <Navbar setShowGreenAssistant={setShowGreenAssistant}/>
       <button className="back-btn" onClick={() => navigate("/ProducerHome")}>
         Back to myHome
       </button>

@@ -3,9 +3,21 @@ import { AuthContext } from "../context/AuthContext";
 
 function RecycleBuddy({onClose}) {
     const {token, user} = useContext(AuthContext);
-    const [messages, setMessages] = useState([
-        {role: "assistant", content: "Hi! I'm RecycleBuddy. Ask me anything about sustainability, eco-friendly living, or how PackBack helps the planet!"}
-    ]);
+    
+    const initialMessage = 
+        user?.role === "Producer"
+        ? {
+            role: "assistant",
+            content:
+                "Hi! I'm GreenAssistant. I can help you manage sustainable logistics, optimize packing workflows, reduce waste and improve your green operations."
+        } : {
+            role: "assistant",
+            content:
+            "Hi! I'm RecycleBuddy. ask me anything about sustainability, eco-friendly living, or how PackBack helps the planet!"
+        };
+    
+    const [messages, setMessages] = useState([initialMessage]);
+
     const [input, setInput] = useState("");
         const [isLoading, setIsLoading] = useState (false);
         const bottomRef = useRef(null);
@@ -50,7 +62,13 @@ function RecycleBuddy({onClose}) {
                 <div className="chat-drawer"
                 onClick = {(e) =>  e.stopPropagation()}>
                     <div className="chat-header">
-                        <h3>Recycle Buddy</h3>
+                        <h3>
+                            {user?.role === "Producer"
+                            ?
+                            "GreenAssistant"
+                            :
+                            "RecycleBuddy"
+                        }</h3>
                         <button className="bt-close-chat"
                         onClick={onClose}>Close chat </button>
                     </div>
@@ -72,7 +90,12 @@ function RecycleBuddy({onClose}) {
                         <input
                         className="chat-input"
                         type="text"
-                        placeholder="Ask me something green..."
+                        placeholder={
+                            user?.role === "Producer" ? 
+                            "Ask about logistics, packaging or sustainability" 
+                            :
+                            "Ask me something green..."
+                        }
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={(e) => {if (e.key === "Enter") sendMessage();
