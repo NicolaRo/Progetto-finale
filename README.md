@@ -3,8 +3,8 @@
 
 A clean, lightweight app with a smooth friendly UI.
 
-Live Demo: **[will be available here soon]**
-Hosting: **Netlify** 🚀
+Live Demo: **https://packback-greengrocery.netlify.app/login**
+Hosting: **Netlify & Render ** 🚀
 
 ---
 
@@ -23,14 +23,6 @@ Hosting: **Netlify** 🚀
 
 The production build is automatically deployed via **Netlify**.
 Live site:
-👉 [will provided a link here when ready]
+👉 [https://packback-greengrocery.netlify.app/login]
 
 ---
-
-## 🖼️ App Screenshots
-
- 
-=======
-# Progetto-finale
-Logistic platform to deliver goods with reusable packaging.
-
