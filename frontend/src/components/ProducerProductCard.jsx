@@ -11,7 +11,8 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
     unit: product.unit,
   });
 
-  const handleAdd = () => onUpdateQuantity(product._id, product.quantity + Number(qtyChange));
+  const handleAdd = () =>
+    onUpdateQuantity(product._id, product.quantity + Number(qtyChange));
   const handleRemove = () => {
     const newQty = product.quantity - Number(qtyChange);
     if (newQty < 0) return alert("Quantity cannot be negative");
@@ -34,10 +35,16 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
         <div className="ppc-title">
           <p className="ppc-name">{product.name}</p>
           <p className="ppc-type">{product.type}</p>
-          <p className={`ppc-qty ${product.quantity === 0 ? "out-of-stock" : ""}`}>
+          <p
+            className={`ppc-qty ${
+              product.quantity === 0 ? "out-of-stock" : ""
+            }`}
+          >
             Stock: {product.quantity} {product.unit}
           </p>
-          <p className="ppc-price">{product.price}€/{product.unit}</p>
+          <p className="ppc-price">
+            {product.price}€/{product.unit}
+          </p>
         </div>
       </div>
 
@@ -48,12 +55,18 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
           value={qtyChange}
           onChange={(e) => setQtyChange(e.target.value)}
         >
-          {[1,2,3,4,5,6,7,8,9,10].map(n => (
-            <option key={n} value={n}>{n}</option>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+            <option key={n} value={n}>
+              {n}
+            </option>
           ))}
         </select>
-        <button className="ppc-btn-add" onClick={handleAdd}>+ Add</button>
-        <button className="ppc-btn-remove" onClick={handleRemove}>- Remove</button>
+        <button className="ppc-btn-add" onClick={handleAdd}>
+          + Add
+        </button>
+        <button className="ppc-btn-remove" onClick={handleRemove}>
+          - Remove
+        </button>
       </div>
 
       {/* EDIT */}
@@ -63,24 +76,54 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
 
       {isEditing && (
         <div className="ppc-edit-form">
-          <input className="ppc-input" value={editData.name} onChange={(e) => setEditData({...editData, name: e.target.value})} placeholder="Name" />
-          <input className="ppc-input" value={editData.description} onChange={(e) => setEditData({...editData, description: e.target.value})} placeholder="Description" />
-          <input className="ppc-input" type="number" value={editData.price} onChange={(e) => setEditData({...editData, price: e.target.value})} placeholder="Price" />
-          <select className="ppc-input" value={editData.type} onChange={(e) => setEditData({...editData, type: e.target.value})}>
+          <input
+            className="ppc-input"
+            value={editData.name}
+            onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+            placeholder="Name"
+          />
+          <input
+            className="ppc-input"
+            value={editData.description}
+            onChange={(e) =>
+              setEditData({ ...editData, description: e.target.value })
+            }
+            placeholder="Description"
+          />
+          <input
+            className="ppc-input"
+            type="number"
+            value={editData.price}
+            onChange={(e) =>
+              setEditData({ ...editData, price: e.target.value })
+            }
+            placeholder="Price"
+          />
+          <select
+            className="ppc-input"
+            value={editData.type}
+            onChange={(e) => setEditData({ ...editData, type: e.target.value })}
+          >
             <option value="Vegetables">Vegetables</option>
             <option value="Fruits">Fruits</option>
             <option value="Dry">Dry</option>
             <option value="Frozen">Frozen</option>
             <option value="Liquid">Liquid</option>
           </select>
-          <select className="ppc-input" value={editData.unit} onChange={(e) => setEditData({...editData, unit: e.target.value})}>
+          <select
+            className="ppc-input"
+            value={editData.unit}
+            onChange={(e) => setEditData({ ...editData, unit: e.target.value })}
+          >
             <option value="Kg">Kg</option>
             <option value="Lt">Lt</option>
             <option value="Gr">Gr</option>
             <option value="Cl">Cl</option>
             <option value="Piece">Piece</option>
           </select>
-          <button className="ppc-btn-save" onClick={handleEdit}>Save changes</button>
+          <button className="ppc-btn-save" onClick={handleEdit}>
+            Save changes
+          </button>
         </div>
       )}
     </div>

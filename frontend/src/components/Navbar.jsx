@@ -10,15 +10,16 @@ import LogoutIcon from "../assets/logout-icon.png";
 import OrderIcon from "../assets/order-icon.png";
 import OrderIconEmpty from "../assets/empty-order-icon.png";
 
-function Navbar({setShowCart, setShowOrders, showOrders, orders =  [], setShowGreenAssistant = () => {}}) {
+function Navbar({
+  setShowCart,
+  setShowOrders,
+  showOrders,
+  orders = [],
+  setShowGreenAssistant = () => {},
+}) {
   const { cart } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-
- // console.log for debug
-
- console.log("orders in navbar:", orders);
- console.log("has shipped:", orders.some(o => o.status === "Order shipped"));
 
   return (
     <>
@@ -29,58 +30,77 @@ function Navbar({setShowCart, setShowOrders, showOrders, orders =  [], setShowGr
             {user ? `Welcome: ${user.name}` : "Caricamento..."}
           </h4>
           <div className="PP-container">
-          <button
-            className="btn-logout"
-            onClick={() => {
-              logout();
-              navigate("/login");
-            }}
-          >
-            <img
-              className="account-logout-icon"
-              src={LogoutIcon}
-              alt="log out"
-            />
-            log out
-          </button>
-      </div>
+            <button
+              className="btn-logout"
+              onClick={() => {
+                logout();
+                navigate("/login");
+              }}
+            >
+              <img
+                className="account-logout-icon"
+                src={LogoutIcon}
+                alt="log out"
+              />
+              log out
+            </button>
+          </div>
         </div>
         <div className="Navbar-btn-container">
-        {user?.role === "User" && (
-          <button className="cart-btn" onClick={() => setShowCart(true)}>
-            <img
+          {user?.role === "User" && (
+            <button className="cart-btn" onClick={() => setShowCart(true)}>
+              <img
                 className="cart-icon"
                 src={cart.length > 0 ? FullShoppingCart : ShoppingCart}
                 alt="Cart"
-            />
-          </button>
-        )}
+              />
+            </button>
+          )}
 
-        {user?.role === "User" && (
+          {user?.role === "User" && (
             <button
-                className="orders-btn "
-                onClick={()=> setShowOrders(!showOrders)}>
-                    <img
-                        className="orders-icon"
-                        src={orders.some(o => o.status === "Order shipped") ? OrderIcon : OrderIconEmpty}
-                    />
-                </button>
-        )}
+              className="orders-btn "
+              onClick={() => setShowOrders(!showOrders)}
+            >
+              <img
+                className="orders-icon"
+                src={
+                  orders.some((o) => o.status === "Order shipped")
+                    ? OrderIcon
+                    : OrderIconEmpty
+                }
+              />
+            </button>
+          )}
 
-        {user?.role === "Producer" && (
-          <>
-          <button className="orders-btn" onClick={() => navigate("/orders")}>
-            <img 
-              className="orders-icon"
-              src={orders.some(o => o.status === "Order shipped") ? OrderIcon : OrderIconEmpty} />
-          </button>
-          <button className="green-assistant-btn" onClick={() => setShowGreenAssistant(true)}>
-            <img className="green-assistant-icon" src={GreenAssistantIcon} alt="Green Assistant" /></button>
-          </>
-          
-        )}
+          {user?.role === "Producer" && (
+            <>
+              <button
+                className="orders-btn"
+                onClick={() => navigate("/orders")}
+              >
+                <img
+                  className="orders-icon"
+                  src={
+                    orders.some((o) => o.status === "Order shipped")
+                      ? OrderIcon
+                      : OrderIconEmpty
+                  }
+                />
+              </button>
+              <button
+                className="green-assistant-btn"
+                onClick={() => setShowGreenAssistant(true)}
+              >
+                <img
+                  className="green-assistant-icon"
+                  src={GreenAssistantIcon}
+                  alt="Green Assistant"
+                />
+              </button>
+            </>
+          )}
         </div>
-
       </div>
     </>
   );

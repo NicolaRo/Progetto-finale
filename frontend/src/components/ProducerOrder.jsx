@@ -11,11 +11,11 @@ function ProducerOrder({ orders, setRefresh }) {
 
   //divide orders per status new orders goes on top, closed orders into a collapsable
 
-  const newOrders = orders.filter(o => o.status === "Order created");
-  const preparingOrders = orders.filter(o => o.status === "Preparing order");
-  const shippedOrder = orders.filter(o => o.status === "Order shipped");
+  const newOrders = orders.filter((o) => o.status === "Order created");
+  const preparingOrders = orders.filter((o) => o.status === "Preparing order");
+  const shippedOrder = orders.filter((o) => o.status === "Order shipped");
   const closedOrders = orders
-    .filter (o => o.status === "Order closed")
+    .filter((o) => o.status === "Order closed")
     .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
   const handleContainerChange = (productId, orderId, field, value) => {
@@ -60,7 +60,8 @@ function ProducerOrder({ orders, setRefresh }) {
       }
     );
 
-    if (!response.ok) return alert("Could not update order state, please try later.");
+    if (!response.ok)
+      return alert("Could not update order state, please try later.");
 
     setRefresh((prev) => prev + 1);
   };
@@ -87,18 +88,18 @@ function ProducerOrder({ orders, setRefresh }) {
     }
   };
 
-  const renderCards = (orderList) => 
+  const renderCards = (orderList) =>
     orderList.map((order) => (
       <ProducerOrderCard
-      key={order._id}
-      user={user}
-      order={order}
-      containerSelections={containerSelections}
-      handleContainerChange={handleContainerChange}
-      handlePackedProduct={handlePackedProduct}
-      handleContainerCheckin={handleContainerCheckin}
-    />
-  ));
+        key={order._id}
+        user={user}
+        order={order}
+        containerSelections={containerSelections}
+        handleContainerChange={handleContainerChange}
+        handlePackedProduct={handlePackedProduct}
+        handleContainerCheckin={handleContainerCheckin}
+      />
+    ));
 
   return (
     <div className="orders-container">
@@ -126,16 +127,18 @@ function ProducerOrder({ orders, setRefresh }) {
         </div>
       )}
 
-      { /* COLLAPSABLE CLOSED ORDERS */}
+      {/* COLLAPSABLE CLOSED ORDERS */}
       <div className="producer-orders-section">
         <button
           className="toggle-orders-section"
-          onClick={() => setShowClosed(!showClosed)}>
-            {showClosed ? "Hide closed orders △" : `Show closed ordes ▼ (${closedOrders.length})`}
-          </button>
-          {showClosed && renderCards(closedOrders)}
+          onClick={() => setShowClosed(!showClosed)}
+        >
+          {showClosed
+            ? "Hide closed orders △"
+            : `Show closed ordes ▼ (${closedOrders.length})`}
+        </button>
+        {showClosed && renderCards(closedOrders)}
       </div>
-      
     </div>
   );
 }

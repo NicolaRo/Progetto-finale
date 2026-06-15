@@ -104,9 +104,6 @@ function LoginPage() {
       _id: logInData._id,
     });
 
-    //console log for debug
-    console.log(logInData);
-
     //Navigate to specific page depending on the role
     if (logInData.role === "Producer") {
       navigate("/ProducerHome");

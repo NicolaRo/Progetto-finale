@@ -22,40 +22,40 @@ function UserHome() {
 
   const { token, user } = useContext(AuthContext);
 
-  // Caricamento iniziale prodotti
+  //Loading products
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then(r => r.json())
-      .then(data => setShopProducts(data));
+      .then((r) => r.json())
+      .then((data) => setShopProducts(data));
   }, [token]);
 
-  // Fetch ordini
+  //Fetch orders
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then(r => r.json())
-      .then(data => setOrders(Array.isArray(data) ? data : []));
+      .then((r) => r.json())
+      .then((data) => setOrders(Array.isArray(data) ? data : []));
   }, [token, refresh]);
 
   //Fetch green tips from OpenAI
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/ai/hero-tip`,{
+    fetch(`${import.meta.env.VITE_API_URL}/api/ai/hero-tip`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
     })
-    .then(r => r.json())
-    .then(data => setHeroTip(data.tip));
+      .then((r) => r.json())
+      .then((data) => setHeroTip(data.tip));
   }, [token]);
 
-  // Ricerca + filtri — chiamata manuale
+  //Search + filters
   const fetchProducts = async (nameQuery, filters, producer) => {
     const params = new URLSearchParams();
     if (nameQuery) params.append("name", nameQuery);
-    if (filters) filters.forEach(f => params.append("type", f));
+    if (filters) filters.forEach((f) => params.append("type", f));
     if (producer) params.append("producerId", producer);
 
     const response = await fetch(
@@ -63,18 +63,20 @@ function UserHome() {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     const data = await response.json();
-    setShopProducts(Array.isArray(data)? data : []);
+    setShopProducts(Array.isArray(data) ? data : []);
   };
 
-  const producers = [...new Map(
-    shopProducts
-      .filter(p => p.producerId)
-      .map(p => [p.producerId._id, p.producerId])
-  ).values()];
+  const producers = [
+    ...new Map(
+      shopProducts
+        .filter((p) => p.producerId)
+        .map((p) => [p.producerId._id, p.producerId])
+    ).values(),
+  ];
 
   const toggleFilter = (type) => {
     const updated = activeFilters.includes(type)
-      ? activeFilters.filter(f => f !== type)
+      ? activeFilters.filter((f) => f !== type)
       : [...activeFilters, type];
     setActiveFilters(updated);
     fetchProducts(query, updated, selectedProducer);
@@ -87,27 +89,42 @@ function UserHome() {
 
   return (
     <>
-      <Navbar setShowCart={setShowCart} setShowOrders={setShowOrders} showOrders={showOrders} orders = {orders}/>
+      <Navbar
+        setShowCart={setShowCart}
+        setShowOrders={setShowOrders}
+        showOrders={showOrders}
+        orders={orders}
+      />
       {showWelcome && (
         <div className="toast-welcome">
-          <div className="welcome-msg">
-          Welcome back, {user?.name}!
-          </div>
-          <button  className="close-welcome-btn" onClick={() => setShowWelcome(false)}>✕</button>
+          <div className="welcome-msg">Welcome back, {user?.name}!</div>
+          <button
+            className="close-welcome-btn"
+            onClick={() => setShowWelcome(false)}
+          >
+            ✕
+          </button>
         </div>
       )}
 
       {showCart && <Cart setShowCart={setShowCart} />}
-      {showOrders && <UserOrder orders={orders} setRefresh={setRefresh} setShowOrders={setShowOrders} />}
+      {showOrders && (
+        <UserOrder
+          orders={orders}
+          setRefresh={setRefresh}
+          setShowOrders={setShowOrders}
+        />
+      )}
 
       <div className="hero-banner">
         <h3 className="hero-title">Green tip of the day</h3>
         <p className="hero-tip">{heroTip || "Loading..."}</p>
-        <button className="hero-chat-btn" 
-        onClick={() => setShowChat(true)}>Chat with RecycleBuddy</button>
+        <button className="hero-chat-btn" onClick={() => setShowChat(true)}>
+          Chat with RecycleBuddy
+        </button>
       </div>
-      {showChat && <RecycleBuddy onClose={() => setShowChat(false)}/>}
-        
+      {showChat && <RecycleBuddy onClose={() => setShowChat(false)} />}
+
       <div className="research-container">
         <h3 className="page-title">What do you need today?</h3>
 
@@ -118,19 +135,29 @@ function UserHome() {
             placeholder="Search products..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => { if (e.key === "Enter") fetchProducts(query, activeFilters, selectedProducer); }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter")
+                fetchProducts(query, activeFilters, selectedProducer);
+            }}
           />
-          <button className="search-button" onClick={() => fetchProducts(query, activeFilters, selectedProducer)}>
+          <button
+            className="search-button"
+            onClick={() =>
+              fetchProducts(query, activeFilters, selectedProducer)
+            }
+          >
             Search
           </button>
         </div>
 
         <div className="filters-container">
           <div className="filter-tag-container">
-            {["Vegetables", "Fruits", "Dry", "Frozen", "Liquid"].map(type => (
+            {["Vegetables", "Fruits", "Dry", "Frozen", "Liquid"].map((type) => (
               <button
                 key={type}
-                className={`filter-btn ${activeFilters.includes(type) ? "active" : ""}`}
+                className={`filter-btn ${
+                  activeFilters.includes(type) ? "active" : ""
+                }`}
                 onClick={() => toggleFilter(type)}
               >
                 {type}
@@ -145,8 +172,10 @@ function UserHome() {
               onChange={handleProducerChange}
             >
               <option value="">Choose Producer...</option>
-              {producers.map(p => (
-                <option key={p._id} value={p._id}>{p.name}</option>
+              {producers.map((p) => (
+                <option key={p._id} value={p._id}>
+                  {p.name}
+                </option>
               ))}
             </select>
           </div>

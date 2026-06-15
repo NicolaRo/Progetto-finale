@@ -1,35 +1,36 @@
 //Import createContext to set component's state between non relative files
-import { createContext, useState} from "react";
+import { createContext, useState } from "react";
 
-//Save the cart state 
+//Save the cart state
 const CartContext = createContext();
 
-//the function CartProvider 
-function CartProvider({children}) {
-    const [cart, setCart] = useState([]);
+//the function CartProvider
+function CartProvider({ children }) {
+  const [cart, setCart] = useState([]);
 
-    //addToCart store the selected products and userData 
-    const addToCart = (product) => {
-    
-        setCart([...cart, product]);
-    };
+  //addToCart store the selected products and userData
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
 
-    //removeFromCart will remove selected products from the cart
-    const removeFromCart = (productId) => {
-        console.log("removeFromCart chiamato con:", productId);
-        setCart(cart.filter(item => item.product !== productId));
-    };
+  //removeFromCart will remove selected products from the cart
+  const removeFromCart = (productId) => {
+    console.log("removeFromCart chiamato con:", productId);
+    setCart(cart.filter((item) => item.product !== productId));
+  };
 
-    //clearCart remove the selected products from the cart
-    const clearCart = () => {
-        setCart([]);
-    };
+  //clearCart remove the selected products from the cart
+  const clearCart = () => {
+    setCart([]);
+  };
 
-    return (
-        <CartContext.Provider value={{cart, addToCart, removeFromCart, clearCart}}>
-        {children}
-        </CartContext.Provider>
-    );
+  return (
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, clearCart }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }
 
-export {CartContext, CartProvider}; 
+export { CartContext, CartProvider };

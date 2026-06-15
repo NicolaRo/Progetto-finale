@@ -5,7 +5,6 @@ import OrderCard from "./OrderCard";
 
 import ShippingIcon from '../assets/shipping-order.gif';
 
-
 function UserOrder({ orders, setRefresh }) {
   const { token } = useContext(AuthContext);
 
@@ -25,7 +24,6 @@ function UserOrder({ orders, setRefresh }) {
       alert("Could not update container status");
     }
   };
-
 
   const isCompleted = (order) => order.status === "Order closed";
   const isShipped = (order) => order.status === "Order shipped";

@@ -8,8 +8,7 @@ import { getOrders } from "../../services/orderService";
 
 import ProducerOrder from "../../components/ProducerOrder";
 
-function OrderPage({setShowGreenAssistant}) {
-  
+function OrderPage({ setShowGreenAssistant }) {
   const [orders, setOrders] = useState([]);
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -21,16 +20,15 @@ function OrderPage({setShowGreenAssistant}) {
         const data = await getOrders(token);
         setOrders(data);
       } catch (error) {
-                console.log("Errore fetch ordini:", error);
-            }
-        };
-        fetchOrders();
-      }, [token, refresh]);
+        console.log("Errore fetch ordini:", error);
+      }
+    };
+    fetchOrders();
+  }, [token, refresh]);
 
   return (
     <>
-      
-      <Navbar setShowGreenAssistant={setShowGreenAssistant}/>
+      <Navbar setShowGreenAssistant={setShowGreenAssistant} />
       <button className="back-btn" onClick={() => navigate("/ProducerHome")}>
         Back to myHome
       </button>
