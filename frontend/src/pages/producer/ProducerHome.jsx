@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import ProducerProductCard from "../../components/ProducerProductCard";
 
 function ProducerHome({ setShowGreenAssistant }) {
-  const { token, producer } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
 
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
@@ -122,7 +122,7 @@ function ProducerHome({ setShowGreenAssistant }) {
       <Navbar setShowGreenAssistant={setShowGreenAssistant} />
       {showWelcome && (
         <div className="toast-welcome">
-          <div className="welcome-msg">Welcome back, {producer?.name}!</div>
+          <div className="welcome-msg">Welcome back, {user?.name}!</div>
           <button
             className="close-welcome-btn"
             onClick={() => setShowWelcome(false)}

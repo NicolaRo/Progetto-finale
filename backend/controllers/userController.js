@@ -80,19 +80,57 @@ const loginUser = async (req, res) => {
 const googleLogin = async (req, res) => {
   
   try {
-    const {email} = req.body;
+    const {email, name, role} = req.body;
 
-    const existingUser = await User.findOne({email});
+    let existingUser = await User.findOne({email});
+
+    const isNewUser = !existingUser;
     
     if (!existingUser){
-      return res.status(404).json({ message: "User's email not found" });
-    } else {
-      const jwtToken = jwt.sign({_id: existingUser._id, role: existingUser.role, name: existingUser.name}, process.env.JWT_SECRET, {expiresIn: "7d"});
-      return res.status(200).json({token: jwtToken, role: existingUser.role, name: existingUser.name, _id: existingUser._id, message: "Successfully logged-in"});
+      //Splits the name Google will pass
+      const nameParts = name.split(" ");
+      const firstName = nameParts [0];
+      const lastName = nameParts [1] || "GoogleUser";
+
+      existingUser = await User.create ({
+        email,
+        name: firstName,
+        surname: lastName,
+        role: role || "User",
+        password: Math.random().toString(36),
+      });
     }
+
+    const jwtToken = jwt.sign(
+      {_id: existingUser._id, role: existingUser.role, name: existingUser.name },
+      process.env.JWT_SECRET,
+      {expiresIn: "7d" }
+      
+    );
+    return res.status(200).json({
+      token: jwtToken,
+      role: existingUser.role,
+      name: existingUser.name,
+      _id: existingUser._id,
+      isNewUser,
+      message: "Successfully logged-in"
+    });
 
   } catch (error) {
     return res.status(500).json({message: error.message});
+  }
+};
+
+// 1.2.1. check for already existing email when a new user wants to register with Google Auth
+//Check for already existing emails when using Google SSO to register.
+const checkEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const existingUser = await User.findOne({ email });
+    const exists = existingUser !== null;
+    return res.status(200).json({ exists });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -161,5 +199,6 @@ module.exports = {
   updateUser,
   deleteUser,
   loginUser,
-  googleLogin
+  googleLogin,
+  checkEmail
 };

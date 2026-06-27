@@ -56,6 +56,10 @@ const UserSchema = new mongoose.Schema({
 //pre('save) schema to manipulate/encrypt passwords
 UserSchema.pre('save', async function() {
 
+    //Prevent encripting passowrd if uneccessary 
+    // (if the user update other info, an already encripted password should not be encripted again)
+    if(!this.isModified('password')) return;
+
     //genSalt creates "salt rounds" to encrypt the password
     const salt = await bcryptjs.genSalt(10);
 

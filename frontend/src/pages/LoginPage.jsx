@@ -8,6 +8,7 @@ import googleLogin from "../assets/googleLogin.png";
 import ShowPassword from "../assets/show-password.png";
 import Account from "../assets/account-icon.png";
 import ForgotPassword from "./ForgotPassword";
+import RoleModal from "../components/RoleModal";
 
 function LoginPage() {
   const [showLogin, setShowLogin] = useState(true);
@@ -19,6 +20,8 @@ function LoginPage() {
   const [role, setRole] = useState("User");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [googleUserData, setGoogleUserData] = useState(null);
+  const [showRoleModal, setShowRoleModal] = useState (false);
 
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
@@ -30,38 +33,75 @@ function LoginPage() {
 
   //Function to enable google login popup
   const googleLogIn = async () => {
-    const result = await signInWithPopup(auth, provider);
+    //Console.log for debug
+    console.log("googleLogIn called");
 
-    //Fetch data to the backend
-    const googleAuth = await fetch(
+    
+    const result = await signInWithPopup(auth, provider);
+    //Console.log for debug
+    console.log("result:", result);
+
+    const googleEmail = result.user.email;
+    const googleName = result.user.displayName; // Firebase will share the User Name
+    //Console.log for debug
+    console.log("googleName:", googleName);
+
+
+    //1. Check if the email already exist
+    const checkResponse = await fetch( `${import.meta.env.VITE_API_URL}/api/users/check-email`,
+      {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({email: googleEmail}),
+      }
+    );
+
+    const checkData = await checkResponse.json();
+
+    //Console log for debug:
+    console.log("checkData:", checkData);
+    console.log("checkData.exists:", checkData.exists);
+
+    if(!checkData.exists) {
+      //Console log for debug:
+      console.log("New USer, open modal");
+      console.log("Setto googleUserData:", {email: googleEmail, name: googleName});
+
+      setGoogleUserData ({email: googleEmail, name: googleName});
+      setShowRoleModal (true);
+      return;
+    }
+
+    await completeGoogleLogin(googleEmail, googleName, null);
+  };
+
+  const completeGoogleLogin = async (email, name, role) => {
+    const googleAuth = await fetch (
       `${import.meta.env.VITE_API_URL}/api/users/google-login`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: result.user.email }),
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({email, name, role}),
       }
     );
-    console.log(googleAuth.status);
-
-    //Read the data
+    
     const logInData = await googleAuth.json();
-    login(logInData.token, {
+    login(
+      logInData.token,
+      {
       role: logInData.role,
       name: logInData.name,
       _id: logInData._id,
-    });
+      }
+    );
 
-    console.log(logInData);
-
-    //Navigate to specific page depending on the role
     if (logInData.role === "Producer") {
       navigate("/ProducerHome");
     } else {
-      if (logInData.role === "User") {
-        navigate("/UserHome");
-      }
+      navigate("/UserHome");
     }
   };
+
   //Function to log in with own credentials
   const handleLogIn = async (e) => {
     e.preventDefault();
@@ -381,10 +421,23 @@ function LoginPage() {
           className="toogle-login"
           onClick={() => {
             setShowLogin(!showLogin);
-          }}
+          }
+        }
         >
           {showLogin ? "Sign Up" : "Back to login"}
         </button>
+
+        {showRoleModal && (
+          <RoleModal
+            isOpen = {showRoleModal}
+            userName = {googleUserData.googleName}
+            onClose = {() => setShowRoleModal(false)}
+            onChooseRole = {async (choosenRole) => {
+                setShowRoleModal (false);
+                await completeGoogleLogin(googleUserData.email, googleUserData.googleName, choosenRole);
+              }}
+            />
+          )}
       </div>
     </>
   );

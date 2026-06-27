@@ -24,6 +24,10 @@ router.post("/login", userController.loginUser);
 //3.1.1 Log in an existing user with Google Auth
 router.post("/google-login", userController.googleLogin);
 
+//3.1.2 Check for already existing email
+router.post("/check-email",userController.checkEmail);
+
+
 //PUT
 
 //4. Update an existing user

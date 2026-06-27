@@ -97,7 +97,7 @@ function UserHome() {
       />
       {showWelcome && (
         <div className="toast-welcome">
-          <div className="welcome-msg">Welcome back, {user?.name}!</div>
+          <div className="welcome-msg">Welcome back, {user?.name}</div>
           <button
             className="close-welcome-btn"
             onClick={() => setShowWelcome(false)}
