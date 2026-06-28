@@ -1,12 +1,12 @@
 @use '../base/variables' as *;
-
+@use '../base/mixins' as *;
 
 .input{
     margin:0.5rem;
-    border-radius: $radius;
+    border-radius: $radius-md;
     border: none;
     padding: 0.5rem;
-    box-shadow: $box-shadow;
+    shadow-sm: $shadow-sm;
 }
 
 .filters-container{
@@ -49,5 +49,5 @@ flex-direction: column;
 border-style: none;
 display: flex;
 align-self: center;
-border-radius: $radius;
+border-radius: $radius-md;
 }

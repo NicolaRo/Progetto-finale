@@ -11,11 +11,11 @@
   
   .modal {
     background: $background;
-    border-radius: $radius;
+    border-radius: $radius-md;
     padding: $space-xl;
     max-width: 620px;
     width: 90%;
-    box-shadow: $glow;
+    shadow-sm: $shadow-glow;
   
     h2 {
       color: $accent;
@@ -39,10 +39,9 @@
     &__role-card {
       flex: 1;
       background: $glass-background;
-      border: $border;
-      border-radius: $button-radius;
+      border-radius: $radius-md;
       padding: $space-md;
-      box-shadow: $box-shadow;
+      shadow-sm: $shadow-sm;
       @include flex-center;
       flex-direction: column;
       gap: $space-md;
@@ -75,10 +74,10 @@
       width: 100%;
       padding: $space-sm $space-md;
       border: none;
-      border-radius: $button-radius;
+      border-radius: $radius-md;
       cursor: pointer;
       font-size: 1rem;
-      box-shadow: $btn-shadow;
+      box-shadow: $shadow-glow;
       transition: opacity 0.2s;
   
       &:hover {

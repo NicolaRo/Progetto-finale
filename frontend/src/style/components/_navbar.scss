@@ -5,21 +5,20 @@
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 $radius-sm $radius-sm;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 100;
   background-color: $background;
   backdrop-filter: blur(2px);
-  background-color: rgba(255, 255, 255, 0.761);
-  box-shadow: 3px 3px 20px #0000005e;
+  box-shadow: $shadow-sm;
 
   @include respond(md) {
     flex-direction: row;
     align-items: center;
     padding: 1rem 2rem;
-    border-radius: 0 0 2rem 2rem;
+    border-radius: 0 0 $radius-md $radius-md;
   }
 }
 
@@ -27,7 +26,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-;
+  justify-content: space-evenly;
 
   @include respond(md) {
     flex-direction: row;
@@ -52,7 +51,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  border-radius: $radius;
+  border-radius: $radius-md;
   margin-top: 0.5rem;
 
   @include respond(md) {

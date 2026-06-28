@@ -1,11 +1,10 @@
 @use '../base/variables' as*;
 @use '../base/mixins' as *;
 
-
 .loader {
   width: 35vw;
   height: 25rem;
-  box-shadow: 0 3px 0 #ac35e3;
+  box-shadow: $shadow-md;
   position: absolute;
   clip-path: inset(-40px 0 -5px);
   margin-left: 32.5%;
@@ -54,25 +53,25 @@
   
 
   .skeleton-card {
-    border-radius: $button-radius;
+    border-radius: $radius-md;
     overflow: hidden;
-    box-shadow: $box-shadow;
+    box-shadow: $shadow-sm;
     min-width: 10rem;
     margin: 1rem 0;
   }
 
   .user-skeleton-card {
-    border-radius: 1rem;
+    border-radius: $radius-sm;
     overflow: hidden;
-    box-shadow: 1px 1px 10px 1px rgba(35, 143, 129, 0.235), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    box-shadow: $shadow-skeleton;
     min-width: 10rem;
     margin: 1rem;
   }
 
   .user-order-skeleton-card {
-    border-radius: 1rem;
+    border-radius: $radius-sm;
     overflow: hidden;
-    box-shadow: 1px 1px 10px 1px rgba(35, 143, 129, 0.235), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    box-shadow: $shadow-skeleton;
     min-width: 10rem;
     margin: 1rem;
   }
@@ -80,27 +79,19 @@
   .skeleton-img {
     width: 100%;
     height: 150px;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    @include skeleton-loader;
   }
   .user-skeleton-img{
     width: 100%;
     height: 150px;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    display: grid;
-    grid-template-columns: repeat (2, 2fr);
-    animation: shimmer 1.5s infinite;
+    @include skeleton-loader;
   }
   
   .skeleton-line {
     height: 16px;
     margin: $space-sm $space-md;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    border-radius: $radius-xl;
+    @include skeleton-loader;
   
     &--short {
       width: 60%;
@@ -110,10 +101,9 @@
   .user-skeleton-line{
     height: 16px;
     margin: $space-sm $space-md;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    border-radius: $radius-xl;
+
+    @include skeleton-loader;
   
     &--short {
       width: 60%;
@@ -123,10 +113,8 @@
   .user-order-skeleton-line{
     height: 16px;
     margin: $space-sm $space-md;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    border-radius: $radius-xl;
+    @include skeleton-loader;
   
     &--short {
       width: 60%;

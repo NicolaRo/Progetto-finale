@@ -10,7 +10,7 @@
   }
 
 .ingredient-img {
-    border-radius: $radius;
+    border-radius: $radius-md;
 }
 .container-assigned-preview{
     display: flex;
@@ -19,11 +19,11 @@
     gap: 0.5rem;
     background-color: $accent;
     padding: 0.5rem;
-    border-radius: $radius;
+    border-radius: $radius-md;
     color: white;
 }
 
 .rejected-payment {
     width: 90vw;
-    border-radius: $radius;
+    border-radius: $radius-md;
 }

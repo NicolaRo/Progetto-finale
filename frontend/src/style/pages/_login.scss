@@ -6,11 +6,11 @@
     flex-direction: column;
     text-align: center;
     margin: 0.5rem;
-    border-radius: $radius;
+    border-radius: $radius-md;
     @include respond (md) {
         max-width: 480px;
         margin: 0.5rem auto;
-        border: $border;
+
     }
 }
 
@@ -21,18 +21,20 @@
 }
 
 .input-text, .search-input, .ppc-input {
-    min-height: 2.5rem;
+  min-height: 2.5rem;
   margin: 0.5rem 1rem 1rem 1rem;
-  border-radius: 1rem;
-  border: $border;
+  border-radius: $radius-sm;
+
   padding: 0.5rem;
   background-color: rgb(255, 255, 255);
-  box-shadow: $box-shadow;
+  shadow-sm: $shadow-sm;
   width: -webkit-fill-available;
 }
 .search-input{
     margin: 0 !important;
     width: 85%;
+    border: none;
+    shadow-sm: $shadow-md;
 }
 
 .input-container--btn{
@@ -73,7 +75,7 @@ margin-left: 1rem;
   margin: 1rem;
   background-color: $container-color;
   padding: 1rem;
-  border-radius: $radius;
+  border-radius: $radius-md;
   @include respond (md) {
     max-width: 480px;
     margin: 2rem auto;
@@ -98,8 +100,8 @@ margin-left: 1rem;
 //-_-_-_ REGISTER _-_-_-
 
 .signin-container{
-    border: $border;
-    border-radius: $radius;
+
+    border-radius: $radius-md;
     padding: 1rem;
     margin: 1rem;
     @include respond (md) {
@@ -112,7 +114,7 @@ margin-left: 1rem;
     margin: 1rem;
     background-color: $container-color;
     padding: 1rem;
-    border-radius: $radius;
+    border-radius: $radius-md;
     justify-content: space-evenly;
     display: flex;
     flex-direction: column;
