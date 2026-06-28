@@ -19,25 +19,39 @@ function UserHome() {
   const [heroTip, setHeroTip] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingOrders, setIsLoadingOrders] = useState (true);
 
   const { token, user } = useContext(AuthContext);
 
   //Loading products
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((r) => r.json())
-      .then((data) => setShopProducts(data));
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      const r = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await r.json();
+      setShopProducts(data);
+      setIsLoading(false);
+    };
+    fetchProducts();
   }, [token]);
 
   //Fetch orders
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((r) => r.json())
-      .then((data) => setOrders(Array.isArray(data) ? data : []));
+    const fetchOrders = async () => {
+      setIsLoadingOrders(true);
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      const r = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await r.json();
+      setOrders(Array.isArray(data)? data : []);
+      setIsLoadingOrders (false);
+    };
+    fetchOrders();
   }, [token, refresh]);
 
   //Fetch green tips from OpenAI
@@ -108,12 +122,23 @@ function UserHome() {
       )}
 
       {showCart && <Cart setShowCart={setShowCart} />}
-      {showOrders && (
-        <UserOrder
+      {showOrders && ( 
+        isLoadingOrders ? (
+          <div className="user-order-skeleton-grid">
+            {[1,2,3].map((i) => (
+              <div key={i} className="user-order-skeleton-card">
+                <div className ="user-order-skeleton-line"></div>
+                <div className="user-order-skeleton-line--short"></div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <UserOrder
           orders={orders}
           setRefresh={setRefresh}
           setShowOrders={setShowOrders}
         />
+        )
       )}
 
       <div className="hero-banner">
@@ -181,8 +206,20 @@ function UserHome() {
           </div>
         </div>
       </div>
-
-      <ProductList products={shopProducts} />
+      {/* SKELETON LOADER */}
+      {isLoading ? (
+        <div className="user-skeleton-grid">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="user-skeleton-card">
+              <div className="user-skeleton-img"></div>
+              <div className="user-skeleton-line"></div>
+              <div className="user-skeleton-line skeleton-line--short"></div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ProductList products={shopProducts} />
+      )}
     </>
   );
 }

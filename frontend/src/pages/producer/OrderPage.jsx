@@ -13,14 +13,18 @@ function OrderPage({ setShowGreenAssistant }) {
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
   const [refresh, setRefresh] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
+        setIsLoading(true);
         const data = await getOrders(token);
         setOrders(data);
+        setIsLoading(false);
       } catch (error) {
-        console.log("Errore fetch ordini:", error);
+        console.log("Error fetching orders:", error);
+       /*  setIsLoading(false) */
       }
     };
     fetchOrders();
@@ -32,7 +36,19 @@ function OrderPage({ setShowGreenAssistant }) {
       <button className="back-btn" onClick={() => navigate("/ProducerHome")}>
         Back to myHome
       </button>
-      <ProducerOrder orders={orders} setRefresh={setRefresh} />
+      {isLoading ? (
+        <div className="skeleton-grid">
+          {[1,2,3].map((i) => (
+            <div className ="skeleton-card">
+              <div className="skeleton-line skeleton-line--short"></div>
+              <div className="skeleton-line skeleton-line--short"></div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ProducerOrder orders={orders} setRefresh={setRefresh} />
+      )}
+      
       <div className="btn-container"></div>
     </>
   );

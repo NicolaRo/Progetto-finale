@@ -92,7 +92,12 @@ function RecycleBuddy({ onClose }) {
           ))}
           {isLoading && (
             <div className="chat-mesage-assistant">
+              <div className="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
               <p>Thinking...</p>
+              </div>
             </div>
           )}
           <div ref={bottomRef} />

@@ -18,6 +18,8 @@ function ProducerHome({ setShowGreenAssistant }) {
   const [myProducts, setMyProducts] = useState([]);
   const [refresh, setRefresh] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingIngredients, setIsLoadingIngredients] = useState(false);
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
@@ -94,11 +96,13 @@ function ProducerHome({ setShowGreenAssistant }) {
   useEffect(() => {
     if (!productName) return;
     const timer = setTimeout(async () => {
+      setIsLoadingIngredients(true);
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/ingredients?query=${productName}`
       );
       const data = await response.json();
       setIngredientResults(data);
+      setIsLoadingIngredients(false);
     }, 1000);
     return () => clearTimeout(timer);
   }, [productName]);
@@ -113,6 +117,7 @@ function ProducerHome({ setShowGreenAssistant }) {
       );
       const data = await response.json();
       setMyProducts(Array.isArray(data) ? data : []);
+      setIsLoading(false);
     };
     fetchProducts();
   }, [token, refresh]);
@@ -187,25 +192,36 @@ function ProducerHome({ setShowGreenAssistant }) {
             <option value="Piece">Piece</option>
           </select>
         </div>
-        <div className="ingredients-grid">
-          {ingredientResults.map((ingredient) => (
-            <div
-              key={ingredient.id}
-              onClick={() => {
-                setProductName(ingredient.name);
-                setSelectedImage(ingredient.image);
-                setSelectedIngredientId(ingredient.id);
-              }}
-            >
-              <img
-                className="ingredient-img"
-                src={`https://img.spoonacular.com/ingredients_250x250/${ingredient.image}`}
-                alt={ingredient.name}
-              />
-              <p>{ingredient.name}</p>
-            </div>
-          ))}
+        {/*SKELETON LOADER*/}
+          <div className="ingredients-grid">
+          {isLoadingIngredients ? (
+              [1,2,3].map((i) => (
+                <div key={i} className="skeleton-card">
+                  <div className="skeleton-img"></div>
+                  <div className="skeleton-line"></div>
+                  <div className="skeleton-line skeleton-line--short"></div>
+                </div>
+                ))
+              ) : (
+                ingredientResults.map((ingredient) => (
+                  <div
+                    key={ingredient.id}
+                    onClick={() => {
+                      setProductName(ingredient.name);
+                      setSelectedImage(ingredient.image);
+                      setSelectedIngredientId(ingredient.id);
+                    }}
+                  >
+                    <img
+                      className="ingredient-img"
+                      src={`https://img.spoonacular.com/ingredients_250x250/${ingredient.image}`}
+                      alt={ingredient.name}
+                    />
+                    <p>{ingredient.name}</p>
+                    </div>
+        )))}
         </div>
+
         <button
           className="create-product-btn"
           type="submit"
@@ -216,14 +232,28 @@ function ProducerHome({ setShowGreenAssistant }) {
       </div>
       <h3 className="sub-session-title">My Products</h3>
       <div className="my-products-container">
-        {myProducts.map((product) => (
-          <ProducerProductCard
-            key={product._id}
-            product={product}
-            onUpdateQuantity={handleUpdateQuantity}
-            onUpdateProduct={handleUpdateProduct}
-          />
-        ))}
+       
+        {/*SKELETON LOADER*/}
+        {isLoading ? (
+          <div className="skeleton-grid">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="skeleton-card">
+                <div className="skeleton-img"></div>
+                <div className="skeleton-line"></div>
+                <div className="skeleton-line skeleton-line--short"></div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          myProducts.map((product) => (
+            <ProducerProductCard
+              key={product._id}
+              product={product}
+              onUpdateQuantity={handleUpdateQuantity}
+              onUpdateProduct={handleUpdateProduct}
+            />
+          ))
+        )}
       </div>
     </>
   );

@@ -60,53 +60,61 @@ function Cart({ setShowCart }) {
 
           <div className="cart-list">
             <h3>Cart list:</h3>
-            {cart.map((product) => (
-              <div className="cart-items" key={product.product}>
-                <div className="cart-item-details">
-                  <img
-                    className="cart-item-img"
-                    src={`http://img.spoonacular.com/ingredients_100x100/${product.image}`}
-                    alt={product.name}
-                  />
-                  <p className="cart-p-details"></p>
-                </div>
-                <div className="cart-cards">
-                  <div className="cart-item-qty">
-                    <p className="cart-p-details">
-                      <strong>Quantity: </strong>
-                      {product.orderedQuantity}
-                    </p>
-                  </div>
-
-                  <div className="cart-item-name">
-                    <p className="cart-p-details">
-                      <strong>Product: </strong>
-                      {product.name}
-                    </p>
-                  </div>
-
-                  <div className="cart-item-producerName">
-                    <p className="cart-p-details">
-                      <strong>Producer: </strong>
-                      {product.producerName}
-                    </p>
-                  </div>
-                </div>
-
-                <button
-                  className="remove-from-cart-btn"
-                  onClick={() => removeFromCart(product.product)}
-                >
-                  <img
-                    className="remove-from-cart-icon"
-                    src={RemoveFromCartIcon}
-                    alt="Remove product from cart"
-                  />
-                </button>
+            {cart.length === 0 ? (
+              <div className = "empty-cart">
+                <br></br>
+                <p>Your cart is empty</p>
+                <br></br>
+                <p>Buy local for a greater suistainability</p>
               </div>
-            ))}
+            ) : (
+              cart.map((product) => (
+                <div className="cart-items" key={product.product}>
+                  <div className="cart-item-details">
+                    <img
+                      className="cart-item-img"
+                      src={`http://img.spoonacular.com/ingredients_100x100/${product.image}`}
+                      alt={product.name}
+                    />
+                    <p className="cart-p-details"></p>
+                  </div>
+                  <div className="cart-cards">
+                    <div className="cart-item-qty">
+                      <p className="cart-p-details">
+                        <strong>Quantity: </strong>
+                        {product.orderedQuantity}
+                      </p>
+                    </div>
+  
+                    <div className="cart-item-name">
+                      <p className="cart-p-details">
+                        <strong>Product: </strong>
+                        {product.name}
+                      </p>
+                    </div>
+  
+                    <div className="cart-item-producerName">
+                      <p className="cart-p-details">
+                        <strong>Producer: </strong>
+                        {product.producerName}
+                      </p>
+                    </div>
+                  </div>
+  
+                  <button
+                    className="remove-from-cart-btn"
+                    onClick={() => removeFromCart(product.product)}
+                  >
+                    <img
+                      className="remove-from-cart-icon"
+                      src={RemoveFromCartIcon}
+                      alt="Remove product from cart"
+                    />
+                  </button>
+                </div>
+              ))
+            )}
           </div>
-
           <div className="cart-order-btn-container">
             <button className="clear-cart-btn" onClick={clearCart}>
               <img

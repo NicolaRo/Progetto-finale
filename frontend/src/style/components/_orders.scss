@@ -99,7 +99,7 @@ flex-direction: column;
 .containers-assigned{
   display: flex;
   padding: 1rem;
-  flex-direction: column-reverse;
+  flex-direction: row-reverse;
   align-items: center;
   
   @include respond (md) {
