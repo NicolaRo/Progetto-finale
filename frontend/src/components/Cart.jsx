@@ -1,5 +1,6 @@
-import { useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import {useContext} from "react";
+import {useSelector, useDispatch} from 'react-redux';
+import{removeFromCart, clearCart} from '../store/cartSlice';
 import { AuthContext } from "../context/AuthContext";
 
 import RemoveFromCartIcon from "../assets/remove-from-cart.png";
@@ -7,7 +8,9 @@ import ClearCartIcon from "../assets/clear-cart.png";
 import ConfirmOrder from "../assets/confirm-order.png";
 
 function Cart({ setShowCart }) {
-  const { cart, removeFromCart, clearCart } = useContext(CartContext);
+  const cart = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+
   const { user, token } = useContext(AuthContext);
 
   //Function to calculate Cart total
@@ -46,7 +49,7 @@ function Cart({ setShowCart }) {
 
     const { url } = await stripeResponse.json();
     alert("Order confirmed, please chek out your purchase");
-    clearCart();
+    dispatch(clearCart());
     window.location.href = url;
   };
 
@@ -103,7 +106,7 @@ function Cart({ setShowCart }) {
   
                   <button
                     className="remove-from-cart-btn"
-                    onClick={() => removeFromCart(product.product)}
+                    onClick={() => dispatch(removeFromCart(product.product))}
                   >
                     <img
                       className="remove-from-cart-icon"
@@ -116,7 +119,7 @@ function Cart({ setShowCart }) {
             )}
           </div>
           <div className="cart-order-btn-container">
-            <button className="clear-cart-btn" onClick={clearCart}>
+            <button className="clear-cart-btn" onClick= {()=> dispatch(clearCart())}>
               <img
                 className="clear-cart-icon"
                 src={ClearCartIcon}
@@ -125,7 +128,9 @@ function Cart({ setShowCart }) {
               Clear cart
             </button>
 
-            <button className="confirm-order-btn" onClick={handleConfirmOrder}>
+            <button 
+              className="confirm-order-btn" 
+              onClick={handleConfirmOrder}>
               <img
                 className="confirm-order-icon"
                 src={ConfirmOrder}

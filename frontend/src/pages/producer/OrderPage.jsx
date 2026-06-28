@@ -38,8 +38,8 @@ function OrderPage({ setShowGreenAssistant }) {
       </button>
       {isLoading ? (
         <div className="skeleton-grid">
-          {[1,2,3].map((i) => (
-            <div className ="skeleton-card">
+          {[1,2,3].map((item, index) => (
+            <div key ={index} className ="skeleton-card">
               <div className="skeleton-line skeleton-line--short"></div>
               <div className="skeleton-line skeleton-line--short"></div>
             </div>

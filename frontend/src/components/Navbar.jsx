@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
+import {useSelector} from 'react-redux';
 import GreenAssistantIcon from "../assets/assistant-icon.png";
 
 import ShoppingCart from "../assets/shopping-cart.png";
@@ -17,7 +17,7 @@ function Navbar({
   orders = [],
   setShowGreenAssistant = () => {},
 }) {
-  const { cart } = useContext(CartContext);
+  const cart = useSelector((state) => state.cart.items);
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 

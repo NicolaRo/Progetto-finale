@@ -2,16 +2,17 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
-import { CartProvider } from './context/CartContext.jsx'
+import { Provider } from 'react-redux'
+import store from './store/index.js'
 
 import './style/main.scss';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CartProvider>
+    <Provider store ={store}>
     <AuthProvider>
       <App />
     </AuthProvider>
-    </CartProvider>
+    </Provider>
   </StrictMode>,
 )

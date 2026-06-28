@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
-import { CartContext } from "../context/CartContext";
+import {useDispatch} from 'react-redux';
+import { addToCart } from "../store/cartSlice";
 import { AuthContext } from "../context/AuthContext";
 
 function ProductCard({ product }) {
   const [quantity, setQuantity] = useState("");
-  const { addToCart } = useContext(CartContext);
+  const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
 
   const handleAddToCart = () => {
@@ -21,7 +22,7 @@ function ProductCard({ product }) {
       return;
     }
 
-    addToCart({
+    dispatch(addToCart({
       product: product._id,
       orderedQuantity: quantity,
       price: product.price,
@@ -29,7 +30,7 @@ function ProductCard({ product }) {
       image: product.image,
       producerName: product.producerId.name,
       producerId: product.producerId._id,
-    });
+    }));
     setQuantity("");
   };
 
