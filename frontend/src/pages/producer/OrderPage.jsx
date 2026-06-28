@@ -24,7 +24,7 @@ function OrderPage({ setShowGreenAssistant }) {
         setIsLoading(false);
       } catch (error) {
         console.log("Error fetching orders:", error);
-       /*  setIsLoading(false) */
+        setIsLoading(false)
       }
     };
     fetchOrders();
