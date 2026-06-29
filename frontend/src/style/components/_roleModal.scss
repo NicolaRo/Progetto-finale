@@ -2,111 +2,119 @@
 @use '../base/mixins' as *;
 
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    @include flex-center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  @include flex-center;
+}
+  
+.modal {
+  background: $background;
+  border-radius: $radius-md;
+  padding: $space-xl;
+  max-width: 620px;
+  width: 90%;
+  box-shadow: $shadow-glow;
+
+  h2 {
+    color: $accent;
+    margin-bottom: $space-sm;
   }
-  
-  .modal {
-    background: $background;
-    border-radius: $radius-md;
-    padding: $space-xl;
-    max-width: 620px;
-    width: 90%;
-    shadow-sm: $shadow-glow;
-  
-    h2 {
-      color: $accent;
-      margin-bottom: $space-sm;
-    }
-  
-    p {
-      margin-bottom: $space-lg;
-      color: #555;
-    }
-  
-    &__roles {
-      display: flex;
-      gap: $space-lg;
-  
-      @media (max-width: $sm) {
-        flex-direction: column;
-      }
-    }
-  
-    &__role-card {
-      flex: 1;
-      background: $glass-background;
-      border-radius: $radius-md;
-      padding: $space-md;
-      shadow-sm: $shadow-sm;
-      @include flex-center;
+
+  p {
+    margin-bottom: $space-lg;
+    color: #555;
+  }
+
+  &__roles {
+    display: flex;
+    gap: $space-lg;
+
+    @media (max-width: $sm) {
       flex-direction: column;
-      gap: $space-md;
-  
-      h3 {
-        color: $accent;
-      }
-  
-      ul {
-        list-style: none;
-        padding: 0;
-        width: 100%;
-  
-        li {
-          padding: $space-xs 0;
-          &::before {
-            content: '✓ ';
-            color: $accent;
-          }
-        }
-      }
-  
-      &--accent {
-        border-color: $accent;
-        border-width: 2px;
-      }
-    }
-  
-    &__btn {
-      width: 100%;
-      padding: $space-sm $space-md;
-      border: none;
-      border-radius: $radius-md;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: $shadow-glow;
-      transition: opacity 0.2s;
-  
-      &:hover {
-        opacity: 0.85;
-      }
-  
-      &--primary {
-        background: $accent;
-        color: $button-text;
-      }
-  
-      &--secondary {
-        background: transparent;
-        color: $accent;
-        border: 2px solid $accent;
-      }
     }
   }
 
-  .modal__description {
-    margin: $space-lg 0;
-    
+  &__role-card {
+    flex: 1;
+    background: $glass-background;
+    border-radius: $radius-md;
+    padding: $space-md;
+    box-shadow: $shadow-sm;
+    @include flex-center;
+    flex-direction: column;
+    gap: $space-md;
+
+    h3 {
+      color: $accent;
+    }
+
     ul {
       list-style: none;
       padding: 0;
-      
+      width: 100%;
+
       li {
-        padding: $space-sm 0;
-        font-size: 1rem;
+        padding: $space-xs 0;
+        &::before {
+          content: '✓ ';
+          color: $accent;
+        }
       }
     }
+
+    &--accent {
+      border-color: $accent;
+      border-width: 2px;
+    }
   }
+
+  &__btn {
+    width: 100%;
+    padding: $space-sm $space-md;
+    border: none;
+    border-radius: $radius-md;
+    cursor: pointer;
+    font-size: $space-md;
+    box-shadow: $shadow-glow;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &--primary {
+      background: $accent;
+      color: $button-text;
+    }
+
+    &--secondary {
+      background: transparent;
+      color: $accent;
+      border: 2px solid $accent;
+    }
+  }
+}
+
+.modal__description {
+  margin: $space-lg 0;
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      padding: $space-sm 0;
+      font-size: $space-md;
+    }
+  }
+}

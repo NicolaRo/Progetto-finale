@@ -104,8 +104,9 @@ function OrderCard({ order, variant, onReturnContainers }) {
           <div className="containers-return">
             <h4>Order received?</h4>
             {order.containers.some((c) => c.status === "Container busy") ? (
-              <button
-                className="return-containers-btn"
+              <div className= "container-return-btn-container">
+                  <button
+                className="return-containers-btn btn btn--primary"
                 onClick={async () => {
                   await onReturnContainers(order.containers);
                   setShowModal(true);
@@ -113,6 +114,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
               >
                 Confirm receipt & return containers
               </button>
+              </div>
             ) : (
               <p>All containers are returned! See you on the next order.</p>
             )}

@@ -90,7 +90,7 @@ function Onboarding({ onComplete }) {
           {slide.note && <p className="onboarding-note">{slide.note}</p>}
 
           {slide.steps && (
-            <ul className="onboarding-steps">
+            <ul className="onboarding-steps-continer">
               {slide.steps.map((step, i) => (
                 <li key={i} className="onboarding-step">
                   {step}
@@ -99,7 +99,8 @@ function Onboarding({ onComplete }) {
             </ul>
           )}
         </div>
-        {/* DOTS */}
+        <div className="onboarding-navigation-container">
+           {/* DOTS */}
         <div className="onboarding-dots">
           {SLIDES.map((_, i) => (
             <span
@@ -113,16 +114,16 @@ function Onboarding({ onComplete }) {
         {/* NAVIGATION */}
         <div className="onboarding-nav">
           {current > 0 && (
-            <button className="onboarding-btn-back" onClick={goPrev}>
+            <button className="onboarding-btn-back btn btn--ghost" onClick={goPrev}>
               Back
             </button>
           )}
           {current < SLIDES.length - 1 ? (
-            <button className="onboarding-btn-next" onClick={goNext}>
+            <button className="onboarding-btn-next btn btn--primary" onClick={goNext}>
               Next
             </button>
           ) : (
-            <button className="onboarding-btn-start" onClick={handleComplete}>
+            <button className="onboarding-btn-start btn btn--primary" onClick={handleComplete}>
               {" "}
               Let's start
             </button>
@@ -138,6 +139,7 @@ function Onboarding({ onComplete }) {
             onChange={(e) => setDontShow(e.target.checked)}
           />
           <label htmlFor="dontShow">Don't show this again</label>
+        </div>
         </div>
       </div>
     </div>

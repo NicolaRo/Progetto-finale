@@ -6,21 +6,22 @@
     max-width: 250px;
     height: auto;
     object-fit: contain;
-    margin: 1rem 0;
-  }
+    margin: $space-md 0;
+}
 
 .ingredient-img {
     border-radius: $radius-md;
 }
+
 .container-assigned-preview{
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-    gap: 0.5rem;
-    background-color: $accent;
-    padding: 0.5rem;
+    gap: $space-sm;
+    background-color: $green-light;
+    padding: $space-sm;
     border-radius: $radius-md;
-    color: white;
+    color: $black;
 }
 
 .rejected-payment {

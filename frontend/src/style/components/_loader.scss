@@ -8,139 +8,142 @@
   position: absolute;
   clip-path: inset(-40px 0 -5px);
   margin-left: 32.5%;
-  }
-  .loader:before {
-    content: "";
-    position: absolute;
-    inset: auto calc(50% - 17px) 0;
-    height: 50px;
-    --g:no-repeat linear-gradient(#08edde 0 0);
-    background: var(--g),var(--g),var(--g),var(--g);
-    background-size: 16px 14px;
-    animation:
-      l7-1 2s infinite linear,
-      l7-2 2s infinite linear;
-  }
-  @keyframes l7-1 {
-    0%,
-    100%  {background-position: 0 -50px,100% -50px}
-    17.5% {background-position: 0 100%,100% -50px,0 -50px,100% -50px}
-    35%   {background-position: 0 100%,100% 100% ,0 -50px,100% -50px}
-    52.5% {background-position: 0 100%,100% 100% ,0 calc(100% - 16px),100% -50px}
-    70%,
-    98%  {background-position: 0 100%,100% 100% ,0 calc(100% - 16px),100% calc(100% - 16px)}
-  }
-  @keyframes l7-2 {
-    0%,70% {transform:translate(0)}
-    100%  {transform:translate(200%)}
-  }
+}
 
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-  
-  .user-skeleton-grid{
-    display: grid;
-    grid-template-columns: repeat(2, 2fr);
-    gap: 1rem;
-  }
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: auto calc(50% - 17px) 0;
+  height: 50px;
+  --g:no-repeat linear-gradient(#08edde 0 0);
+  background: var(--g),var(--g),var(--g),var(--g);
+  background-size: 16px 14px;
+  animation:
+    l7-1 2s infinite linear,
+    l7-2 2s infinite linear;
+}
 
-  .user-order-skeleton-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-  
+@keyframes l7-1 {
+  0%,
+  100%  {background-position: 0 -50px,100% -50px}
+  17.5% {background-position: 0 100%,100% -50px,0 -50px,100% -50px}
+  35%   {background-position: 0 100%,100% 100% ,0 -50px,100% -50px}
+  52.5% {background-position: 0 100%,100% 100% ,0 calc(100% - 16px),100% -50px}
+  70%,
+  98%  {background-position: 0 100%,100% 100% ,0 calc(100% - 16px),100% calc(100% - 16px)}
+}
 
-  .skeleton-card {
-    border-radius: $radius-md;
-    overflow: hidden;
-    box-shadow: $shadow-sm;
-    min-width: 10rem;
-    margin: 1rem 0;
-  }
+@keyframes l7-2 {
+  0%,70% {transform:translate(0)}
+  100%  {transform:translate(200%)}
+}
 
-  .user-skeleton-card {
-    border-radius: $radius-sm;
-    overflow: hidden;
-    box-shadow: $shadow-skeleton;
-    min-width: 10rem;
-    margin: 1rem;
-  }
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+  
+.user-skeleton-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 2fr);
+  gap: $space-md;
+}
 
-  .user-order-skeleton-card {
-    border-radius: $radius-sm;
-    overflow: hidden;
-    box-shadow: $shadow-skeleton;
-    min-width: 10rem;
-    margin: 1rem;
-  }
-  
-  .skeleton-img {
-    width: 100%;
-    height: 150px;
-    @include skeleton-loader;
-  }
-  .user-skeleton-img{
-    width: 100%;
-    height: 150px;
-    @include skeleton-loader;
-  }
-  
-  .skeleton-line {
-    height: 16px;
-    margin: $space-sm $space-md;
-    border-radius: $radius-xl;
-    @include skeleton-loader;
-  
-    &--short {
-      width: 60%;
-    }
-  }
+.user-order-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
 
-  .user-skeleton-line{
-    height: 16px;
-    margin: $space-sm $space-md;
-    border-radius: $radius-xl;
 
-    @include skeleton-loader;
-  
-    &--short {
-      width: 60%;
-    } 
-  }
+.skeleton-card {
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  min-width: 10rem;
+  margin: $space-md 0;
+}
 
-  .user-order-skeleton-line{
-    height: 16px;
-    margin: $space-sm $space-md;
-    border-radius: $radius-xl;
-    @include skeleton-loader;
-  
-    &--short {
-      width: 60%;
-    } 
-  }
+.user-skeleton-card {
+  border-radius: $radius-sm;
+  overflow: hidden;
+  box-shadow: $shadow-skeleton;
+  min-width: 10rem;
+  margin: $space-md;
+}
 
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding: $space-sm;
-  
-    span {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: $accent;
-      animation: bounce 1.2s infinite ease-in-out;
-  
-      &:nth-child(2) { animation-delay: 0.2s; }
-      &:nth-child(3) { animation-delay: 0.4s; }
-    }
+.user-order-skeleton-card {
+  border-radius: $radius-sm;
+  overflow: hidden;
+  box-shadow: $shadow-skeleton;
+  min-width: 10rem;
+  margin: $space-md;
+}
+
+.skeleton-img {
+  width: 100%;
+  height: 150px;
+  @include skeleton-loader;
+}
+.user-skeleton-img{
+  width: 100%;
+  height: 150px;
+  @include skeleton-loader;
+}
+
+.skeleton-line {
+  height: 16px;
+  margin: $space-sm $space-md;
+  border-radius: $radius-xl;
+  @include skeleton-loader;
+
+  &--short {
+    width: 60%;
   }
-  
-  @keyframes bounce {
-    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-    40% { transform: scale(1); opacity: 1; }
+}
+
+.user-skeleton-line{
+  height: 16px;
+  margin: $space-sm $space-md;
+  border-radius: $radius-xl;
+
+  @include skeleton-loader;
+
+  &--short {
+    width: 60%;
+  } 
+}
+
+.user-order-skeleton-line{
+  height: 16px;
+  margin: $space-sm $space-md;
+  border-radius: $radius-xl;
+  @include skeleton-loader;
+
+  &--short {
+    width: 60%;
+  } 
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: $space-sm;
+
+  span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $accent;
+    animation: bounce 1.2s infinite ease-in-out;
+
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
   }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
   

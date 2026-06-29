@@ -4,7 +4,7 @@
 .my-products-container{
   padding: 0.25rem;
   background-color:#2494867a;
-  border-radius: 20px;
+  border-radius: $radius-md;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   height: 45rem;
@@ -12,9 +12,9 @@
   width: 100vw;
 
   @include respond (lg) {
-    margin: 2rem auto;
-    padding: 2rem;
-    gap: 2rem;
+    margin: $space-lg auto;
+    padding: $space-lg;
+    gap: $space-lg;
     grid-template-columns: repeat(4, 4fr);
   }
 }
@@ -22,10 +22,10 @@
   display: flex;
   flex-direction: column;
   border-radius: $radius-md;
-  margin: 0.5rem;
+  margin: $space-sm;
   align-items: center;
-  shadow-sm: 1px 1px 10px 1px rgb(34, 142, 128), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
-  background-color:white;
+  box-shadow: $shadow-md;
+  background-color:$white;
 }
 
 .prod-qty-buttons{
@@ -36,4 +36,9 @@
 
 .ppc-name{
   font-weight: bolder;
+}
+
+.edit-btn-container{
+  display: flex;
+  justify-content: center;
 }

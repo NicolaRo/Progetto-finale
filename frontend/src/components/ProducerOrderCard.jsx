@@ -93,7 +93,7 @@ function ProducerOrderCard({
                             ] || "🧺"}
                           </span>
                           <select
-                            className="select-container-type"
+                            className="dropdown"
                             value={
                               containerSelections?.[order._id]?.[p.product._id]
                                 ?.type || ""
@@ -115,7 +115,7 @@ function ProducerOrderCard({
                         </div>
 
                         <select
-                          className="select-container-qty"
+                          className="dropdown"
                           value={
                             containerSelections?.[order._id]?.[p.product._id]
                               ?.quantity || ""
@@ -138,7 +138,7 @@ function ProducerOrderCard({
                         </select>
 
                         <button
-                          className="btn-pack-product"
+                          className="btn-pack-product btn btn--primary"
                           onClick={() =>
                             handlePackedProduct(p.product._id, order._id)
                           }
@@ -159,12 +159,15 @@ function ProducerOrderCard({
         order.containers.every(
           (c) => c.status === "Container ready for collection"
         ) && (
-          <button
-            className="btn-checkin-containers"
+          <div className= "container-checkin-btn-container">
+            <button
+            className="btn-checkin-containers btn btn--primary"
             onClick={() => handleContainerCheckin(order._id)}
           >
             Check in containers and close the order
           </button>
+          </div>
+          
         )}
     </div>
   );

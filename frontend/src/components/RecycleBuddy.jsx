@@ -75,7 +75,7 @@ function RecycleBuddy({ onClose }) {
           <h3>
             {user?.role === "Producer" ? "GreenAssistant" : "RecycleBuddy"}
           </h3>
-          <button className="bt-close-chat" onClick={onClose}>
+          <button className="btn-close-chat btn btn--destructive" onClick={onClose}>
             Close chat{" "}
           </button>
         </div>
@@ -118,7 +118,7 @@ function RecycleBuddy({ onClose }) {
               if (e.key === "Enter") sendMessage();
             }}
           />
-          <button className="chat-send-btn" onClick={sendMessage}>
+          <button className="chat-send-btn btn btn--primary" onClick={sendMessage}>
             ➤
           </button>
         </div>

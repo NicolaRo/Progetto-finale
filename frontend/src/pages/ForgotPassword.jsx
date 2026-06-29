@@ -48,7 +48,7 @@ function ForgotPassword() {
         />
       </div>
 
-      <button className="login-btn" onClick={handleSubmit}>
+      <button className="login-btn btn btn--primary" onClick={handleSubmit}>
         Send reset link
       </button>
 

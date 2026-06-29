@@ -33,7 +33,7 @@ function OrderPage({ setShowGreenAssistant }) {
   return (
     <>
       <Navbar setShowGreenAssistant={setShowGreenAssistant} />
-      <button className="back-btn" onClick={() => navigate("/ProducerHome")}>
+      <button className="back-btn btn btn--ghost" onClick={() => navigate("/ProducerHome")}>
         Back to myHome
       </button>
       {isLoading ? (

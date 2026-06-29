@@ -1,81 +1,229 @@
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
 
-//-_-_- ONBOARDING -_-_-
+//-_-_- Base buttons -_-_-
 
-.show-pwd-btn, 
-.login-btn, 
-.register-btn, 
-.btn-close-cart,
-.btn-logout,
-.confirm-order-btn,
-.clear-cart-btn{
+button {
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: scale(0.96);
+    opacity: 1;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.btn{
   width: fit-content;
   height: fit-content;
-  align-items: center;
   display: flex;
-  align-self: flex-end;
+  justify-content: center;
   border-radius: $radius-sm;
-  border: 1px solid white;
-  padding: 0.25rem;
-  background-color: transparent;
+  padding: $buttons-padding;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
 }
-.btn-logout{
-  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
-  background: transparent;
-  gap: 0.25rem;
+
+.btn--primary{
+  background-color: $accent;
+  color: $button-text;
 }
-.register-btn{
-  padding: 0.75rem;
+
+.btn--secondary{
+  background-color: $green-mid;
+  color: $black;
+}
+.btn--destructive{
+  background-color: $error;
+  color:$button-text;
+}
+
+.btn--ghost{
+  background-color: $grey-ghost;
+  color: $button-text;
+}
+
+.btn--rounded{
+  border-radius: 100%;
+  width: $space-xl;
+  height: $space-xl;
+  display: flex;
+  align-items: center;
+  background-color: $accent;
+}
+
+//-_-_- Onboarding buttons -_-_-
+
+.onboarding-btn-back {
+  box-shadow: $shadow-md;
+  color: $btn-back-text;
   border-radius: $radius-md;
-  background-color: #000000;
+}
+
+.onboarding-btn-next {
   box-shadow: $shadow-glow;
+  border-radius: $radius-md;
+}
+
+.onboarding-btn-start {
+  font-weight: bold;
+  border-radius: $radius-md;
+  background-color: $black;
+  box-shadow: $shadow-glow;
+  justify-content: center;
+}
+
+//-_-_- Login buttons -_-_-
+
+.register-btn, .login-btn{
+  border-radius: $radius-md;
+  background-color: $black;
+  box-shadow: $shadow-md;
   width: -webkit-fill-available;
   justify-content: center;
   font-weight: bolder;
   font-size: x-large;
-  margin:1rem;
-  color: white;
-}
-.cart-btn, .orders-btn, .green-assistant-btn {
-  background-color:$accent;
-  border: none;
-  padding: 0.74rem;
-  border-radius: $radius-md;
-  width: auto;
-  justify-content: center;
-  display: flex;
-}
-.login-btn, .onboarding-btn-next, .onboarding-btn-back, .onboarding-btn-start {
-  font-size: larger;
-  font-weight: bold;
-  padding: 1rem 5rem 1rem 5rem;
-  border-radius: 25px;
-  background-color: #000000d9;
-  shadow-sm: $shadow-glow;
-  width: -webkit-fill-available;
-  justify-content: center;
-  color: #fff;
-  margin: 0 1rem 0 1rem; 
-}
-.onboarding-btn-next, .onboarding-btn-back, .onboarding-btn-start {
-  padding: 1rem !important;
-  width: fit-content!important;
-  font-size: xx-large !important;
-}
-.onboarding-btn-back {
-  background-color: $accent;
-}
-.show-pwd-btn{
-  font-size: x-small;
-  border: none;
-  gap: 0.5rem;
-  background-color:$accent;
-  color: white;
-  margin-right: 1rem;
+  margin:$space-md;
+  color: $button-text;
 }
 
-//-_-_-_ TOOGLE BUTTON
+.show-pwd-btn{
+  font-size: x-small;
+  align-items: center;
+  gap: $space-sm;
+  margin: $space-md;
+  padding: $space-sm;
+  
+}
+
+.btn-google-auth{
+  display: flex;
+  border-radius: $radius-md;
+  margin: $space-lg 0;
+  border: none;
+  box-shadow: $shadow-md;
+}
+.login-buttons-container {
+  display: flex;
+  padding: $space-md;
+}
+.forgot-pwd-btn{
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  color: $accent;
+}
+
+//-_-_- Cart buttons -_-_-
+
+.btn-close-cart {
+  background-color: $error;
+  padding: $buttons-padding ;
+  border-radius: $radius-md;
+  display: flex;
+  font-weight: bold;
+  font-size: medium;
+  box-shadow:$shadow-md;
+  margin: $space-md 0;
+}
+
+.clear-cart-btn {
+  margin-right: $space-md;
+  padding: $space-sm;
+  display:flex;
+  align-items: center;
+
+  @include respond (md) {
+    padding: $space-md;
+    gap: $space-sm;
+    }
+  
+    @include respond (lg) {
+    padding: $space-lg $space-lg;
+    gap: $space-md;
+    }
+  
+    @include respond (xl) {
+    padding: $space-lg $space-lg;
+    gap: $space-md;
+    }
+}
+
+.remove-from-cart-btn {
+  opacity: calc(60%);
+  border-radius: $rounded-radius;
+  padding: $space-sm;
+  width: $space-lg;
+  height: $space-lg;
+  display:flex;
+  align-items: center;
+
+  @include respond (md) {
+  padding: $space-sm $space-md;
+  border-radius: $rounded-radius;
+  }
+
+  @include respond (lg) {
+  padding: $space-lg $space-lg;
+  border-radius: $rounded-radius;
+  width: $space-md;
+  height: $space-md;
+  }
+
+  @include respond (xl) {
+  padding: $space-lg $space-lg;
+  border-radius: $rounded-radius;
+  }
+}
+
+.confirm-order-btn{
+  gap: $space-xs;
+  padding: $space-sm;
+
+  @include respond(md) {
+    gap:$space-sm;
+    padding: $space-md;
+  }
+
+  @include respond (lg) {
+    gap: $space-md;
+    padding: $space-lg;
+  }
+}
+
+//-_-_- Navbar buttons -_-_-
+
+.btn-logout{
+  gap: $space-sm;
+  padding: $space-sm;
+  display: flex;
+  align-items: center;
+  font-size: x-small;
+}
+
+.green-assistant-btn{
+  padding: $space-sm;
+}
+
+//-_-_-_ TOOGLE BUTTON _-_-_-
 
 .checkbox-wrapper-35 .switch {
   display: none;
@@ -85,14 +233,13 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  color: #78768d;
+  color: $green-dark;
   cursor: pointer;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 1rem;
+  font-size: $space-md;
   line-height: 15px;
   position: relative;
   -webkit-user-select: none;
@@ -109,7 +256,7 @@
   background-color: #05012c;
   border-radius: 500px;
   height: 30px;
-  margin-right: 2rem;
+  margin-right: $space-lg;
   -webkit-transition: background-color 0.125s ease-out;
   transition: background-color 0.125s ease-out;
   width: 70px;
@@ -117,7 +264,7 @@
 .checkbox-wrapper-35 .switch + label::after {
   background-color: #fff;
   border-radius: 13px;
-  shadow-sm: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
+  box-shadow: 0 3px 1px 0 rgba(37, 34, 71, 0.05), 0 2px 2px 0 rgba(37, 34, 71, 0.1), 0 3px 3px 0 rgba(37, 34, 71, 0.05);
   height: 28px;
   left: 1px;
   position: absolute;
@@ -181,290 +328,154 @@
   -webkit-transform: none;
   transform: none;
 }
-.toogle-login, .toggle-btn-completed-orders, .toggle-orders-section{
-  padding: 0.75rem 2rem;
-  margin: 2rem 0.5rem; 
+.toogle-login{
+  padding: $space-md $space-lg;
+  min-width: fit-content;
+  box-shadow: $shadow-md;
+  border-radius: $radius-md;
+  font-size: larger;
+}
+.toggle-btn-completed-orders {
+  padding: $space-sm $space-md;
+  margin: $space-md $space-sm; 
   border-radius: $radius-md;
   background-color: $accent;
-  shadow-sm: $shadow-sm;
+  box-shadow: $shadow-sm;
   width: -webkit-fill-available;
   font-weight: 700;
-}
-.btn-google-auth{
-  width: fit-content;
-  padding: 0.25rem 1rem;
-  justify-content: space-evenly;
-  display: flex;
-  border-radius: 0.5rem;
-  margin: 2rem 0;
-  background: transparent;
   border: none;
-}
-.login-buttons-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 1rem;
-}
-.forgot-pwd-btn{
-  background-color: transparent;
-  border: none;
-  text-decoration: underline;
-  color: blue;
-}
-
-/* -_-_-_ UserHome _-_-_- */
-
-.search-button, .search-btn, .ppc-btn-save{
-  padding: 0.5rem;
-  border-radius: 20px;
-  background-color: #000;
-  box-shadow: $shadow-glow;
-  border: solid 1px gray;
-  width: -webkit-fill-available;
-  font-weight: bolder;
-  margin: 0.5rem;
-  color: white;
-  width: fit-content;
-  box-shadow: $shadow-glow;
-}
-.ppc-btn-save{
-  background-color:#ebb922 !important;
-}
-.filter-btn{
-  width: fit-content;
-  background-color: $accent;
-  border: none;
-  padding: 0.5rem;
-  border-radius: $radius-md;
-  color: white;
-}
-.producer-select, .dropdown{
-  background-color: $container-color;
-  padding: 0.25rem;
-  border-radius: $radius-md;
-
-  margin: 0.5rem;
-}
-.dropdown, .chat-input {
-
-  border-radius: $radius-md;
-  padding: 0.5rem;
-  background-color:$container-color;
-  color:rgb(0, 0, 0);
-}
-.create-product-btn, .hero-chat-btn{
-  border: 1px solid #d3d2d1;
-  border-radius: 2rem;
-  padding: 1rem;
-  background-color: $accent;
-  color: white;
-  margin: 1rem;
-  justify-content: end;
-  font-weight: bolder;
-  font-size: large;
-}
-.hero-chat-btn{
-  margin-top: 1.5rem !important;
-  padding: 0.5rem !important;
-  color: white !important;
-  shadow-sm: $shadow-glow;
-}
-
-/* -_-_-_ Cart _-_-_- */
-
-.create-order-btn {
-  padding: 0.5rem;
-  border-radius: 2rem;
-  background-color: $accent;
-  shadow-sm: 1px 1px 10px 1px white;
-  border: 1px solid #d3d2d1;
-  margin: 0.5rem;
-  font-size: medium;
-  font-weight: bold;
-  align-self: center;
-  color: white;
-}
-.remove-from-cart-btn{
-  border: none;
-  height: 2rem;
-  padding: 0.25rem;
-  align-self: center;
-  border-radius: 50%;
-  background-color: rgba(255, 0, 20, 0.69);
-  width: 2rem;
-}
-.clear-cart-btn, .confirm-order-btn {
- display: flex;
- flex-direction: column;
- shadow-sm: $shadow-sm;
-}
-.confirm-order-btn{
-  background-color: #31dc19;
-  justify-content: flex-end;
-  padding: 1rem;
-  font-weight: 600;
-  color: white;
-}
-.clear-cart-btn {
-  background-color: rgba(157, 146, 146, 0.57);
-  margin-right: 1rem;
-  color: white;
-  padding: 1rem;
-}
-.back-btn {
-  background-color: red;
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem;
-  margin: 1rem;
-  border-radius: $radius-md;
-  border: none;
-  shadow-sm: $shadow-sm;
-}
-.ppc-btn-edit{
-  background-color: rgba(248, 156, 156, 0.573);
-  width: fit-content;
-  padding: 0.5rem;
-  border-radius: $radius-md;
-  shadow-sm: $shadow-sm;
-  display: flex;
-  margin-bottom: 2rem;
-}
-.btn-close-cart {
-  background-color: red;
-  width: fit-content;
-  padding: 0.5rem;
-  border-radius: $radius-md;
-  display: flex;
-  color: white;
-  font-weight: bold;
-  font-size: medium;
-  shadow-sm:1px 1px 10px 1px rgb(35, 143, 129), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
-}
-.ppc-btn-edit{
-  background-color: white !important;
-  shadow-sm:1px 1px 10px 1px rgb(35, 143, 129), inset 0 1px 0 0 rgba(255, 255, 255, 0.3) !important;
-}
-
-/*-_-_-_ORDER PAGE BTN _-_-_-*/
-
-.ppc-btn-add{
-  background-color: $accent;
-  border: none;
-  padding: 0.5rem;
-  border-radius: $radius-md;
-  font-weight: bold;
-  font-size: 0.75rem;
-}
-.return-containers-btn, .ppc-btn-remove{
-  padding: 0.5rem;
-  border-radius: 10px;
-  background-color: black;
-  shadow-sm: $shadow-sm;
-  margin-top: 1rem;
-  color: white;
-  font-weight:700;
-}
-.ppc-btn-remove{
-  margin: 0 !important;
-  font-size: 0.75rem !important;
-}
-.select-container-type, .select-container-qty, .ppc-qty-select{
-  padding: 0.25rem;
-  background-color: rgba(0, 206, 51, 0.48);
-  border-radius: 20px;
-
-}
-.btn-pack-product, .btn-checkin-containers{
-  background-color: black;
-  color: white;
-  font-weight: 700;
-  padding: 0.5rem;
-  margin: 0.5rem;
-  border-radius: 20px;
-
-  shadow-sm: 3px 3px 20px rgba(0, 0, 0, 0.368627451);
-}
-
-.btn-pack-product{
-  margin: 0 !important;
-}
-
-.btn-checkin-containers{
-  background-color: #ebb922 !important; 
-  color:black !important;
-}
-
-//-_-_- CHAT -_-_-
-
-.bt-close-chat{
-  background: red;
-  margin: 2rem 0;
-  border-radius: 2rem;
-  border: none;
-  height: 3rem;
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem;
-  font-size: small;
-}
-
-.chat-send-btn{
-  margin-left: 0.5rem;
-  background-color: #31dc19;
-  border: none;
-  padding: 1rem;
-  border-radius: 50%;
-  min-width: 2rem;
-  max-width: 4rem;
-  color: white;
   font-size: larger;
 }
 
-.chat-input-container{
-  display: ruby-base;
-}
 
-.green-assistant-btn{
-  background-color: transparent;
+//-_-_-_ UserHome _-_-_-
+
+
+.close-welcome-btn{
+  background-color: $error;
+  border-radius: $rounded-radius;
+  color: $white;
+  padding: $space-sm;
   border: none;
-  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  padding: $space-sm;
+  font-size: x-large;
+  font-weight: bolder;
+  box-shadow: $shadow-md;
+}
+.search-button{
+  margin: $space-sm;
+  box-shadow: $shadow-glow;
+  border-radius: $radius-md;
+  padding: $space-sm $space-md;
+}
+
+.filter-btn{
   background-color: $accent;
-  padding: 0.5rem;
+  border: none;
+  padding: $space-sm;
+  border-radius: $radius-md;
+  color: white;
 }
 
-// -_-_-_ Button UI Global _-_-_-
-
-button {
-  cursor: pointer;
-  transition: transform 0.1s ease, shadow-sm 0.1s ease, opacity 0.1s ease;
-
-  &:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: scale(0.96);
-    opacity: 1;
-    shadow-sm: none;
-  }
-
-  &:focus-visible {
-    outline: 2px solid #08edde;
-    outline-offset: 2px;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
-  }
+.producer-select, .dropdown{
+  background-color: $container-color;
+  padding: $space-sm;
+  border-radius: $radius-md;
+  margin: $space-sm;
+  border: none;
 }
+
+.hero-chat-btn{
+  box-shadow: $shadow-glow;
+  font-size: larger;
+  border-radius: $radius-md;
+}
+
 .filter-btn.active {
-  background-color: #000;
-  color: #fff;
-  border-color: #000;
+  background-color: $black;
+  color: $white;
+  border:none;
   transform: scale(1.03);
+}
+
+.add-to-cart-btn{
+  padding: $space-sm;
+  box-shadow: $shadow-glow;
+}
+
+//-_-_- ProducerHome -_-_-
+
+.btn-add-new-product {
+  margin:$space-md;
+  box-shadow: $shadow-glow;
+}
+
+.prod-btn-add-one, .prod-btn-remove-one{
+  padding: $space-sm;
+}
+
+.back-btn {
+  padding: $space-sm;
+  margin: $space-md $space-sm;
+  border-radius: $radius-md;
+}
+.prod-btn-edit{
+  background-color: $grey-ghost;
+  padding: $space-sm;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  display: flex;
+  margin: $space-md;
+}
+.btn-product-save-changes{
+  padding: $space-sm;
+  border-radius: $radius-md;
+  margin: $space-md;
+}
+
+// -_-_- Chat button -_-_-
+.chat-input {
+  border-radius: $radius-md;
+  padding: $space-sm;
+  background-color:$input-background;
+  color:$black;
+  border:none;
+  width: 90%;
+}
+
+.chat-send-btn{
+  padding: $space-md;
+  margin: 0 $space-md;
+}
+
+.btn-close-chat{
+  margin: $space-md;
+  padding: $space-md;
+}
+
+/*-_-_-_ Producer orders _-_-_-*/
+
+.btn-checkin-containers{
+  box-shadow: $shadow-glow;
+}
+
+.toggle-orders-section{
+  
+  &.active{
+    background-color: $green-dark;
+  }
+}
+
+.return-containers-btn {
+padding: $space-md;
+margin: $space-lg 0;
+width: 80%;
+font-size: larger;
+box-shadow: $shadow-glow;
+}
+
+.btn-pack-product{
+  box-shadow: $shadow-glow;
 }

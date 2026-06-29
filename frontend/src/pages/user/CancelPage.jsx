@@ -15,7 +15,7 @@ function CancelPage() {
             />
             <p>Your payment has been canceled.</p>
             <p>Please check it and try later.</p>
-      <button className="back-btn" onClick={() => navigate("/UserHome")}>Back to my home</button>
+      <button className="back-btn btn btn--ghost" onClick={() => navigate("/UserHome")}>Back to my home</button>
         </div>
         </>
     );

@@ -4,7 +4,7 @@
 .navbar {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
+  padding: $space-sm;
   border-radius: 0 0 $radius-sm $radius-sm;
   justify-content: space-between;
   position: sticky;
@@ -17,7 +17,7 @@
   @include respond(md) {
     flex-direction: row;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: $space-md $space-lg;
     border-radius: 0 0 $radius-md $radius-md;
   }
 }
@@ -30,17 +30,17 @@
 
   @include respond(md) {
     flex-direction: row;
-    gap: 1rem;
+    gap: $space-md;
   }
 }
 
 .account-name {
-  margin: 0.5rem;
+  margin: $space-sm;
   font-size: large;
 
   @include respond(md) {
     font-size: x-large;
-    margin: 1rem;
+    margin: $space-md;
   }
 }
 
@@ -49,15 +49,32 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
+  gap: $space-sm;
+  padding: 0.75rem $space-md;
   border-radius: $radius-md;
-  margin-top: 0.5rem;
+  margin-top: $space-sm;
 
   @include respond(md) {
     margin-top: 0;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
+    gap: $space-md;
+    padding: $space-md 1.5rem;
   }
 }
 
+.cart-btn-wrapper, .order-btn-wrapper{
+  position: relative;
+}
+
+.cart-badge, .orders-badge {
+  position: absolute;
+  top: 0;
+  right: -$space-sm;
+  background-color: $success;
+  border-radius: 100%;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  color: $white;
+}

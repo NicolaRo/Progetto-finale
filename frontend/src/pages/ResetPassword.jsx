@@ -58,7 +58,7 @@ function ResetPassword() {
         />
       </div>
 
-      <button className="login-btn" onClick={handleSubmit}>
+      <button className="login-btn btn btn--primary" onClick={handleSubmit}>
         Reset Password
       </button>
 

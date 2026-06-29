@@ -20,6 +20,10 @@ function ProducerHome({ setShowGreenAssistant }) {
   const [showWelcome, setShowWelcome] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingIngredients, setIsLoadingIngredients] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [showOrders, setShowOrders] = useState(false);
+  const [isLoadingOrders, setIsLoadingOrders] = useState (true);
+  
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
@@ -59,6 +63,20 @@ function ProducerHome({ setShowGreenAssistant }) {
       setRefresh((prev) => prev + 1);
     }
   };
+
+  //Fetch orders
+  useEffect(() => {
+    const fetchOrders = async () => {
+      setIsLoadingOrders(true);
+      const r = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await r.json();
+      setOrders(Array.isArray(data)? data : []);
+      setIsLoadingOrders (false);
+    };
+    fetchOrders();
+  }, [token, refresh]);
 
   const handleUpdateQuantity = async (productId, newQuantity) => {
     const response = await fetch(
@@ -124,12 +142,18 @@ function ProducerHome({ setShowGreenAssistant }) {
 
   return (
     <>
-      <Navbar setShowGreenAssistant={setShowGreenAssistant} />
+      <Navbar 
+        setShowGreenAssistant={setShowGreenAssistant}
+        showOrders={showOrders}
+        setShowOrders = {setShowOrders}
+        orders= {orders} 
+      />
+
       {showWelcome && (
         <div className="toast-welcome">
           <div className="welcome-msg">Welcome back, {user?.name}!</div>
           <button
-            className="close-welcome-btn"
+            className="close-welcome-btn btn btn--rounded"
             onClick={() => setShowWelcome(false)}
           >
             ✕
@@ -223,7 +247,7 @@ function ProducerHome({ setShowGreenAssistant }) {
         </div>
 
         <button
-          className="create-product-btn"
+          className="btn-add-new-product btn btn--primary"
           type="submit"
           onClick={handleCreateProduct}
         >

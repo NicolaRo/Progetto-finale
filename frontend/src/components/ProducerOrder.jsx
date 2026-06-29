@@ -130,7 +130,7 @@ function ProducerOrder({ orders, setRefresh }) {
       {/* COLLAPSABLE CLOSED ORDERS */}
       <div className="producer-orders-section">
         <button
-          className="toggle-orders-section"
+          className={`toggle-orders-section btn ${showClosed ? "btn--ghost" : "btn--primary"}`}
           onClick={() => setShowClosed(!showClosed)}
         >
           {showClosed

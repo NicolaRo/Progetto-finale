@@ -83,13 +83,14 @@ function ProductCard({ product }) {
             <option value="9">9 {product.unit}</option>
             <option value="10">10 {product.unit}</option>
           </select>
-          <button
-            className="create-order-btn"
-            type="submit"
-            onClick={handleAddToCart}
-          >
-            {user?.role === "User" ? "Add to cart" : "Load product"}
-          </button>
+            <button
+              className="add-to-cart-btn btn btn--primary"
+              type="submit"
+              onClick={handleAddToCart}
+            >
+              {user?.role === "User" ? "Add to cart" : "Load product"}
+            </button>
+          
         </div>
       </div>
     </>

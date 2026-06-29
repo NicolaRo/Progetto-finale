@@ -5,9 +5,7 @@ import {useSelector} from 'react-redux';
 import GreenAssistantIcon from "../assets/assistant-icon.png";
 
 import ShoppingCart from "../assets/shopping-cart.png";
-import FullShoppingCart from "../assets/full-shopping-cart.png";
 import LogoutIcon from "../assets/logout-icon.png";
-import OrderIcon from "../assets/order-icon.png";
 import OrderIconEmpty from "../assets/empty-order-icon.png";
 
 function Navbar({
@@ -27,11 +25,11 @@ function Navbar({
         <div className="account-container">
           <h4 className="account-name">
             {" "}
-            {user ? `Welcome: ${user.name}` : "Caricamento..."}
+            {user ? `Welcome, ${user.name}` : "Loading name..."}
           </h4>
           <div className="PP-container">
             <button
-              className="btn-logout"
+              className="btn-logout btn btn--ghost"
               onClick={() => {
                 logout();
                 navigate("/login");
@@ -48,48 +46,52 @@ function Navbar({
         </div>
         <div className="Navbar-btn-container">
           {user?.role === "User" && (
-            <button className="cart-btn" onClick={() => setShowCart(true)}>
+            <div className="cart-btn-wrapper">
+            <button className="cart-btn btn btn--rounded" onClick={() => setShowCart(true)}>
               <img
                 className="cart-icon"
-                src={cart.length > 0 ? FullShoppingCart : ShoppingCart}
+                src={ShoppingCart}
                 alt="Cart"
               />
             </button>
+            {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
+            </div>
           )}
 
           {user?.role === "User" && (
-            <button
-              className="orders-btn "
+            <div className="order-btn-wrapper">
+              <button
+              className="orders-btn btn btn--rounded"
               onClick={() => setShowOrders(!showOrders)}
             >
               <img
                 className="orders-icon"
-                src={
-                  orders.some((o) => o.status === "Order shipped")
-                    ? OrderIcon
-                    : OrderIconEmpty
-                }
+                src={OrderIconEmpty}
               />
             </button>
+            <span className="orders-badge">{orders.filter(o => o.status === "Order shipped").length}</span>
+            </div>
+            
           )}
 
           {user?.role === "Producer" && (
             <>
-              <button
-                className="orders-btn"
+            <div className="order-btn-wrapper">
+            <button
+                className="orders-btn btn btn--rounded"
                 onClick={() => navigate("/orders")}
               >
                 <img
                   className="orders-icon"
-                  src={
-                    orders.some((o) => o.status === "Order shipped")
-                      ? OrderIcon
-                      : OrderIconEmpty
+                  src={OrderIconEmpty
                   }
                 />
               </button>
+              <div className="orders-badge">{orders.filter(o => o.status === "Order created").length}</div>
+            </div>
+              
               <button
-                className="green-assistant-btn"
+                className="green-assistant-btn btn btn--rounded"
                 onClick={() => setShowGreenAssistant(true)}
               >
                 <img

@@ -57,7 +57,7 @@ function Cart({ setShowCart }) {
     <>
       <div className="cart-overlay" onClick={() => setShowCart(false)}>
         <div className="cart-drawer" onClick={(e) => e.stopPropagation()}>
-          <button className="btn-close-cart" onClick={() => setShowCart(false)}>
+          <button className="btn-close-cart btn btn--destructive" onClick={() => setShowCart(false)}>
             Close
           </button>
 
@@ -105,7 +105,7 @@ function Cart({ setShowCart }) {
                   </div>
   
                   <button
-                    className="remove-from-cart-btn"
+                    className="remove-from-cart-btn btn btn--destructive"
                     onClick={() => dispatch(removeFromCart(product.product))}
                   >
                     <img
@@ -119,7 +119,7 @@ function Cart({ setShowCart }) {
             )}
           </div>
           <div className="cart-order-btn-container">
-            <button className="clear-cart-btn" onClick= {()=> dispatch(clearCart())}>
+            <button className="clear-cart-btn btn btn--ghost" onClick= {()=> dispatch(clearCart())}>
               <img
                 className="clear-cart-icon"
                 src={ClearCartIcon}
@@ -129,7 +129,7 @@ function Cart({ setShowCart }) {
             </button>
 
             <button 
-              className="confirm-order-btn" 
+              className="confirm-order-btn btn btn--primary" 
               onClick={handleConfirmOrder}>
               <img
                 className="confirm-order-icon"

@@ -2,98 +2,98 @@
 @use '../base/mixins' as *;
 
 .login-container{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    margin: 0.5rem;
-    border-radius: $radius-md;
-    @include respond (md) {
-        max-width: 480px;
-        margin: 0.5rem auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: $space-sm;
+  border-radius: $radius-md;
 
-    }
+  @include respond (md) {
+    max-width: 480px;
+    margin: $space-sm auto;
+
+  }
 }
 
 .google-login-container{
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.input-text, .search-input, .ppc-input {
-  min-height: 2.5rem;
-  margin: 0.5rem 1rem 1rem 1rem;
+.input-text, .search-input {
+  min-height: $space-lg;
+  margin: $space-sm $space-md $space-md $space-md;
   border-radius: $radius-sm;
-
-  padding: 0.5rem;
-  background-color: rgb(255, 255, 255);
-  shadow-sm: $shadow-sm;
+  border: none;
+  padding: $space-sm;
+  background-color: $white;
+  box-shadow: $shadow-sm;
   width: -webkit-fill-available;
 }
 .search-input{
-    margin: 0 !important;
-    width: 85%;
-    border: none;
-    shadow-sm: $shadow-md;
+  margin: 0 !important;
+  width: 85%;
+  border: none;
+  box-shadow: $shadow-md;
 }
 
 .input-container--btn{
-    display: flex;
+  display: flex;
   flex-direction: column;
 }
 .container-title{
-    margin: 1rem;
+  margin: $space-md;
 }
 
 .container-subtitle{
-    margin: 1rem 0 1rem 0;
+  margin: $space-md 0 $space-md 0;
 }
-
-
 
 .input-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 2rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: $space-lg 0 $space-lg 0;
 }
 .input-container-btn{
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 .label{
-justify-content: flex-start;
-display: flex;
-margin-left: 1rem;
+  justify-content: flex-start;
+  display: flex;
+  margin-left: $space-md;
 }
 
 .signUp-container{
-    display: flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 1rem;
+  margin: $space-md;
   background-color: $container-color;
-  padding: 1rem;
+  padding: $space-md;
   border-radius: $radius-md;
+  
   @include respond (md) {
     max-width: 480px;
-    margin: 2rem auto;
+    margin: $space-lg auto;
   }
 }
 
 .signup-img-container{
-    margin: 1rem;
+  margin: $space-md;
 }
 
 .signup-text{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
 }
 
 .confirmation-msg{
-    margin: 2rem;
+  margin: $space-lg;
   font-size: larger;
   font-weight: bolder;
 }
@@ -101,24 +101,24 @@ margin-left: 1rem;
 
 .signin-container{
 
-    border-radius: $radius-md;
-    padding: 1rem;
-    margin: 1rem;
-    @include respond (md) {
-        max-width: 480px;
-        margin: 2rem auto;
-    }
+  border-radius: $radius-md;
+  padding: $space-md;
+  margin: $space-md;
+  @include respond (md) {
+    max-width: 480px;
+    margin: $space-lg auto;
+  }
 }
 
 .role-selection-container{
-    margin: 1rem;
-    background-color: $container-color;
-    padding: 1rem;
-    border-radius: $radius-md;
-    justify-content: space-evenly;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    font-size: larger;
-    font-weight: 600;
+  margin: $space-lg;
+  background-color: $container-color;
+  padding: $space-md;
+  border-radius: $radius-md;
+  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  gap:$space-md;
+  font-size: larger;
+  font-weight: 600;
 }

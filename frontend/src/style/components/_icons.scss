@@ -19,17 +19,15 @@
   }
   
   .green-assistant-icon {
+    display: flex;
     width: 3rem;
     height: auto;
     border-radius: 50%;
-  
-    @include respond(md) {
-      width: 4rem;
-    }
+    opacity: 90%;
   }
 
 .packed-product-icon{
-    width: 2rem;
+    width: $space-lg;
 }
 
 .delivering-icon{
@@ -44,8 +42,8 @@
 }
 
 .icon-show-pwd{
-    width: 1rem;
-    height: 1rem;
+    width: $space-md;
+    height: $space-md;
 }
 
 .account-icon{

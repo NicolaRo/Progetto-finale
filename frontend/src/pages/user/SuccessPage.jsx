@@ -8,7 +8,12 @@ function SuccessPage() {
     return (
         <>
         <div className="payment-success">
-            <h1 className="payment-success-title">🎉 Payment successful!</h1>
+        <button 
+        className="back-btn btn btn--primary"
+        onClick={() => navigate("/UserHome")}>Continue shopping</button>
+        </div>
+        <div className ="success-payment-container">
+        <h1 className="payment-success-title">🎉 Payment successful!</h1>
             <img
                 className="payment-success-icon"
                 src={SuccessPayment}
@@ -16,9 +21,6 @@ function SuccessPage() {
                 />
             <p>Your order has been confirmed.</p>
             <p>Track your order state in the order page.</p>
-      <button 
-        className="back-btn"
-        onClick={() => navigate("/UserHome")}>Back to shop</button>
         </div>
         </>
     );

@@ -9,80 +9,93 @@
 }
 
 .onboarding-title {
-    margin: 1rem 0;
+  margin: $space-md 0;
 }
 
 .onboarding-content {
-    margin-top: 1rem;
+  margin-top: $space-md;
 }
 
 .onboarding-step {
-    margin: 0.5rem 1rem;
+  margin: $space-sm $space-md;
 }
 .onboarding-note{
-    margin-top: 1rem;
+  margin-top: $space-md;
 }
 .onboarding-dot :active {
-    background-color: black;
+  background-color: black;
 }
 .onboarding-dot{
-    background-color: gray;
+  background-color: gray;
 }
+
+.onboarding-navigation-container{
+  position: absolute;
+  bottom: $space-md;
+  width: 100%;
+  gap:$space-sm;
+  display: flex;
+  flex-direction: column;
+}
+
 .onboarding-nav {
-    display: flex;
-    margin-right: 1rem;
-    justify-content: space-evenly;
-    margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
 }
 .onboarding-skip{
-    margin-top: 2rem;
-    gap: 0.5rem;
-    display: flex; 
-}.onboarding-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
-  }
+  gap: $space-md;
+  bottom: $space-sm;
+  display: flex;
+}
+
+.onboarding-dots {
+  display: flex;
+  justify-content: center;
+  gap: $space-sm;
+  margin: $space-md 0;
+}
   
-  .onboarding-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: rgb(255, 255, 255);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  
-    &.active {
-      background-color: black;
-    }
+.onboarding-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &.active {
+    background-color: $black;
   }
+}
 
 
-  .onboarding-steps {
+  .onboarding-steps-container {
     list-style: none;
     width: 100%;
     text-align: left;
   }
   
-  .onboarding-step {
-    margin: 0.75rem 0;
-    padding: 0.5rem;
-    background-color: rgba(255,255,255,0.25);
-    border-radius: 0.5rem;
-  }
+.onboarding-step {
+  margin: 0.75rem 0;
+  padding: $space-sm;
+  border-radius: $space-sm;
+  background-color: $accent;
+  list-style: none;
+}
   
   
 .onboarding-card {
-  background-color: rgb(21, 136, 125);
-  border-radius: 2rem;
-  padding: 1.5rem;
+  background-color: rgba(21, 136, 124, 0.75);
+  backdrop-filter: blur(2px);
+  border-radius: $space-lg;
+  padding: 1rem;
   justify-content: center;
-  display: flex;
-  flex-direction: column;
-  margin: 1rem;
-  color: white;
+  margin: $space-md;
+  color: $white;
   font-weight: 500;
+  height: 45rem;
+  width: 90vw;
+  
   @include respond (md) {
     font-size: x-large;
     font-weight: bold;

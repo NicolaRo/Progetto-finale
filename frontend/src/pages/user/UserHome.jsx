@@ -113,7 +113,7 @@ function UserHome() {
         <div className="toast-welcome">
           <div className="welcome-msg">Welcome back, {user?.name}</div>
           <button
-            className="close-welcome-btn"
+            className="close-welcome-btn btn btn--rounded"
             onClick={() => setShowWelcome(false)}
           >
             ✕
@@ -140,19 +140,8 @@ function UserHome() {
         />
         )
       )}
-
-      <div className="hero-banner">
-        <h3 className="hero-title">Green tip of the day</h3>
-        <p className="hero-tip">{heroTip || "Loading..."}</p>
-        <button className="hero-chat-btn" onClick={() => setShowChat(true)}>
-          Chat with RecycleBuddy
-        </button>
-      </div>
-      {showChat && <RecycleBuddy onClose={() => setShowChat(false)} />}
-
-      <div className="research-container">
+<div className="research-container">
         <h3 className="page-title">What do you need today?</h3>
-
         <div className="searchbar">
           <input
             className="search-input"
@@ -166,7 +155,7 @@ function UserHome() {
             }}
           />
           <button
-            className="search-button"
+            className="search-button btn btn--primary"
             onClick={() =>
               fetchProducts(query, activeFilters, selectedProducer)
             }
@@ -206,6 +195,17 @@ function UserHome() {
           </div>
         </div>
       </div>
+
+      <div className="hero-banner">
+        <h3 className="hero-title">Green tip of the day</h3>
+        <p className="hero-tip">{heroTip || "Loading..."}</p>
+        <button className="hero-chat-btn btn btn--primary" onClick={() => setShowChat(true)}>
+          Chat with RecycleBuddy
+        </button>
+      </div>
+      {showChat && <RecycleBuddy onClose={() => setShowChat(false)} />}
+
+      
       {/* SKELETON LOADER */}
       {isLoading ? (
         <div className="user-skeleton-grid">

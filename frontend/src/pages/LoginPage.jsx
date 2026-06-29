@@ -254,7 +254,7 @@ function LoginPage() {
               }}
             />
             <button
-              className="show-pwd-btn"
+              className="show-pwd-btn btn btn--ghost"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "Hide" : "Show password"}
@@ -274,7 +274,7 @@ function LoginPage() {
             {showForgotPassword && <ForgotPassword />}
           </div>
           <div className="login-buttons-container">
-            <button className="login-btn" type="submit" onClick={handleLogIn}>
+            <button className="login-btn btn btn--primary" type="submit" onClick={handleLogIn}>
               Log In
             </button>
           </div>
@@ -380,7 +380,7 @@ function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
-                  className="show-pwd-btn"
+                  className="show-pwd-btn btn btn--ghost"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? "Hide" : "Show password"}
@@ -394,7 +394,7 @@ function LoginPage() {
             </div>
           </div>
 
-          <button className="register-btn" type="submit" onClick={handleSubmit}>
+          <button className="register-btn btn btn--primary" type="submit" onClick={handleSubmit}>
             Register
           </button>
         </div>
@@ -418,7 +418,7 @@ function LoginPage() {
           )}
         </div>
         <button
-          className="toogle-login"
+          className="toogle-login btn btn--primary"
           onClick={() => {
             setShowLogin(!showLogin);
           }
