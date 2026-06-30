@@ -59,7 +59,6 @@ function ProducerHome({ setShowGreenAssistant }) {
       }
     );
     if (response.ok) {
-      alert("Product created");
       setRefresh((prev) => prev + 1);
     }
   };

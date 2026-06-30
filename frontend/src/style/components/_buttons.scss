@@ -256,7 +256,7 @@ button {
   background-color: #05012c;
   border-radius: 500px;
   height: 30px;
-  margin-right: $space-lg;
+  margin-right: $space-md;
   -webkit-transition: background-color 0.125s ease-out;
   transition: background-color 0.125s ease-out;
   width: 70px;
@@ -281,11 +281,10 @@ button {
 }
 .checkbox-wrapper-35 .switch + label .switch-x-toggletext {
   display: block;
-  font-weight: bold;
   height: 15px;
   overflow: hidden;
   position: relative;
-  width: 5rem;
+  width: 6rem;
 }
 .checkbox-wrapper-35 .switch + label .switch-x-unchecked,
   .checkbox-wrapper-35 .switch + label .switch-x-checked {
@@ -316,7 +315,11 @@ button {
 }
 .checkbox-wrapper-35 .switch:checked + label::after {
   -webkit-transform: translate3d(10px, 0, 0);
-  transform: translate3d(33px, 0, 0);
+  transform: translate3d(20px, 0, 0);
+  @include respond (md) {
+    transform: translate3d(33px, 0, 0);
+
+  }
 }
 .checkbox-wrapper-35 .switch:checked + label .switch-x-unchecked {
   opacity: 0;
@@ -420,6 +423,8 @@ button {
   padding: $space-sm;
   margin: $space-md $space-sm;
   border-radius: $radius-md;
+  font-size: larger;
+  box-shadow: $shadow-glow;
 }
 .prod-btn-edit{
   background-color: $grey-ghost;

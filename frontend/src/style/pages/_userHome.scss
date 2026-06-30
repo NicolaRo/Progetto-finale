@@ -33,7 +33,7 @@
   padding: $space-md;
 }
 
-/* .product-card{
+.product-card{
   display: flex;
   flex-direction: column;
   border: none;
@@ -47,7 +47,7 @@
     max-width: 15rem;
     justify-content: space-evenly;
   }
-} */
+}
 
 
 .research-container{
@@ -70,29 +70,36 @@
   justify-content: center;
 }
 
-.toast-welcome {
+//-_-_- TOAST NOTIFICATIONS -_-_-
+
+.toast-welcome,
+.toast-account-registration {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  top: 8rem;
+  right: $space-lg;
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000;
   gap: $space-md;
-  animation: fadeOut 4s forwards;
+  background-color: $white;
+  padding: $space-md $space-lg;
+  border-radius: $radius-sm;
+  box-shadow: $shadow-md;
+  z-index: 1000;
+  max-width: 320px;
+  animation: slideIn 0.3s ease, fadeOut 0.4s ease 3.6s forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes fadeOut {
-  0%, 70% { opacity: 1; }
-  100% { opacity: 0; pointer-events: none; }
+  to { opacity: 0; transform: translateX(20px); pointer-events: none; }
 }
 
-.welcome-msg {
-  background-color: $green-light;
-  color: $white;
+.toast-welcome {
+  color: $black;
   padding: 0.75rem 1.5rem;
   border-radius: $space-lg;
   box-shadow:$shadow-md;
@@ -103,6 +110,6 @@
   font-size: 1.5rem;
 
   @include respond (md) {
-    font-size: $space-xl;
+    font-size: $space-lg;
   }
 }

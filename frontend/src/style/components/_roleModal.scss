@@ -118,3 +118,43 @@
     }
   }
 }
+
+.role-cards {
+  display: flex;
+  gap: $space-md;
+  margin: $space-lg 0;
+
+  @include respond(md) {
+    gap: $space-lg;
+  }
+}
+
+.role-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-sm;
+  padding: $space-lg $space-md;
+  border-radius: $radius-md;
+  background-color: $white;
+  box-shadow: $shadow-sm;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &.active {
+    border-color: $green-dark;
+    box-shadow: $shadow-glow;
+  }
+}
+
+.role-card-icon {
+  font-size: 2.5rem;
+}

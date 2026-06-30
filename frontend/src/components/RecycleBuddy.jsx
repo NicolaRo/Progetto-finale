@@ -14,7 +14,7 @@ function RecycleBuddy({ onClose }) {
       : {
           role: "assistant",
           content:
-            "Hi! I'm RecycleBuddy. ask me anything about sustainability, eco-friendly living, or how PackBack helps the planet!",
+            "Hi! I'm RecycleBuddy. Ask me anything about sustainability, eco-friendly living, or how PackBack helps the planet!",
         };
 
   const [messages, setMessages] = useState([initialMessage]);
@@ -91,7 +91,7 @@ function RecycleBuddy({ onClose }) {
             </div>
           ))}
           {isLoading && (
-            <div className="chat-mesage-assistant">
+            <div className="chat-message-assistant">
               <div className="typing-indicator">
                 <span></span>
                 <span></span>

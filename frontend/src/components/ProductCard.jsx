@@ -11,7 +11,7 @@ function ProductCard({ product }) {
   const handleAddToCart = () => {
     console.log("handleAddToCart called", quantity);
     if (!quantity || quantity === "0") {
-      alert("Chose a quantity higher than 0");
+      alert("Choose a quantity higher than 0");
       return;
     }
 
@@ -40,10 +40,11 @@ function ProductCard({ product }) {
         <div className="p-name-pic-details">
           <p className="p-name-details">
             <strong>{product.name}</strong>
+            
           </p>
           <img
             className="product-listed-img"
-            src={`http://img.spoonacular.com/ingredients_100x100/${product.image}`}
+            src={`https://img.spoonacular.com/ingredients_100x100/${product.image}`}
             alt={product.name}
           />
         </div>
@@ -65,6 +66,7 @@ function ProductCard({ product }) {
             {product.producerId.name}
           </p>
         </div>
+        <span className="eco-badge">♻️ Reusable pack</span>
         <div className="card-btn-container">
           <select
             className="dropdown"

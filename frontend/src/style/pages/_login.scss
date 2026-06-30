@@ -97,6 +97,27 @@
   font-size: larger;
   font-weight: bolder;
 }
+
+.auth-error-banner {
+  background-color: $error-light;
+  border: 1px solid $error;
+  color: $white;
+  border-radius: $radius-sm;
+  padding: $space-sm $space-md;
+  box-shadow: $shadow-sm;
+  margin-bottom: $space-md;
+  font-weight: 500;
+  font-size: larger;
+  text-align: center;
+}
+
+.error-text {
+  color: $error;
+  font-size: 0.85rem;
+  margin-top: $space-xs;
+  display: block;
+}
+
 //-_-_-_ REGISTER _-_-_-
 
 .signin-container{
@@ -111,7 +132,6 @@
 }
 
 .role-selection-container{
-  margin: $space-lg;
   background-color: $container-color;
   padding: $space-md;
   border-radius: $radius-md;
@@ -121,4 +141,8 @@
   gap:$space-md;
   font-size: larger;
   font-weight: 600;
+}
+
+.join-us-claim {
+  margin: 0 $space-md;
 }

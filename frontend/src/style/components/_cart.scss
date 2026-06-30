@@ -100,3 +100,28 @@ margin-top: $space-md;
   margin: $space-md 0;
   font-weight: normal;
 }
+
+.checkout-error-banner{
+  z-index: 1000;
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  background-color: $error-light;
+  padding: $space-md;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+
+  .error-text{
+    color: white;
+    font-size: x-large;
+    font-weight: 600;
+  }
+  
+  @keyframes fadeOut {
+    to { 
+      opacity: 0; 
+      transform: translateX(20px);
+      pointer-events: none;
+    }
+  }
+}

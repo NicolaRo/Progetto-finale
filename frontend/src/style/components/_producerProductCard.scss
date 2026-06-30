@@ -9,7 +9,6 @@
   grid-template-columns: repeat(2, 1fr);
   height: 45rem;
   overflow-y: scroll;
-  width: 100vw;
 
   @include respond (lg) {
     margin: $space-lg auto;

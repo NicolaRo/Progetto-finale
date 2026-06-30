@@ -28,7 +28,6 @@ function UserHome() {
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 2000));
       const r = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -43,7 +42,6 @@ function UserHome() {
   useEffect(() => {
     const fetchOrders = async () => {
       setIsLoadingOrders(true);
-      await new Promise(resolve => setTimeout(resolve, 2000));
       const r = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -111,13 +109,7 @@ function UserHome() {
       />
       {showWelcome && (
         <div className="toast-welcome">
-          <div className="welcome-msg">Welcome back, {user?.name}</div>
-          <button
-            className="close-welcome-btn btn btn--rounded"
-            onClick={() => setShowWelcome(false)}
-          >
-            ✕
-          </button>
+          <p>Welcome back, {user?.name}</p>
         </div>
       )}
 

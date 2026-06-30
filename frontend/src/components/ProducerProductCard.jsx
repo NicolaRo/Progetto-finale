@@ -29,7 +29,7 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
       <div className="ppc-header">
         <img
           className="ppc-image"
-          src={`http://img.spoonacular.com/ingredients_100x100/${product.image}`}
+          src={`https://img.spoonacular.com/ingredients_100x100/${product.image}`}
           alt={product.name}
         />
         <div className="ppc-title">
@@ -126,8 +126,6 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
             <option value="Cl">Cl</option>
             <option value="Piece">Piece</option>
           </select>
-          
-          
         </div>
       )}
     </div>

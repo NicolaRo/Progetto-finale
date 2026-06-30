@@ -36,7 +36,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
           </div>
         )}
         <p>
-          <strong>{order.user.name}</strong>, Id: {order.user._id}
+          <strong>{order.user.name}</strong>
         </p>
         <label>
           <strong>Order Id: </strong>
@@ -71,7 +71,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
                 {!isCompleted && (
                   <img
                     className="prod-order-preview"
-                    src={`http://img.spoonacular.com/ingredients_100x100/${products.product.image}`}
+                    src={`https://img.spoonacular.com/ingredients_100x100/${products.product.image}`}
                     alt={products.product.name}
                   />
                 )}
@@ -126,7 +126,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
           <div className=" modal-card" onClick={(e) => e.stopPropagation()}>
             <h3>Containers are on their way back!</h3>
             <p>
-              Congratulations - You contributed to reducing single-use plastick
+              Congratulations - You contributed to reducing single-use plastic
               packaging. Your 5,00€ deposit will be refunded shortly
             </p>
             <button className="modal-btn" onClick={() => setShowModal(false)}>

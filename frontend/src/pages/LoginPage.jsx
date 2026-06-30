@@ -11,19 +11,23 @@ import ForgotPassword from "./ForgotPassword";
 import RoleModal from "../components/RoleModal";
 
 function LoginPage() {
-  const [showLogin, setShowLogin] = useState(true);
-  const [showRole, setShowRole] = useState(true);
+  const[showLogin, setShowLogin] = useState(true);
 
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("User");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [googleUserData, setGoogleUserData] = useState(null);
-  const [showRoleModal, setShowRoleModal] = useState (false);
+  const[name, setName] = useState("");
+  const[surname, setSurname] = useState("");
+  const[email, setEmail] = useState("");
+  const[role, setRole] = useState("User");
+  const[password, setPassword] = useState("");
 
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const[errors, setErrors] = useState({});
+
+  const[showPassword, setShowPassword] = useState(false);
+  const[googleUserData, setGoogleUserData] = useState(null);
+  const[showRoleModal, setShowRoleModal] = useState (false);
+
+  const[showForgotPassword, setShowForgotPassword] = useState(false);
+
+  const[showToast, setShowToast] = useState(false);
 
   const provider = new GoogleAuthProvider();
 
@@ -33,20 +37,12 @@ function LoginPage() {
 
   //Function to enable google login popup
   const googleLogIn = async () => {
-    //Console.log for debug
-    console.log("googleLogIn called");
-
     
     const result = await signInWithPopup(auth, provider);
-    //Console.log for debug
-    console.log("result:", result);
 
     const googleEmail = result.user.email;
     const googleName = result.user.displayName; // Firebase will share the User Name
-    //Console.log for debug
-    console.log("googleName:", googleName);
-
-
+    
     //1. Check if the email already exist
     const checkResponse = await fetch( `${import.meta.env.VITE_API_URL}/api/users/check-email`,
       {
@@ -58,15 +54,8 @@ function LoginPage() {
 
     const checkData = await checkResponse.json();
 
-    //Console log for debug:
-    console.log("checkData:", checkData);
-    console.log("checkData.exists:", checkData.exists);
-
     if(!checkData.exists) {
-      //Console log for debug:
-      console.log("New USer, open modal");
-      console.log("Setto googleUserData:", {email: googleEmail, name: googleName});
-
+      
       setGoogleUserData ({email: googleEmail, name: googleName});
       setShowRoleModal (true);
       return;
@@ -115,13 +104,15 @@ function LoginPage() {
     // Validations
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      alert("Please provide a valid e-mail address.");
+      setErrors({email: "Please provide a valid e-mail address."});
       return;
     }
     if (password.length < 8) {
-      alert("The password must be of minimum 8 digits.");
+      setErrors({password: "The password must be of minimum 8 digits."});
       return;
     }
+
+    setErrors({});
 
     //Fetch data to the backend
     const response = await fetch(
@@ -136,7 +127,8 @@ function LoginPage() {
     //Read the data
     const logInData = await response.json();
 
-    if (!response.ok) return alert("Invalid credentials, please try again");
+    if (!response.ok) return 
+    setErrors({auth: "Invalid credentials, please try again"});
 
     login(logInData.token, {
       role: logInData.role,
@@ -159,16 +151,20 @@ function LoginPage() {
 
     // Validations
     if (name.length < 2) {
-      alert("Name lenght must be at least 2 digits.");
+      setErrors({name: "Name lenght must be at least 2 digits."});
+      return;
+    }
+    if (surname.length < 2) {
+      setErrors({surname: "surname lenght must be at least 2 digits."});
       return;
     }
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      alert("Please provide a valid e-mail address.");
+      setErrors({email: "Please provide a valid e-mail address."});
       return;
     }
     if (password.length < 8) {
-      alert("The password must be of minimum 8 digits.");
+      setErrors({password: "The password must be of minimum 8 digits."});
       return;
     }
 
@@ -192,23 +188,30 @@ function LoginPage() {
     );
 
     if (response.ok) {
-      navigate("/login");
-      alert("Account created successfully, log in to access");
+      setShowLogin(true);
+      setShowToast(true);
     } else {
       const error = await response.json();
-      alert(error.message);
+      setErrors(error.message);
     }
   };
 
   return (
     <>
+    {showToast && (
+      <div className="toast-account-registration">
+        <p>Well done! Your account has been registered succesfully. Log in to start.</p>
+      </div>
+    )}
       {showLogin ? (
         <div className="login-container">
           <h3 className="container-title">Welcome in PackBack</h3>
 
           <h4 className="container-subtitle">
-            Reuseable packagin for a greener world
+            Reusable packaging for a greener world
           </h4>
+
+          {errors.auth && <div className="auth-error-banner">{errors.auth}</div>}
 
           <div className="google-login-container">
             <button
@@ -238,6 +241,8 @@ function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
             />
+            {errors.email && <span className="error-text">{errors.email}</span>}
+
             <label className="label" htmlFor="password">
               Password
             </label>
@@ -253,6 +258,7 @@ function LoginPage() {
                 if (e.key === "Enter") handleLogIn(e);
               }}
             />
+            {errors.password && <span className="error-text">{errors.password}</span>}
             <button
               className="show-pwd-btn btn btn--ghost"
               onClick={() => setShowPassword(!showPassword)}
@@ -288,40 +294,29 @@ function LoginPage() {
 
           <div className="role-selection-container">
             <h3>Choose your account type:</h3>
-            <div className="checkbox-wrapper-35">
-              <input
-                id="switch"
-                name="switch"
-                type="checkbox"
-                className="switch"
-                checked={role === "Producer"}
-                onChange={() => {
-                  setShowRole(!showRole);
-                  setRole(showRole ? "Producer" : "User");
-                }}
-              />
-              <label htmlFor="switch">
-                <span className="switch-x-text">Register as: </span>
-                <span className="switch-x-toggletext">
-                  <span className="switch-x-unchecked">
-                    <span className="switch-x-hiddenlabel">Unchecked: </span>
-                    User
-                  </span>
-                  <span className="switch-x-checked">
-                    <span className="switch-x-hiddenlabel">Checked: </span>
-                    Producer
-                  </span>
-                </span>
-              </label>
-            </div>
-
-            {role === "Producer" ? (
-              <p>A Producer can sell products</p>
-            ) : (
-              <p>A User can buy products allowing packaging reuse</p>
-            )}
           </div>
 
+<div className="role-cards">
+  <div
+    className={`role-card ${role === "User" ? "active" : ""}`}
+    onClick={() => setRole("User")}
+  >
+    <span className="role-card-icon">🛒</span>
+    <h3>User</h3>
+    <p>Buy products from local producers and get them in reusable containers.</p>
+  </div>
+
+  <div
+    className={`role-card ${role === "Producer" ? "active" : ""}`}
+    onClick={() => setRole("Producer")}
+  >
+    <span className="role-card-icon">🌱</span>
+    <h3>Producer</h3>
+    <p>Sell your products and ship them with our reusable packaging.</p>
+  </div>
+</div>
+
+        
           <div className="input-containers">
             <div className="input-name-container">
               <label className="label" htmlFor="name">
@@ -336,6 +331,7 @@ function LoginPage() {
                 placeholder="I.e.: John"
               />
             </div>
+            {errors.name && <span className="error-text">{errors.name}</span>}
 
             <div className="input-surname-container">
               <label className="label" htmlFor="surname">
@@ -350,6 +346,7 @@ function LoginPage() {
                 placeholder="I.e.: Doe"
               />
             </div>
+            {errors.surname && <span className="error-text">{errors.surname}</span>}
 
             <div className="input-pwd-container-btn">
               <div className="input-email-container">
@@ -365,6 +362,7 @@ function LoginPage() {
                   placeholder="I.e.: john.doe@example.com"
                 />
               </div>
+              {errors.email && <span className="error-text">{errors.email}</span>}
 
               <div className="input-container">
                 <label className="label" htmlFor="password">
@@ -379,6 +377,7 @@ function LoginPage() {
                   placeholder="Choose a password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                {errors.password && <span className="error-text">{errors.password}</span>}
                 <button
                   className="show-pwd-btn btn btn--ghost"
                   onClick={() => setShowPassword(!showPassword)}
@@ -430,11 +429,11 @@ function LoginPage() {
         {showRoleModal && (
           <RoleModal
             isOpen = {showRoleModal}
-            userName = {googleUserData.googleName}
+            userName = {googleUserData.name}
             onClose = {() => setShowRoleModal(false)}
             onChooseRole = {async (choosenRole) => {
                 setShowRoleModal (false);
-                await completeGoogleLogin(googleUserData.email, googleUserData.googleName, choosenRole);
+                await completeGoogleLogin(googleUserData.email, googleUserData.name, choosenRole);
               }}
             />
           )}

@@ -35,6 +35,19 @@
   margin-left: $space-sm;
 }
 
+.eco-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  background-color: $green-light;
+  color: $green-dark;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: $space-xs $space-sm;
+  border-radius: $radius-sm;
+  width: fit-content;
+}
+
 .product-details{
   display: flex;
   flex-direction: column;

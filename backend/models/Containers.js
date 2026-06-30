@@ -10,7 +10,7 @@ const ContainerSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ["Container ready to use", "Container busy", "Container ready for collection"],
-        required: [true, "Please chose a Container state"]
+        required: [true, "Please choose a Container state"]
     }
 }, {timestamps: true});
 
