@@ -9,7 +9,7 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background-image:linear-gradient(to right, #ccf8dd, #dffbea);
+  background-color:$background;
 }
   
 .splash-image {
@@ -22,7 +22,7 @@
 .loader {
   width: 60px;
   height: 60px;
-  box-shadow: 0 3px 0 #ac35e3;
+  box-shadow: 0 3px 0 $green-mid;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -37,7 +37,7 @@
   position: absolute;
   inset: auto calc(50% - 17px) 0;
   height: 50px;
-  --g: no-repeat linear-gradient(rgb(21, 136, 125) 0 0);
+  --g: no-repeat linear-gradient $green-dark 0 0;
   background: var(--g), var(--g), var(--g), var(--g);
   background-size: 16px 14px;
   animation:

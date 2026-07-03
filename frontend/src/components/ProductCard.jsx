@@ -8,8 +8,10 @@ function ProductCard({ product }) {
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
 
+  const [addedToCart, setAddedToCart] = useState(false);
+
   const handleAddToCart = () => {
-    console.log("handleAddToCart called", quantity);
+
     if (!quantity || quantity === "0") {
       alert("Choose a quantity higher than 0");
       return;
@@ -21,6 +23,9 @@ function ProductCard({ product }) {
       );
       return;
     }
+
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 3000);
 
     dispatch(addToCart({
       product: product._id,
@@ -36,6 +41,12 @@ function ProductCard({ product }) {
 
   return (
     <>
+
+    {addedToCart && ( 
+      <div className="toast-cart">
+        <p>Product added to cart</p>
+      </div>
+    )}
       <div className="product-card">
         <div className="p-name-pic-details">
           <p className="p-name-details">

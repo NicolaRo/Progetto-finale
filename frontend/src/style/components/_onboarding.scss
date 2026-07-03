@@ -16,9 +16,7 @@
   margin-top: $space-md;
 }
 
-.onboarding-step {
-  margin: $space-sm $space-md;
-}
+
 .onboarding-note{
   margin-top: $space-md;
 }
@@ -30,17 +28,18 @@
 }
 
 .onboarding-navigation-container{
-  position: absolute;
-  bottom: $space-md;
-  width: 100%;
-  gap:$space-sm;
+  position: fixed;
+  gap: 0.5rem;
   display: flex;
   flex-direction: column;
+  bottom: 1rem;
+  align-items: center;
 }
 
 .onboarding-nav {
   display: flex;
   justify-content: space-evenly;
+  gap:$space-lg;
 }
 .onboarding-skip{
   gap: $space-md;
@@ -79,22 +78,25 @@
   margin: 0.75rem 0;
   padding: $space-sm;
   border-radius: $space-sm;
-  background-color: $accent;
+  background-color: $green-mid;
   list-style: none;
+  color:$white;
 }
   
-  
 .onboarding-card {
-  background-color: rgba(21, 136, 124, 0.75);
+  background-color:$green-light;
   backdrop-filter: blur(2px);
   border-radius: $space-lg;
   padding: 1rem;
-  justify-content: center;
+  justify-content: space-between;
   margin: $space-md;
-  color: $white;
+  color: $green-dark;
   font-weight: 500;
   height: 45rem;
   width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
   @include respond (md) {
     font-size: x-large;

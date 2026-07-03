@@ -8,7 +8,10 @@ import ShippingIcon from '../assets/shipping-order.gif';
 function UserOrder({ orders, setRefresh }) {
   const { token } = useContext(AuthContext);
 
-  const [modalDismissed, setModalDismissed] = useState (false);
+  const [seenOrders, setSeenOrders] = useState(() => {
+    const saved = localStorage.getItem("seenOrders");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const handleReturnContainers = async (containers) => {
     try {
@@ -30,7 +33,7 @@ function UserOrder({ orders, setRefresh }) {
   const isPreparing = (order) => order.status === "Preparing order";
   const isCreated = (order) => order.status === "Order created";
   
-  const shippedOrderForModal = !modalDismissed && orders.find(o=> o.status === "Order shipped");
+  const shippedOrderForModal = orders.find((o)=> o.status === "Order shipped" && (!seenOrders.includes(o._id)) && o.containers.some((c) => c.status === "Container busy"));
 
   const createdOrders = orders.filter(isCreated);
   const preparingOrders = orders.filter(isPreparing);
@@ -87,7 +90,11 @@ function UserOrder({ orders, setRefresh }) {
       <h3>Your order is on its way!</h3>
       <p>Once you receive it, tap <strong>"Confirm receipt & return containers"</strong> so we can reuse them.</p>
       <p>This way doing the grocery won't pollute with single-use packaging.</p>
-      <button className="modal-btn" onClick={() => setModalDismissed(true)}>
+      <button className="modal-btn" onClick={() => {
+          const updated = [...seenOrders, shippedOrderForModal._id];
+          setSeenOrders(updated);
+          localStorage.setItem("seenOrders", JSON.stringify(updated));
+      }}>
         Got it
       </button>
     </div>

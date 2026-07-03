@@ -23,10 +23,10 @@
   padding: $space-xl;
   max-width: 620px;
   width: 90%;
-  box-shadow: $shadow-glow;
+  box-shadow: $shadow-md;
 
   h2 {
-    color: $accent;
+    color: $green-dark;
     margin-bottom: $space-sm;
   }
 
@@ -46,16 +46,17 @@
 
   &__role-card {
     flex: 1;
-    background: $glass-background;
+    background: $white;
     border-radius: $radius-md;
     padding: $space-md;
     box-shadow: $shadow-sm;
+
     @include flex-center;
     flex-direction: column;
     gap: $space-md;
 
     h3 {
-      color: $accent;
+      color: $green-dark;
     }
 
     ul {
@@ -67,13 +68,13 @@
         padding: $space-xs 0;
         &::before {
           content: '✓ ';
-          color: $accent;
+          color: $green-dark;
         }
       }
     }
 
     &--accent {
-      border-color: $accent;
+      border-color: $green-mid;
       border-width: 2px;
     }
   }
@@ -85,22 +86,27 @@
     border-radius: $radius-md;
     cursor: pointer;
     font-size: $space-md;
-    box-shadow: $shadow-glow;
     transition: opacity 0.2s;
+
+    @include ambient-shadow ($green-dark);
 
     &:hover {
       opacity: 0.85;
     }
 
     &--primary {
-      background: $accent;
+      background: $green-dark;
       color: $button-text;
+
+      @include ambient-shadow ($green-dark);
     }
 
     &--secondary {
       background: transparent;
-      color: $accent;
-      border: 2px solid $accent;
+      color: $green-dark;
+      border: 2px solid $green-mid;
+
+      @include ambient-shadow ($green-dark);
     }
   }
 }
@@ -151,7 +157,7 @@
 
   &.active {
     border-color: $green-dark;
-    box-shadow: $shadow-glow;
+    box-shadow: $shadow-md;
   }
 }
 

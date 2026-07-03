@@ -3,7 +3,7 @@
 
 .my-products-container{
   padding: 0.25rem;
-  background-color:#2494867a;
+  background-color:$background;
   border-radius: $radius-md;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -12,7 +12,8 @@
 .product-upd-preview {
     margin:  $space-md;
     border-radius: $radius-sm;
-    background-color: beige;
+    background-color: $white;
+    border: 0.5px solid $black 0.08;
     padding: $space-sm;
     display: flex;
     flex-direction: column;
@@ -35,11 +36,6 @@
 .ppc-header{
     display: flex;
     flex-direction: column;
+    margin-top: $space-md;
 }
 
-.ppc-image {
-    border-style: none;
-    display: flex;
-    align-self: center;
-    border-radius: $radius-md;
-}

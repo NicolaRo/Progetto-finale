@@ -4,9 +4,7 @@ import{removeFromCart, clearCart} from '../store/cartSlice';
 import { AuthContext } from "../context/AuthContext";
 import { useState } from "react";
 
-import RemoveFromCartIcon from "../assets/remove-from-cart.png";
-import ClearCartIcon from "../assets/clear-cart.png";
-import ConfirmOrder from "../assets/confirm-order.png";
+import { CloseIcon, TrashIcon, CheckIcon } from "../components/icons/Icons";
 
 function Cart({ setShowCart }) {
   const cart = useSelector((state) => state.cart.items);
@@ -124,11 +122,7 @@ function Cart({ setShowCart }) {
                     className="remove-from-cart-btn btn btn--destructive"
                     onClick={() => dispatch(removeFromCart(product.product))}
                   >
-                    <img
-                      className="remove-from-cart-icon"
-                      src={RemoveFromCartIcon}
-                      alt="Remove product from cart"
-                    />
+                    <CloseIcon className="remove-from-cart-icon" size={16} />
                   </button>
                 </div>
               ))
@@ -136,11 +130,7 @@ function Cart({ setShowCart }) {
           </div>
           <div className="cart-order-btn-container">
             <button className="clear-cart-btn btn btn--ghost" onClick= {()=> dispatch(clearCart())}>
-              <img
-                className="clear-cart-icon"
-                src={ClearCartIcon}
-                alt="Cleat Cart"
-              />
+            <TrashIcon className="clear-cart-icon" size={16} />
               Clear cart
             </button>
 
@@ -148,11 +138,7 @@ function Cart({ setShowCart }) {
               className="confirm-order-btn btn btn--primary" 
               onClick={handleConfirmOrder}
               disabled={isLoading}>
-              <img
-                className="confirm-order-icon"
-                src={ConfirmOrder}
-                alt="Confirm Order"
-              />
+              <CheckIcon className="confirm-order-icon" size={16} />
               {isLoading ? "Processing..." : "Confirm order"}
             </button>
           </div>

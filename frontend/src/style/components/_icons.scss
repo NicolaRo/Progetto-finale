@@ -2,7 +2,13 @@
 @use '../base/variables' as*;
 
 .cart-icon,
-.orders-icon,
+.order-icon,
+.account-logout-icon,
+.green-assistant-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 .clear-cart-icon,
 .confirm-order-icon{
     width: 1.5rem;
@@ -12,19 +18,6 @@
 .remove-from-cart-icon{
     width: 1.5rem;
 }
-
-.account-logout-icon {
-    width: 1.5rem;
-    height: auto;
-  }
-  
-  .green-assistant-icon {
-    display: flex;
-    width: 3rem;
-    height: auto;
-    border-radius: 50%;
-    opacity: 90%;
-  }
 
 .packed-product-icon{
     width: $space-lg;

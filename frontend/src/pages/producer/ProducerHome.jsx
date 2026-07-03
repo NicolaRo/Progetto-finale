@@ -151,12 +151,6 @@ function ProducerHome({ setShowGreenAssistant }) {
       {showWelcome && (
         <div className="toast-welcome">
           <div className="welcome-msg">Welcome back, {user?.name}!</div>
-          <button
-            className="close-welcome-btn btn btn--rounded"
-            onClick={() => setShowWelcome(false)}
-          >
-            ✕
-          </button>
         </div>
       )}
       <div className="create-product-container">

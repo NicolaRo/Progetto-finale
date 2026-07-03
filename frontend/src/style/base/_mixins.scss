@@ -41,4 +41,8 @@
     rgb(224, 224, 224) 75%); 
     background-size: 200% 100%; 
     animation: shimmer 1.5s infinite;
-    }
+}
+
+@mixin ambient-shadow($color, $opacity: 0.35, $blur: 20px, $y: 8px, $spread: -4px) {
+    box-shadow: 0 $y $blur $spread rgba($color, $opacity);
+}

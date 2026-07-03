@@ -72,9 +72,10 @@
   flex-direction: row;
   align-items: center;
   margin: $space-md;
-  background-color: $container-color;
+  background-color: $white;
   padding: $space-md;
   border-radius: $radius-md;
+  border: 1px solid $green-light;
   
   @include respond (md) {
     max-width: 480px;
@@ -132,8 +133,9 @@
 }
 
 .role-selection-container{
-  background-color: $container-color;
+  background-color: $white;
   padding: $space-md;
+  border: 1px solid $green-light;
   border-radius: $radius-md;
   justify-content: space-evenly;
   display: flex;

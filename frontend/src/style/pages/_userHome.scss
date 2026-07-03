@@ -23,8 +23,9 @@
   display: flex;
   gap: $space-md;
   overflow-x: auto;
-  padding: $space-sm;
+  padding: $space-xs $space-sm;
 }
+
 .filters-container{
   display: flex;
   gap: $space-lg;
@@ -73,7 +74,7 @@
 //-_-_- TOAST NOTIFICATIONS -_-_-
 
 .toast-welcome,
-.toast-account-registration {
+.toast-account-registration, .toast-cart {
   position: fixed;
   top: 8rem;
   right: $space-lg;

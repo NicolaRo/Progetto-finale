@@ -9,10 +9,10 @@ $xl: 1440px; //Extra large: desktop
 /*-=-=-= SEMANTIC COLOR PALETTE =-=-=- */
 
 //## BRAND -> Colors that defines the brand identity
-$green-dark: rgb(21, 136, 125); //-> Primary actions, accent
-$green-mid: rgba(43, 131, 123, 0.569);  // -> Borders, shadows, hover states
-$green-light: rgb(150, 238, 197); //-> light backgrounds
-$accent: rgb(35, 210, 193);
+$green-dark: rgb(29, 122, 76); //-> Primary actions, accent
+$green-mid: rgb(76, 175, 110);  // -> Borders, shadows, hover states
+$green-light:rgb(201, 240, 176); //-> light backgrounds
+/* $accent: rgb(35, 210, 193); */
 
 $button-text: rgb(255, 255, 255);
 //## SEMANTIC -> Colors that communicates success failure or warnings
@@ -30,7 +30,7 @@ $btn-back-text: rgb(221, 219, 219);
 /*-=-=-= ELEVATION HIERARCHY =-=-=- */
 $shadow-sm: 1px 1px 15px 1px rgba(0, 0, 0, 0.15);
 $shadow-md: 1px 1px 30px 2px rgba(0, 0, 0, 0.3);
-$shadow-glow: 1px 1px 15px 2px rgba(2, 247, 137, 0.4);
+/* $shadow-glow: 1px 1px 15px 2px rgba(2, 247, 137, 0.4); */
 $shadow-skeleton: 1px 1px 10px 1px rgba(35, 143, 129, 0.235), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
 
 /*-=-=-= RADIUS =-=-=- */
@@ -43,7 +43,7 @@ $radius-sm: 1rem;
 $rounded-radius: 50%;
 
 $background:  rgb(249, 249, 249);
-$container-color: rgba(0, 206, 51, 0.15);
+/* $container-color: rgba(0, 206, 51, 0.15); */
 
 /*-=-=-= SPACING =-=-=- */
 $space-xs: 0.25rem;
@@ -60,6 +60,6 @@ $buttons-padding: $space-md $space-lg;
 //-=-=-= INPUTS =-=-=-
 
   $input-padding: $space-sm;
-  $input-background: $container-color;
+  $input-background: $white;
   $input-text:$grey-ghost;
   $input-border:none;

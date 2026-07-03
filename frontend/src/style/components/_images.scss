@@ -18,7 +18,7 @@
     align-items: center;
     flex-direction: row-reverse;
     gap: $space-sm;
-    background-color: $green-light;
+    background-color: $green-mid;
     padding: $space-sm;
     border-radius: $radius-md;
     color: $black;
@@ -26,5 +26,12 @@
 
 .rejected-payment {
     width: 90vw;
+    border-radius: $radius-md;
+}
+
+.ppc-image {
+    border-style: none;
+    display: flex;
+    align-self: center;
     border-radius: $radius-md;
 }

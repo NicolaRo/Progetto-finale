@@ -123,7 +123,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
       </div>
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className=" modal-card" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <h3>Containers are on their way back!</h3>
             <p>
               Congratulations - You contributed to reducing single-use plastic

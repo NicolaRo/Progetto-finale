@@ -2,10 +2,9 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import {useSelector} from 'react-redux';
-import GreenAssistantIcon from "../assets/assistant-icon.png";
 
+import { LogoutIcon, AssistantIcon } from "./icons/Icons";
 import ShoppingCart from "../assets/shopping-cart.png";
-import LogoutIcon from "../assets/logout-icon.png";
 import OrderIconEmpty from "../assets/empty-order-icon.png";
 
 function Navbar({
@@ -18,6 +17,8 @@ function Navbar({
   const cart = useSelector((state) => state.cart.items);
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const newOrdersCount = orders.filter(o => o.status === "Order created").length;
+  const shippedOrdersCount = orders.filter(o => o.status === "Order shipped").length;
 
   return (
     <>
@@ -35,11 +36,7 @@ function Navbar({
                 navigate("/login");
               }}
             >
-              <img
-                className="account-logout-icon"
-                src={LogoutIcon}
-                alt="log out"
-              />
+              <LogoutIcon className="account-logout-icon" size={16} />
               log out
             </button>
           </div>
@@ -48,11 +45,11 @@ function Navbar({
           {user?.role === "User" && (
             <div className="cart-btn-wrapper">
             <button className="cart-btn btn btn--rounded" onClick={() => setShowCart(true)}>
-              <img
-                className="cart-icon"
-                src={ShoppingCart}
-                alt="Cart"
-              />
+            <img
+            className= "cart-icon"
+            src = {ShoppingCart}
+            alt = "shopping cart icon"
+            />
             </button>
             {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
             </div>
@@ -65,11 +62,12 @@ function Navbar({
               onClick={() => setShowOrders(!showOrders)}
             >
               <img
-                className="orders-icon"
-                src={OrderIconEmpty}
+              className = "order-icon"
+              src = {OrderIconEmpty}
+              alt = "order icon"
               />
             </button>
-            <span className="orders-badge">{orders.filter(o => o.status === "Order shipped").length}</span>
+            {shippedOrdersCount > 0 && <span className="orders-badge">{shippedOrdersCount}</span>}
             </div>
             
           )}
@@ -81,24 +79,20 @@ function Navbar({
                 className="orders-btn btn btn--rounded"
                 onClick={() => navigate("/orders")}
               >
-                <img
-                  className="orders-icon"
-                  src={OrderIconEmpty
-                  }
-                />
+            <img
+              className = "order-icon"
+              src = {OrderIconEmpty}
+              alt = "order icon"
+            />
               </button>
-              <div className="orders-badge">{orders.filter(o => o.status === "Order created").length}</div>
+              {newOrdersCount > 0 && <div className="orders-badge">{newOrdersCount}</div>}
             </div>
               
               <button
                 className="green-assistant-btn btn btn--rounded"
                 onClick={() => setShowGreenAssistant(true)}
               >
-                <img
-                  className="green-assistant-icon"
-                  src={GreenAssistantIcon}
-                  alt="Green Assistant"
-                />
+                <AssistantIcon className="green-assistant-icon" size={26} />
               </button>
             </>
           )}

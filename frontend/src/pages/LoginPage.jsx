@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 import googleLogin from "../assets/googleLogin.png";
-import ShowPassword from "../assets/show-password.png";
+
+import {EyeIcon} from "../components/icons/Icons";
+
 import Account from "../assets/account-icon.png";
 import ForgotPassword from "./ForgotPassword";
 import RoleModal from "../components/RoleModal";
@@ -264,11 +266,7 @@ function LoginPage() {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "Hide" : "Show password"}
-              <img
-                className="icon-show-pwd"
-                src={ShowPassword}
-                alt="show/hide password"
-              />
+              <EyeIcon className="icon-show-pwd" size={16} />
             </button>
             <button
               className="forgot-pwd-btn"
@@ -315,7 +313,6 @@ function LoginPage() {
     <p>Sell your products and ship them with our reusable packaging.</p>
   </div>
 </div>
-
         
           <div className="input-containers">
             <div className="input-name-container">
@@ -383,11 +380,7 @@ function LoginPage() {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? "Hide" : "Show password"}
-                  <img
-                    className="icon-show-pwd"
-                    src={ShowPassword}
-                    alt="show/hide password"
-                  />
+                  <EyeIcon className="icon-show-pwd" size={16} />
                 </button>
               </div>
             </div>
