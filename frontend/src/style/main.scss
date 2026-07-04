@@ -2,6 +2,7 @@
 @use './base/variables' as *;
 @use './base/reset';
 @use './base/mixins' as *;
+@use './base/typography' as *;
 
 @use './components/loader';
 @use './components/navbar';

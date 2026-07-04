@@ -129,8 +129,9 @@ function LoginPage() {
     //Read the data
     const logInData = await response.json();
 
-    if (!response.ok) return 
-    setErrors({auth: "Invalid credentials, please try again"});
+    if (!response.ok) {
+    setErrors({auth: "Invalid credentials, please try again"})
+    return};
 
     login(logInData.token, {
       role: logInData.role,
@@ -207,13 +208,13 @@ function LoginPage() {
     )}
       {showLogin ? (
         <div className="login-container">
-          <h3 className="container-title">Welcome in PackBack</h3>
+          <h3 className="container-title text-h1">Welcome in PackBack</h3>
 
-          <h4 className="container-subtitle">
+          <h4 className="container-subtitle text-subtitle">
             Reusable packaging for a greener world
           </h4>
 
-          {errors.auth && <div className="auth-error-banner">{errors.auth}</div>}
+          {errors.auth && <div className="auth-error-banner text-body">{errors.auth}</div>}
 
           <div className="google-login-container">
             <button
@@ -231,7 +232,7 @@ function LoginPage() {
 
           <p>Or log in with your credentials</p>
           <div className="input-container">
-            <label className="label" htmlFor="email">
+            <label className="label text-label" htmlFor="email">
               Email
             </label>
             <input
@@ -245,7 +246,7 @@ function LoginPage() {
             />
             {errors.email && <span className="error-text">{errors.email}</span>}
 
-            <label className="label" htmlFor="password">
+            <label className="label text-label" htmlFor="password">
               Password
             </label>
             <input
@@ -286,12 +287,12 @@ function LoginPage() {
       ) : (
         <div className="signin-container">
           <div className="signup-img-container">
-            <h3 className="container-title">Sign Up</h3>
+            <h3 className="container-title text-h1">Sign Up</h3>
             <img className="account-icon" src={Account} alt="Account icon" />
           </div>
 
-          <div className="role-selection-container">
-            <h3>Choose your account type:</h3>
+          <div className="role-selection-container text-h2">
+            <h3 className="text-h2">Choose your account type:</h3>
           </div>
 
 <div className="role-cards">
@@ -300,8 +301,8 @@ function LoginPage() {
     onClick={() => setRole("User")}
   >
     <span className="role-card-icon">🛒</span>
-    <h3>User</h3>
-    <p>Buy products from local producers and get them in reusable containers.</p>
+    <h3 className="text-card-title">User</h3>
+    <p className="text-body">Buy products from local producers and get them in reusable containers.</p>
   </div>
 
   <div
@@ -309,8 +310,8 @@ function LoginPage() {
     onClick={() => setRole("Producer")}
   >
     <span className="role-card-icon">🌱</span>
-    <h3>Producer</h3>
-    <p>Sell your products and ship them with our reusable packaging.</p>
+    <h3 className="text-card-title">Producer</h3>
+    <p className="text-body">Sell your products and ship them with our reusable packaging.</p>
   </div>
 </div>
         
@@ -397,9 +398,9 @@ function LoginPage() {
         <div className="signup-text">
           {showLogin ? (
             <div className="join-us-claim">
-              <h4>Not a member yet?</h4>
+              <h4 className="text-h2">Not a member yet?</h4>
               <br></br>
-              <p>Join our community and become part of the changing world</p>
+              <p className="text-body">Join our community and become part of the changing world</p>
             </div>
           ) : (
             <div className="join-us-claim">

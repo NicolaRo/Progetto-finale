@@ -98,23 +98,17 @@ function Cart({ setShowCart }) {
                   <div className="cart-cards">
                     <div className="cart-item-qty">
                       <p className="cart-p-details">
-                        <strong>Quantity: </strong>
-                        {product.orderedQuantity}
-                      </p>
+                        Quantity:{product.orderedQuantity}</p>
                     </div>
   
                     <div className="cart-item-name">
                       <p className="cart-p-details">
-                        <strong>Product: </strong>
-                        {product.name}
-                      </p>
+                        Product:{product.name}</p>
                     </div>
   
                     <div className="cart-item-producerName">
                       <p className="cart-p-details">
-                        <strong>Producer: </strong>
-                        {product.producerName}
-                      </p>
+                        Producer:{product.producerName}</p>
                     </div>
                   </div>
   
@@ -144,13 +138,13 @@ function Cart({ setShowCart }) {
           </div>
           <div className="cart-total">
             {cart.length > 0 && (
-              <h6 className="deposit-info">
+              <p className="deposit-info">
                 Refundable container deposit: 5,00€
-              </h6>
+              </p>
             )}
-            <h5>Order total: {totalPrice.toFixed(2)}€</h5>
+            <p className="order-total-text text-body">Order total: {totalPrice.toFixed(2)}€</p>
             {cart.length > 0 && (
-              <h3>Total due today: {(totalPrice + 5).toFixed(2)}€</h3>
+              <p className="total-due-text">Total due today: {(totalPrice + 5).toFixed(2)}€</p>
             )}
           </div>
         </div>

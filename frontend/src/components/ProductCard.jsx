@@ -44,15 +44,12 @@ function ProductCard({ product }) {
 
     {addedToCart && ( 
       <div className="toast-cart">
-        <p>Product added to cart</p>
+        <p text-body>Product added to cart</p>
       </div>
     )}
       <div className="product-card">
         <div className="p-name-pic-details">
-          <p className="p-name-details">
-            <strong>{product.name}</strong>
-            
-          </p>
+          <p className="p-name-details text-card-title">{product.name}</p>
           <img
             className="product-listed-img"
             src={`https://img.spoonacular.com/ingredients_100x100/${product.image}`}
@@ -62,22 +59,18 @@ function ProductCard({ product }) {
 
         <div className="product-details">
           <div className="p-unit-details">
-            <p className="p-details">
-              <strong>Availability: </strong>
-              {product.quantity}
-              {product.unit}
+            <p className="p-details text-label">
+              <span className="text-emphasis">Availability: </span>
+              <span style = {{color: 'black'}}>{product.quantity}
+              {product.unit}</span> 
             </p>
           </div>
-          <p className="p-details">
-            <strong>Unit price: </strong>
-            {product.price}€
-          </p>
-          <p className="p-details">
-            <strong>Producer: </strong>
-            {product.producerId.name}
-          </p>
+          <p className="p-details text-label">
+            <span className="text-emphasis">Unit price: </span>{product.price}€</p>
+          <p className="p-details text-label">
+            <span className="text-emphasis">Producer: </span>{product.producerId.name}</p>
         </div>
-        <span className="eco-badge">♻️ Reusable pack</span>
+        <span className="eco-badge text-utility">♻️ Reusable pack</span>
         <div className="card-btn-container">
           <select
             className="dropdown"

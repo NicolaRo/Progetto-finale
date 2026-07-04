@@ -24,7 +24,7 @@ function Navbar({
     <>
       <div className="navbar">
         <div className="account-container">
-          <h4 className="account-name">
+          <h4 className="account-name text-h1">
             {" "}
             {user ? `Welcome, ${user.name}` : "Loading name..."}
           </h4>
@@ -51,7 +51,7 @@ function Navbar({
             alt = "shopping cart icon"
             />
             </button>
-            {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
+            {cart.length > 0 && <span className="cart-badge text-utility">{cart.length}</span>}
             </div>
           )}
 
@@ -67,7 +67,7 @@ function Navbar({
               alt = "order icon"
               />
             </button>
-            {shippedOrdersCount > 0 && <span className="orders-badge">{shippedOrdersCount}</span>}
+            {shippedOrdersCount > 0 && <span className="orders-badge text-utility">{shippedOrdersCount}</span>}
             </div>
             
           )}
@@ -85,7 +85,7 @@ function Navbar({
               alt = "order icon"
             />
               </button>
-              {newOrdersCount > 0 && <div className="orders-badge">{newOrdersCount}</div>}
+              {newOrdersCount > 0 && <div className="orders-badge text-utility">{newOrdersCount}</div>}
             </div>
               
               <button

@@ -9,23 +9,26 @@ $xl: 1440px; //Extra large: desktop
 /*-=-=-= SEMANTIC COLOR PALETTE =-=-=- */
 
 //## BRAND -> Colors that defines the brand identity
-$green-dark: rgb(29, 122, 76); //-> Primary actions, accent
-$green-mid: rgb(76, 175, 110);  // -> Borders, shadows, hover states
-$green-light:rgb(201, 240, 176); //-> light backgrounds
-/* $accent: rgb(35, 210, 193); */
+$green-dark: #1d7a4c; //-> Primary actions, accent
+$green-mid: #4caf6e;  // -> Borders, shadows, hover states
+$green-light:#c9f0b0; //-> light backgrounds
 
 $button-text: rgb(255, 255, 255);
+
 //## SEMANTIC -> Colors that communicates success failure or warnings
 $success: rgb(78, 223, 127); //-> Confirmation, modal "container returned"
 $error: rgb(229, 62, 62); //-> buttons close/remove
 $error-light: rgba(246, 115, 115, 0.5); // -> non destructive actions
 $warning: rgb(235, 185, 34); //-> warning messages
 
+
 //## NEUTRAL -> mainly black and white used for texts
 $black: black;
 $white: white;
+$muted-gray: #6B7280;
 $grey-ghost: rgba(128, 128, 128, 0.48);
 $btn-back-text: rgb(221, 219, 219);
+
 
 /*-=-=-= ELEVATION HIERARCHY =-=-=- */
 $shadow-sm: 1px 1px 15px 1px rgba(0, 0, 0, 0.15);

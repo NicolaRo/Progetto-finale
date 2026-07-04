@@ -35,15 +35,9 @@ function ProducerOrderCard({
       {/* ORDER HEADER */}
 
       <div className="order-user-details-container">
-        <p>
-          <strong>Order ID:</strong> {order._id}
-        </p>
-        <p>
-          <strong>Status:</strong> {order.status}
-        </p>
-        <p>
-          <strong>Customer:</strong> {order.user?.name}
-        </p>
+        <p>Order ID: {order._id}</p>
+        <p>Status: {order.status}</p>
+        <p>Customer: {order.user?.name}</p>
       </div>
 
       {/* PRODUCTS + PACK */}
@@ -51,9 +45,7 @@ function ProducerOrderCard({
         ?.filter((p) => p.product)
         .map((p) => (
           <div key={p.product._id} className="ordered-products">
-            <p>
-              <strong>{p.product.name}</strong>
-            </p>
+            <p>{p.product.name}</p>
             <p>Qty: {p.orderedQuantity}</p>
 
             {p.containerType && CONTAINER_IMAGES[p.containerType] && (
@@ -93,7 +85,7 @@ function ProducerOrderCard({
                             ] || "🧺"}
                           </span>
                           <select
-                            className="dropdown"
+                            className="dropdown text-label"
                             value={
                               containerSelections?.[order._id]?.[p.product._id]
                                 ?.type || ""
@@ -115,7 +107,7 @@ function ProducerOrderCard({
                         </div>
 
                         <select
-                          className="dropdown"
+                          className="dropdown text-label"
                           value={
                             containerSelections?.[order._id]?.[p.product._id]
                               ?.quantity || ""

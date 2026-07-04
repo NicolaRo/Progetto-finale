@@ -10,7 +10,7 @@ function ProductList({products}) {
     return (
         <>
         <div className="product-list-container">
-        <h3 className="container-title">Recently added products:</h3>
+        <h3 className="container-title text-h2">Recently added products:</h3>
             <div className="singleItem">
                 
                 {productItems}

@@ -19,9 +19,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
         className={`single-order-container ${isCompleted ? "completed" : ""}`}
       >
         <div className="order-user-details-container">
-          <label>
-            <strong>Customer:</strong>
-          </label>
+          <label>Customer:</label>
         </div>
         {CONTAINER_IMAGES[order.containerType] && (
           <div className="container-assigned-preview">
@@ -30,21 +28,13 @@ function OrderCard({ order, variant, onReturnContainers }) {
               src={CONTAINER_IMAGES[order.containerType]}
               alt={order.containerType}
             />
-            <p>
-              {order.containerQuantity} X {order.containerType}
-            </p>
+            <p>{order.containerQuantity} X {order.containerType}</p>
           </div>
         )}
-        <p>
-          <strong>{order.user.name}</strong>
-        </p>
-        <label>
-          <strong>Order Id: </strong>
-        </label>{" "}
+        <p>{order.user.name}</p>
+        <label>Order Id:</label>{" "}
         <p>{order._id}</p>
-        <label>
-          <strong>Order Status:</strong> {order.status}
-        </label>
+        <label>Order Status:{order.status}</label>
         {order.products
           .filter((p) => p.product)
           .map((products) => (
@@ -56,16 +46,12 @@ function OrderCard({ order, variant, onReturnContainers }) {
                     src={CONTAINER_IMAGES[products.containerType]}
                     alt={products.containerType}
                   />
-                  <p>
-                    {products.containerType} x {products.containerQuantity}
-                  </p>
+                  <p>{products.containerType} x {products.containerQuantity}</p>
                 </div>
               )}
 
               <div className="order-product-details-container">
-                <label>
-                  <strong>Product: </strong>
-                </label>
+                <label>Product:</label>
 
                 <p>{products.product.name}</p>
                 {!isCompleted && (
@@ -78,24 +64,18 @@ function OrderCard({ order, variant, onReturnContainers }) {
               </div>
               <div className="order-details-contianer">
                 <div className="order-producer-details-container">
-                  <label>
-                    <strong>Producer: </strong>
-                  </label>
+                  <label>Producer:</label>
                   <p>{products.producerId.name}</p>
                 </div>
 
                 <div className="order-product-details-container">
-                  <label>
-                    <strong>Price: </strong>
-                  </label>
+                  <label>Price:</label>
                   <p>{products.product.price}€</p>
                 </div>
 
                 <div className="order-product-quantity-container">
                   <p>{products.orderedQuantity}</p>
-                  <p>
-                    <strong>{products.product.unit}</strong>
-                  </p>
+                  <p>{products.product.unit}</p>
                 </div>
               </div>
             </div>

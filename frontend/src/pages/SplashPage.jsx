@@ -15,15 +15,9 @@ function SplashPage () {
     useEffect(() =>{
         const timer = setTimeout(() => {
 
-            //Console.log for debug
-            console.log("timeout scattato");
-            
 
             const onboardingDone = localStorage.getItem("onboardingDone");
             
-            //Console.log for debug
-            console.log("onboardingDone:", onboardingDone);
-
             if(onboardingDone) {
                 //Already seen the onboarding, goes to the login
                 navigate('/login');
@@ -44,7 +38,7 @@ function SplashPage () {
     return (
         <>
         <div className="splash-page">
-        <div className="loader"></div>
+        <div class="loader"></div>
                 <img
                 className="splash-image"
                 src={splashImage}

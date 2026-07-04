@@ -11,6 +11,16 @@
   border: none;
 }
 
+.hero-banner-header{
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+.hero-assistant-icon {
+  color: $green-dark;
+}
+
 .hero-tip{
   margin: $space-md 0;
 }
@@ -52,11 +62,15 @@
 
 
 .research-container{
-  margin: 8rem $space-md;
+  margin: $space-lg $space-md;
   justify-content: space-evenly;
   display: flex;
   flex-direction: column;
   gap: $space-md;
+
+  @include respond (md) {
+    padding-top: 96px;
+  }
 }
 .product-listed-img{
   margin: $space-sm;

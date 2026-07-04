@@ -6,6 +6,7 @@ import Cart from "../../components/Cart";
 import UserOrder from "../../components/UserOrder";
 
 import RecycleBuddy from "../../components/RecycleBuddy";
+import {AssistantIcon } from "../../components/icons/Icons";
 
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
@@ -161,7 +162,7 @@ function UserHome() {
             {["Vegetables", "Fruits", "Dry", "Frozen", "Liquid"].map((type) => (
               <button
                 key={type}
-                className={`filter-btn ${
+                className={`filter-btn text-label ${
                   activeFilters.includes(type) ? "active" : ""
                 }`}
                 onClick={() => toggleFilter(type)}
@@ -173,7 +174,7 @@ function UserHome() {
 
           <div className="filter-select">
             <select
-              className="producer-select"
+              className="producer-select text-label"
               value={selectedProducer}
               onChange={handleProducerChange}
             >
@@ -187,16 +188,6 @@ function UserHome() {
           </div>
         </div>
       </div>
-
-      <div className="hero-banner">
-        <h3 className="hero-title">Green tip of the day</h3>
-        <p className="hero-tip">{heroTip || "Loading..."}</p>
-        <button className="hero-chat-btn btn btn--primary" onClick={() => setShowChat(true)}>
-          Chat with RecycleBuddy
-        </button>
-      </div>
-      {showChat && <RecycleBuddy onClose={() => setShowChat(false)} />}
-
       
       {/* SKELETON LOADER */}
       {isLoading ? (
@@ -212,6 +203,17 @@ function UserHome() {
       ) : (
         <ProductList products={shopProducts} />
       )}
+
+      <div className="hero-banner">
+      <AssistantIcon className="hero-assistant-icon" size={28} />
+        <h3 className="hero-title">Green tip of the day</h3>
+        <p className="hero-tip">{heroTip || "Loading..."}</p>
+        <button className="hero-chat-btn btn btn--primary" onClick={() => setShowChat(true)}>
+        <AssistantIcon size={16} />
+          Chat with RecycleBuddy
+        </button>
+      </div>
+      {showChat && <RecycleBuddy onClose={() => setShowChat(false)} />}
     </>
   );
 }

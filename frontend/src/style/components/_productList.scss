@@ -30,7 +30,6 @@
 }
 
 .p-name-details{
-  font-size: larger;
   margin-left: $space-sm;
 }
 
@@ -40,8 +39,6 @@
   gap: $space-xs;
   background-color: $green-light;
   color: $green-dark;
-  font-size: 0.7rem;
-  font-weight: 600;
   padding: $space-xs $space-sm;
   border-radius: $radius-sm;
   width: fit-content;

@@ -52,7 +52,7 @@ function ForgotPassword() {
         Send reset link
       </button>
 
-      {confirmationMsg && <p className="confirmation-msg">{confirmationMsg}</p>}
+      {confirmationMsg && <p className="confirmation-msg text-h2">{confirmationMsg}</p>}
     </div>
   );
 }

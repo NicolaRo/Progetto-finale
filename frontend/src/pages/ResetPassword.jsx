@@ -62,7 +62,7 @@ function ResetPassword() {
         Reset Password
       </button>
 
-      {confirmationMsg && <p className="confirmation-msg">{confirmationMsg}</p>}
+      {confirmationMsg && <p className="confirmation-msg text-h2">{confirmationMsg}</p>}
     </div>
   );
 }

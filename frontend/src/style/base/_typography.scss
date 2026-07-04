@@ -1,0 +1,89 @@
+@use './variables' as *;
+
+// min: mobile (375px) — max: desktop (1440px)
+
+@use 'sass:math';
+@use '../base/variables' as *;
+
+@function fluid($min-px, $max-px, $min-vw: 375, $max-vw: 1440) {
+  $slope: math.div($max-px - $min-px, $max-vw - $min-vw);
+  $intercept: $min-px - $slope * $min-vw;
+  @return clamp(
+    #{math.div($min-px, 16)}rem,
+    #{math.div($intercept, 16)}rem + #{$slope * 100}vw,
+    #{math.div($max-px, 16)}rem
+  );
+}
+  
+  $font-size-xs:   fluid(12, 13);   // badge, tag, small text
+  $font-size-sm:   fluid(14, 15);   // label, meta info
+  $font-size-md:   fluid(16, 18);   // body text
+  $font-size-lg:   fluid(18, 21);   // card title, products name
+  $font-size-xl:   fluid(20, 25);   // section title
+  $font-size-2xl:  fluid(24, 30);   // H2 / emphasized title section
+  $font-size-3xl:  fluid(30, 38);   // H1 — titolo di pagina
+  
+  // Weights e line-height don't change depending on the viewportt
+  $font-weight-regular:  400;
+  $font-weight-semibold: 600;
+  $font-weight-bold:     700;
+  
+  
+  strong, b {
+    font-weight: inherit; // non forza più 700, eredita dal genitore/token
+  }
+  
+  $line-height-heading: 1.2;
+  $line-height-body:    1.5;
+  $line-height-tight:   1.3;
+
+
+// --- SEMANTIC CLASSES ---
+// applied together with layout settings
+
+.text-h1 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-heading;
+  }
+  
+  .text-h2 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-heading;
+  }
+  
+  .text-subtitle {
+    font-size: $font-size-md;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-body;
+    color: $muted-gray;
+  }
+  
+  .text-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-tight;
+  }
+  
+  .text-body {
+    font-size: $font-size-md;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-body;
+  }
+  
+  .text-utility {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-tight;
+  }
+  .text-card-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-heading;
+  }
+
+  .text-emphasis {
+    color: $muted-gray;
+    font-weight: $font-weight-regular;
+  }

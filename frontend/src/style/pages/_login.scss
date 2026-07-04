@@ -95,8 +95,6 @@
 
 .confirmation-msg{
   margin: $space-lg;
-  font-size: larger;
-  font-weight: bolder;
 }
 
 .auth-error-banner {
@@ -107,8 +105,6 @@
   padding: $space-sm $space-md;
   box-shadow: $shadow-sm;
   margin-bottom: $space-md;
-  font-weight: 500;
-  font-size: larger;
   text-align: center;
 }
 
@@ -141,8 +137,6 @@
   display: flex;
   flex-direction: column;
   gap:$space-md;
-  font-size: larger;
-  font-weight: 600;
 }
 
 .join-us-claim {

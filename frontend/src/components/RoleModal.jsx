@@ -38,7 +38,7 @@ const RoleModal = ({ isOpen, userName, onClose, onChooseRole }) => {
             className="modal__btn modal__btn--primary"
             onClick={() => onChooseRole(isProducer ? "Producer" : "User")}
           >
-            <strong>Confirm</strong>
+            Confirm
           </button>
         </div>
 
