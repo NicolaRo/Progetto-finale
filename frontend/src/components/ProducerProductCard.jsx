@@ -33,16 +33,16 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
           alt={product.name}
         />
         <div className="ppc-title">
-          <p className="ppc-name">{product.name}</p>
-          <p className="ppc-type">{product.type}</p>
+          <p className="ppc-name text-card-title">{product.name}</p>
+          <p className="ppc-type text-label">{product.type}</p>
           <p
             className={`ppc-qty ${
               product.quantity === 0 ? "out-of-stock" : ""
             }`}
           >
-            Stock: {product.quantity} {product.unit}
+            <span className="text-emphasis">Stock:</span> {product.quantity} {product.unit}
           </p>
-          <p className="ppc-price">
+          <p className="ppc-price text-body">
             {product.price}€/{product.unit}
           </p>
         </div>

@@ -3,13 +3,15 @@ import { AuthContext } from "../../context/AuthContext";
 import Navbar from "../../components/Navbar";
 import ProducerProductCard from "../../components/ProducerProductCard";
 
+import { CloseIcon } from "../../components/icons/Icons";
+
 function ProducerHome({ setShowGreenAssistant }) {
   const { token, user } = useContext(AuthContext);
 
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [productType, setProductType] = useState(null);
+  const [productType, setProductType] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
   const [productUnit, setProductUnit] = useState("");
   const [ingredientResults, setIngredientResults] = useState([]);
@@ -22,8 +24,25 @@ function ProducerHome({ setShowGreenAssistant }) {
   const [isLoadingIngredients, setIsLoadingIngredients] = useState(false);
   const [orders, setOrders] = useState([]);
   const [showOrders, setShowOrders] = useState(false);
-  const [isLoadingOrders, setIsLoadingOrders] = useState (true);
-  
+  const [toast, setToast] = useState(null);
+
+
+  const notify = (message, type = "success") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const resetForm = () => {
+    setProductName("");
+    setProductDescription("");
+    setProductPrice("");
+    setProductType("");
+    setProductQuantity("");
+    setProductUnit("");
+    setSelectedImage("");
+    setSelectedIngredientId("");
+    setIngredientResults([]);
+  };
 
   const handleCreateProduct = async (e) => {
     e.preventDefault();
@@ -60,19 +79,21 @@ function ProducerHome({ setShowGreenAssistant }) {
     );
     if (response.ok) {
       setRefresh((prev) => prev + 1);
+      notify("Product created successfully!");
+      resetForm();
+    } else {
+      notify("Could not create product, try later.", "error");
     }
   };
 
   //Fetch orders
   useEffect(() => {
     const fetchOrders = async () => {
-      setIsLoadingOrders(true);
       const r = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await r.json();
       setOrders(Array.isArray(data)? data : []);
-      setIsLoadingOrders (false);
     };
     fetchOrders();
   }, [token, refresh]);
@@ -141,6 +162,12 @@ function ProducerHome({ setShowGreenAssistant }) {
 
   return (
     <>
+    {toast && (
+      <div className={`toast-cart ${toast.type === "error" ? "toast-cart--error" : ""}`}>
+        <p className="text-body">{toast.message}</p>
+      </div>
+    )}
+
       <Navbar 
         setShowGreenAssistant={setShowGreenAssistant}
         showOrders={showOrders}
@@ -148,13 +175,16 @@ function ProducerHome({ setShowGreenAssistant }) {
         orders= {orders} 
       />
 
-      {showWelcome && (
-        <div className="toast-welcome">
-          <div className="welcome-msg">Welcome back, {user?.name}!</div>
-        </div>
-      )}
+        {showWelcome && (
+          <div className="toast-welcome">
+            <p className="text-body" style={{fontWeight: 600}}>Welcome back, {user?.name}!</p>
+            <button className="close-toast-btn" onClick={() => setShowWelcome(false)}>
+              <CloseIcon size={14} />
+            </button>
+          </div>
+        )}
       <div className="create-product-container">
-        <h3 className="component-title">Add a new product</h3>
+        <h3 className="component-title text-h2">Add a new product</h3>
         <div className="add-new-product">
           <input
             className="input"
@@ -210,6 +240,11 @@ function ProducerHome({ setShowGreenAssistant }) {
           </select>
         </div>
         {/*SKELETON LOADER*/}
+        {ingredientResults.length > 0 && !isLoadingIngredients && (
+            <p className="ingredients-hint text-label">
+              Select an image for your product:
+            </p>
+          )}
           <div className="ingredients-grid">
           {isLoadingIngredients ? (
               [1,2,3].map((i) => (
@@ -223,6 +258,9 @@ function ProducerHome({ setShowGreenAssistant }) {
                 ingredientResults.map((ingredient) => (
                   <div
                     key={ingredient.id}
+                    className={`ingredient-option ${
+                      selectedIngredientId === ingredient.id ? "selected" : ""
+                    }`}
                     onClick={() => {
                       setProductName(ingredient.name);
                       setSelectedImage(ingredient.image);
@@ -234,7 +272,7 @@ function ProducerHome({ setShowGreenAssistant }) {
                       src={`https://img.spoonacular.com/ingredients_250x250/${ingredient.image}`}
                       alt={ingredient.name}
                     />
-                    <p>{ingredient.name}</p>
+                    <p className="text-label">{ingredient.name}</p>
                     </div>
         )))}
         </div>
@@ -247,7 +285,7 @@ function ProducerHome({ setShowGreenAssistant }) {
           Add a new product
         </button>
       </div>
-      <h3 className="sub-session-title">My Products</h3>
+      <h3 className="sub-session-title text-h2">My Products</h3>
       <div className="my-products-container">
        
         {/*SKELETON LOADER*/}

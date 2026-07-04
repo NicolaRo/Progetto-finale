@@ -18,7 +18,7 @@ function Navbar({
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const newOrdersCount = orders.filter(o => o.status === "Order created").length;
-  const shippedOrdersCount = orders.filter(o => o.status === "Order shipped").length;
+  const shippedOrdersCount = orders.filter((o) => o.status === "Order shipped" && o.containers.some((c)=> c.status === "Container busy")).length;
 
   return (
     <>

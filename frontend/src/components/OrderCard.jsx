@@ -34,7 +34,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
               alt={order.containerType}
             />
             <span className="badge-container-type text-utility">
-              {products.containerType} x{products.containerQuantity}
+              {order.containerType} x{order.containerQuantity}
             </span>
           </div>
         )}

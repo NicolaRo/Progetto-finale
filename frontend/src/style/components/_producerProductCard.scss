@@ -1,5 +1,6 @@
 @use '../base/variables' as*;
 @use '../base/mixins' as *;
+@use '../base/typography' as *;
 
 .my-products-container{
   padding: 0.25rem;
@@ -7,14 +8,12 @@
   border-radius: $radius-md;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  height: 45rem;
-  overflow-y: scroll;
 
   @include respond (lg) {
     margin: $space-lg auto;
     padding: $space-lg;
     gap: $space-lg;
-    grid-template-columns: repeat(4, 4fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 .producer-product-card{
@@ -33,11 +32,11 @@
   gap: 0.25rem;
 }
 
-.ppc-name{
-  font-weight: bolder;
-}
-
 .edit-btn-container{
   display: flex;
   justify-content: center;
 }
+
+/* .ppc-type, .ppc-qty, .ppc-price {
+  // nessuna regola oggi — aggiungiamole
+} */

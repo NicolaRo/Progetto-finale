@@ -1,5 +1,6 @@
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
+@use '../base/typography' as *;
 
 .input{
     margin:$space-sm;
@@ -24,11 +25,15 @@
     margin: $space-md;
 }
 
+.ingredients-hint{
+    margin: $space-md $space-lg 0;
+    color: $muted-gray;
+}
+
 .ingredients-grid{
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
-    width: 90vw;
     gap: $space-md;
     margin: $space-lg;
 }
@@ -39,3 +44,34 @@
     margin-top: $space-md;
 }
 
+.ingredient-option {
+    cursor: pointer;
+    border: 2px solid transparent; 
+    border-radius: $radius-sm;
+    padding: $space-xs;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    text-align: center;
+  
+    &:hover {
+      transform: translateY(-2px);
+    }
+  
+    &.selected {
+      border-color: $green-dark;
+      @include ambient-shadow($green-dark); 
+    }
+  }
+
+  .create-product-container {
+    background-color: $white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-sm;
+    padding: $space-md;
+    margin: $space-md;
+  
+    @include respond(lg) {
+      padding: $space-lg;
+      margin: $space-lg auto;
+      max-width: 900px;
+    }
+  }
