@@ -6,7 +6,7 @@ import Cart from "../../components/Cart";
 import UserOrder from "../../components/UserOrder";
 
 import RecycleBuddy from "../../components/RecycleBuddy";
-import {AssistantIcon } from "../../components/icons/Icons";
+import {AssistantIcon, CloseIcon } from "../../components/icons/Icons";
 
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
@@ -108,11 +108,14 @@ function UserHome() {
         showOrders={showOrders}
         orders={orders}
       />
-      {showWelcome && (
-        <div className="toast-welcome">
-          <p>Welcome back, {user?.name}</p>
-        </div>
-      )}
+{showWelcome && (
+  <div className="toast-welcome">
+    <p className="text-body" style={{fontWeight: 600}}>Welcome back, {user?.name}</p>
+    <button className="close-toast-btn" onClick={() => setShowWelcome(false)}>
+      <CloseIcon size={14} />
+    </button>
+  </div>
+)}
 
       {showCart && <Cart setShowCart={setShowCart} />}
       {showOrders && ( 

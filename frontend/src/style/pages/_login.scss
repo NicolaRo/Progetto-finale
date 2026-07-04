@@ -1,5 +1,6 @@
 @use '../base/variables' as *; 
 @use '../base/mixins' as *;
+@use '../base/typography' as *;
 
 .login-container{
   display: flex;
@@ -113,6 +114,7 @@
   font-size: 0.85rem;
   margin-top: $space-xs;
   display: block;
+  font-size: $font-size-md;
 }
 
 //-_-_-_ REGISTER _-_-_-

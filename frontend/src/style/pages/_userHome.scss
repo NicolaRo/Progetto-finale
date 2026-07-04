@@ -94,6 +94,7 @@
   right: $space-lg;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: $space-md;
   background-color: $white;
   padding: $space-md $space-lg;
@@ -113,18 +114,13 @@
   to { opacity: 0; transform: translateX(20px); pointer-events: none; }
 }
 
-.toast-welcome {
-  color: $black;
-  padding: 0.75rem 1.5rem;
-  border-radius: $space-lg;
-  box-shadow:$shadow-md;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  font-weight: bolder;
-  font-size: 1.5rem;
 
-  @include respond (md) {
-    font-size: $space-lg;
-  }
+.toast-cart--error {
+  background-color: $error-light;
+  color: $white;
+  border: 1px solid $error;
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+
 }

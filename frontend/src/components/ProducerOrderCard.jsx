@@ -50,6 +50,9 @@ function ProducerOrderCard({
 
             {p.containerType && CONTAINER_IMAGES[p.containerType] && (
               <div className="container-assigned-preview">
+                <p className="text-label">
+                  <span className="text-emphasis">Container: </span>
+                </p>
                 <img
                   className="container-type-img"
                   src={CONTAINER_IMAGES[p.containerType]}

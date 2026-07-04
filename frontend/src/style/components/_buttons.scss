@@ -339,31 +339,35 @@ button {
   padding: $space-sm $space-md;
   margin: $space-md $space-sm; 
   border-radius: $radius-md;
-  background-color: $green-mid;
   box-shadow: $shadow-sm;
   width: -webkit-fill-available;
-  font-weight: 700;
   border: none;
-  font-size: larger;
 }
 
 
 //-_-_-_ UserHome _-_-_-
 
-
-.close-welcome-btn{
-  background-color: $error;
-  border-radius: $rounded-radius;
-  color: $white;
-  padding: $space-sm;
+.close-toast-btn {
+  background: transparent;
   border: none;
+  color: $muted-gray;
   display: flex;
   align-items: center;
-  padding: $space-sm;
-  font-size: x-large;
-  font-weight: bolder;
-  box-shadow: $shadow-md;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  width: $space-lg;
+  height: $space-lg;
+  transition: background-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background-color: $background;
+    color: $black;
+  }
 }
+
 .search-button{
   margin: $space-sm;
   border-radius: $radius-md;

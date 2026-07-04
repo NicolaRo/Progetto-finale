@@ -18,42 +18,61 @@ function OrderCard({ order, variant, onReturnContainers }) {
       <div
         className={`single-order-container ${isCompleted ? "completed" : ""}`}
       >
-        <div className="order-user-details-container">
-          <label>Customer:</label>
-        </div>
+      <div className="order-user-details-container">
+        <p className="text-label">
+          <span className="text-emphasis">Customer:</span> {order.user.name}
+        </p>
+      </div>
         {CONTAINER_IMAGES[order.containerType] && (
           <div className="container-assigned-preview">
+            <p className="text-label">
+              <span className="text-emphasis">Container: </span>
+            </p>
             <img
               className="container-type-img"
               src={CONTAINER_IMAGES[order.containerType]}
               alt={order.containerType}
             />
-            <p>{order.containerQuantity} X {order.containerType}</p>
+            <span className="badge-container-type text-utility">
+              {products.containerType} x{products.containerQuantity}
+            </span>
           </div>
         )}
-        <p>{order.user.name}</p>
-        <label>Order Id:</label>{" "}
-        <p>{order._id}</p>
-        <label>Order Status:{order.status}</label>
+      <div className="user-id-order-container">
+        <p className="text-label">
+          <span className="text-emphasis">Order Id:</span> {order._id}
+        </p>
+      </div>
+      <div className="user-order-status-container">
+        <p className="text-label">
+          <span className="text-emphasis">Order Status:</span> {order.status}
+        </p>
+      </div>
+        
         {order.products
           .filter((p) => p.product)
           .map((products) => (
             <div className="ordered-products" key={products.product._id}>
               {CONTAINER_IMAGES[products.containerType] && (
                 <div className="container-assigned-preview">
+                  <p className="text-label">
+                    <span className="text-emphasis">Container: </span>
+                  </p>
                   <img
                     className="container-type-img"
                     src={CONTAINER_IMAGES[products.containerType]}
                     alt={products.containerType}
                   />
-                  <p>{products.containerType} x {products.containerQuantity}</p>
+                  <span className="badge-container-type text-utility">
+                    {products.containerType} x{products.containerQuantity}
+                  </span>
                 </div>
               )}
-
-              <div className="order-product-details-container">
-                <label>Product:</label>
-
-                <p>{products.product.name}</p>
+              <div className="user-order-card-details">
+                <div className="order-product-details-container">
+              <p className="text-label">
+                <span className="text-emphasis">Product:</span> {products.product.name}
+              </p>
                 {!isCompleted && (
                   <img
                     className="prod-order-preview"
@@ -64,20 +83,26 @@ function OrderCard({ order, variant, onReturnContainers }) {
               </div>
               <div className="order-details-contianer">
                 <div className="order-producer-details-container">
-                  <label>Producer:</label>
-                  <p>{products.producerId.name}</p>
+                <p className="text-label">
+                  <span className="text-emphasis">Producer: </span>{products.producerId.name}
+                </p>
                 </div>
 
                 <div className="order-product-details-container">
-                  <label>Price:</label>
-                  <p>{products.product.price}€</p>
+                <p className="text-label">
+                  <span className="text-emphasis">Price: </span>{products.product.price}€
+                </p>
                 </div>
 
                 <div className="order-product-quantity-container">
-                  <p>{products.orderedQuantity}</p>
-                  <p>{products.product.unit}</p>
+                <p className="text-label">
+                  <span className="text-emphasis">Ordered Quantity: </span>
+                  {products.orderedQuantity} {products.product.unit}
+                </p>
                 </div>
               </div>
+              </div>
+              
             </div>
           ))}
         {!isCompleted && order.status === "Order shipped" && (

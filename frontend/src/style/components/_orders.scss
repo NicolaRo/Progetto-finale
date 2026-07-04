@@ -1,6 +1,7 @@
 // USER ORDER ****
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
+@use '../base/typography' as *; 
 
 
 //-=-=-= PRODUCER ORDERS =-=-=-
@@ -24,10 +25,15 @@
   gap: $space-lg;
 }
 .user-openOrders-container{
-  padding:$space-md;
+  padding:$space-sm;
   border: none;
   border-radius: $radius-md;
-  margin:$space-md;
+  margin:$space-sm;
+}
+
+.user-order-card-details{
+  display: flex;
+  justify-content: space-between;
 }
 
 .user-completedOrders-container{
@@ -53,27 +59,45 @@
   padding: $space-md;
   border-radius: $radius-sm;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column-reverse;
+  gap: $space-lg;
   margin: $space-md 0;
-  justify-content: space-between;
-  gap: $space-md;
   box-shadow: $shadow-sm;
 
   @include respond (md) {
     flex-direction: row;
+    flex-wrap: wrap; 
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.order-details-contianer{
+  display: flex;
+  flex-direction: column; 
+  gap: $space-xs;
+
+  @include respond (md) {
+    flex-direction: row;
+    gap: $space-lg;
   }
 }
 
 .order-product-details-container{
-  margin-left: $space-sm;
   display: flex;
   flex-direction: column;
+  font-weight: $font-weight-semibold;
+  width: fit-content;
 }
 
 .order-product-quantity-container{
   display: flex;
-  margin: 0 $space-sm 0 $space-sm;
+  flex-direction: column;
+}
+
+.user-order-prod-card-header, .user-order-resume-order-details {
+  font-size: $font-size-lg;
+  font-weight:  $font-weight-semibold;
 }
 
 .shipped-order-details{
@@ -100,6 +124,10 @@
   flex-direction: column;
   align-items: center;
   gap: $space-md;
+
+  h3 {
+    align-self: flex-start;
+  }
 }
 
 .single-order-container{
@@ -126,8 +154,17 @@ flex-direction: column;
   }
 }
 
-.container-type-img{
-  width: $space-xl;
+.badge-container-type {
+  position: absolute;
+  bottom: -$space-xs;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $green-light;
+  color: $green-dark;
+  padding: 2px $space-xs;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+  box-shadow: $shadow-sm;
 }
 
 .modal-card {

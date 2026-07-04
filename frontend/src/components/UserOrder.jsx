@@ -30,13 +30,13 @@ function UserOrder({ orders, setRefresh }) {
 
   const isCompleted = (order) => order.status === "Order closed";
   const isShipped = (order) => order.status === "Order shipped";
-  const isPreparing = (order) => order.status === "Preparing order";
+/*   const isPreparing = (order) => order.status === "Preparing order"; */
   const isCreated = (order) => order.status === "Order created";
   
   const shippedOrderForModal = orders.find((o)=> o.status === "Order shipped" && (!seenOrders.includes(o._id)) && o.containers.some((c) => c.status === "Container busy"));
 
   const createdOrders = orders.filter(isCreated);
-  const preparingOrders = orders.filter(isPreparing);
+/*   const preparingOrders = orders.filter(isPreparing); */
   const shippedOrders = orders.filter(isShipped);
   const completedOrders = orders.filter(isCompleted);
   
@@ -45,21 +45,14 @@ function UserOrder({ orders, setRefresh }) {
   return (
     <div className="user-orders-container">
       <div className="user-openOrders-container">
-        <h3>Open orders</h3>
+        <h3 className="text-h2">Open orders</h3>
         {createdOrders.map((order) => (
           <OrderCard key={order._id} order={order} variant="active" onReturnContainers={handleReturnContainers} />
         ))}
       </div>
 
-      <div className="user-preparingOrders-container">
-        <h3>Preparing orders</h3>
-        {preparingOrders.map((order) => (
-          <OrderCard key={order._id} order={order} variant="active" onReturnContainers={handleReturnContainers} />
-        ))}
-      </div>
-
       <div className="user-shippedOrders-container">
-        <h3>Shipped orders</h3>
+        <h3 className="text-h2">Shipped orders</h3>
         <img className="delivering-icon"
         src={ShippingIcon}
         alt="shipping products"
@@ -73,9 +66,9 @@ function UserOrder({ orders, setRefresh }) {
       </div>
 
       <div className="user-completedOrders-container">
-        <h3>Completed orders</h3>
+        <h3 className="text-h2">Completed orders</h3>
         <button
-          className="toggle-btn-completed-orders"
+          className="toggle-btn-completed-orders btn btn--secondary"
           onClick={() => setShowCompleted(!showCompleted)}
         >
           {showCompleted ? "Reduce completed orders △" : "Expand completed orders ▼"}

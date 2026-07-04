@@ -8,25 +8,29 @@ function ProductCard({ product }) {
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
 
-  const [addedToCart, setAddedToCart] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
 
   const handleAddToCart = () => {
-
     if (!quantity || quantity === "0") {
-      alert("Choose a quantity higher than 0");
+      showToast("Choose a quantity higher than 0", "error");
       return;
     }
-
+  
     if (Number(quantity) > product.quantity) {
-      alert(
-        `Not enough stock. ${product.name} Availability: ${product.quantity} ${product.unit}`
+      showToast(
+        `Not enough stock. ${product.name} Availability: ${product.quantity} ${product.unit}`,
+        "error"
       );
       return;
     }
-
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 3000);
-
+  
+    showToast("Product added to cart", "success");
+  
     dispatch(addToCart({
       product: product._id,
       orderedQuantity: quantity,
@@ -42,9 +46,9 @@ function ProductCard({ product }) {
   return (
     <>
 
-    {addedToCart && ( 
-      <div className="toast-cart">
-        <p text-body>Product added to cart</p>
+    {toast && (
+      <div className={`toast-cart ${toast.type === "error" ? "toast-cart--error" : ""}`}>
+        <p className="text-body">{toast.message}</p>
       </div>
     )}
       <div className="product-card">
