@@ -132,6 +132,7 @@ function Cart({ setShowCart }) {
               className="confirm-order-btn btn btn--primary" 
               onClick={handleConfirmOrder}
               disabled={isLoading}>
+
               <CheckIcon className="confirm-order-icon" size={16} />
               {isLoading ? "Processing..." : "Confirm order"}
             </button>
