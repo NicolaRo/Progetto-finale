@@ -72,7 +72,7 @@ function RecycleBuddy({ onClose }) {
     <div className="chat-overlay" onClick={onClose}>
       <div className="chat-drawer" onClick={(e) => e.stopPropagation()}>
         <div className="chat-header">
-          <h3>
+          <h3 className="text-h2">
             {user?.role === "Producer" ? "GreenAssistant" : "RecycleBuddy"}
           </h3>
           <button className="btn-close-chat btn btn--destructive" onClick={onClose}>

@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { useToast } from "../hooks/useToast";
+import { Toast } from "../components/Toast";
+
 function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
   const [qtyChange, setQtyChange] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
@@ -11,11 +14,13 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
     unit: product.unit,
   });
 
+  const{toast, notify, dismiss} = useToast();
+
   const handleAdd = () =>
     onUpdateQuantity(product._id, product.quantity + Number(qtyChange));
   const handleRemove = () => {
     const newQty = product.quantity - Number(qtyChange);
-    if (newQty < 0) return alert("Quantity cannot be negative");
+    if (newQty < 0) return notify("Quantity cannot be negative", "error");
     onUpdateQuantity(product._id, newQty);
   };
 
@@ -25,6 +30,8 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
   };
 
   return (
+    <>
+    <Toast toast={toast} onDismiss={dismiss} />
     <div className="producer-product-card">
       <div className="ppc-header">
         <img
@@ -129,6 +136,7 @@ function ProducerProductCard({ product, onUpdateQuantity, onUpdateProduct }) {
         </div>
       )}
     </div>
+    </>
   );
 }
 

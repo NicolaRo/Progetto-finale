@@ -5,6 +5,9 @@ import ProducerProductCard from "../../components/ProducerProductCard";
 
 import { CloseIcon } from "../../components/icons/Icons";
 
+import { useToast } from "../../hooks/useToast";
+import { Toast } from "../../components/Toast";
+
 function ProducerHome({ setShowGreenAssistant }) {
   const { token, user } = useContext(AuthContext);
 
@@ -24,13 +27,9 @@ function ProducerHome({ setShowGreenAssistant }) {
   const [isLoadingIngredients, setIsLoadingIngredients] = useState(false);
   const [orders, setOrders] = useState([]);
   const [showOrders, setShowOrders] = useState(false);
-  const [toast, setToast] = useState(null);
+  
+  const {toast, notify, dismiss} = useToast();
 
-
-  const notify = (message, type = "success") => {
-    setToast({ message, type });
-    setTimeout(() => setToast(null), 3000);
-  };
 
   const resetForm = () => {
     setProductName("");
@@ -54,7 +53,7 @@ function ProducerHome({ setShowGreenAssistant }) {
       !productQuantity ||
       !productUnit
     ) {
-      alert("Please provide all the product's details.");
+      notify("Please provide all the product's details.", "error");
       return;
     }
     const response = await fetch(
@@ -110,9 +109,11 @@ function ProducerHome({ setShowGreenAssistant }) {
         body: JSON.stringify({ quantity: newQuantity }),
       }
     );
-    if (!response.ok) return alert("Could not update quantity, try later");
-    setRefresh((prev) => prev + 1);
-  };
+    if (!response.ok) {
+      notify("Could not update quantity, try later", "error");
+      return;
+    } setRefresh((prev) => prev + 1);
+  }
 
   const handleUpdateProduct = async (productId, editData) => {
     const response = await fetch(
@@ -126,8 +127,11 @@ function ProducerHome({ setShowGreenAssistant }) {
         body: JSON.stringify(editData),
       }
     );
-    if (!response.ok) return alert("Could not update product, try later");
-    alert("Product updated successfully");
+    if (!response.ok) {
+      notify ("Could not update product, try later", "error"); 
+      return;
+    }
+    notify("Product updated successfully");
     setRefresh((prev) => prev + 1);
   };
 
@@ -139,7 +143,8 @@ function ProducerHome({ setShowGreenAssistant }) {
         `${import.meta.env.VITE_API_URL}/api/ingredients?query=${productName}`
       );
       const data = await response.json();
-      setIngredientResults(data);
+      setIngredientResults(Array.isArray (data) ? data : []);
+
       setIsLoadingIngredients(false);
     }, 1000);
     return () => clearTimeout(timer);
@@ -162,12 +167,7 @@ function ProducerHome({ setShowGreenAssistant }) {
 
   return (
     <>
-    {toast && (
-      <div className={`toast-cart ${toast.type === "error" ? "toast-cart--error" : ""}`}>
-        <p className="text-body">{toast.message}</p>
-      </div>
-    )}
-
+   <Toast toast={toast} onDismiss={dismiss} />
       <Navbar 
         setShowGreenAssistant={setShowGreenAssistant}
         showOrders={showOrders}
@@ -274,9 +274,8 @@ function ProducerHome({ setShowGreenAssistant }) {
                     />
                     <p className="text-label">{ingredient.name}</p>
                     </div>
-        )))}
+                )))}
         </div>
-
         <button
           className="btn-add-new-product btn btn--primary"
           type="submit"

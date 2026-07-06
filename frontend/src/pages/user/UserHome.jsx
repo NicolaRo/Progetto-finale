@@ -137,7 +137,7 @@ function UserHome() {
         )
       )}
 <div className="research-container">
-        <h3 className="page-title">What do you need today?</h3>
+<h3 className="page-title text-h1">What do you need today?</h3>
         <div className="searchbar">
           <input
             className="search-input"
@@ -209,8 +209,8 @@ function UserHome() {
 
       <div className="hero-banner">
       <AssistantIcon className="hero-assistant-icon" size={28} />
-        <h3 className="hero-title">Green tip of the day</h3>
-        <p className="hero-tip">{heroTip || "Loading..."}</p>
+        <h3 className="hero-title text-h2">Green tip of the day</h3>
+        <p className="hero-tip text-body">{heroTip || "Loading..."}</p>
         <button className="hero-chat-btn btn btn--primary" onClick={() => setShowChat(true)}>
         <AssistantIcon size={16} />
           Chat with RecycleBuddy

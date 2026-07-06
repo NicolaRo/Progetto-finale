@@ -1,15 +1,20 @@
 import { useState } from "react";
 
+import { useToast } from "../hooks/useToast";
+import { Toast } from "../components/Toast";
+
+
 function ForgotPassword() {
+  const { toast, notify, dismiss } = useToast();
   const [email, setEmail] = useState("");
   const [confirmationMsg, setConfirmationMsg] = useState("");
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      alert("Please provide a valid email address.");
+      notify("Please provide a valid email address.", "error");
       return;
     }
 
@@ -27,17 +32,19 @@ function ForgotPassword() {
   };
 
   return (
+    <>
+    <Toast toast={toast} onDismiss={dismiss} />
     <div className="login-container">
-      <h3 className="container-title">Reset your password</h3>
-      <p>Enter your email and we'll send you a reset link.</p>
+      <h3 className="text-h2">Reset your password</h3>
+      <p className="text-subtitle">Enter your email and we'll send you a reset link.</p>
 
       <div className="input-container">
-        <label className="label" htmlFor="email">
+        <label className="text-label" htmlFor="reset-email">
           Email
         </label>
         <input
           className="input-text"
-          id="email"
+          id="reset-email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -48,12 +55,14 @@ function ForgotPassword() {
         />
       </div>
 
-      <button className="login-btn btn btn--primary" onClick={handleSubmit}>
+      <button className="reset-pwd-btn btn btn--primary" onClick={handleSubmit}>
         Send reset link
       </button>
 
       {confirmationMsg && <p className="confirmation-msg text-h2">{confirmationMsg}</p>}
     </div>
+    </>
+    
   );
 }
 

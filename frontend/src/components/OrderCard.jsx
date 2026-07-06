@@ -107,7 +107,7 @@ function OrderCard({ order, variant, onReturnContainers }) {
           ))}
         {!isCompleted && order.status === "Order shipped" && (
           <div className="containers-return">
-            <h4>Order received?</h4>
+            <h4 className="text-h2">Order received?</h4>
             {order.containers.some((c) => c.status === "Container busy") ? (
               <div className= "container-return-btn-container">
                   <button
@@ -129,8 +129,8 @@ function OrderCard({ order, variant, onReturnContainers }) {
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <h3>Containers are on their way back!</h3>
-            <p>
+            <h3 className="text-h2">Containers are on their way back!</h3>
+            <p className="text-body">
               Congratulations - You contributed to reducing single-use plastic
               packaging. Your 5,00€ deposit will be refunded shortly
             </p>

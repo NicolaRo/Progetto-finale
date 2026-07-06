@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+import { useToast } from "../hooks/useToast";
+import { Toast } from "../components/Toast";
+
 function ResetPassword() {
+  const { toast, notify, dismiss } = useToast();
+
   //UseParams gets the token from the URL
   const { token } = useParams();
   const navigate = useNavigate();
@@ -13,7 +18,7 @@ function ResetPassword() {
     e.preventDefault();
 
     if (newPassword.length < 8) {
-      alert("Password must be at least 8 characters.");
+      notify("Password must be at least 8 characters.", "error");
       return;
     }
 
@@ -37,6 +42,8 @@ function ResetPassword() {
   };
 
   return (
+    <>
+    <Toast toast={toast} onDismiss={dismiss} />
     <div className="login-container">
       <h3 className="container-title">Reset your password</h3>
       <p>Choose a new password — at least 8 characters.</p>
@@ -64,6 +71,7 @@ function ResetPassword() {
 
       {confirmationMsg && <p className="confirmation-msg text-h2">{confirmationMsg}</p>}
     </div>
+    </>
   );
 }
 

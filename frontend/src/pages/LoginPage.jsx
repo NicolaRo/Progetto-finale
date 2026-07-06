@@ -214,7 +214,7 @@ function LoginPage() {
             Reusable packaging for a greener world
           </h4>
 
-          {errors.auth && <div className="auth-error-banner text-body">{errors.auth}</div>}
+          {errors.auth && <div className="error-banner text-body">{errors.auth}</div>}
 
           <div className="google-login-container">
             <button

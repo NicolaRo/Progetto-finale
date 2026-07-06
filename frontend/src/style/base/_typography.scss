@@ -23,7 +23,7 @@
   $font-size-2xl:  fluid(24, 30);   // H2 / emphasized title section
   $font-size-3xl:  fluid(30, 38);   // H1 — titolo di pagina
   
-  // Weights e line-height don't change depending on the viewportt
+  // Weights e line-height don't change depending on the viewport
   $font-weight-regular:  400;
   $font-weight-semibold: 600;
   $font-weight-bold:     700;
@@ -86,4 +86,9 @@
   .text-emphasis {
     color: $muted-gray;
     font-weight: $font-weight-regular;
+  }
+
+  .text-emphasis--strong {
+    color: $black;
+    font-weight: $font-weight-semibold;
   }

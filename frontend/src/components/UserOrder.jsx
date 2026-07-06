@@ -5,9 +5,13 @@ import OrderCard from "./OrderCard";
 
 import ShippingIcon from '../assets/shipping-order.gif';
 
-function UserOrder({ orders, setRefresh }) {
-  const { token } = useContext(AuthContext);
+import { useToast } from "../hooks/useToast";
+import { Toast } from "../components/Toast";
 
+
+function UserOrder({ orders, setRefresh }) {
+  const {toast, notify, dismiss} = useToast();
+  const { token } = useContext(AuthContext);
   const [seenOrders, setSeenOrders] = useState(() => {
     const saved = localStorage.getItem("seenOrders");
     return saved ? JSON.parse(saved) : [];
@@ -24,7 +28,7 @@ function UserOrder({ orders, setRefresh }) {
       }
       setRefresh((prev) => prev + 1);
     } catch {
-      alert("Could not update container status");
+      notify("Could not update container status", "error");
     }
   };
 
@@ -43,6 +47,8 @@ function UserOrder({ orders, setRefresh }) {
   const [showCompleted, setShowCompleted] = useState(false);
 
   return (
+    <>
+    <Toast toast={toast} onDismiss={dismiss} />
     <div className="user-orders-container">
       <div className="user-openOrders-container">
         <h3 className="text-h2">Open orders</h3>
@@ -78,23 +84,23 @@ function UserOrder({ orders, setRefresh }) {
         ))}
       </div>
       {shippedOrderForModal && (
-    <div className="modal-overlay" onClick={() => {}}>
-    <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-      <h3>Your order is on its way!</h3>
-      <p>Once you receive it, tap <strong>"Confirm receipt & return containers"</strong> so we can reuse them.</p>
-      <p>This way doing the grocery won't pollute with single-use packaging.</p>
-      <button className="modal-btn" onClick={() => {
-          const updated = [...seenOrders, shippedOrderForModal._id];
-          setSeenOrders(updated);
-          localStorage.setItem("seenOrders", JSON.stringify(updated));
-      }}>
-        Got it
-      </button>
+          <div className="modal-overlay" onClick={() => {}}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+            <h3>Your order is on its way!</h3>
+            <p>Once you receive it, tap <strong>"Confirm receipt & return containers"</strong> so we can reuse them.</p>
+            <p>This way doing the grocery won't pollute with single-use packaging.</p>
+            <button className="modal-btn" onClick={() => {
+                const updated = [...seenOrders, shippedOrderForModal._id];
+                setSeenOrders(updated);
+                localStorage.setItem("seenOrders", JSON.stringify(updated));
+            }}>
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-  </div>
-)}
-    </div>
-    
+    </>
   );
 }
 

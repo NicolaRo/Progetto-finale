@@ -1,7 +1,9 @@
 @use '../base/variables' as *;
 @use '../base/mixins' as *;
 
-
+.page-title {
+  margin: $space-md 0;
+}
 
 .hero-banner{
   margin: $space-lg $space-md;
@@ -116,9 +118,9 @@
 
 
 .toast-cart--error {
-  background-color: $error-light;
+  background-color: $error;
   color: $white;
-  border: 1px solid $error;
+  border: 1px solid $error-light;
   display: flex;
   flex-direction: row;
   width: fit-content;

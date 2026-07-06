@@ -10,8 +10,8 @@ const RoleModal = ({ isOpen, userName, onClose, onChooseRole }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
 
-        <h2>Welcome, {userName}! 👋</h2>
-        <p>Please choose your role in PackBack:</p>
+        <h2 className="text-h2">Welcome, {userName}! 👋</h2>
+        <p className="text-subtitle">Please choose your role in PackBack:</p>
 
         <div className="role-cards">
           <div
@@ -19,8 +19,8 @@ const RoleModal = ({ isOpen, userName, onClose, onChooseRole }) => {
             onClick={() => setIsProducer(false)}
           >
             <span className="role-card-icon">🛒</span>
-            <h3>User</h3>
-            <p>Buy products from local producers and get them in reusable containers.</p>
+            <h3 className="text-card-title">User</h3>
+            <p className="text-body">Buy products from local producers and get them in reusable containers.</p>
           </div>
 
           <div

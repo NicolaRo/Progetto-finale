@@ -1,73 +1,49 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import ProducerOrderCard from "./ProducerOrderCard";
+  import { useContext, useState } from "react";
+  import { AuthContext } from "../context/AuthContext";
+  import ProducerOrderCard from "./ProducerOrderCard";
 
-function ProducerOrder({ orders, setRefresh }) {
-  const [containerSelections, setContainerSelections] = useState({});
-  const { token, user } = useContext(AuthContext);
-  const [showClosed, setShowClosed] = useState(false);
+  import { useToast } from "../hooks/useToast"; // aggiusta ../ in base alla posizione del file
+  import { Toast } from "../components/Toast";
 
-  if (!orders || !Array.isArray(orders)) return null;
+  function ProducerOrder({ orders, setRefresh }) {
+    const [containerSelections, setContainerSelections] = useState({});
+    const { token, user } = useContext(AuthContext);
+    const [showClosed, setShowClosed] = useState(false);
+    const {toast, notify, dismiss} = useToast();
 
-  //divide orders per status new orders goes on top, closed orders into a collapsable
+    if (!orders || !Array.isArray(orders)) return null;
 
-  const newOrders = orders.filter((o) => o.status === "Order created");
-  const preparingOrders = orders.filter((o) => o.status === "Preparing order");
-  const shippedOrder = orders.filter((o) => o.status === "Order shipped");
-  const closedOrders = orders
-    .filter((o) => o.status === "Order closed")
-    .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    //divide orders per status new orders goes on top, closed orders into a collapsable
 
-  const handleContainerChange = (productId, orderId, field, value) => {
-    setContainerSelections((prev) => ({
-      ...prev,
-      [orderId]: {
-        ...prev[orderId],
-        [productId]: {
-          ...prev[orderId]?.[productId],
-          [field]: value,
+    const newOrders = orders.filter((o) => o.status === "Order created");
+    const preparingOrders = orders.filter((o) => o.status === "Preparing order");
+    const shippedOrder = orders.filter((o) => o.status === "Order shipped");
+    const closedOrders = orders
+      .filter((o) => o.status === "Order closed")
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
+    const handleContainerChange = (productId, orderId, field, value) => {
+      setContainerSelections((prev) => ({
+        ...prev,
+        [orderId]: {
+          ...prev[orderId],
+          [productId]: {
+            ...prev[orderId]?.[productId],
+            [field]: value,
+          },
         },
-      },
-    }));
-  };
+      }));
+    };
 
-  const handlePackedProduct = async (productId, orderId) => {
-    if (
-      !containerSelections[orderId]?.[productId]?.type ||
-      !containerSelections[orderId]?.[productId]?.quantity
-    ) {
-      alert("Please select container type and quantity");
-      return;
-    }
-
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          containers: [
-            {
-              productId,
-              type: containerSelections[orderId][productId].type,
-              quantity: containerSelections[orderId][productId].quantity,
-            },
-          ],
-        }),
+    const handlePackedProduct = async (productId, orderId) => {
+      if (
+        !containerSelections[orderId]?.[productId]?.type ||
+        !containerSelections[orderId]?.[productId]?.quantity
+      ) {
+        notify("Please select container type and quantity", "error");
+        return;
       }
-    );
 
-    if (!response.ok)
-      return alert("Could not update order state, please try later.");
-
-    setRefresh((prev) => prev + 1);
-  };
-
-  const handleContainerCheckin = async (orderId) => {
-    try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
         {
@@ -76,71 +52,106 @@ function ProducerOrder({ orders, setRefresh }) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ status: "Order closed" }),
+          body: JSON.stringify({
+            containers: [
+              {
+                productId,
+                type: containerSelections[orderId][productId].type,
+                quantity: containerSelections[orderId][productId].quantity,
+              },
+            ],
+          }),
         }
       );
 
-      if (!response.ok) throw new Error();
+      if (!response.ok) {
+        notify("Could not update order state, please try later.", "error");
+        return;
+      }
+        
 
       setRefresh((prev) => prev + 1);
-    } catch {
-      alert("Could not complete order, try later");
-    }
-  };
+    };
 
-  const renderCards = (orderList) =>
-    orderList.map((order) => (
-      <ProducerOrderCard
-        key={order._id}
-        user={user}
-        order={order}
-        containerSelections={containerSelections}
-        handleContainerChange={handleContainerChange}
-        handlePackedProduct={handlePackedProduct}
-        handleContainerCheckin={handleContainerCheckin}
-      />
-    ));
+    const handleContainerCheckin = async (orderId) => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ status: "Order closed" }),
+          }
+        );
 
-  return (
-    <div className="orders-container">
-      <h3 className="component-title">Orders list</h3>
-      {/* NEW ORDERS */}
-      {newOrders.length > 0 && (
-        <div className="producer-order-section">
-          <h4> New orders:</h4>
-          {renderCards(newOrders)}
-        </div>
-      )}
-      {/* PREPARING ORDERS */}
-      {preparingOrders.length > 0 && (
+        if (!response.ok) throw new Error();
+
+        setRefresh((prev) => prev + 1);
+      } catch {
+        notify("Could not complete order, try later", "error");
+      }
+    };
+
+    const renderCards = (orderList) =>
+      orderList.map((order) => (
+        <ProducerOrderCard
+          key={order._id}
+          user={user}
+          order={order}
+          containerSelections={containerSelections}
+          handleContainerChange={handleContainerChange}
+          handlePackedProduct={handlePackedProduct}
+          handleContainerCheckin={handleContainerCheckin}
+        />
+      ));
+
+    return (
+      <>
+      <Toast toast={toast} onDismiss={dismiss} />
+      <div className="orders-container">
+        <h3 className="component-title">Orders list</h3>
+        {/* NEW ORDERS */}
+        {newOrders.length > 0 && (
+          <div className="producer-order-section">
+            <h4> New orders:</h4>
+            {renderCards(newOrders)}
+          </div>
+        )}
+        {/* PREPARING ORDERS */}
+        {preparingOrders.length > 0 && (
+          <div className="producer-orders-section">
+            <h4>Preparing orders:</h4>
+            {renderCards(preparingOrders)}
+          </div>
+        )}
+
+        {/* SHIPPED ORDERS */}
+        {shippedOrder.length > 0 && (
+          <div className="producer-orders-section">
+            <h4>Shipped orders & waiting for containers return</h4>
+            {renderCards(shippedOrder)}
+          </div>
+        )}
+
+        {/* COLLAPSABLE CLOSED ORDERS */}
         <div className="producer-orders-section">
-          <h4>Preparing orders:</h4>
-          {renderCards(preparingOrders)}
+          <button
+            className={`toggle-orders-section btn ${showClosed ? "btn--ghost" : "btn--primary"}`}
+            onClick={() => setShowClosed(!showClosed)}
+          >
+            {showClosed
+              ? "Hide closed orders △"
+              : `Show closed ordes ▼ (${closedOrders.length})`}
+          </button>
+          {showClosed && renderCards(closedOrders)}
         </div>
-      )}
-
-      {/* SHIPPED ORDERS */}
-      {shippedOrder.length > 0 && (
-        <div className="producer-orders-section">
-          <h4>Shipped orders & waiting for containers return</h4>
-          {renderCards(shippedOrder)}
-        </div>
-      )}
-
-      {/* COLLAPSABLE CLOSED ORDERS */}
-      <div className="producer-orders-section">
-        <button
-          className={`toggle-orders-section btn ${showClosed ? "btn--ghost" : "btn--primary"}`}
-          onClick={() => setShowClosed(!showClosed)}
-        >
-          {showClosed
-            ? "Hide closed orders △"
-            : `Show closed ordes ▼ (${closedOrders.length})`}
-        </button>
-        {showClosed && renderCards(closedOrders)}
       </div>
-    </div>
-  );
-}
+      </>
+      
+    );
+  }
 
-export default ProducerOrder;
+  export default ProducerOrder;

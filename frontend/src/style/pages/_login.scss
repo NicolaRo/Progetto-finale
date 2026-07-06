@@ -98,7 +98,18 @@
   margin: $space-lg;
 }
 
-.auth-error-banner {
+.forgot-password-card {
+  background: $white;
+  border-radius: $radius-md;
+  padding: $space-lg;
+  margin-top: $space-md;
+  box-shadow: $shadow-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.error-banner {
   background-color: $error-light;
   border: 1px solid $error;
   color: $white;

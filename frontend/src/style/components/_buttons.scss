@@ -140,6 +140,11 @@ button {
   color: $green-mid;
 }
 
+.reset-pwd-btn {
+  background: $green-dark;
+  @include ambient-shadow($green-dark);
+}
+
 //-_-_- Cart buttons -_-_-
 
 .btn-close-cart {
