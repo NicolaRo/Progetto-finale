@@ -5,7 +5,6 @@ const Product = require ('../models/Products');
 
 //1. Create Product from user query
 const createProduct = async (req, res) => {
-    /* console.log(req.body); */  // CONSOLE LOG// 
     try {
 
         const {name, description, price, type, quantity, unit, image, ingredientId} = req.body;

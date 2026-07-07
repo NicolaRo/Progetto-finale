@@ -45,7 +45,6 @@ const restoreProductStock = async (products = []) => {
             {$inc: {quantity: +p.orderedQuantity} }
         )
     };
-    /* console.log('products ricevuti:', products); */  // CONSOLE LOG// 
 }
 
 module.exports = {updateProductStock, restoreProductStock};

@@ -137,12 +137,6 @@ const getOrderById = async (req, res) => {
 //3. Update an order
 const updateOrder = async (req, res) => {
     try {
-
-        //console log for debug
-        console.log("updateOrder chiamato");
-        console.log("req.body.status:", req.body.status);
-        console.log("req.body:", req.body);
-        
         const orderId = req.params.id;
 
         const {
@@ -150,8 +144,6 @@ const updateOrder = async (req, res) => {
             userId,
             containers
         } = req.body;
-
-        console.log(req.body);
 
         const order = await Order.findById(orderId);
 
@@ -188,8 +180,6 @@ const updateOrder = async (req, res) => {
             const assignedContainerIds = [];
 
             for (const selection of containers) {
-
-                console.log("Finding:", selection.type, "Container ready to use");
 
                 const available = await Container.find({
                     type: selection.type,
@@ -236,8 +226,6 @@ const updateOrder = async (req, res) => {
                 p => p.containerType && p.containerQuantity > 0
             ).length;
 
-            /* console.log(`packedProducts: ${packedCount} / ${order.products.length}`); */ // CONSOLE LOG// 
-
             if (packedCount === order.products.length && order.products.length > 0) {
                 order.status = "Order shipped";
             } else if (packedCount > 0) {
@@ -245,9 +233,6 @@ const updateOrder = async (req, res) => {
             } else {
                 order.status = "Order created";
             }
-
-            /* console.log("NEW ORDER STATUS:", order.status);
-            console.log("containers after push:", order.containers); */  // CONSOLE LOG// 
         }
 
         // =========================

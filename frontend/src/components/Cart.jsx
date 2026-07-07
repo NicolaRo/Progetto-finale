@@ -32,8 +32,6 @@ function Cart({ setShowCart }) {
       },
       body: JSON.stringify({ user: user._id, products: cart }),
     });
-    
-    console.log(response);
 
     if (!response.ok) {
       setIsLoading(false); //in case of error the button is enabled to allow retry

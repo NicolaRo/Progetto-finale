@@ -26,10 +26,6 @@ function ProducerOrderCard({
 }) {
   if (!order) return null;
 
-  order.product?.forEach((p) => {
-    console.log("Product:", p.product?.name, "containerType:", p.containerType);
-  });
-
   return (
     <div className="single-order-container">
       {/* ORDER HEADER */}
