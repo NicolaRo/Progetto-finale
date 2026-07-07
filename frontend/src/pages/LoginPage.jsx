@@ -30,6 +30,7 @@ function LoginPage() {
   const[showForgotPassword, setShowForgotPassword] = useState(false);
 
   const[showToast, setShowToast] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const provider = new GoogleAuthProvider();
 
@@ -39,8 +40,10 @@ function LoginPage() {
 
   //Function to enable google login popup
   const googleLogIn = async () => {
-    
-    const result = await signInWithPopup(auth, provider);
+    setIsLoading(true);
+    setErrors({});
+    try {
+      const result = await signInWithPopup(auth, provider);
 
     const googleEmail = result.user.email;
     const googleName = result.user.displayName; // Firebase will share the User Name
@@ -54,6 +57,11 @@ function LoginPage() {
       }
     );
 
+    if(!checkResponse.ok) {
+    setErrors({auth: "Something went wrong, please try again."});
+    return;
+    }
+
     const checkData = await checkResponse.json();
 
     if(!checkData.exists) {
@@ -63,34 +71,54 @@ function LoginPage() {
       return;
     }
 
-    await completeGoogleLogin(googleEmail, googleName, null);
+    await completeGoogleLogin(googleEmail, googleName, null); 
+  } catch (error) {
+      //Covers popup closed by user, popub blocked, network failure
+      console.error("Google sign-in failed", error);
+      setErrors({auth: "Google sign-in failed please try again."});
+      }finally {
+      setIsLoading(false);
+    }
   };
 
   const completeGoogleLogin = async (email, name, role) => {
-    const googleAuth = await fetch (
-      `${import.meta.env.VITE_API_URL}/api/users/google-login`,
-      {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({email, name, role}),
+    setIsLoading(true);
+    try {
+      const googleAuth = await fetch (
+        `${import.meta.env.VITE_API_URL}/api/users/google-login`,
+        {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({email, name, role}),
+        }
+      );
+  
+      if(!googleAuth.ok) {
+      setErrors({auth: "Google sign-in failed, please try again."});
+      return;
       }
-    );
-    
-    const logInData = await googleAuth.json();
-    login(
-      logInData.token,
-      {
-      role: logInData.role,
-      name: logInData.name,
-      _id: logInData._id,
+      
+      const logInData = await googleAuth.json();
+      login(
+        logInData.token,
+        {
+        role: logInData.role,
+        name: logInData.name,
+        _id: logInData._id,
+        }
+      );
+  
+      if (logInData.role === "Producer") {
+        navigate("/ProducerHome");
+      } else {
+        navigate("/UserHome");
       }
-    );
-
-    if (logInData.role === "Producer") {
-      navigate("/ProducerHome");
-    } else {
-      navigate("/UserHome");
-    }
+     } catch (error) {
+      console.error("Google sign-in failed:", error);
+      setErrors({auth: "Google sign-in failed, please try again"});
+      } finally {
+       setIsLoading(false);
+      }
   };
 
   //Function to log in with own credentials
@@ -116,38 +144,49 @@ function LoginPage() {
 
     setErrors({});
 
-    //Fetch data to the backend
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/users/login`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+    
+    setIsLoading(true);
+    try {
+      //Fetch data to the backend
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+  
+      //Read the data
+      const logInData = await response.json();
+  
+      if (!response.ok) {
+        setErrors({auth: "Invalid credentials, please try again"})
+        return;
       }
-    );
-
-    //Read the data
-    const logInData = await response.json();
-
-    if (!response.ok) {
-    setErrors({auth: "Invalid credentials, please try again"})
-    return};
-
-    login(logInData.token, {
-      role: logInData.role,
-      name: logInData.name,
-      _id: logInData._id,
-    });
-
-    //Navigate to specific page depending on the role
-    if (logInData.role === "Producer") {
-      navigate("/ProducerHome");
-    } else {
-      if (logInData.role === "User") {
-        navigate("/UserHome");
+  
+      login(logInData.token, {
+        role: logInData.role,
+        name: logInData.name,
+        _id: logInData._id,
+      });
+  
+      //Navigate to specific page depending on the role
+      if (logInData.role === "Producer") {
+        navigate("/ProducerHome");
+      } else {
+        if (logInData.role === "User") {
+          navigate("/UserHome");
+        } 
       }
-    }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setErrors({auth: "Something went wronf, please try again."});
+     } finally {
+      setIsLoading(false);
+      }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -180,23 +219,32 @@ function LoginPage() {
       role: role,
     };
 
-    //Fetch data to the backend
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/users/register`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+    
+    setIsLoading(true);
+    try {
+      //Fetch data to the backend
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/register`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+  
+      if (response.ok) {
+        setShowLogin(true);
+        setShowToast(true);
+      } else {
+        const error = await response.json();
+        setErrors(error.message || "Registrtion failed, please try again.");
       }
-    );
-
-    if (response.ok) {
-      setShowLogin(true);
-      setShowToast(true);
-    } else {
-      const error = await response.json();
-      setErrors(error.message);
-    }
+    } catch (error) {
+     console.error("Registration failed:", error);
+     setErrors({auth: "Something went wronf please try again."});
+     } finally {
+      setIsLoading(false);
+      }
   };
 
   return (
@@ -221,6 +269,7 @@ function LoginPage() {
               className="btn-google-auth"
               placeholder="login with Google"
               onClick={googleLogIn}
+              disabled={isLoading}
             >
               <img
                 className="icon-google-login"
@@ -279,8 +328,8 @@ function LoginPage() {
             {showForgotPassword && <ForgotPassword />}
           </div>
           <div className="login-buttons-container">
-            <button className="login-btn btn btn--primary" type="submit" onClick={handleLogIn}>
-              Log In
+            <button className="login-btn btn btn--primary" type="submit" onClick={handleLogIn} disabled={isLoading} >
+              {isLoading ? "Logging in..." : "Log In"}
             </button>
           </div>
         </div>
@@ -291,29 +340,31 @@ function LoginPage() {
             <img className="account-icon" src={Account} alt="Account icon" />
           </div>
 
+          {errors.auth && <div className="error-banner text-body">{errors.auth}</div>}
+
           <div className="role-selection-container text-h2">
             <h3 className="text-h2">Choose your account type:</h3>
           </div>
 
-<div className="role-cards">
-  <div
-    className={`role-card ${role === "User" ? "active" : ""}`}
-    onClick={() => setRole("User")}
-  >
-    <span className="role-card-icon">🛒</span>
-    <h3 className="text-card-title">User</h3>
-    <p className="text-body">Buy products from local producers and get them in reusable containers.</p>
-  </div>
+          <div className="role-cards">
+            <div
+              className={`role-card ${role === "User" ? "active" : ""}`}
+              onClick={() => setRole("User")}
+            >
+              <span className="role-card-icon">🛒</span>
+              <h3 className="text-card-title">User</h3>
+              <p className="text-body">Buy products from local producers and get them in reusable containers.</p>
+            </div>
 
-  <div
-    className={`role-card ${role === "Producer" ? "active" : ""}`}
-    onClick={() => setRole("Producer")}
-  >
-    <span className="role-card-icon">🌱</span>
-    <h3 className="text-card-title">Producer</h3>
-    <p className="text-body">Sell your products and ship them with our reusable packaging.</p>
-  </div>
-</div>
+            <div
+              className={`role-card ${role === "Producer" ? "active" : ""}`}
+              onClick={() => setRole("Producer")}
+            >
+              <span className="role-card-icon">🌱</span>
+              <h3 className="text-card-title">Producer</h3>
+              <p className="text-body">Sell your products and ship them with our reusable packaging.</p>
+            </div>
+          </div>
         
           <div className="input-containers">
             <div className="input-name-container">
@@ -387,8 +438,8 @@ function LoginPage() {
             </div>
           </div>
 
-          <button className="register-btn btn btn--primary" type="submit" onClick={handleSubmit}>
-            Register
+          <button className="register-btn btn btn--primary" type="submit" onClick={handleSubmit} disabled={isLoading}>
+            {isLoading ? "Registering..." : "Register"}
           </button>
         </div>
       )}
