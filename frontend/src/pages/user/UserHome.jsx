@@ -33,7 +33,7 @@ function UserHome() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await r.json();
-      setShopProducts(data);
+      setShopProducts(Array.isArray(data) ? data : []);
       setIsLoading(false);
     };
     fetchProducts();
