@@ -13,6 +13,7 @@ function ResetPassword() {
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmationMsg, setConfirmationMsg] = useState("");
+  const [isLoading, setIsLoading] = useState (false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,24 +22,31 @@ function ResetPassword() {
       notify("Password must be at least 8 characters.", "error");
       return;
     }
-
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/password/reset/${token}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: newPassword }),
+    setIsLoading(true);
+    try{
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/passwords/reset/${token}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: newPassword }),
+        }
+      );
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        setConfirmationMsg(data.message);
+        setTimeout(() => navigate("/login"), 2000);
+      } else {
+        notify(data.message || "Something went wrong, please try again.", "error");
       }
-    );
-
-    const data = await response.json();
-
-    if (response.ok) {
-      setConfirmationMsg(data.message);
-      setTimeout(() => navigate("/login"), 2000);
-    } else {
-      alert(data.message);
-    }
+     } catch (error) {
+      console.error("Password reset failed:", error);
+      notify("Something went wrong, please try again.", "error");
+      } finally {
+       setIsLoading(false);
+       }
   };
 
   return (
@@ -65,8 +73,8 @@ function ResetPassword() {
         />
       </div>
 
-      <button className="login-btn btn btn--primary" onClick={handleSubmit}>
-        Reset Password
+      <button className="login-btn btn btn--primary" onClick={handleSubmit} disabled={isLoading} >
+        {isLoading ? "Sending reset link..." : "Reset Password" }
       </button>
 
       {confirmationMsg && <p className="confirmation-msg text-h2">{confirmationMsg}</p>}
