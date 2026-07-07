@@ -31,26 +31,29 @@ app.use(cors({
 //1. Parse JSON applied to the queries body
 app.use(express.json());
 
-/* //2. NoSQL Injection protection
-app.use(mongoSanitize({
-  //sanitizeQuery disable sanitization for req.query which is auto-generated
-  //while sanitizing req.body: the input from the user
-  sanitizeQuery: false,
-  onSanitize: ({req, key}) => {
-    console.warn(`⚠️ Attempted NoSQL Injection attack to : ${key}`);
-  },
-})); */
+//2. NoSQL Injection protection
+//NOTE: express-mongo-sanitize's middleware() tries to reassign req.query,
+//Use pure sanitize() function only on body/params
+//(the only user-controlled inputs that matter for this app's queries).
+app.use((req, res, next) => {
+  if(req.body) {
+    const cleanBody = mongoSanitize.sanitize(req.body);
+    if(JSON.stringify(cleanBody) !== JSON.stringify(req.body)){
+      console.warn(`Attempted NoSQL Injection attack in body`);
+    }
+    req.body = cleanBody;
+  }
+  if(req.params){
+    req.params = mongoSanitize.sanitize(req.params);
+  }
+  next();
+})
 
 //3. Logging to debug
 app.use((req, res, next) => {
   console.log(`📨 ${req.method} ${req.path}`);
   next();
 });
-
-//Import middleware
-const authMiddleware = require('./middleware/authMiddleware');
-const roleMiddleware = require('./middleware/roleMiddleware');
-
 
 //Import the routes
 const userRoutes = require('./routes/userRoutes');
