@@ -43,34 +43,40 @@
         notify("Please select container type and quantity", "error");
         return;
       }
-
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            containers: [
-              {
-                productId,
-                type: containerSelections[orderId][productId].type,
-                quantity: containerSelections[orderId][productId].quantity,
-              },
-            ],
-          }),
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/orders/${orderId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              containers: [
+                {
+                  productId,
+                  type: containerSelections[orderId][productId].type,
+                  quantity: containerSelections[orderId][productId].quantity,
+                },
+              ],
+            }),
+          }
+        );
+  
+        if (!response.ok) {
+          notify("Could not update order state, please try later.", "error");
+          return;
         }
-      );
-
-      if (!response.ok) {
+          if(!response.ok) {
+          notify("Could not update order state, please try later.", "error");
+          return;
+          }
+  
+        setRefresh((prev) => prev + 1);
+       } catch {
         notify("Could not update order state, please try later.", "error");
-        return;
       }
-        
-
-      setRefresh((prev) => prev + 1);
     };
 
     const handleContainerCheckin = async (orderId) => {
