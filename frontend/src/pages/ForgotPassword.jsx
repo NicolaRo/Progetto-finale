@@ -8,6 +8,7 @@ function ForgotPassword() {
   const { toast, notify, dismiss } = useToast();
   const [email, setEmail] = useState("");
   const [confirmationMsg, setConfirmationMsg] = useState("");
+  const [isLoading, setIsLoading] = useState (false);
  
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,18 +18,31 @@ function ForgotPassword() {
       notify("Please provide a valid email address.", "error");
       return;
     }
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/password/request`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
+  
+      const data = await response.json();
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/password/request`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+      if(!response.ok) {
+        notify(data.message || "Something went wrong, please try again.", "error");
+        return;
       }
-    );
 
-    const data = await response.json();
-    setConfirmationMsg(data.message);
+      setConfirmationMsg(data.message);
+    } catch (error) {
+      console.error("Password reset request failed:", error);
+      notify("Something went wrong, please try again.", "error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,7 +69,7 @@ function ForgotPassword() {
         />
       </div>
 
-      <button className="reset-pwd-btn btn btn--primary" onClick={handleSubmit}>
+      <button className="reset-pwd-btn btn btn--primary" onClick={handleSubmit} disabled={isLoading}>
         Send reset link
       </button>
 
