@@ -8,6 +8,9 @@ import UserOrder from "../../components/UserOrder";
 import RecycleBuddy from "../../components/RecycleBuddy";
 import {AssistantIcon, CloseIcon } from "../../components/icons/Icons";
 
+import { useToast } from "../../hooks/useToast";
+import { Toast } from "../../components/Toast";
+
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -24,34 +27,50 @@ function UserHome() {
   const [isLoadingOrders, setIsLoadingOrders] = useState (true);
 
   const { token, user } = useContext(AuthContext);
+  const { toast, notify, dismiss } = useToast();
 
   //Loading products
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
-      const r = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await r.json();
-      setShopProducts(Array.isArray(data) ? data : []);
-      setIsLoading(false);
+      try {
+        const r = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await r.json();
+        setShopProducts(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+        setShopProducts([]);
+        notify("Couldn't load products, please try again later.", "error");
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchProducts();
-  }, [token]);
+  }, [token, notify]);
 
   //Fetch orders
   useEffect(() => {
     const fetchOrders = async () => {
       setIsLoadingOrders(true);
-      const r = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await r.json();
-      setOrders(Array.isArray(data)? data : []);
-      setIsLoadingOrders (false);
+      try {
+        const r = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await r.json();
+        setOrders(Array.isArray(data)? data : []);
+      } catch (error) {
+        console.error("Failed to fetch orders:", error);
+        notify("Failed to get orders from the Database, please try later", "error");
+        setOrders([]);
+      } finally {
+        setIsLoadingOrders (false);
+      }
+      
     };
     fetchOrders();
-  }, [token, refresh]);
+  }, [token, refresh, notify]);
 
   //Fetch green tips from OpenAI
   useEffect(() => {
@@ -61,7 +80,12 @@ function UserHome() {
       },
     })
       .then((r) => r.json())
-      .then((data) => setHeroTip(data.tip));
+      .then((data) => setHeroTip(data.tip))
+      .catch((error) => {
+        console.error("Failed to fetch hero tip:", error);
+        //UX Improvement: show the statement instead of infinite loading if API crash
+        setHeroTip("Reduce, reuse, recycle!");
+      });
   }, [token]);
 
   //Search + filters
@@ -71,12 +95,21 @@ function UserHome() {
     if (filters) filters.forEach((f) => params.append("type", f));
     if (producer) params.append("producerId", producer);
 
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/api/products?${params.toString()}`,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    const data = await response.json();
-    setShopProducts(Array.isArray(data) ? data : []);
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/products?${params.toString()}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      const data = await response.json();
+      setShopProducts(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Failed to search products:", error);
+      setShopProducts([]);
+      notify("Couldn't get the products from Database, please try later", "error");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const producers = [
@@ -102,6 +135,7 @@ function UserHome() {
 
   return (
     <>
+      <Toast toast={toast} onDismiss={dismiss} />
       <Navbar
         setShowCart={setShowCart}
         setShowOrders={setShowOrders}
