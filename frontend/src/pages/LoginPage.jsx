@@ -29,7 +29,6 @@ function LoginPage() {
 
   const[showForgotPassword, setShowForgotPassword] = useState(false);
 
-  const[showToast, setShowToast] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const provider = new GoogleAuthProvider();
@@ -233,11 +232,21 @@ function LoginPage() {
       );
   
       if (response.ok) {
-        setShowLogin(true);
-        setShowToast(true);
+        const registerData = await response.json();
+        login(registerData.token, {
+          role: registerData.user.role,
+          name: registerData.user.name,
+          _id: registerData.user._id,
+        });
+
+        if (registerData.user.role === "Producer") {
+          navigate("/ProducerHome", { state: { justRegistered: true } });
+        } else {
+          navigate("/UserHome", { state: { justRegistered: true } });
+        }
       } else {
         const error = await response.json();
-        setErrors(error.message || "Registrtion failed, please try again.");
+        setErrors({ auth: error.message || "Registration failed, please try again." });
       }
     } catch (error) {
      console.error("Registration failed:", error);
@@ -249,11 +258,6 @@ function LoginPage() {
 
   return (
     <>
-    {showToast && (
-      <div className="toast-account-registration">
-        <p>Well done! Your account has been registered succesfully. Log in to start.</p>
-      </div>
-    )}
       {showLogin ? (
         <div className="login-container">
           <h3 className="container-title text-h1">Welcome in PackBack</h3>

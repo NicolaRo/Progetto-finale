@@ -10,6 +10,7 @@ import {AssistantIcon, CloseIcon } from "../../components/icons/Icons";
 
 import { useToast } from "../../hooks/useToast";
 import { Toast } from "../../components/Toast";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function UserHome() {
   const [shopProducts, setShopProducts] = useState([]);
@@ -22,12 +23,23 @@ function UserHome() {
   const [selectedProducer, setSelectedProducer] = useState("");
   const [heroTip, setHeroTip] = useState("");
   const [showChat, setShowChat] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(() => !location.state?.justRegistered);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingOrders, setIsLoadingOrders] = useState (true);
 
   const { token, user } = useContext(AuthContext);
   const { toast, notify, dismiss } = useToast();
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  //Show a confirmation toast if the user just registered
+  useEffect(() => {
+    if (location.state?.justRegistered) {
+      notify("Account created successfully! Welcome to PackBack.", "success");
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [location, notify, navigate]);
 
   //Loading products
   useEffect(() => {
