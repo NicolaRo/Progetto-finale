@@ -13,6 +13,9 @@ import { Toast } from "../../components/Toast";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function UserHome() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
   const [shopProducts, setShopProducts] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [orders, setOrders] = useState([]);
@@ -29,9 +32,6 @@ function UserHome() {
 
   const { token, user } = useContext(AuthContext);
   const { toast, notify, dismiss } = useToast();
-
-  const location = useLocation();
-  const navigate = useNavigate();
 
   //Show a confirmation toast if the user just registered
   useEffect(() => {
