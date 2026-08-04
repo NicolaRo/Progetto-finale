@@ -1,0 +1,9 @@
+{
+  "title": "PackBack",
+  "tags": ["React", "Stripe", "SSO"],
+  "demo": {
+    "type": "live",
+    "url": "https://packback-greengrocery.netlify.app/"
+  },
+  "logo": "packback.png"
+}
