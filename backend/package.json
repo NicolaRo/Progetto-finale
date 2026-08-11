@@ -7,9 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "test": "mocha 'test/**/*.test.js' --timeout 5000"
+    "dev": "tsx watch server.ts",
+    "start": "tsx server.ts",
+    "test": "mocha --require tsx 'test/**/*.test.js' --timeout 5000"
   },
   "keywords": [],
   "author": "",
@@ -27,9 +27,14 @@
     "stripe": "^22.1.1"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.2.0",
     "chai": "^6.2.2",
     "mocha": "^11.7.5",
     "nodemon": "^3.1.14",
-    "sinon": "^21.1.2"
+    "sinon": "^21.1.2",
+    "tsx": "^4.23.11",
+    "typescript": "^7.0.2"
   }
 }
